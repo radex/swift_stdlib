@@ -10,15 +10,15 @@ infix operator += {
     assignment
 }
 
+infix operator ... {
+    associativity none
+    precedence 135
+}
+
 infix operator -= {
     associativity right
     precedence 90
     assignment
-}
-
-infix operator ... {
-    associativity none
-    precedence 135
 }
 
 infix operator &% {
@@ -78,14 +78,14 @@ infix operator ^= {
     assignment
 }
 
-infix operator ?? {
-    associativity right
-    precedence 110
-}
-
 infix operator ^ {
     associativity left
     precedence 140
+}
+
+infix operator ?? {
+    associativity right
+    precedence 110
 }
 
 infix operator != {
@@ -152,14 +152,14 @@ infix operator <<= {
     assignment
 }
 
+infix operator < {
+    associativity none
+    precedence 130
+}
+
 infix operator | {
     associativity left
     precedence 140
-}
-
-infix operator ~> {
-    associativity left
-    precedence 255
 }
 
 infix operator || {
@@ -177,9 +177,9 @@ infix operator <= {
     precedence 130
 }
 
-infix operator >> {
-    associativity none
-    precedence 160
+infix operator ~> {
+    associativity left
+    precedence 255
 }
 
 infix operator >>= {
@@ -188,9 +188,9 @@ infix operator >>= {
     assignment
 }
 
-infix operator < {
+infix operator >> {
     associativity none
-    precedence 130
+    precedence 160
 }
 
 infix operator !== {
@@ -198,12 +198,12 @@ infix operator !== {
     precedence 130
 }
 
-infix operator ~= {
+infix operator >= {
     associativity none
     precedence 130
 }
 
-infix operator >= {
+infix operator ~= {
     associativity none
     precedence 130
 }
@@ -217,13 +217,13 @@ prefix operator ++ {
 prefix operator - {
 }
 
+prefix operator ~ {
+}
+
 prefix operator + {
 }
 
 prefix operator ! {
-}
-
-prefix operator ~ {
 }
 
 postfix operator -- {
@@ -241,6 +241,10 @@ func !=<T>(lhs: _OptionalNilComparisonType, rhs: T?) -> Bool
 func !=<T>(lhs: T?, rhs: _OptionalNilComparisonType) -> Bool
 
 func !=<T : Equatable>(lhs: T?, rhs: T?) -> Bool
+
+
+/// Returns true if the arrays do not contain the same elements.
+func !=<T : Equatable>(lhs: ContiguousArray<T>, rhs: ContiguousArray<T>) -> Bool
 
 func !=(lhs: UInt, rhs: UInt) -> Bool
 
@@ -263,10 +267,6 @@ func !=(lhs: UInt8, rhs: UInt8) -> Bool
 func !=<T : Equatable>(lhs: T, rhs: T) -> Bool
 
 func !=(lhs: Int, rhs: Int) -> Bool
-
-
-/// Returns true if the arrays do not contain the same elements.
-func !=<T : Equatable>(lhs: ContiguousArray<T>, rhs: ContiguousArray<T>) -> Bool
 
 
 /// Returns true if the arrays do not contain the same elements.
@@ -438,7 +438,7 @@ func +<T>(lhs: Int, rhs: UnsafeMutablePointer<T>) -> UnsafeMutablePointer<T>
 
 func +<T>(lhs: UnsafeMutablePointer<T>, rhs: Int) -> UnsafeMutablePointer<T>
 
-@effects(readonly) func +(lhs: String, rhs: String) -> String
+func +(lhs: String, rhs: String) -> String
 
 func +<T>(lhs: UnsafePointer<T>, rhs: Int) -> UnsafePointer<T>
 
@@ -668,9 +668,9 @@ postfix func --(inout lhs: Double) -> Double
 
 prefix func --(inout rhs: Float80) -> Float80
 
-prefix func --(inout x: Int16) -> Int16
-
 postfix func --(inout lhs: Float80) -> Float80
+
+prefix func --(inout x: Int16) -> Int16
 
 prefix func --(inout x: Int) -> Int
 
@@ -714,9 +714,9 @@ func -=(inout lhs: UInt32, rhs: UInt32)
 
 func -=(inout lhs: Int32, rhs: Int32)
 
-func -=<T : Strideable>(inout lhs: T, rhs: T.Stride)
-
 func -=(inout lhs: UInt64, rhs: UInt64)
+
+func -=<T : Strideable>(inout lhs: T, rhs: T.Stride)
 
 func -=<T : _IntegerArithmeticType>(inout lhs: T, rhs: T)
 
@@ -919,22 +919,22 @@ func <=(lhs: Int8, rhs: Int8) -> Bool
 
 func <=(lhs: UInt16, rhs: UInt16) -> Bool
 
-func ==<I>(lhs: ReverseBidirectionalIndex<I>, rhs: ReverseBidirectionalIndex<I>) -> Bool
-
-func ==<I>(lhs: ReverseRandomAccessIndex<I>, rhs: ReverseRandomAccessIndex<I>) -> Bool
+func ==<T>(lhs: UnsafePointer<T>, rhs: UnsafePointer<T>) -> Bool
 
 func ==<T : _Strideable>(x: T, y: T) -> Bool
 
-func ==(lhs: UInt16, rhs: UInt16) -> Bool
+func ==(x: ObjectIdentifier, y: ObjectIdentifier) -> Bool
 
-func ==(lhs: Int8, rhs: Int8) -> Bool
+func ==(lhs: String.Index, rhs: String.Index) -> Bool
+
+func ==(lhs: String.UTF8View.Index, rhs: String.UTF8View.Index) -> Bool
 
 
 /// Two `HalfOpenInterval`\ s are equal if their `start` and `end` are
 /// equal
 func ==<T : Comparable>(lhs: HalfOpenInterval<T>, rhs: HalfOpenInterval<T>) -> Bool
 
-func ==(lhs: UInt8, rhs: UInt8) -> Bool
+func ==(lhs: String.UnicodeScalarView.Index, rhs: String.UnicodeScalarView.Index) -> Bool
 
 
 /// Two `ClosedInterval`\ s are equal if their `start` and `end` are
@@ -945,45 +945,49 @@ func ==<T : Equatable>(lhs: T?, rhs: T?) -> Bool
 
 func ==<T>(lhs: T?, rhs: _OptionalNilComparisonType) -> Bool
 
-func ==(lhs: String, rhs: String) -> Bool
+func ==(lhs: UInt8, rhs: UInt8) -> Bool
+
+func ==(lhs: Int8, rhs: Int8) -> Bool
 
 func ==(lhs: Bit, rhs: Bit) -> Bool
 
-func ==<T>(lhs: UnsafePointer<T>, rhs: UnsafePointer<T>) -> Bool
-
-func ==<T>(lhs: UnsafeMutablePointer<T>, rhs: UnsafeMutablePointer<T>) -> Bool
+func ==(lhs: UInt16, rhs: UInt16) -> Bool
 
 func ==<Value, Element>(lhs: HeapBuffer<Value, Element>, rhs: HeapBuffer<Value, Element>) -> Bool
-
-func ==(lhs: UnicodeScalar, rhs: UnicodeScalar) -> Bool
 
 func ==(lhs: FloatingPointClassification, rhs: FloatingPointClassification) -> Bool
 
 func ==(lhs: Float80, rhs: Float80) -> Bool
 
-func ==(lhs: String.Index, rhs: String.Index) -> Bool
+
+/// Returns true if these arrays contain the same elements.
+func ==<T : Equatable>(lhs: ContiguousArray<T>, rhs: ContiguousArray<T>) -> Bool
 
 func ==(lhs: Double, rhs: Double) -> Bool
 
 func ==(lhs: Float, rhs: Float) -> Bool
 
-func ==(lhs: String.UTF8View.Index, rhs: String.UTF8View.Index) -> Bool
+func ==<T>(lhs: UnsafeMutablePointer<T>, rhs: UnsafeMutablePointer<T>) -> Bool
 
-func ==(x: ObjectIdentifier, y: ObjectIdentifier) -> Bool
-
-func ==<Base : CollectionType>(lhs: FilterCollectionViewIndex<Base>, rhs: FilterCollectionViewIndex<Base>) -> Bool
-
-func ==(lhs: String.UnicodeScalarView.Index, rhs: String.UnicodeScalarView.Index) -> Bool
-
-func ==(lhs: Int, rhs: Int) -> Bool
-
-func ==<T>(lhs: Range<T>, rhs: Range<T>) -> Bool
-
-func ==(lhs: UInt, rhs: UInt) -> Bool
+func ==(lhs: UnicodeScalar, rhs: UnicodeScalar) -> Bool
 
 
 /// Returns true if these arrays contain the same elements.
-func ==<T : Equatable>(lhs: ContiguousArray<T>, rhs: ContiguousArray<T>) -> Bool
+func ==<T : Equatable>(lhs: Slice<T>, rhs: Slice<T>) -> Bool
+
+func ==<I>(lhs: ReverseRandomAccessIndex<I>, rhs: ReverseRandomAccessIndex<I>) -> Bool
+
+func ==(lhs: Int, rhs: Int) -> Bool
+
+
+/// Returns true if these arrays contain the same elements.
+func ==<T : Equatable>(lhs: [T], rhs: [T]) -> Bool
+
+func ==(lhs: UInt, rhs: UInt) -> Bool
+
+func ==(lhs: Bool, rhs: Bool) -> Bool
+
+func ==<T>(lhs: AutoreleasingUnsafeMutablePointer<T>, rhs: AutoreleasingUnsafeMutablePointer<T>) -> Bool
 
 func ==(lhs: Int64, rhs: Int64) -> Bool
 
@@ -993,21 +997,11 @@ func ==(lhs: Int32, rhs: Int32) -> Bool
 
 func ==(lhs: UInt32, rhs: UInt32) -> Bool
 
-
-/// Returns true if these arrays contain the same elements.
-func ==<T : Equatable>(lhs: Slice<T>, rhs: Slice<T>) -> Bool
+func ==(lhs: COpaquePointer, rhs: COpaquePointer) -> Bool
 
 func ==(lhs: Int16, rhs: Int16) -> Bool
 
-
-/// Returns true if these arrays contain the same elements.
-func ==<T : Equatable>(lhs: [T], rhs: [T]) -> Bool
-
-func ==(lhs: Bool, rhs: Bool) -> Bool
-
-func ==<T>(lhs: AutoreleasingUnsafeMutablePointer<T>, rhs: AutoreleasingUnsafeMutablePointer<T>) -> Bool
-
-func ==(lhs: COpaquePointer, rhs: COpaquePointer) -> Bool
+func ==<I>(lhs: ReverseBidirectionalIndex<I>, rhs: ReverseBidirectionalIndex<I>) -> Bool
 
 func ==<T>(lhs: CFunctionPointer<T>, rhs: CFunctionPointer<T>) -> Bool
 
@@ -1015,29 +1009,27 @@ func ==(lhs: Character, rhs: Character) -> Bool
 
 func ==<T : _RawOptionSetType>(a: T, b: T) -> Bool
 
+func ==(lhs: String, rhs: String) -> Bool
+
 func ==<Key : Hashable, Value>(lhs: DictionaryIndex<Key, Value>, rhs: DictionaryIndex<Key, Value>) -> Bool
 
 func ==<Key : Equatable, Value : Equatable>(lhs: [Key : Value], rhs: [Key : Value]) -> Bool
+
+func ==<T>(lhs: Range<T>, rhs: Range<T>) -> Bool
+
+func ==<Base : CollectionType>(lhs: FilterCollectionViewIndex<Base>, rhs: FilterCollectionViewIndex<Base>) -> Bool
 
 func ==<T>(lhs: _OptionalNilComparisonType, rhs: T?) -> Bool
 
 func ===(lhs: AnyObject?, rhs: AnyObject?) -> Bool
 
-func >(lhs: Int64, rhs: Int64) -> Bool
-
 func >(lhs: UInt64, rhs: UInt64) -> Bool
 
-func >(lhs: UInt8, rhs: UInt8) -> Bool
-
-func >(lhs: Int8, rhs: Int8) -> Bool
-
-func >(lhs: UInt16, rhs: UInt16) -> Bool
+func >(lhs: Int64, rhs: Int64) -> Bool
 
 func >(lhs: UInt, rhs: UInt) -> Bool
 
 func >(lhs: Int, rhs: Int) -> Bool
-
-func >(lhs: Int16, rhs: Int16) -> Bool
 
 func ><T : _Comparable>(lhs: T?, rhs: T?) -> Bool
 
@@ -1045,75 +1037,83 @@ func >(lhs: UInt32, rhs: UInt32) -> Bool
 
 func >(lhs: Int32, rhs: Int32) -> Bool
 
+func >(lhs: Int16, rhs: Int16) -> Bool
+
+func >(lhs: UInt16, rhs: UInt16) -> Bool
+
+func >(lhs: Int8, rhs: Int8) -> Bool
+
+func >(lhs: UInt8, rhs: UInt8) -> Bool
+
 func ><T : _Comparable>(lhs: T, rhs: T) -> Bool
 
-func >=<T : _Comparable>(lhs: T?, rhs: T?) -> Bool
+func >=(lhs: UInt8, rhs: UInt8) -> Bool
+
+func >=(lhs: Int8, rhs: Int8) -> Bool
+
+func >=(lhs: UInt16, rhs: UInt16) -> Bool
+
+func >=(lhs: Int16, rhs: Int16) -> Bool
+
+func >=(lhs: UInt32, rhs: UInt32) -> Bool
+
+func >=(lhs: Int32, rhs: Int32) -> Bool
+
+func >=(lhs: UInt64, rhs: UInt64) -> Bool
+
+func >=(lhs: Int64, rhs: Int64) -> Bool
 
 func >=(lhs: UInt, rhs: UInt) -> Bool
 
 func >=(lhs: Int, rhs: Int) -> Bool
 
-func >=(lhs: Int64, rhs: Int64) -> Bool
-
-func >=(lhs: UInt64, rhs: UInt64) -> Bool
-
-func >=(lhs: Int32, rhs: Int32) -> Bool
+func >=<T : _Comparable>(lhs: T?, rhs: T?) -> Bool
 
 func >=<T : _Comparable>(lhs: T, rhs: T) -> Bool
 
-func >=(lhs: UInt32, rhs: UInt32) -> Bool
-
-func >=(lhs: Int16, rhs: Int16) -> Bool
-
-func >=(lhs: UInt16, rhs: UInt16) -> Bool
-
-func >=(lhs: Int8, rhs: Int8) -> Bool
-
-func >=(lhs: UInt8, rhs: UInt8) -> Bool
-
-func >>(lhs: UInt32, rhs: UInt32) -> UInt32
-
-func >>(lhs: UInt, rhs: UInt) -> UInt
-
-func >>(lhs: Int32, rhs: Int32) -> Int32
-
-func >>(lhs: Int16, rhs: Int16) -> Int16
+func >>(lhs: Int64, rhs: Int64) -> Int64
 
 func >>(lhs: Int, rhs: Int) -> Int
 
-func >>(lhs: Int64, rhs: Int64) -> Int64
+func >>(lhs: UInt, rhs: UInt) -> UInt
+
+func >>(lhs: Int16, rhs: Int16) -> Int16
 
 func >>(lhs: UInt16, rhs: UInt16) -> UInt16
-
-func >>(lhs: UInt64, rhs: UInt64) -> UInt64
 
 func >>(lhs: Int8, rhs: Int8) -> Int8
 
 func >>(lhs: UInt8, rhs: UInt8) -> UInt8
 
+func >>(lhs: UInt32, rhs: UInt32) -> UInt32
+
+func >>(lhs: Int32, rhs: Int32) -> Int32
+
+func >>(lhs: UInt64, rhs: UInt64) -> UInt64
+
 func >>=(inout lhs: UInt32, rhs: UInt32)
 
 func >>=(inout lhs: Int, rhs: Int)
-
-func >>=(inout lhs: UInt8, rhs: UInt8)
 
 func >>=(inout lhs: UInt, rhs: UInt)
 
 func >>=(inout lhs: Int64, rhs: Int64)
 
+func >>=(inout lhs: UInt8, rhs: UInt8)
+
 func >>=(inout lhs: UInt64, rhs: UInt64)
 
 func >>=(inout lhs: Int32, rhs: Int32)
+
+func >>=(inout lhs: Int16, rhs: Int16)
 
 func >>=(inout lhs: Int8, rhs: Int8)
 
 func >>=(inout lhs: UInt16, rhs: UInt16)
 
-func >>=(inout lhs: Int16, rhs: Int16)
+func ??<T>(optional: T?, defaultValue: @autoclosure () -> T?) -> T?
 
 func ??<T>(optional: T?, defaultValue: @autoclosure () -> T) -> T
-
-func ??<T>(optional: T?, defaultValue: @autoclosure () -> T?) -> T?
 
 protocol AbsoluteValuable : SignedNumberType {
     class func abs(_: Self) -> Self
@@ -1257,7 +1257,7 @@ extension Array {
 extension Array {
 
     /// This function "seeds" the ArrayLiteralConvertible protocol
-    @effects(readonly) static func convertFromHeapArray(base: Builtin.RawPointer, owner: Builtin.NativeObject, count: Builtin.Word) -> [T]
+    static func convertFromHeapArray(base: Builtin.RawPointer, owner: Builtin.NativeObject, count: Builtin.Word) -> [T]
 }
 
 extension Array {
@@ -1297,9 +1297,9 @@ struct AssertString : AssertStringType, StringInterpolationConvertible, Printabl
     var stringValue: String
     init()
     init(_ value: String)
-    @effects(readonly) static func convertFromUnicodeScalarLiteral(value: String) -> AssertString
-    @effects(readonly) static func convertFromExtendedGraphemeClusterLiteral(value: String) -> AssertString
-    @effects(readonly) static func convertFromStringLiteral(value: String) -> AssertString
+    static func convertFromUnicodeScalarLiteral(value: String) -> AssertString
+    static func convertFromExtendedGraphemeClusterLiteral(value: String) -> AssertString
+    static func convertFromStringLiteral(value: String) -> AssertString
     static func convertFromStringInterpolation(strings: AssertString...) -> AssertString
     static func convertFromStringInterpolationSegment<T>(expr: T) -> AssertString
     var description: String { get }
@@ -1709,7 +1709,7 @@ struct ContiguousArray<T> : MutableCollectionType, Sliceable {
 }
 
 extension ContiguousArray : ArrayLiteralConvertible {
-    @effects(readonly) static func convertFromArrayLiteral(elements: T...) -> ContiguousArray<T>
+    static func convertFromArrayLiteral(elements: T...) -> ContiguousArray<T>
 }
 
 
@@ -1877,7 +1877,7 @@ struct Dictionary<Key : Hashable, Value> : CollectionType, DictionaryLiteralConv
     /// Complexity: O(1)
     var count: Int { get }
     func generate() -> DictionaryGenerator<Key, Value>
-    @effects(readonly) static func convertFromDictionaryLiteral(elements: (Key, Value)...) -> [Key : Value]
+    static func convertFromDictionaryLiteral(elements: (Key, Value)...) -> [Key : Value]
     var isEmpty: Bool { get }
     var keys: LazyBidirectionalCollection<MapCollectionView<[Key : Value], Key>> { get }
     var values: LazyBidirectionalCollection<MapCollectionView<[Key : Value], Value>> { get }
@@ -3532,9 +3532,9 @@ protocol RawOptionSetType : _RawOptionSetType, BitwiseOperationsType, NilLiteral
 }
 
 protocol RawRepresentable {
-    typealias Raw
-    class func fromRaw(raw: Raw) -> Self?
-    func toRaw() -> Raw
+    typealias RawValue
+    init?(rawValue: RawValue)
+    var rawValue: RawValue { get }
 }
 
 
@@ -3618,7 +3618,7 @@ struct Slice<T> : MutableCollectionType, Sliceable {
 }
 
 extension Slice : ArrayLiteralConvertible {
-    @effects(readonly) static func convertFromArrayLiteral(elements: T...) -> Slice<T>
+    static func convertFromArrayLiteral(elements: T...) -> Slice<T>
 }
 
 
@@ -3754,9 +3754,9 @@ struct StaticString : StaticStringType, Printable, DebugPrintable {
     func withUTF8Buffer<R>(body: (UnsafeBufferPointer<UInt8>) -> R) -> R
     var stringValue: String { get }
     init()
-    @effects(readonly) static func convertFromUnicodeScalarLiteral(value: StaticString) -> StaticString
-    @effects(readonly) static func convertFromExtendedGraphemeClusterLiteral(value: StaticString) -> StaticString
-    @effects(readonly) static func convertFromStringLiteral(value: StaticString) -> StaticString
+    static func convertFromUnicodeScalarLiteral(value: StaticString) -> StaticString
+    static func convertFromExtendedGraphemeClusterLiteral(value: StaticString) -> StaticString
+    static func convertFromStringLiteral(value: StaticString) -> StaticString
     var description: String { get }
     var debugDescription: String { get }
 }
@@ -3952,7 +3952,7 @@ extension String : Hashable {
 }
 
 extension String : StringInterpolationConvertible {
-    @effects(readonly) static func convertFromStringInterpolation(strings: String...) -> String
+    static func convertFromStringInterpolation(strings: String...) -> String
     static func convertFromStringInterpolationSegment<T>(expr: T) -> String
 }
 
@@ -5237,25 +5237,25 @@ func ^=(inout lhs: UInt, rhs: UInt)
 
 func ^=(inout lhs: Int8, rhs: Int8)
 
+func ^=<T : BitwiseOperationsType>(inout lhs: T, rhs: T)
+
+func ^=(inout lhs: Int, rhs: Int)
+
+func ^=(inout lhs: Bool, rhs: Bool)
+
 func ^=(inout lhs: Int64, rhs: Int64)
+
+func ^=(inout lhs: UInt64, rhs: UInt64)
 
 func ^=(inout lhs: Int32, rhs: Int32)
 
 func ^=(inout lhs: UInt32, rhs: UInt32)
 
-func ^=(inout lhs: Int, rhs: Int)
-
 func ^=(inout lhs: Int16, rhs: Int16)
-
-func ^=<T : BitwiseOperationsType>(inout lhs: T, rhs: T)
-
-func ^=(inout lhs: UInt16, rhs: UInt16)
-
-func ^=(inout lhs: UInt64, rhs: UInt64)
 
 func ^=(inout lhs: UInt8, rhs: UInt8)
 
-func ^=(inout lhs: Bool, rhs: Bool)
+func ^=(inout lhs: UInt16, rhs: UInt16)
 
 
 /// The underlying buffer for an ArrayType conforms to _ArrayBufferType
@@ -5483,8 +5483,8 @@ protocol _RandomAccessIndexType : _BidirectionalIndexType, Strideable {
 }
 
 protocol _RawOptionSetType : RawRepresentable, Equatable {
-    typealias Raw : BitwiseOperationsType, Equatable
-    class func fromMask(raw: Raw) -> Self
+    typealias RawValue : BitwiseOperationsType, Equatable
+    init(rawValue: RawValue)
 }
 
 
@@ -5621,7 +5621,7 @@ func assert(condition: @autoclosure () -> Bool, _ message: StaticString = defaul
 ///
 /// When assertions are turned off, the optimizer can assume that the
 /// `condition` is true.
-func assert<T : BooleanType, Str : AssertStringType>(condition: @autoclosure () -> T, message: @autoclosure () -> Str, file: StaticString = default, line: UWord = default)
+func assert<Str : AssertStringType>(condition: @autoclosure () -> Bool, message: @autoclosure () -> Str, file: StaticString = default, line: UWord = default)
 
 
 /// Traditional C-style assert with an optional message.
@@ -5645,17 +5645,17 @@ func assert<T : BooleanType, Str : StaticStringType>(condition: @autoclosure () 
 ///
 /// When assertions are turned off, the optimizer can assume that the
 /// `condition` is true.
-func assert<Str : AssertStringType>(condition: @autoclosure () -> Bool, message: @autoclosure () -> Str, file: StaticString = default, line: UWord = default)
-
-
-/// A fatal error occurred and program execution should stop in debug mode.  In
-/// optimized builds this is a noop.
-@noreturn func assertionFailure<Str : AssertStringType>(message: Str, file: StaticString = default, line: UWord = default)
+func assert<T : BooleanType, Str : AssertStringType>(condition: @autoclosure () -> T, message: @autoclosure () -> Str, file: StaticString = default, line: UWord = default)
 
 
 /// A fatal error occurred and program execution should stop in debug mode.  In
 /// optimized builds this is a noop.
 @noreturn func assertionFailure(message: StaticString, file: StaticString = default, line: UWord = default)
+
+
+/// A fatal error occurred and program execution should stop in debug mode.  In
+/// optimized builds this is a noop.
+@noreturn func assertionFailure<Str : AssertStringType>(message: Str, file: StaticString = default, line: UWord = default)
 
 
 /// Return `true` iff `x` is in `seq`.
@@ -5672,9 +5672,9 @@ func count<I : RandomAccessIndexType>(r: Range<I>) -> I.Distance
 /// RandomAccessIndexType; O(N) otherwise.
 func countElements<T : _CollectionType>(x: T) -> T.Index.Distance
 
-func debugPrint<T>(object: T)
-
 func debugPrint<T, TargetStream : OutputStreamType>(object: T, inout target: TargetStream)
+
+func debugPrint<T>(object: T)
 
 func debugPrintln<T>(object: T)
 
@@ -5730,12 +5730,12 @@ func extend<C : RangeReplaceableCollectionType, S : CollectionType where S.Gener
 
 /// A fatal error occurred and program execution should stop in debug,
 /// optimized and unchecked modes.
-@noreturn func fatalError(message: StaticString, file: StaticString = default, line: UWord = default)
+@noreturn func fatalError<Str : AssertStringType>(message: Str, file: StaticString = default, line: UWord = default)
 
 
 /// A fatal error occurred and program execution should stop in debug,
 /// optimized and unchecked modes.
-@noreturn func fatalError<Str : AssertStringType>(message: Str, file: StaticString = default, line: UWord = default)
+@noreturn func fatalError(message: StaticString, file: StaticString = default, line: UWord = default)
 
 
 /// Return an `Array` containing the elements of `source`,
@@ -5781,7 +5781,7 @@ func lazy<S : SequenceType>(s: S) -> LazySequence<S>
 
 
 /// Augment `s` with lazy methods such as `map`, `filter`, etc.
-func lazy<S : CollectionType where S.Index : ForwardIndexType>(s: S) -> LazyForwardCollection<S>
+func lazy<S : CollectionType where S.Index : RandomAccessIndexType>(s: S) -> LazyRandomAccessCollection<S>
 
 
 /// Augment `s` with lazy methods such as `map`, `filter`, etc.
@@ -5789,7 +5789,7 @@ func lazy<S : CollectionType where S.Index : BidirectionalIndexType>(s: S) -> La
 
 
 /// Augment `s` with lazy methods such as `map`, `filter`, etc.
-func lazy<S : CollectionType where S.Index : RandomAccessIndexType>(s: S) -> LazyRandomAccessCollection<S>
+func lazy<S : CollectionType where S.Index : ForwardIndexType>(s: S) -> LazyForwardCollection<S>
 
 
 /// Return true iff a1 precedes a2 in a lexicographical ("dictionary")
@@ -5829,23 +5829,23 @@ func max<T : Comparable>(x: T, y: T) -> T
 func maxElement<R : SequenceType where R.Generator.Element : Comparable>(elements: R) -> R.Generator.Element
 
 
-/// Return the lesser of `x` and `y`
-func min<T : Comparable>(x: T, y: T) -> T
-
-
 /// Return the least argument passed
 func min<T : Comparable>(x: T, y: T, z: T, rest: T...) -> T
+
+
+/// Return the lesser of `x` and `y`
+func min<T : Comparable>(x: T, y: T) -> T
 
 
 /// Returns the minimum element in `elements`.  Requires:
 /// `elements` is non-empty. O(countElements(elements))
 func minElement<R : SequenceType where R.Generator.Element : Comparable>(elements: R) -> R.Generator.Element
 
-func numericCast<T : _UnsignedIntegerType, U : _UnsignedIntegerType>(x: T) -> U
+func numericCast<T : _UnsignedIntegerType, U : _SignedIntegerType>(x: T) -> U
 
 func numericCast<T : _SignedIntegerType, U : _UnsignedIntegerType>(x: T) -> U
 
-func numericCast<T : _UnsignedIntegerType, U : _SignedIntegerType>(x: T) -> U
+func numericCast<T : _UnsignedIntegerType, U : _UnsignedIntegerType>(x: T) -> U
 
 func numericCast<T : _SignedIntegerType, U : _SignedIntegerType>(x: T) -> U
 
@@ -5884,14 +5884,6 @@ func partition<C : MutableCollectionType where C.Index : RandomAccessIndexType>(
 /// If the `condition` is false, in debug and release modes the program stops.
 ///
 /// In unchecked mode the optimizer can assume that the `condition` is true.
-func precondition<T : BooleanType, Str : AssertStringType>(condition: @autoclosure () -> T, message: @autoclosure () -> Str, file: StaticString = default, line: UWord = default)
-
-
-/// Ensure that the `condition` is true.
-///
-/// If the `condition` is false, in debug and release modes the program stops.
-///
-/// In unchecked mode the optimizer can assume that the `condition` is true.
 func precondition(condition: @autoclosure () -> Bool, _ message: StaticString = default, file: StaticString = default, line: UWord = default)
 
 
@@ -5911,10 +5903,12 @@ func precondition<Str : AssertStringType>(condition: @autoclosure () -> Bool, me
 func precondition<T : BooleanType, Str : StaticStringType>(condition: @autoclosure () -> T, message: @autoclosure () -> Str, file: StaticString = default, line: UWord = default)
 
 
-/// A fatal error occurred and program execution should stop in debug mode and
-/// in optimized mode.  In unchecked builds this is a noop, but the
-/// optimizer can still assume that the call is unreachable.
-@noreturn func preconditionFailure<Str : AssertStringType>(message: Str, file: StaticString = default, line: UWord = default)
+/// Ensure that the `condition` is true.
+///
+/// If the `condition` is false, in debug and release modes the program stops.
+///
+/// In unchecked mode the optimizer can assume that the `condition` is true.
+func precondition<T : BooleanType, Str : AssertStringType>(condition: @autoclosure () -> T, message: @autoclosure () -> Str, file: StaticString = default, line: UWord = default)
 
 
 /// A fatal error occurred and program execution should stop in debug mode and
@@ -5923,22 +5917,17 @@ func precondition<T : BooleanType, Str : StaticStringType>(condition: @autoclosu
 @noreturn func preconditionFailure(message: StaticString, file: StaticString = default, line: UWord = default)
 
 
+/// A fatal error occurred and program execution should stop in debug mode and
+/// in optimized mode.  In unchecked builds this is a noop, but the
+/// optimizer can still assume that the call is unreachable.
+@noreturn func preconditionFailure<Str : AssertStringType>(message: Str, file: StaticString = default, line: UWord = default)
+
+
 /// Return a slice, up to `maxLength` in length, containing the
 /// initial elements of `s`.  O(1)+K when `S.Index` conforms to
 /// `RandomAccessIndexType` and O(N)+K otherwise, where K is the cost
 /// of slicing `s`.
 func prefix<S : Sliceable>(s: S, maxLength: Int) -> S.SubSlice
-
-
-/// Writes the textual representation of `object` into the stream `target`.
-///
-/// The textual representation is obtained from the `object` using its protocol
-/// conformances, in the following order of preference: `Streamable`,
-/// `Printable`, `DebugPrintable`.
-///
-/// Do not overload this function for your type.  Instead, adopt one of the
-/// protocols mentioned above.
-func print<T, TargetStream : OutputStreamType>(object: T, inout target: TargetStream)
 
 
 /// Writes the textual representation of `object` into the standard output.
@@ -5950,6 +5939,17 @@ func print<T, TargetStream : OutputStreamType>(object: T, inout target: TargetSt
 /// Do not overload this function for your type.  Instead, adopt one of the
 /// protocols mentioned above.
 func print<T>(object: T)
+
+
+/// Writes the textual representation of `object` into the stream `target`.
+///
+/// The textual representation is obtained from the `object` using its protocol
+/// conformances, in the following order of preference: `Streamable`,
+/// `Printable`, `DebugPrintable`.
+///
+/// Do not overload this function for your type.  Instead, adopt one of the
+/// protocols mentioned above.
+func print<T, TargetStream : OutputStreamType>(object: T, inout target: TargetStream)
 
 
 /// Writes a single newline character into the standard output.
@@ -6019,6 +6019,8 @@ func sizeof<T>(_: T.Type) -> Int
 
 func sizeofValue<T>(_: T) -> Int
 
+func sort<T : Comparable>(inout array: [T])
+
 
 /// Sort `collection` in-placeaccording to 'isOrderedBefore'.
 /// Requires: `isOrderedBefore` is a `strict weak ordering
@@ -6036,7 +6038,12 @@ func sort<T>(inout array: [T], isOrderedBefore: (T, T) -> Bool)
 /// over `elements`.
 func sort<C : MutableCollectionType where C.Index : RandomAccessIndexType, C.Generator.Element : Comparable>(inout collection: C)
 
-func sort<T : Comparable>(inout array: [T])
+
+/// Return an `Array` containing the sorted elements of `source`according to 'isOrderedBefore'.
+/// Requires: `isOrderedBefore` is a `strict weak ordering
+/// <http://en.wikipedia.org/wiki/Strict_weak_order#Strict_weak_orderings>`__
+/// over `elements`.
+func sorted<C : SequenceType>(source: C, isOrderedBefore: (C.Generator.Element, C.Generator.Element) -> Bool) -> [C.Generator.Element]
 
 
 /// Return an `Array` containing the sorted elements of `source`.
@@ -6053,13 +6060,6 @@ func sorted<C : SequenceType where C.Generator.Element : Comparable>(source: C) 
 /// <http://en.wikipedia.org/wiki/Strict_weak_order#Strict_weak_orderings>`__
 /// over `elements`.
 func sorted<C : MutableCollectionType where C.Index : RandomAccessIndexType, C.Generator.Element : Comparable>(source: C) -> C
-
-
-/// Return an `Array` containing the sorted elements of `source`according to 'isOrderedBefore'.
-/// Requires: `isOrderedBefore` is a `strict weak ordering
-/// <http://en.wikipedia.org/wiki/Strict_weak_order#Strict_weak_orderings>`__
-/// over `elements`.
-func sorted<C : SequenceType>(source: C, isOrderedBefore: (C.Generator.Element, C.Generator.Element) -> Bool) -> [C.Generator.Element]
 
 
 /// Return an `Array` containing the sorted elements of `source`according to 'isOrderedBefore'.
@@ -6180,63 +6180,61 @@ func withUnsafePointers<A0, A1, Result>(inout arg0: A0, inout arg1: A1, body: (U
 /// and `arg2`.
 func withUnsafePointers<A0, A1, A2, Result>(inout arg0: A0, inout arg1: A1, inout arg2: A2, body: (UnsafePointer<A0>, UnsafePointer<A1>, UnsafePointer<A2>) -> Result) -> Result
 
-func withVaList<R>(builder: VaListBuilder, f: (CVaListPointer) -> R) -> R
-
 func withVaList<R>(args: [CVarArgType], f: (CVaListPointer) -> R) -> R
 
-func |(lhs: Int8, rhs: Int8) -> Int8
-
-func |(lhs: Int, rhs: Int) -> Int
-
-func |(lhs: UInt, rhs: UInt) -> UInt
-
-func |(lhs: Int64, rhs: Int64) -> Int64
-
-func |(lhs: UInt64, rhs: UInt64) -> UInt64
-
-func |(lhs: Int32, rhs: Int32) -> Int32
-
-func |(lhs: UInt32, rhs: UInt32) -> UInt32
-
-func |(lhs: Int16, rhs: Int16) -> Int16
-
-func |(lhs: UInt16, rhs: UInt16) -> UInt16
-
-func |(lhs: UInt8, rhs: UInt8) -> UInt8
+func withVaList<R>(builder: VaListBuilder, f: (CVaListPointer) -> R) -> R
 
 func |<T : _RawOptionSetType>(a: T, b: T) -> T
 
 func |(lhs: Bool, rhs: Bool) -> Bool
 
-func |=(inout lhs: UInt8, rhs: UInt8)
+func |(lhs: Int64, rhs: Int64) -> Int64
+
+func |(lhs: UInt8, rhs: UInt8) -> UInt8
+
+func |(lhs: Int8, rhs: Int8) -> Int8
+
+func |(lhs: UInt16, rhs: UInt16) -> UInt16
+
+func |(lhs: Int16, rhs: Int16) -> Int16
+
+func |(lhs: UInt32, rhs: UInt32) -> UInt32
+
+func |(lhs: Int32, rhs: Int32) -> Int32
+
+func |(lhs: UInt64, rhs: UInt64) -> UInt64
+
+func |(lhs: UInt, rhs: UInt) -> UInt
+
+func |(lhs: Int, rhs: Int) -> Int
 
 func |=(inout lhs: Bool, rhs: Bool)
 
+func |=(inout lhs: UInt8, rhs: UInt8)
+
 func |=(inout lhs: Int8, rhs: Int8)
-
-func |=(inout lhs: Int16, rhs: Int16)
-
-func |=<T : BitwiseOperationsType>(inout lhs: T, rhs: T)
-
-func |=(inout lhs: Int, rhs: Int)
-
-func |=(inout lhs: UInt, rhs: UInt)
 
 func |=(inout lhs: UInt16, rhs: UInt16)
 
-func |=(inout lhs: Int64, rhs: Int64)
+func |=(inout lhs: Int16, rhs: Int16)
 
-func |=(inout lhs: UInt64, rhs: UInt64)
+func |=(inout lhs: UInt32, rhs: UInt32)
 
 func |=(inout lhs: Int32, rhs: Int32)
 
-func |=(inout lhs: UInt32, rhs: UInt32)
+func |=(inout lhs: UInt64, rhs: UInt64)
+
+func |=(inout lhs: Int64, rhs: Int64)
+
+func |=(inout lhs: UInt, rhs: UInt)
+
+func |=(inout lhs: Int, rhs: Int)
+
+func |=<T : BitwiseOperationsType>(inout lhs: T, rhs: T)
 
 func ||<T : BooleanType, U : BooleanType>(lhs: T, rhs: @autoclosure () -> U) -> Bool
 
 func ||<T : BooleanType>(lhs: T, rhs: @autoclosure () -> Bool) -> Bool
-
-prefix func ~(a: Bool) -> Bool
 
 prefix func ~(rhs: Int) -> Int
 
@@ -6256,15 +6254,17 @@ prefix func ~(rhs: UInt16) -> UInt16
 
 prefix func ~(rhs: Int8) -> Int8
 
-prefix func ~(rhs: UInt8) -> UInt8
+prefix func ~(a: Bool) -> Bool
 
 prefix func ~<T : _RawOptionSetType>(a: T) -> T
+
+prefix func ~(rhs: UInt8) -> UInt8
+
+func ~=<T : Equatable>(a: T, b: T) -> Bool
+
+func ~=<T>(lhs: _OptionalNilComparisonType, rhs: T?) -> Bool
 
 
 /// Returns `true` iff `pattern` contains `value`
 func ~=<I : IntervalType>(pattern: I, value: I.Bound) -> Bool
-
-func ~=<T>(lhs: _OptionalNilComparisonType, rhs: T?) -> Bool
-
-func ~=<T : Equatable>(a: T, b: T) -> Bool
 
