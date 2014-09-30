@@ -11,6 +11,6 @@ And replace `6.1-beta1` and `6.1-beta2` with the two versions you're interested 
 
 Note that at the moment, the order of function overrides appears quite random — that's why in every beta there's a lot of lines changed, but there are usually few actual changes hidden in the noise.
 
-In addition, [Swifter](http://swifter.natecook.com) is a handy reference which
+btw. [Swifter](http://swifter.natecook.com) is a handy reference which
 provides auto-generated documentation for the Swift stdlib, with the ability
 to switch between versions. 
