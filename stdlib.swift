@@ -1,6 +1,6 @@
-infix operator ~> {
-    associativity left
-    precedence 255
+infix operator >> {
+    associativity none
+    precedence 160
 }
 
 infix operator += {
@@ -77,19 +77,19 @@ infix operator ^= {
     assignment
 }
 
-infix operator ?? {
-    associativity right
-    precedence 110
-}
-
 infix operator ^ {
     associativity left
     precedence 140
 }
 
-infix operator | {
+infix operator ?? {
+    associativity right
+    precedence 110
+}
+
+infix operator ~> {
     associativity left
-    precedence 140
+    precedence 255
 }
 
 infix operator &= {
@@ -129,9 +129,9 @@ infix operator + {
     precedence 140
 }
 
-infix operator >> {
-    associativity none
-    precedence 160
+infix operator | {
+    associativity left
+    precedence 140
 }
 
 infix operator - {
@@ -155,19 +155,19 @@ infix operator !== {
     precedence 130
 }
 
-infix operator ~= {
+infix operator >= {
     associativity none
     precedence 130
-}
-
-infix operator || {
-    associativity left
-    precedence 110
 }
 
 infix operator << {
     associativity none
     precedence 160
+}
+
+infix operator || {
+    associativity left
+    precedence 110
 }
 
 infix operator |= {
@@ -181,15 +181,9 @@ infix operator <= {
     precedence 130
 }
 
-infix operator >= {
+infix operator ~= {
     associativity none
     precedence 130
-}
-
-infix operator %= {
-    associativity right
-    precedence 90
-    assignment
 }
 
 infix operator != {
@@ -200,6 +194,12 @@ infix operator != {
 infix operator > {
     associativity none
     precedence 130
+}
+
+infix operator %= {
+    associativity right
+    precedence 90
+    assignment
 }
 
 infix operator >>= {
@@ -469,9 +469,9 @@ func +<T>(lhs: Int, rhs: UnsafePointer<T>) -> UnsafePointer<T>
 
 prefix func +(x: Float) -> Float
 
-func +<T>(lhs: UnsafePointer<T>, rhs: Int) -> UnsafePointer<T>
-
 func +(lhs: Int, rhs: Int) -> Int
+
+func +<T>(lhs: UnsafePointer<T>, rhs: Int) -> UnsafePointer<T>
 
 func +(lhs: UInt, rhs: UInt) -> UInt
 
@@ -522,7 +522,7 @@ func +<EC1 : _ExtensibleCollectionType, EC2 : _ExtensibleCollectionType where EC
 
 func +<T : Strideable>(lhs: T, rhs: T.Stride) -> T
 
-prefix func ++(inout x: Int8) -> Int8
+prefix func ++(inout x: UInt16) -> UInt16
 
 prefix func ++(inout x: Int16) -> Int16
 
@@ -570,13 +570,13 @@ postfix func ++(inout x: Int16) -> Int16
 
 postfix func ++(inout x: UInt16) -> UInt16
 
-prefix func ++(inout x: UInt16) -> UInt16
-
-postfix func ++(inout x: Int8) -> Int8
-
 prefix func ++(inout x: UInt8) -> UInt8
 
 postfix func ++(inout x: UInt8) -> UInt8
+
+prefix func ++(inout x: Int8) -> Int8
+
+postfix func ++(inout x: Int8) -> Int8
 
 
 /// Extend `lhs` with the elements of `rhs`
@@ -639,11 +639,11 @@ func +=<T, S : SequenceType where T == T>(inout lhs: [T], rhs: S)
 /// Extend `lhs` with the elements of `rhs`
 func +=<T, C : CollectionType where T == T>(inout lhs: [T], rhs: C)
 
+func +=(inout lhs: Int8, rhs: Int8)
+
 
 /// Append the elements of rhs to lhs
 func +=<T, C : CollectionType where T == T>(inout lhs: _ContiguousArrayBuffer<T>, rhs: C)
-
-func +=(inout lhs: Int8, rhs: Int8)
 
 func +=(inout lhs: UInt8, rhs: UInt8)
 
@@ -700,11 +700,11 @@ func -(lhs: Float, rhs: Float) -> Float
 
 prefix func -(x: Float) -> Float
 
-postfix func --(inout x: UInt) -> UInt
+postfix func --(inout lhs: Float80) -> Float80
 
 prefix func --(inout rhs: Float) -> Float
 
-postfix func --(inout lhs: Float80) -> Float80
+postfix func --(inout x: UInt) -> UInt
 
 prefix func --(inout x: UInt) -> UInt
 
@@ -724,9 +724,9 @@ prefix func --(inout x: UInt8) -> UInt8
 
 prefix func --(inout rhs: Float80) -> Float80
 
-prefix func --(inout x: UInt64) -> UInt64
-
 postfix func --(inout x: UInt8) -> UInt8
+
+prefix func --(inout x: UInt64) -> UInt64
 
 prefix func --(inout x: Int8) -> Int8
 
@@ -772,9 +772,9 @@ func -=(inout lhs: Int32, rhs: Int32)
 
 func -=<T>(inout lhs: UnsafeMutablePointer<T>, rhs: Int)
 
-func -=(inout lhs: UInt32, rhs: UInt32)
-
 func -=<T : Strideable>(inout lhs: T, rhs: T.Stride)
+
+func -=(inout lhs: UInt32, rhs: UInt32)
 
 func -=(inout lhs: Int16, rhs: Int16)
 
@@ -862,97 +862,95 @@ func /=(inout lhs: Float80, rhs: Float80)
 /// case of arithmetic overflow (except in -Ounchecked builds).
 func /=<T : _IntegerArithmeticType>(inout lhs: T, rhs: T)
 
-func <(lhs: UnicodeScalar, rhs: UnicodeScalar) -> Bool
+func <(lhs: Int64, rhs: Int64) -> Bool
+
+func <(lhs: Character, rhs: Character) -> Bool
+
+func <<Key : Hashable, Value>(lhs: DictionaryIndex<Key, Value>, rhs: DictionaryIndex<Key, Value>) -> Bool
+
+func <(lhs: UInt8, rhs: UInt8) -> Bool
+
+func <(lhs: Int8, rhs: Int8) -> Bool
+
+func <(lhs: UInt16, rhs: UInt16) -> Bool
+
+func <(lhs: Int16, rhs: Int16) -> Bool
 
 func <(lhs: UInt, rhs: UInt) -> Bool
 
-func <(lhs: String.Index, rhs: String.Index) -> Bool
+func <(lhs: Int, rhs: Int) -> Bool
 
-func <(lhs: String, rhs: String) -> Bool
+func <(lhs: Float, rhs: Float) -> Bool
+
+func <(lhs: UInt32, rhs: UInt32) -> Bool
+
+func <(lhs: Int32, rhs: Int32) -> Bool
+
+func <(lhs: UInt64, rhs: UInt64) -> Bool
+
+func <(lhs: Double, rhs: Double) -> Bool
+
+func <(lhs: Float80, rhs: Float80) -> Bool
+
+func <<T : _Comparable>(lhs: T?, rhs: T?) -> Bool
+
+func <(lhs: Bit, rhs: Bit) -> Bool
+
+func <<T>(lhs: UnsafePointer<T>, rhs: UnsafePointer<T>) -> Bool
+
+func <<T>(lhs: UnsafeMutablePointer<T>, rhs: UnsafeMutablePointer<T>) -> Bool
+
+func <(lhs: UnicodeScalar, rhs: UnicodeScalar) -> Bool
 
 
 /// Compare two Strideables
 func <<T : _Strideable>(x: T, y: T) -> Bool
 
-func <<T : _Comparable>(lhs: T?, rhs: T?) -> Bool
-
-func <(lhs: Float80, rhs: Float80) -> Bool
-
-func <(lhs: Double, rhs: Double) -> Bool
-
-func <(lhs: Float, rhs: Float) -> Bool
-
-func <(lhs: Int, rhs: Int) -> Bool
-
 func <(lhs: String.UnicodeScalarView.Index, rhs: String.UnicodeScalarView.Index) -> Bool
 
-func <(lhs: Int64, rhs: Int64) -> Bool
+func <(lhs: String.Index, rhs: String.Index) -> Bool
 
-func <(lhs: UInt64, rhs: UInt64) -> Bool
-
-func <(lhs: Int32, rhs: Int32) -> Bool
-
-func <(lhs: UInt32, rhs: UInt32) -> Bool
-
-func <(lhs: Int16, rhs: Int16) -> Bool
-
-func <(lhs: UInt16, rhs: UInt16) -> Bool
-
-func <(lhs: Int8, rhs: Int8) -> Bool
-
-func <(lhs: UInt8, rhs: UInt8) -> Bool
-
-func <<Key : Hashable, Value>(lhs: DictionaryIndex<Key, Value>, rhs: DictionaryIndex<Key, Value>) -> Bool
-
-func <(lhs: Character, rhs: Character) -> Bool
-
-func <(lhs: Bit, rhs: Bit) -> Bool
-
-func <<T>(lhs: UnsafeMutablePointer<T>, rhs: UnsafeMutablePointer<T>) -> Bool
-
-func <<T>(lhs: UnsafePointer<T>, rhs: UnsafePointer<T>) -> Bool
-
-func <<(lhs: UInt8, rhs: UInt8) -> UInt8
+func <(lhs: String, rhs: String) -> Bool
 
 func <<(lhs: Int, rhs: Int) -> Int
 
-func <<(lhs: UInt, rhs: UInt) -> UInt
-
-func <<(lhs: Int64, rhs: Int64) -> Int64
-
-func <<(lhs: Int8, rhs: Int8) -> Int8
-
-func <<(lhs: UInt16, rhs: UInt16) -> UInt16
-
-func <<(lhs: Int16, rhs: Int16) -> Int16
-
 func <<(lhs: UInt64, rhs: UInt64) -> UInt64
+
+func <<(lhs: UInt, rhs: UInt) -> UInt
 
 func <<(lhs: Int32, rhs: Int32) -> Int32
 
 func <<(lhs: UInt32, rhs: UInt32) -> UInt32
 
-func <<=(inout lhs: UInt8, rhs: UInt8)
+func <<(lhs: Int16, rhs: Int16) -> Int16
 
-func <<=(inout lhs: Int8, rhs: Int8)
+func <<(lhs: UInt16, rhs: UInt16) -> UInt16
 
-func <<=(inout lhs: UInt16, rhs: UInt16)
+func <<(lhs: Int8, rhs: Int8) -> Int8
 
-func <<=(inout lhs: Int16, rhs: Int16)
+func <<(lhs: Int64, rhs: Int64) -> Int64
 
-func <<=(inout lhs: UInt32, rhs: UInt32)
+func <<(lhs: UInt8, rhs: UInt8) -> UInt8
+
+func <<=(inout lhs: UInt64, rhs: UInt64)
 
 func <<=(inout lhs: Int32, rhs: Int32)
 
-func <<=(inout lhs: UInt64, rhs: UInt64)
+func <<=(inout lhs: UInt32, rhs: UInt32)
+
+func <<=(inout lhs: Int16, rhs: Int16)
+
+func <<=(inout lhs: UInt16, rhs: UInt16)
+
+func <<=(inout lhs: Int8, rhs: Int8)
+
+func <<=(inout lhs: UInt8, rhs: UInt8)
 
 func <<=(inout lhs: Int64, rhs: Int64)
 
 func <<=(inout lhs: UInt, rhs: UInt)
 
 func <<=(inout lhs: Int, rhs: Int)
-
-func <=(lhs: UInt32, rhs: UInt32) -> Bool
 
 func <=<T : _Comparable>(lhs: T, rhs: T) -> Bool
 
@@ -968,53 +966,55 @@ func <=(lhs: UInt64, rhs: UInt64) -> Bool
 
 func <=(lhs: Int32, rhs: Int32) -> Bool
 
+func <=(lhs: UInt32, rhs: UInt32) -> Bool
+
 func <=(lhs: Int16, rhs: Int16) -> Bool
 
 func <=(lhs: UInt16, rhs: UInt16) -> Bool
 
-func <=(lhs: Int8, rhs: Int8) -> Bool
-
 func <=(lhs: UInt8, rhs: UInt8) -> Bool
 
-func ==(x: ObjectIdentifier, y: ObjectIdentifier) -> Bool
+func <=(lhs: Int8, rhs: Int8) -> Bool
+
+func ==<T>(lhs: UnsafeMutablePointer<T>, rhs: UnsafeMutablePointer<T>) -> Bool
 
 func ==<T>(lhs: UnsafePointer<T>, rhs: UnsafePointer<T>) -> Bool
 
-func ==(lhs: UInt8, rhs: UInt8) -> Bool
+func ==(lhs: UnicodeScalar, rhs: UnicodeScalar) -> Bool
 
 func ==(lhs: Bit, rhs: Bit) -> Bool
 
-func ==(lhs: Int8, rhs: Int8) -> Bool
+func ==(lhs: String.UnicodeScalarView.Index, rhs: String.UnicodeScalarView.Index) -> Bool
 
-func ==(lhs: UInt16, rhs: UInt16) -> Bool
+func ==(lhs: String.UTF8View.Index, rhs: String.UTF8View.Index) -> Bool
 
 func ==<Base : CollectionType>(lhs: FilterCollectionViewIndex<Base>, rhs: FilterCollectionViewIndex<Base>) -> Bool
 
-func ==(lhs: Int16, rhs: Int16) -> Bool
+func ==(lhs: String.Index, rhs: String.Index) -> Bool
 
 func ==<Key : Equatable, Value : Equatable>(lhs: [Key : Value], rhs: [Key : Value]) -> Bool
 
 func ==<Key : Hashable, Value>(lhs: DictionaryIndex<Key, Value>, rhs: DictionaryIndex<Key, Value>) -> Bool
 
-func ==(lhs: UInt32, rhs: UInt32) -> Bool
+func ==(lhs: String, rhs: String) -> Bool
 
 func ==<T : _RawOptionSetType>(a: T, b: T) -> Bool
 
 func ==(lhs: Character, rhs: Character) -> Bool
 
-func ==(lhs: UInt64, rhs: UInt64) -> Bool
+func ==<T : _Strideable>(x: T, y: T) -> Bool
 
-func ==(lhs: Int32, rhs: Int32) -> Bool
+func ==<I>(lhs: ReverseRandomAccessIndex<I>, rhs: ReverseRandomAccessIndex<I>) -> Bool
 
-func ==(lhs: Int64, rhs: Int64) -> Bool
+func ==<I>(lhs: ReverseBidirectionalIndex<I>, rhs: ReverseBidirectionalIndex<I>) -> Bool
 
 func ==<T>(lhs: CFunctionPointer<T>, rhs: CFunctionPointer<T>) -> Bool
 
-func ==(lhs: UInt, rhs: UInt) -> Bool
+func ==(x: ObjectIdentifier, y: ObjectIdentifier) -> Bool
 
 func ==(lhs: COpaquePointer, rhs: COpaquePointer) -> Bool
 
-func ==<I>(lhs: ReverseBidirectionalIndex<I>, rhs: ReverseBidirectionalIndex<I>) -> Bool
+func ==(lhs: UInt8, rhs: UInt8) -> Bool
 
 func ==<T>(lhs: AutoreleasingUnsafeMutablePointer<T>, rhs: AutoreleasingUnsafeMutablePointer<T>) -> Bool
 
@@ -1032,29 +1032,45 @@ func ==<T : Equatable>(lhs: Slice<T>, rhs: Slice<T>) -> Bool
 /// Returns true if these arrays contain the same elements.
 func ==<T : Equatable>(lhs: ContiguousArray<T>, rhs: ContiguousArray<T>) -> Bool
 
-func ==(lhs: Int, rhs: Int) -> Bool
+func ==(lhs: Int8, rhs: Int8) -> Bool
 
-func ==<I>(lhs: ReverseRandomAccessIndex<I>, rhs: ReverseRandomAccessIndex<I>) -> Bool
+func ==(lhs: UInt16, rhs: UInt16) -> Bool
 
-func ==<T : _Strideable>(x: T, y: T) -> Bool
+func ==(lhs: Int16, rhs: Int16) -> Bool
 
-func ==(lhs: String.UTF8View.Index, rhs: String.UTF8View.Index) -> Bool
+func ==(lhs: UInt32, rhs: UInt32) -> Bool
 
-func ==<T>(lhs: UnsafeMutablePointer<T>, rhs: UnsafeMutablePointer<T>) -> Bool
+func ==(lhs: Int32, rhs: Int32) -> Bool
 
-func ==(lhs: String, rhs: String) -> Bool
-
-func ==(lhs: UnicodeScalar, rhs: UnicodeScalar) -> Bool
-
-func ==(lhs: Float, rhs: Float) -> Bool
-
-func ==(lhs: String.Index, rhs: String.Index) -> Bool
-
-func ==(lhs: Double, rhs: Double) -> Bool
+func ==(lhs: UInt64, rhs: UInt64) -> Bool
 
 func ==<T>(lhs: Range<T>, rhs: Range<T>) -> Bool
 
-func ==(lhs: String.UnicodeScalarView.Index, rhs: String.UnicodeScalarView.Index) -> Bool
+func ==<T>(lhs: _OptionalNilComparisonType, rhs: T?) -> Bool
+
+func ==<T>(lhs: T?, rhs: _OptionalNilComparisonType) -> Bool
+
+func ==<T : Equatable>(lhs: T?, rhs: T?) -> Bool
+
+
+/// Two `ClosedInterval`\ s are equal if their `start` and `end` are
+/// equal
+func ==<T : Comparable>(lhs: ClosedInterval<T>, rhs: ClosedInterval<T>) -> Bool
+
+
+/// Two `HalfOpenInterval`\ s are equal if their `start` and `end` are
+/// equal
+func ==<T : Comparable>(lhs: HalfOpenInterval<T>, rhs: HalfOpenInterval<T>) -> Bool
+
+func ==(lhs: Int64, rhs: Int64) -> Bool
+
+func ==(lhs: UInt, rhs: UInt) -> Bool
+
+func ==(lhs: Int, rhs: Int) -> Bool
+
+func ==(lhs: Float, rhs: Float) -> Bool
+
+func ==(lhs: Double, rhs: Double) -> Bool
 
 func ==(lhs: Float80, rhs: Float80) -> Bool
 
@@ -1062,41 +1078,21 @@ func ==(lhs: FloatingPointClassification, rhs: FloatingPointClassification) -> B
 
 func ==<Value, Element>(lhs: HeapBuffer<Value, Element>, rhs: HeapBuffer<Value, Element>) -> Bool
 
-
-/// Two `HalfOpenInterval`\ s are equal if their `start` and `end` are
-/// equal
-func ==<T : Comparable>(lhs: HalfOpenInterval<T>, rhs: HalfOpenInterval<T>) -> Bool
-
-
-/// Two `ClosedInterval`\ s are equal if their `start` and `end` are
-/// equal
-func ==<T : Comparable>(lhs: ClosedInterval<T>, rhs: ClosedInterval<T>) -> Bool
-
-func ==<T : Equatable>(lhs: T?, rhs: T?) -> Bool
-
-func ==<T>(lhs: T?, rhs: _OptionalNilComparisonType) -> Bool
-
-func ==<T>(lhs: _OptionalNilComparisonType, rhs: T?) -> Bool
-
 func ===(lhs: AnyObject?, rhs: AnyObject?) -> Bool
-
-func ><T : _Comparable>(lhs: T?, rhs: T?) -> Bool
-
-func >(lhs: Int, rhs: Int) -> Bool
 
 func >(lhs: UInt, rhs: UInt) -> Bool
 
-func >(lhs: Int64, rhs: Int64) -> Bool
+func >(lhs: Int, rhs: Int) -> Bool
+
+func ><T : _Comparable>(lhs: T?, rhs: T?) -> Bool
 
 func ><T : _Comparable>(lhs: T, rhs: T) -> Bool
 
+func >(lhs: Int64, rhs: Int64) -> Bool
+
 func >(lhs: UInt64, rhs: UInt64) -> Bool
 
-func >(lhs: UInt8, rhs: UInt8) -> Bool
-
 func >(lhs: Int32, rhs: Int32) -> Bool
-
-func >(lhs: Int8, rhs: Int8) -> Bool
 
 func >(lhs: UInt32, rhs: UInt32) -> Bool
 
@@ -1104,11 +1100,21 @@ func >(lhs: Int16, rhs: Int16) -> Bool
 
 func >(lhs: UInt16, rhs: UInt16) -> Bool
 
-func >=(lhs: UInt16, rhs: UInt16) -> Bool
+func >(lhs: Int8, rhs: Int8) -> Bool
+
+func >(lhs: UInt8, rhs: UInt8) -> Bool
+
+func >=<T : _Comparable>(lhs: T, rhs: T) -> Bool
+
+func >=<T : _Comparable>(lhs: T?, rhs: T?) -> Bool
+
+func >=(lhs: Int, rhs: Int) -> Bool
 
 func >=(lhs: UInt8, rhs: UInt8) -> Bool
 
 func >=(lhs: Int8, rhs: Int8) -> Bool
+
+func >=(lhs: UInt16, rhs: UInt16) -> Bool
 
 func >=(lhs: Int16, rhs: Int16) -> Bool
 
@@ -1122,55 +1128,49 @@ func >=(lhs: Int64, rhs: Int64) -> Bool
 
 func >=(lhs: UInt, rhs: UInt) -> Bool
 
-func >=(lhs: Int, rhs: Int) -> Bool
-
-func >=<T : _Comparable>(lhs: T?, rhs: T?) -> Bool
-
-func >=<T : _Comparable>(lhs: T, rhs: T) -> Bool
-
-func >>(lhs: UInt16, rhs: UInt16) -> UInt16
-
-func >>(lhs: UInt32, rhs: UInt32) -> UInt32
-
-func >>(lhs: Int16, rhs: Int16) -> Int16
-
-func >>(lhs: Int8, rhs: Int8) -> Int8
+func >>(lhs: Int, rhs: Int) -> Int
 
 func >>(lhs: UInt8, rhs: UInt8) -> UInt8
 
-func >>(lhs: Int32, rhs: Int32) -> Int32
+func >>(lhs: Int8, rhs: Int8) -> Int8
 
-func >>(lhs: Int, rhs: Int) -> Int
+func >>(lhs: UInt16, rhs: UInt16) -> UInt16
+
+func >>(lhs: Int16, rhs: Int16) -> Int16
+
+func >>(lhs: UInt32, rhs: UInt32) -> UInt32
+
+func >>(lhs: Int32, rhs: Int32) -> Int32
 
 func >>(lhs: UInt64, rhs: UInt64) -> UInt64
 
-func >>(lhs: UInt, rhs: UInt) -> UInt
-
 func >>(lhs: Int64, rhs: Int64) -> Int64
 
-func >>=(inout lhs: Int16, rhs: Int16)
+func >>(lhs: UInt, rhs: UInt) -> UInt
 
-func >>=(inout lhs: UInt16, rhs: UInt16)
+func >>=(inout lhs: UInt64, rhs: UInt64)
+
+func >>=(inout lhs: UInt8, rhs: UInt8)
 
 func >>=(inout lhs: Int8, rhs: Int8)
 
-func >>=(inout lhs: UInt8, rhs: UInt8)
+func >>=(inout lhs: UInt16, rhs: UInt16)
+
+func >>=(inout lhs: Int16, rhs: Int16)
+
+func >>=(inout lhs: UInt32, rhs: UInt32)
+
+func >>=(inout lhs: Int32, rhs: Int32)
+
+func >>=(inout lhs: Int64, rhs: Int64)
 
 func >>=(inout lhs: UInt, rhs: UInt)
 
 func >>=(inout lhs: Int, rhs: Int)
 
-func >>=(inout lhs: UInt64, rhs: UInt64)
-
-func >>=(inout lhs: Int32, rhs: Int32)
-
-func >>=(inout lhs: UInt32, rhs: UInt32)
-
-func >>=(inout lhs: Int64, rhs: Int64)
+func ??<T>(optional: T?, defaultValue: @autoclosure () -> T?) -> T?
 
 func ??<T>(optional: T?, defaultValue: @autoclosure () -> T) -> T
-
-func ??<T>(optional: T?, defaultValue: @autoclosure () -> T?) -> T?
 
 
 /// A type that supports an "absolute value" function.
@@ -8402,17 +8402,9 @@ struct ZipGenerator2<E0 : GeneratorType, E1 : GeneratorType> : GeneratorType {
     mutating func next() -> Element?
 }
 
-func ^<T : _RawOptionSetType>(a: T, b: T) -> T
-
-func ^(lhs: Bool, rhs: Bool) -> Bool
+func ^(lhs: Int32, rhs: Int32) -> Int32
 
 func ^(lhs: UInt8, rhs: UInt8) -> UInt8
-
-func ^(lhs: Int8, rhs: Int8) -> Int8
-
-func ^(lhs: UInt16, rhs: UInt16) -> UInt16
-
-func ^(lhs: Int16, rhs: Int16) -> Int16
 
 func ^(lhs: Int, rhs: Int) -> Int
 
@@ -8422,33 +8414,41 @@ func ^(lhs: Int64, rhs: Int64) -> Int64
 
 func ^(lhs: UInt64, rhs: UInt64) -> UInt64
 
-func ^(lhs: Int32, rhs: Int32) -> Int32
-
 func ^(lhs: UInt32, rhs: UInt32) -> UInt32
 
-func ^=(inout lhs: Int, rhs: Int)
+func ^(lhs: Int16, rhs: Int16) -> Int16
 
-func ^=(inout lhs: Int32, rhs: Int32)
+func ^(lhs: UInt16, rhs: UInt16) -> UInt16
 
-func ^=(inout lhs: UInt32, rhs: UInt32)
+func ^(lhs: Int8, rhs: Int8) -> Int8
 
-func ^=(inout lhs: Int16, rhs: Int16)
+func ^<T : _RawOptionSetType>(a: T, b: T) -> T
 
-func ^=(inout lhs: Int8, rhs: Int8)
-
-func ^=(inout lhs: UInt8, rhs: UInt8)
-
-func ^=(inout lhs: UInt16, rhs: UInt16)
+func ^(lhs: Bool, rhs: Bool) -> Bool
 
 func ^=(inout lhs: Bool, rhs: Bool)
 
-func ^=(inout lhs: UInt64, rhs: UInt64)
-
 func ^=<T : BitwiseOperationsType>(inout lhs: T, rhs: T)
 
-func ^=(inout lhs: Int64, rhs: Int64)
+func ^=(inout lhs: UInt64, rhs: UInt64)
+
+func ^=(inout lhs: UInt8, rhs: UInt8)
+
+func ^=(inout lhs: Int32, rhs: Int32)
+
+func ^=(inout lhs: Int8, rhs: Int8)
+
+func ^=(inout lhs: UInt32, rhs: UInt32)
+
+func ^=(inout lhs: Int, rhs: Int)
 
 func ^=(inout lhs: UInt, rhs: UInt)
+
+func ^=(inout lhs: Int16, rhs: Int16)
+
+func ^=(inout lhs: UInt16, rhs: UInt16)
+
+func ^=(inout lhs: Int64, rhs: Int64)
 
 
 /// The underlying buffer for an ArrayType conforms to _ArrayBufferType
