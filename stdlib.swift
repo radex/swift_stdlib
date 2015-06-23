@@ -7,12 +7,39 @@ infix operator %= {
     assignment
 }
 
-infix operator ~= {
+infix operator / {
+    associativity left
+    precedence 150
+}
+
+infix operator <<= {
+    associativity right
+    precedence 90
+    assignment
+}
+
+infix operator || {
+    associativity left
+    precedence 110
+}
+
+infix operator << {
     associativity none
-    precedence 130
+    precedence 160
 }
 
 infix operator += {
+    associativity right
+    precedence 90
+    assignment
+}
+
+infix operator - {
+    associativity left
+    precedence 140
+}
+
+infix operator |= {
     associativity right
     precedence 90
     assignment
@@ -24,15 +51,67 @@ infix operator -= {
     assignment
 }
 
+infix operator + {
+    associativity left
+    precedence 140
+}
+
+infix operator >>= {
+    associativity right
+    precedence 90
+    assignment
+}
+
+infix operator * {
+    associativity left
+    precedence 150
+}
+
+infix operator <= {
+    associativity none
+    precedence 130
+}
+
 infix operator ... {
     associativity none
     precedence 135
+}
+
+infix operator ~= {
+    associativity none
+    precedence 130
+}
+
+infix operator !== {
+    associativity none
+    precedence 130
+}
+
+infix operator >= {
+    associativity none
+    precedence 130
+}
+
+infix operator *= {
+    associativity right
+    precedence 90
+    assignment
+}
+
+infix operator & {
+    associativity left
+    precedence 150
 }
 
 infix operator /= {
     associativity right
     precedence 90
     assignment
+}
+
+infix operator ~> {
+    associativity left
+    precedence 255
 }
 
 infix operator && {
@@ -55,6 +134,11 @@ infix operator &- {
     precedence 140
 }
 
+infix operator < {
+    associativity none
+    precedence 130
+}
+
 infix operator === {
     associativity none
     precedence 130
@@ -65,65 +149,7 @@ infix operator ..< {
     precedence 135
 }
 
-infix operator == {
-    associativity none
-    precedence 130
-}
-
-infix operator ^= {
-    associativity right
-    precedence 90
-    assignment
-}
-
-infix operator ?? {
-    associativity right
-    precedence 131
-}
-
-infix operator ^ {
-    associativity left
-    precedence 140
-}
-
-infix operator > {
-    associativity none
-    precedence 130
-}
-
-infix operator &= {
-    associativity right
-    precedence 90
-    assignment
-}
-
-infix operator % {
-    associativity left
-    precedence 150
-}
-
-infix operator & {
-    associativity left
-    precedence 150
-}
-
-infix operator *= {
-    associativity right
-    precedence 90
-    assignment
-}
-
-infix operator * {
-    associativity left
-    precedence 150
-}
-
-infix operator != {
-    associativity none
-    precedence 130
-}
-
-infix operator + {
+infix operator | {
     associativity left
     precedence 140
 }
@@ -133,119 +159,83 @@ infix operator >> {
     precedence 160
 }
 
-infix operator - {
-    associativity left
-    precedence 140
+infix operator != {
+    associativity none
+    precedence 130
 }
 
-infix operator / {
+infix operator % {
     associativity left
     precedence 150
 }
 
-infix operator <<= {
+infix operator &= {
     associativity right
     precedence 90
     assignment
 }
 
-infix operator | {
+infix operator > {
+    associativity none
+    precedence 130
+}
+
+infix operator ^ {
     associativity left
     precedence 140
 }
 
-infix operator < {
-    associativity none
-    precedence 130
+infix operator ?? {
+    associativity right
+    precedence 131
 }
 
-infix operator || {
-    associativity left
-    precedence 110
-}
-
-infix operator << {
-    associativity none
-    precedence 160
-}
-
-infix operator |= {
+infix operator ^= {
     associativity right
     precedence 90
     assignment
 }
 
-infix operator >>= {
-    associativity right
-    precedence 90
-    assignment
-}
-
-infix operator <= {
+infix operator == {
     associativity none
     precedence 130
-}
-
-infix operator ~> {
-    associativity left
-    precedence 255
-}
-
-infix operator >= {
-    associativity none
-    precedence 130
-}
-
-infix operator !== {
-    associativity none
-    precedence 130
-}
-
-prefix operator - {
-}
-
-prefix operator -- {
-}
-
-prefix operator ++ {
-}
-
-prefix operator + {
-}
-
-prefix operator ! {
 }
 
 prefix operator ~ {
 }
 
-postfix operator -- {
+prefix operator ! {
+}
+
+prefix operator ++ {
+}
+
+prefix operator - {
+}
+
+prefix operator + {
+}
+
+prefix operator -- {
 }
 
 postfix operator ++ {
 }
 
-
-/// Return the result of inverting `a`'s logic value.
-prefix func !<T : BooleanType>(a: T) -> Bool
+postfix operator -- {
+}
 
 prefix func !(a: Bool) -> Bool
 
 
-/// Returns true if the arrays do not contain the same elements.
-func !=<T : Equatable>(lhs: ContiguousArray<T>, rhs: ContiguousArray<T>) -> Bool
-
-
-/// Returns true if the arrays do not contain the same elements.
-func !=<T : Equatable>(lhs: ArraySlice<T>, rhs: ArraySlice<T>) -> Bool
-
-
-/// Returns true if the arrays do not contain the same elements.
-func !=<T : Equatable>(lhs: [T], rhs: [T]) -> Bool
+/// Return the result of inverting `a`'s logic value.
+prefix func !<T : BooleanType>(a: T) -> Bool
 
 
 /// Returns true if the arrays do not contain the same elements.
 func !=<T : Equatable>(lhs: _UnitTestArray<T>, rhs: _UnitTestArray<T>) -> Bool
+
+func !=(lhs: Int32, rhs: Int32) -> Bool
 
 
 /// Return `false` iff `t0` is identical to `t1`; i.e. if they are both
@@ -256,11 +246,39 @@ func !=(t0: Any.Type?, t1: Any.Type?) -> Bool
 /// Returns `true` iff `lhs.rawValue != rhs.rawValue`.
 func !=<T : RawRepresentable where T.RawValue : Equatable>(lhs: T, rhs: T) -> Bool
 
+func !=<T : Equatable>(lhs: T, rhs: T) -> Bool
+
+
+/// Returns true if the arrays do not contain the same elements.
+func !=<T : Equatable>(lhs: ArraySlice<T>, rhs: ArraySlice<T>) -> Bool
+
+
+/// Returns true if the arrays do not contain the same elements.
+func !=<T : Equatable>(lhs: [T], rhs: [T]) -> Bool
+
+func !=<T>(lhs: _OptionalNilComparisonType, rhs: T?) -> Bool
+
+func !=<T>(lhs: T?, rhs: _OptionalNilComparisonType) -> Bool
+
+func !=<T : Equatable>(lhs: T?, rhs: T?) -> Bool
+
 
 /// Returns `true` iff `lhs.rawValue != rhs.rawValue`.
 func !=<T : Equatable where T : RawRepresentable, T.RawValue : Equatable>(lhs: T, rhs: T) -> Bool
 
-func !=(lhs: UInt8, rhs: UInt8) -> Bool
+func !=<Key : Equatable, Value : Equatable>(lhs: [Key : Value], rhs: [Key : Value]) -> Bool
+
+func !=(lhs: Float80, rhs: Float80) -> Bool
+
+func !=(lhs: Double, rhs: Double) -> Bool
+
+func !=(lhs: Float, rhs: Float) -> Bool
+
+func !=(lhs: Int, rhs: Int) -> Bool
+
+
+/// Returns true if the arrays do not contain the same elements.
+func !=<T : Equatable>(lhs: ContiguousArray<T>, rhs: ContiguousArray<T>) -> Bool
 
 func !=(lhs: Int8, rhs: Int8) -> Bool
 
@@ -270,7 +288,7 @@ func !=(lhs: Int16, rhs: Int16) -> Bool
 
 func !=(lhs: UInt32, rhs: UInt32) -> Bool
 
-func !=(lhs: Int32, rhs: Int32) -> Bool
+func !=(lhs: UInt8, rhs: UInt8) -> Bool
 
 func !=(lhs: UInt64, rhs: UInt64) -> Bool
 
@@ -278,29 +296,28 @@ func !=(lhs: Int64, rhs: Int64) -> Bool
 
 func !=(lhs: UInt, rhs: UInt) -> Bool
 
-func !=(lhs: Int, rhs: Int) -> Bool
-
-func !=(lhs: Float, rhs: Float) -> Bool
-
-func !=(lhs: Double, rhs: Double) -> Bool
-
-func !=(lhs: Float80, rhs: Float80) -> Bool
-
-func !=<Key : Equatable, Value : Equatable>(lhs: [Key : Value], rhs: [Key : Value]) -> Bool
-
-func !=<T : Equatable>(lhs: T?, rhs: T?) -> Bool
-
-func !=<T>(lhs: T?, rhs: _OptionalNilComparisonType) -> Bool
-
-func !=<T>(lhs: _OptionalNilComparisonType, rhs: T?) -> Bool
-
-func !=<T : Equatable>(lhs: T, rhs: T) -> Bool
-
-func !==(lhs: AnyObject?, rhs: AnyObject?) -> Bool
-
 
 /// Returns false iff `lhs` and `rhs` store the same underlying collection.
 func !==<L : AnyCollectionType, R : AnyCollectionType>(lhs: L, rhs: R) -> Bool
+
+func !==(lhs: AnyObject?, rhs: AnyObject?) -> Bool
+
+func %(lhs: Int8, rhs: Int8) -> Int8
+
+func %(lhs: UInt8, rhs: UInt8) -> UInt8
+
+
+/// Divide `lhs` and `rhs`, returning the remainder and trapping in case of
+/// arithmetic overflow (except in -Ounchecked builds).
+func %<T : _IntegerArithmeticType>(lhs: T, rhs: T) -> T
+
+func %(lhs: Float80, rhs: Float80) -> Float80
+
+func %(lhs: Double, rhs: Double) -> Double
+
+func %(lhs: Float, rhs: Float) -> Float
+
+func %(lhs: Int, rhs: Int) -> Int
 
 func %(lhs: UInt, rhs: UInt) -> UInt
 
@@ -316,25 +333,6 @@ func %(lhs: Int16, rhs: Int16) -> Int16
 
 func %(lhs: UInt16, rhs: UInt16) -> UInt16
 
-func %(lhs: Int8, rhs: Int8) -> Int8
-
-func %(lhs: UInt8, rhs: UInt8) -> UInt8
-
-func %(lhs: Int, rhs: Int) -> Int
-
-func %(lhs: Float, rhs: Float) -> Float
-
-func %(lhs: Double, rhs: Double) -> Double
-
-func %(lhs: Float80, rhs: Float80) -> Float80
-
-
-/// Divide `lhs` and `rhs`, returning the remainder and trapping in case of
-/// arithmetic overflow (except in -Ounchecked builds).
-func %<T : _IntegerArithmeticType>(lhs: T, rhs: T) -> T
-
-func %=(inout lhs: Double, rhs: Double)
-
 func %=(inout lhs: Float, rhs: Float)
 
 
@@ -342,36 +340,36 @@ func %=(inout lhs: Float, rhs: Float)
 /// case of arithmetic overflow (except in -Ounchecked builds).
 func %=<T : _IntegerArithmeticType>(inout lhs: T, rhs: T)
 
-func %=(inout lhs: Float80, rhs: Float80)
+func %=(inout lhs: Double, rhs: Double)
 
-func &(lhs: Int, rhs: Int) -> Int
+func %=(inout lhs: Float80, rhs: Float80)
 
 func &(lhs: UInt, rhs: UInt) -> UInt
 
-func &(lhs: Int64, rhs: Int64) -> Int64
-
-func &(lhs: UInt64, rhs: UInt64) -> UInt64
-
-func &(lhs: UInt32, rhs: UInt32) -> UInt32
-
-func &(lhs: Int16, rhs: Int16) -> Int16
-
-func &(lhs: UInt16, rhs: UInt16) -> UInt16
+func &(lhs: UInt8, rhs: UInt8) -> UInt8
 
 func &(lhs: Int8, rhs: Int8) -> Int8
 
-func &(lhs: UInt8, rhs: UInt8) -> UInt8
+func &(lhs: UInt16, rhs: UInt16) -> UInt16
 
-func &<T : _RawOptionSetType>(a: T, b: T) -> T
+func &(lhs: Int16, rhs: Int16) -> Int16
+
+func &(lhs: Int, rhs: Int) -> Int
+
+func &(lhs: UInt32, rhs: UInt32) -> UInt32
 
 func &(lhs: Int32, rhs: Int32) -> Int32
 
-func &&<T : BooleanType>(lhs: T, @autoclosure rhs: () -> Bool) -> Bool
+func &(lhs: UInt64, rhs: UInt64) -> UInt64
+
+func &(lhs: Int64, rhs: Int64) -> Int64
 
 
 /// If `lhs` is `false`, return it.  Otherwise, evaluate `rhs` and
 /// return its `boolValue`.
 func &&<T : BooleanType, U : BooleanType>(lhs: T, @autoclosure rhs: () -> U) -> Bool
+
+func &&<T : BooleanType>(lhs: T, @autoclosure rhs: () -> Bool) -> Bool
 
 
 /// multiply `lhs` and `rhs`, silently discarding any overflow.
@@ -385,11 +383,11 @@ func &+<T : _IntegerArithmeticType>(lhs: T, rhs: T) -> T
 /// subtract `lhs` and `rhs`, silently discarding any overflow.
 func &-<T : _IntegerArithmeticType>(lhs: T, rhs: T) -> T
 
-func &=(inout lhs: UInt, rhs: UInt)
+func &=<T : BitwiseOperationsType>(inout lhs: T, rhs: T)
 
 func &=(inout lhs: Int, rhs: Int)
 
-func &=<T : BitwiseOperationsType>(inout lhs: T, rhs: T)
+func &=(inout lhs: UInt, rhs: UInt)
 
 func &=(inout lhs: Int64, rhs: Int64)
 
@@ -403,58 +401,60 @@ func &=(inout lhs: Int16, rhs: Int16)
 
 func &=(inout lhs: UInt16, rhs: UInt16)
 
-func &=(inout lhs: Int8, rhs: Int8)
-
 func &=(inout lhs: UInt8, rhs: UInt8)
 
-func *(lhs: UInt32, rhs: UInt32) -> UInt32
+func &=(inout lhs: Int8, rhs: Int8)
+
+func *(lhs: Double, rhs: Double) -> Double
+
+func *(lhs: Float, rhs: Float) -> Float
+
+func *(lhs: Float80, rhs: Float80) -> Float80
+
+func *(lhs: Int, rhs: Int) -> Int
+
+func *(lhs: UInt, rhs: UInt) -> UInt
 
 
 /// Multiply `lhs` and `rhs`, returning a result and trapping in case of
 /// arithmetic overflow (except in -Ounchecked builds).
 func *<T : _IntegerArithmeticType>(lhs: T, rhs: T) -> T
 
-func *(lhs: Float80, rhs: Float80) -> Float80
-
-func *(lhs: Double, rhs: Double) -> Double
-
-func *(lhs: Float, rhs: Float) -> Float
-
-func *(lhs: Int, rhs: Int) -> Int
-
-func *(lhs: UInt, rhs: UInt) -> UInt
-
 func *(lhs: Int64, rhs: Int64) -> Int64
-
-func *(lhs: UInt8, rhs: UInt8) -> UInt8
-
-func *(lhs: Int8, rhs: Int8) -> Int8
-
-func *(lhs: UInt16, rhs: UInt16) -> UInt16
-
-func *(lhs: Int16, rhs: Int16) -> Int16
 
 func *(lhs: UInt64, rhs: UInt64) -> UInt64
 
 func *(lhs: Int32, rhs: Int32) -> Int32
 
-func *=(inout lhs: Int8, rhs: Int8)
+func *(lhs: UInt32, rhs: UInt32) -> UInt32
 
-func *=(inout lhs: UInt16, rhs: UInt16)
+func *(lhs: Int16, rhs: Int16) -> Int16
 
-func *=(inout lhs: Int16, rhs: Int16)
+func *(lhs: UInt16, rhs: UInt16) -> UInt16
 
-func *=(inout lhs: UInt32, rhs: UInt32)
+func *(lhs: Int8, rhs: Int8) -> Int8
 
-func *=(inout lhs: Int32, rhs: Int32)
-
-func *=(inout lhs: UInt64, rhs: UInt64)
+func *(lhs: UInt8, rhs: UInt8) -> UInt8
 
 func *=(inout lhs: Int64, rhs: Int64)
 
 func *=(inout lhs: UInt, rhs: UInt)
 
 func *=(inout lhs: Int, rhs: Int)
+
+func *=(inout lhs: UInt64, rhs: UInt64)
+
+func *=(inout lhs: Int32, rhs: Int32)
+
+func *=(inout lhs: UInt32, rhs: UInt32)
+
+func *=(inout lhs: Int16, rhs: Int16)
+
+func *=(inout lhs: UInt16, rhs: UInt16)
+
+func *=(inout lhs: Int8, rhs: Int8)
+
+func *=(inout lhs: UInt8, rhs: UInt8)
 
 func *=(inout lhs: Float, rhs: Float)
 
@@ -467,62 +467,56 @@ func *=(inout lhs: Float80, rhs: Float80)
 /// case of arithmetic overflow (except in -Ounchecked builds).
 func *=<T : _IntegerArithmeticType>(inout lhs: T, rhs: T)
 
-func *=(inout lhs: UInt8, rhs: UInt8)
-
-func +<T : Strideable>(lhs: T, rhs: T.Stride) -> T
-
-func +<EC1 : ExtensibleCollectionType, EC2 : ExtensibleCollectionType where EC1.Generator.Element == EC2.Generator.Element>(lhs: EC1, rhs: EC2) -> EC1
-
-func +<T>(lhs: Int, rhs: UnsafePointer<T>) -> UnsafePointer<T>
-
-func +<T>(lhs: UnsafePointer<T>, rhs: Int) -> UnsafePointer<T>
+func +<T>(lhs: UnsafeMutablePointer<T>, rhs: Int) -> UnsafeMutablePointer<T>
 
 func +<T>(lhs: Int, rhs: UnsafeMutablePointer<T>) -> UnsafeMutablePointer<T>
 
-func +<T>(lhs: UnsafeMutablePointer<T>, rhs: Int) -> UnsafeMutablePointer<T>
+func +<T>(lhs: UnsafePointer<T>, rhs: Int) -> UnsafePointer<T>
+
+func +<T>(lhs: Int, rhs: UnsafePointer<T>) -> UnsafePointer<T>
 
 func +(lhs: String, rhs: String) -> String
 
-func +<T : _UnsignedIntegerType>(lhs: T._DisallowMixedSignArithmetic, rhs: T) -> T
-
-func +(lhs: UInt8, rhs: UInt8) -> UInt8
-
-func +(lhs: Int8, rhs: Int8) -> Int8
+func +<T : UnsignedIntegerType>(lhs: T._DisallowMixedSignArithmetic, rhs: T) -> T
 
 func +(lhs: UInt16, rhs: UInt16) -> UInt16
 
-func +(lhs: Int16, rhs: Int16) -> Int16
-
-func +(lhs: UInt32, rhs: UInt32) -> UInt32
-
-func +(lhs: Int32, rhs: Int32) -> Int32
-
-func +(lhs: UInt64, rhs: UInt64) -> UInt64
-
-func +(lhs: Int64, rhs: Int64) -> Int64
-
-func +(lhs: UInt, rhs: UInt) -> UInt
-
-func +(lhs: Int, rhs: Int) -> Int
-
-prefix func +(x: Float) -> Float
-
-func +<T : _UnsignedIntegerType>(lhs: T, rhs: T._DisallowMixedSignArithmetic) -> T
-
-func +(lhs: Float, rhs: Float) -> Float
-
-prefix func +(x: Double) -> Double
-
-func +(lhs: Double, rhs: Double) -> Double
-
-prefix func +(x: Float80) -> Float80
-
-func +(lhs: Float80, rhs: Float80) -> Float80
+func +(lhs: Int8, rhs: Int8) -> Int8
 
 
 /// Add `lhs` and `rhs`, returning a result and trapping in case of
 /// arithmetic overflow (except in -Ounchecked builds).
 func +<T : _IntegerArithmeticType>(lhs: T, rhs: T) -> T
+
+func +<T : Strideable>(lhs: T, rhs: T.Stride) -> T
+
+prefix func +(x: Float80) -> Float80
+
+func +(lhs: Double, rhs: Double) -> Double
+
+func +(lhs: Int16, rhs: Int16) -> Int16
+
+prefix func +(x: Double) -> Double
+
+func +(lhs: UInt32, rhs: UInt32) -> UInt32
+
+func +(lhs: Int32, rhs: Int32) -> Int32
+
+func +(lhs: Float, rhs: Float) -> Float
+
+prefix func +(x: Float) -> Float
+
+func +(lhs: UInt64, rhs: UInt64) -> UInt64
+
+func +(lhs: Int, rhs: Int) -> Int
+
+func +(lhs: Int64, rhs: Int64) -> Int64
+
+func +(lhs: UInt, rhs: UInt) -> UInt
+
+func +(lhs: UInt8, rhs: UInt8) -> UInt8
+
+func +<T : UnsignedIntegerType>(lhs: T, rhs: T._DisallowMixedSignArithmetic) -> T
 
 prefix func +<T : SignedNumberType>(x: T) -> T
 
@@ -530,47 +524,31 @@ func +<C : ExtensibleCollectionType, S : SequenceType where S.Generator.Element 
 
 func +<C : ExtensibleCollectionType, S : SequenceType where S.Generator.Element == C.Generator.Element>(lhs: S, rhs: C) -> C
 
-func +<C : ExtensibleCollectionType, S : CollectionType where S.Generator.Element == C.Generator.Element>(lhs: C, rhs: S) -> C
-
 func +<T : Strideable>(lhs: T.Stride, rhs: T) -> T
 
-postfix func ++(inout x: Int32) -> Int32
+func +<C : ExtensibleCollectionType, S : CollectionType where S.Generator.Element == C.Generator.Element>(lhs: C, rhs: S) -> C
+
+func +<EC1 : ExtensibleCollectionType, EC2 : ExtensibleCollectionType where EC1.Generator.Element == EC2.Generator.Element>(lhs: EC1, rhs: EC2) -> EC1
+
+func +(lhs: Float80, rhs: Float80) -> Float80
 
 prefix func ++(inout x: Int32) -> Int32
 
-prefix func ++(inout x: Int16) -> Int16
+postfix func ++(inout x: Int8) -> Int8
 
-prefix func ++(inout rhs: Double) -> Double
-
-postfix func ++(inout lhs: Double) -> Double
-
-prefix func ++(inout rhs: Float80) -> Float80
-
-postfix func ++(inout lhs: Float80) -> Float80
-
-postfix func ++(inout x: UInt16) -> UInt16
-
-
-/// Replace `i` with its `successor()` and return the updated value of
-/// `i`.
-prefix func ++<T : _Incrementable>(inout i: T) -> T
-
-
-/// Replace `i` with its `successor()` and return the original
-/// value of `i`.
-postfix func ++<T : _Incrementable>(inout i: T) -> T
+postfix func ++(inout x: Int32) -> Int32
 
 prefix func ++(inout x: UInt64) -> UInt64
 
 postfix func ++(inout x: UInt64) -> UInt64
 
+prefix func ++(inout x: UInt8) -> UInt8
+
+postfix func ++(inout x: UInt8) -> UInt8
+
+prefix func ++(inout x: Int8) -> Int8
+
 prefix func ++(inout x: Int64) -> Int64
-
-postfix func ++(inout x: UInt32) -> UInt32
-
-prefix func ++(inout x: UInt32) -> UInt32
-
-postfix func ++(inout x: Int16) -> Int16
 
 postfix func ++(inout x: Int64) -> Int64
 
@@ -586,33 +564,41 @@ prefix func ++(inout rhs: Float) -> Float
 
 postfix func ++(inout lhs: Float) -> Float
 
-prefix func ++(inout x: UInt8) -> UInt8
+prefix func ++(inout rhs: Double) -> Double
 
-postfix func ++(inout x: UInt8) -> UInt8
+postfix func ++(inout lhs: Double) -> Double
 
-prefix func ++(inout x: Int8) -> Int8
+prefix func ++(inout rhs: Float80) -> Float80
+
+postfix func ++(inout lhs: Float80) -> Float80
+
+
+/// Replace `i` with its `successor()` and return the updated value of
+/// `i`.
+prefix func ++<T : _Incrementable>(inout i: T) -> T
+
+
+/// Replace `i` with its `successor()` and return the original
+/// value of `i`.
+postfix func ++<T : _Incrementable>(inout i: T) -> T
+
+postfix func ++(inout x: UInt32) -> UInt32
+
+prefix func ++(inout x: UInt32) -> UInt32
+
+postfix func ++(inout x: Int16) -> Int16
+
+prefix func ++(inout x: Int16) -> Int16
+
+postfix func ++(inout x: UInt16) -> UInt16
 
 prefix func ++(inout x: UInt16) -> UInt16
-
-postfix func ++(inout x: Int8) -> Int8
-
-func +=(inout lhs: UInt16, rhs: UInt16)
-
-func +=(inout lhs: Int8, rhs: Int8)
-
-func +=(inout lhs: UInt8, rhs: UInt8)
-
-
-/// Append the elements of `rhs` to `lhs`.
-func +=<T, C : CollectionType where C.Generator.Element == T>(inout lhs: _ContiguousArrayBuffer<T>, rhs: C)
-
-
-/// Extend `lhs` with the elements of `rhs`.
-func +=<T, C : CollectionType where C.Generator.Element == T>(inout lhs: _UnitTestArray<T>, rhs: C)
 
 
 /// Extend `lhs` with the elements of `rhs`.
 func +=<T, S : SequenceType where S.Generator.Element == T>(inout lhs: _UnitTestArray<T>, rhs: S)
+
+func +=<T : Strideable>(inout lhs: T, rhs: T.Stride)
 
 
 /// Extend `lhs` with the elements of `rhs`.
@@ -626,14 +612,6 @@ func +=<T, S : SequenceType where S.Generator.Element == T>(inout lhs: [T], rhs:
 /// Extend `lhs` with the elements of `rhs`.
 func +=<T, C : CollectionType where C.Generator.Element == T>(inout lhs: ArraySlice<T>, rhs: C)
 
-func +=(inout lhs: Int16, rhs: Int16)
-
-func +=(inout lhs: UInt32, rhs: UInt32)
-
-func +=(inout lhs: Int32, rhs: Int32)
-
-func +=(inout lhs: UInt64, rhs: UInt64)
-
 
 /// Extend `lhs` with the elements of `rhs`.
 func +=<T, S : SequenceType where S.Generator.Element == T>(inout lhs: ArraySlice<T>, rhs: S)
@@ -646,81 +624,62 @@ func +=<T, C : CollectionType where C.Generator.Element == T>(inout lhs: Contigu
 /// Extend `lhs` with the elements of `rhs`.
 func +=<T, S : SequenceType where S.Generator.Element == T>(inout lhs: ContiguousArray<T>, rhs: S)
 
-func +=(inout lhs: Int64, rhs: Int64)
+func +=<T>(inout lhs: UnsafePointer<T>, rhs: Int)
 
-func +=(inout lhs: UInt, rhs: UInt)
+func +=<T>(inout lhs: UnsafeMutablePointer<T>, rhs: Int)
 
-func +=(inout lhs: Int, rhs: Int)
 
-func +=(inout lhs: Float, rhs: Float)
+/// Append `rhs` to `lhs`.
+func +=<T>(inout lhs: _UnitTestArrayBuffer<T>, rhs: T)
 
-func +=(inout lhs: Double, rhs: Double)
 
-func +=(inout lhs: Float80, rhs: Float80)
+/// Append the elements of `rhs` to `lhs`.
+func +=<T, C : CollectionType where C.Generator.Element == T>(inout lhs: _UnitTestArrayBuffer<T>, rhs: C)
+
+func +=(inout lhs: String, rhs: String)
+
+func +=<T : UnsignedIntegerType>(inout lhs: T, rhs: T._DisallowMixedSignArithmetic)
+
+
+/// Extend `lhs` with the elements of `rhs`.
+func +=<T, C : CollectionType where C.Generator.Element == T>(inout lhs: _UnitTestArray<T>, rhs: C)
 
 
 /// add `lhs` and `rhs` and store the result in `lhs`, trapping in
 /// case of arithmetic overflow (except in -Ounchecked builds).
 func +=<T : _IntegerArithmeticType>(inout lhs: T, rhs: T)
 
-func +=<T : Strideable>(inout lhs: T, rhs: T.Stride)
+func +=(inout lhs: Float80, rhs: Float80)
 
-func +=<T>(inout lhs: UnsafePointer<T>, rhs: Int)
+func +=(inout lhs: Double, rhs: Double)
 
-func +=(inout lhs: String, rhs: String)
+func +=(inout lhs: Float, rhs: Float)
+
+func +=(inout lhs: Int, rhs: Int)
+
+func +=(inout lhs: UInt, rhs: UInt)
+
+func +=(inout lhs: Int64, rhs: Int64)
+
+func +=(inout lhs: UInt64, rhs: UInt64)
+
+func +=(inout lhs: Int32, rhs: Int32)
+
+func +=(inout lhs: UInt32, rhs: UInt32)
+
+func +=(inout lhs: Int16, rhs: Int16)
+
+func +=(inout lhs: UInt16, rhs: UInt16)
+
+func +=(inout lhs: Int8, rhs: Int8)
+
+func +=(inout lhs: UInt8, rhs: UInt8)
 
 
 /// Append the elements of `rhs` to `lhs`.
-func +=<T, C : CollectionType where C.Generator.Element == T>(inout lhs: _UnitTestArrayBuffer<T>, rhs: C)
-
-
-/// Append `rhs` to `lhs`.
-func +=<T>(inout lhs: _UnitTestArrayBuffer<T>, rhs: T)
-
-func +=<T>(inout lhs: UnsafeMutablePointer<T>, rhs: Int)
-
-func +=<T : _UnsignedIntegerType>(inout lhs: T, rhs: T._DisallowMixedSignArithmetic)
-
-
-/// Subtract `lhs` and `rhs`, returning a result and trapping in case of
-/// arithmetic overflow (except in -Ounchecked builds).
-func -<T : _IntegerArithmeticType>(lhs: T, rhs: T) -> T
-
-prefix func -<T : SignedNumberType>(x: T) -> T
-
-func -(lhs: UInt8, rhs: UInt8) -> UInt8
-
-func -(lhs: Int8, rhs: Int8) -> Int8
-
-func -(lhs: UInt16, rhs: UInt16) -> UInt16
+func +=<T, C : CollectionType where C.Generator.Element == T>(inout lhs: _ContiguousArrayBuffer<T>, rhs: C)
 
 func -(lhs: Int16, rhs: Int16) -> Int16
-
-func -(lhs: UInt32, rhs: UInt32) -> UInt32
-
-func -(lhs: Int32, rhs: Int32) -> Int32
-
-func -(lhs: UInt64, rhs: UInt64) -> UInt64
-
-func -(lhs: Int64, rhs: Int64) -> Int64
-
-func -(lhs: UInt, rhs: UInt) -> UInt
-
-func -(lhs: Int, rhs: Int) -> Int
-
-prefix func -(x: Float) -> Float
-
-func -(lhs: Float, rhs: Float) -> Float
-
-prefix func -(x: Double) -> Double
-
-func -(lhs: Double, rhs: Double) -> Double
-
-prefix func -(x: Float80) -> Float80
-
-func -(lhs: Float80, rhs: Float80) -> Float80
-
-func -<T : Strideable>(lhs: T, rhs: T.Stride) -> T
 
 func -<T>(lhs: UnsafePointer<T>, rhs: UnsafePointer<T>) -> Int
 
@@ -730,21 +689,88 @@ func -<T>(lhs: UnsafeMutablePointer<T>, rhs: UnsafeMutablePointer<T>) -> Int
 
 func -<T>(lhs: UnsafeMutablePointer<T>, rhs: Int) -> UnsafeMutablePointer<T>
 
-func -<T : _UnsignedIntegerType>(lhs: T, rhs: T) -> T._DisallowMixedSignArithmetic
+func -<T : _DisallowMixedSignArithmetic>(lhs: T, rhs: T) -> T._DisallowMixedSignArithmetic
 
-func -<T : _UnsignedIntegerType>(lhs: T, rhs: T._DisallowMixedSignArithmetic) -> T
+func -<T : _DisallowMixedSignArithmetic>(lhs: T, rhs: T._DisallowMixedSignArithmetic) -> T
 
 func -<T : Strideable>(lhs: T, rhs: T) -> T.Stride
 
-prefix func --(inout x: Int) -> Int
+func -<T : Strideable>(lhs: T, rhs: T.Stride) -> T
+
+prefix func -<T : SignedNumberType>(x: T) -> T
+
+
+/// Subtract `lhs` and `rhs`, returning a result and trapping in case of
+/// arithmetic overflow (except in -Ounchecked builds).
+func -<T : _IntegerArithmeticType>(lhs: T, rhs: T) -> T
+
+func -(lhs: Float80, rhs: Float80) -> Float80
+
+prefix func -(x: Float80) -> Float80
+
+func -(lhs: Double, rhs: Double) -> Double
+
+prefix func -(x: Double) -> Double
+
+func -(lhs: Float, rhs: Float) -> Float
+
+prefix func -(x: Float) -> Float
+
+func -(lhs: Int, rhs: Int) -> Int
+
+func -(lhs: UInt, rhs: UInt) -> UInt
+
+func -(lhs: Int64, rhs: Int64) -> Int64
+
+func -(lhs: UInt64, rhs: UInt64) -> UInt64
+
+func -(lhs: Int32, rhs: Int32) -> Int32
+
+func -(lhs: UInt8, rhs: UInt8) -> UInt8
+
+func -(lhs: Int8, rhs: Int8) -> Int8
+
+func -(lhs: UInt16, rhs: UInt16) -> UInt16
+
+func -(lhs: UInt32, rhs: UInt32) -> UInt32
+
+prefix func --(inout x: UInt8) -> UInt8
+
+
+/// Replace `i` with its `predecessor()` and return the original
+/// value of `i`.
+postfix func --<T : BidirectionalIndexType>(inout i: T) -> T
+
+
+/// Replace `i` with its `predecessor()` and return the updated value
+/// of `i`.
+prefix func --<T : BidirectionalIndexType>(inout i: T) -> T
+
+postfix func --(inout x: UInt8) -> UInt8
+
+prefix func --(inout x: Int8) -> Int8
+
+postfix func --(inout x: Int8) -> Int8
+
+postfix func --(inout lhs: Float80) -> Float80
+
+prefix func --(inout rhs: Float80) -> Float80
+
+prefix func --(inout x: UInt16) -> UInt16
+
+postfix func --(inout lhs: Double) -> Double
 
 prefix func --(inout rhs: Double) -> Double
 
 postfix func --(inout lhs: Float) -> Float
 
-postfix func --(inout x: Int) -> Int
-
 prefix func --(inout rhs: Float) -> Float
+
+postfix func --(inout x: UInt16) -> UInt16
+
+prefix func --(inout x: Int16) -> Int16
+
+postfix func --(inout x: Int16) -> Int16
 
 prefix func --(inout x: UInt32) -> UInt32
 
@@ -764,78 +790,55 @@ postfix func --(inout x: Int64) -> Int64
 
 prefix func --(inout x: UInt) -> UInt
 
-
-/// Replace `i` with its `predecessor()` and return the original
-/// value of `i`.
-postfix func --<T : BidirectionalIndexType>(inout i: T) -> T
-
-
-/// Replace `i` with its `predecessor()` and return the updated value
-/// of `i`.
-prefix func --<T : BidirectionalIndexType>(inout i: T) -> T
-
-postfix func --(inout lhs: Float80) -> Float80
-
-prefix func --(inout rhs: Float80) -> Float80
-
-postfix func --(inout lhs: Double) -> Double
-
 postfix func --(inout x: UInt) -> UInt
 
-postfix func --(inout x: Int16) -> Int16
+prefix func --(inout x: Int) -> Int
 
-prefix func --(inout x: Int16) -> Int16
+postfix func --(inout x: Int) -> Int
 
-postfix func --(inout x: UInt16) -> UInt16
+func -=(inout lhs: Double, rhs: Double)
 
-prefix func --(inout x: UInt16) -> UInt16
-
-postfix func --(inout x: Int8) -> Int8
-
-prefix func --(inout x: Int8) -> Int8
-
-postfix func --(inout x: UInt8) -> UInt8
-
-prefix func --(inout x: UInt8) -> UInt8
-
-func -=(inout lhs: UInt8, rhs: UInt8)
-
-func -=<T : _UnsignedIntegerType>(inout lhs: T, rhs: T._DisallowMixedSignArithmetic)
-
-func -=<T>(inout lhs: UnsafePointer<T>, rhs: Int)
-
-func -=<T>(inout lhs: UnsafeMutablePointer<T>, rhs: Int)
-
-func -=<T : Strideable>(inout lhs: T, rhs: T.Stride)
+func -=(inout lhs: Float80, rhs: Float80)
 
 
 /// subtract `lhs` and `rhs` and store the result in `lhs`, trapping in
 /// case of arithmetic overflow (except in -Ounchecked builds).
 func -=<T : _IntegerArithmeticType>(inout lhs: T, rhs: T)
 
-func -=(inout lhs: Float80, rhs: Float80)
+func -=<T : Strideable>(inout lhs: T, rhs: T.Stride)
 
-func -=(inout lhs: Double, rhs: Double)
+func -=<T : UnsignedIntegerType>(inout lhs: T, rhs: T._DisallowMixedSignArithmetic)
+
+func -=<T>(inout lhs: UnsafeMutablePointer<T>, rhs: Int)
+
+func -=<T>(inout lhs: UnsafePointer<T>, rhs: Int)
 
 func -=(inout lhs: Float, rhs: Float)
 
-func -=(inout lhs: Int, rhs: Int)
-
-func -=(inout lhs: UInt, rhs: UInt)
-
-func -=(inout lhs: Int64, rhs: Int64)
-
-func -=(inout lhs: UInt64, rhs: UInt64)
-
-func -=(inout lhs: Int32, rhs: Int32)
-
-func -=(inout lhs: UInt32, rhs: UInt32)
-
-func -=(inout lhs: Int16, rhs: Int16)
+func -=(inout lhs: UInt8, rhs: UInt8)
 
 func -=(inout lhs: Int8, rhs: Int8)
 
 func -=(inout lhs: UInt16, rhs: UInt16)
+
+func -=(inout lhs: Int16, rhs: Int16)
+
+func -=(inout lhs: UInt32, rhs: UInt32)
+
+func -=(inout lhs: Int32, rhs: Int32)
+
+func -=(inout lhs: UInt64, rhs: UInt64)
+
+func -=(inout lhs: Int64, rhs: Int64)
+
+func -=(inout lhs: UInt, rhs: UInt)
+
+func -=(inout lhs: Int, rhs: Int)
+
+
+/// Forms a closed range that contains both `start` and `end`.
+/// - Requires: `start <= end`.
+func ...<Pos : ForwardIndexType where Pos : Comparable>(start: Pos, end: Pos) -> Range<Pos>
 
 
 /// Returns a closed interval from `start` through `end`.
@@ -846,13 +849,10 @@ func ...<T : Comparable>(start: T, end: T) -> ClosedInterval<T>
 func ...<Pos : ForwardIndexType>(minimum: Pos, maximum: Pos) -> Range<Pos>
 
 
-/// Forms a closed range that contains both `start` and `end`.
+/// Forms a half-open range that contains `start`, but not `end`.
+///
 /// - Requires: `start <= end`.
-func ...<Pos : ForwardIndexType where Pos : Comparable>(start: Pos, end: Pos) -> Range<Pos>
-
-
-/// Returns a half-open interval from `start` to `end`.
-func ..<<T : Comparable>(start: T, end: T) -> HalfOpenInterval<T>
+func ..<<Pos : ForwardIndexType where Pos : Comparable>(start: Pos, end: Pos) -> Range<Pos>
 
 
 /// Forms a half-open range that contains `minimum`, but not
@@ -860,41 +860,39 @@ func ..<<T : Comparable>(start: T, end: T) -> HalfOpenInterval<T>
 func ..<<Pos : ForwardIndexType>(minimum: Pos, maximum: Pos) -> Range<Pos>
 
 
-/// Forms a half-open range that contains `start`, but not `end`.
-///
-/// - Requires: `start <= end`.
-func ..<<Pos : ForwardIndexType where Pos : Comparable>(start: Pos, end: Pos) -> Range<Pos>
+/// Returns a half-open interval from `start` to `end`.
+func ..<<T : Comparable>(start: T, end: T) -> HalfOpenInterval<T>
+
+func /(lhs: UInt8, rhs: UInt8) -> UInt8
+
+func /(lhs: Int8, rhs: Int8) -> Int8
+
+func /(lhs: UInt16, rhs: UInt16) -> UInt16
+
+func /(lhs: Int16, rhs: Int16) -> Int16
+
+func /(lhs: UInt32, rhs: UInt32) -> UInt32
+
+func /(lhs: Int32, rhs: Int32) -> Int32
+
+func /(lhs: UInt64, rhs: UInt64) -> UInt64
+
+func /(lhs: UInt, rhs: UInt) -> UInt
+
+func /(lhs: Int, rhs: Int) -> Int
+
+func /(lhs: Float, rhs: Float) -> Float
+
+func /(lhs: Double, rhs: Double) -> Double
+
+func /(lhs: Float80, rhs: Float80) -> Float80
 
 
 /// Divide `lhs` and `rhs`, returning a result and trapping in case of
 /// arithmetic overflow (except in -Ounchecked builds).
 func /<T : _IntegerArithmeticType>(lhs: T, rhs: T) -> T
 
-func /(lhs: Float80, rhs: Float80) -> Float80
-
-func /(lhs: Double, rhs: Double) -> Double
-
-func /(lhs: Float, rhs: Float) -> Float
-
-func /(lhs: Int, rhs: Int) -> Int
-
-func /(lhs: UInt, rhs: UInt) -> UInt
-
 func /(lhs: Int64, rhs: Int64) -> Int64
-
-func /(lhs: UInt64, rhs: UInt64) -> UInt64
-
-func /(lhs: Int32, rhs: Int32) -> Int32
-
-func /(lhs: UInt32, rhs: UInt32) -> UInt32
-
-func /(lhs: Int16, rhs: Int16) -> Int16
-
-func /(lhs: UInt16, rhs: UInt16) -> UInt16
-
-func /(lhs: Int8, rhs: Int8) -> Int8
-
-func /(lhs: UInt8, rhs: UInt8) -> UInt8
 
 func /=(inout lhs: Float, rhs: Float)
 
@@ -907,11 +905,25 @@ func /=(inout lhs: Float80, rhs: Float80)
 /// case of arithmetic overflow (except in -Ounchecked builds).
 func /=<T : _IntegerArithmeticType>(inout lhs: T, rhs: T)
 
-func <(lhs: UInt32, rhs: UInt32) -> Bool
+func <(lhs: Int8, rhs: Int8) -> Bool
 
-func <(lhs: Float, rhs: Float) -> Bool
+func <(lhs: String.UnicodeScalarView.Index, rhs: String.UnicodeScalarView.Index) -> Bool
 
 func <(lhs: Bit, rhs: Bit) -> Bool
+
+func <(lhs: Character, rhs: Character) -> Bool
+
+func <(lhs: UInt8, rhs: UInt8) -> Bool
+
+func <(lhs: UInt16, rhs: UInt16) -> Bool
+
+func <(lhs: Int16, rhs: Int16) -> Bool
+
+func <(lhs: UInt32, rhs: UInt32) -> Bool
+
+func <(lhs: Int32, rhs: Int32) -> Bool
+
+func <(lhs: UInt64, rhs: UInt64) -> Bool
 
 
 /// Lexicographic comparison of version components.
@@ -921,59 +933,47 @@ func <<T>(lhs: UnsafePointer<T>, rhs: UnsafePointer<T>) -> Bool
 
 func <<T>(lhs: UnsafeMutablePointer<T>, rhs: UnsafeMutablePointer<T>) -> Bool
 
+func <(lhs: Int64, rhs: Int64) -> Bool
+
+func <(lhs: UInt, rhs: UInt) -> Bool
+
+func <(lhs: Int, rhs: Int) -> Bool
+
+func <(lhs: Float, rhs: Float) -> Bool
+
+func <(lhs: Double, rhs: Double) -> Bool
+
+func <(lhs: Float80, rhs: Float80) -> Bool
+
+func <<T : Hashable>(lhs: SetIndex<T>, rhs: SetIndex<T>) -> Bool
+
 func <(lhs: UnicodeScalar, rhs: UnicodeScalar) -> Bool
+
+func <<Key : Hashable, Value>(lhs: DictionaryIndex<Key, Value>, rhs: DictionaryIndex<Key, Value>) -> Bool
 
 func <(lhs: String.UTF16View.Index, rhs: String.UTF16View.Index) -> Bool
 
-func <(lhs: String.UnicodeScalarView.Index, rhs: String.UnicodeScalarView.Index) -> Bool
-
-func <(lhs: UInt64, rhs: UInt64) -> Bool
-
 func <(lhs: Index, rhs: Index) -> Bool
 
+func <<T : Comparable>(lhs: T?, rhs: T?) -> Bool
+
 func <(lhs: String, rhs: String) -> Bool
+
+func <(lhs: ObjectIdentifier, rhs: ObjectIdentifier) -> Bool
 
 
 /// Compare two `Strideable`s.
 func <<T : _Strideable>(x: T, y: T) -> Bool
 
-func <(lhs: ObjectIdentifier, rhs: ObjectIdentifier) -> Bool
+func <<(lhs: Int, rhs: Int) -> Int
 
-func <<T : Comparable>(lhs: T?, rhs: T?) -> Bool
-
-func <<Key : Hashable, Value>(lhs: DictionaryIndex<Key, Value>, rhs: DictionaryIndex<Key, Value>) -> Bool
-
-func <<T : Hashable>(lhs: SetIndex<T>, rhs: SetIndex<T>) -> Bool
-
-func <(lhs: Float80, rhs: Float80) -> Bool
-
-func <(lhs: Double, rhs: Double) -> Bool
-
-func <(lhs: Int16, rhs: Int16) -> Bool
-
-func <(lhs: Int, rhs: Int) -> Bool
-
-func <(lhs: UInt, rhs: UInt) -> Bool
-
-func <(lhs: UInt16, rhs: UInt16) -> Bool
-
-func <(lhs: Int8, rhs: Int8) -> Bool
-
-func <(lhs: Character, rhs: Character) -> Bool
-
-func <(lhs: UInt8, rhs: UInt8) -> Bool
-
-func <(lhs: Int32, rhs: Int32) -> Bool
-
-func <(lhs: Int64, rhs: Int64) -> Bool
-
-func <<(lhs: Int16, rhs: Int16) -> Int16
-
-func <<(lhs: UInt16, rhs: UInt16) -> UInt16
+func <<(lhs: UInt8, rhs: UInt8) -> UInt8
 
 func <<(lhs: Int8, rhs: Int8) -> Int8
 
-func <<(lhs: UInt8, rhs: UInt8) -> UInt8
+func <<(lhs: UInt16, rhs: UInt16) -> UInt16
+
+func <<(lhs: Int16, rhs: Int16) -> Int16
 
 func <<(lhs: UInt32, rhs: UInt32) -> UInt32
 
@@ -981,71 +981,69 @@ func <<(lhs: Int32, rhs: Int32) -> Int32
 
 func <<(lhs: UInt64, rhs: UInt64) -> UInt64
 
-func <<(lhs: UInt, rhs: UInt) -> UInt
-
-func <<(lhs: Int, rhs: Int) -> Int
-
 func <<(lhs: Int64, rhs: Int64) -> Int64
 
-func <<=(inout lhs: Int8, rhs: Int8)
+func <<(lhs: UInt, rhs: UInt) -> UInt
 
 func <<=(inout lhs: UInt, rhs: UInt)
 
-func <<=(inout lhs: Int, rhs: Int)
-
-func <<=(inout lhs: UInt8, rhs: UInt8)
-
-func <<=(inout lhs: UInt16, rhs: UInt16)
-
 func <<=(inout lhs: Int64, rhs: Int64)
-
-func <<=(inout lhs: Int16, rhs: Int16)
-
-func <<=(inout lhs: UInt32, rhs: UInt32)
-
-func <<=(inout lhs: Int32, rhs: Int32)
 
 func <<=(inout lhs: UInt64, rhs: UInt64)
 
-func <=(lhs: Float, rhs: Float) -> Bool
+func <<=(inout lhs: Int, rhs: Int)
 
-func <=(lhs: UInt32, rhs: UInt32) -> Bool
+func <<=(inout lhs: Int32, rhs: Int32)
 
-func <=<T : Comparable>(lhs: T, rhs: T) -> Bool
+func <<=(inout lhs: UInt32, rhs: UInt32)
 
-func <=<T : Comparable>(lhs: T?, rhs: T?) -> Bool
+func <<=(inout lhs: Int16, rhs: Int16)
 
-func <=(lhs: Int, rhs: Int) -> Bool
+func <<=(inout lhs: UInt16, rhs: UInt16)
 
-func <=(lhs: UInt, rhs: UInt) -> Bool
+func <<=(inout lhs: Int8, rhs: Int8)
 
-func <=(lhs: Int64, rhs: Int64) -> Bool
+func <<=(inout lhs: UInt8, rhs: UInt8)
 
 func <=(lhs: UInt64, rhs: UInt64) -> Bool
 
-func <=(lhs: Int32, rhs: Int32) -> Bool
-
-func <=(lhs: Int16, rhs: Int16) -> Bool
-
-func <=(lhs: UInt16, rhs: UInt16) -> Bool
+func <=(lhs: UInt8, rhs: UInt8) -> Bool
 
 func <=(lhs: Int8, rhs: Int8) -> Bool
 
-func <=(lhs: UInt8, rhs: UInt8) -> Bool
+func <=(lhs: UInt16, rhs: UInt16) -> Bool
+
+func <=(lhs: Int16, rhs: Int16) -> Bool
+
+func <=(lhs: UInt32, rhs: UInt32) -> Bool
+
+func <=(lhs: Int32, rhs: Int32) -> Bool
+
+func <=(lhs: Int64, rhs: Int64) -> Bool
+
+func <=(lhs: UInt, rhs: UInt) -> Bool
+
+func <=(lhs: Int, rhs: Int) -> Bool
+
+func <=(lhs: Float, rhs: Float) -> Bool
 
 func <=(lhs: Double, rhs: Double) -> Bool
 
 func <=(lhs: Float80, rhs: Float80) -> Bool
 
-func ==(lhs: Int8, rhs: Int8) -> Bool
+func <=<T : Comparable>(lhs: T?, rhs: T?) -> Bool
+
+func <=<T : Comparable>(lhs: T, rhs: T) -> Bool
+
+func ==<Key : Hashable, Value>(lhs: DictionaryIndex<Key, Value>, rhs: DictionaryIndex<Key, Value>) -> Bool
+
+func ==<T : Hashable>(lhs: SetIndex<T>, rhs: SetIndex<T>) -> Bool
+
+func ==<Key : Equatable, Value : Equatable>(lhs: [Key : Value], rhs: [Key : Value]) -> Bool
+
+func ==<T : Hashable>(lhs: Set<T>, rhs: Set<T>) -> Bool
 
 func ==<I>(lhs: _ConcatenateForwardIndex<I>, rhs: _ConcatenateForwardIndex<I>) -> Bool
-
-func ==<T : _RawOptionSetType>(a: T, b: T) -> Bool
-
-func ==(lhs: FloatingPointClassification, rhs: FloatingPointClassification) -> Bool
-
-func ==<I>(lhs: _ConcatenateBidirectionalIndex<I>, rhs: _ConcatenateBidirectionalIndex<I>) -> Bool
 
 
 /// Returns `true` iff `lhs.rawValue == rhs.rawValue`.
@@ -1055,54 +1053,18 @@ func ==(lhs: Character, rhs: Character) -> Bool
 
 func ==(lhs: COpaquePointer, rhs: COpaquePointer) -> Bool
 
-func ==<T : Hashable>(lhs: Set<T>, rhs: Set<T>) -> Bool
-
-func ==<Key : Equatable, Value : Equatable>(lhs: [Key : Value], rhs: [Key : Value]) -> Bool
+func ==(lhs: FloatingPointClassification, rhs: FloatingPointClassification) -> Bool
 
 
 /// Return `true` iff `t0` is identical to `t1`; i.e. if they are both
 /// `nil` or they both represent the same type.
 func ==(t0: Any.Type?, t1: Any.Type?) -> Bool
 
-func ==<T>(lhs: AutoreleasingUnsafeMutablePointer<T>, rhs: AutoreleasingUnsafeMutablePointer<T>) -> Bool
+func ==(lhs: String.UTF8View.Index, rhs: String.UTF8View.Index) -> Bool
 
-func ==(lhs: Float80, rhs: Float80) -> Bool
+func ==(lhs: String.UTF16View.Index, rhs: String.UTF16View.Index) -> Bool
 
-func ==(lhs: Bool, rhs: Bool) -> Bool
-
-
-/// Returns true if these arrays contain the same elements.
-func ==<T : Equatable>(lhs: _UnitTestArray<T>, rhs: _UnitTestArray<T>) -> Bool
-
-
-/// Returns true if these arrays contain the same elements.
-func ==<T : Equatable>(lhs: [T], rhs: [T]) -> Bool
-
-
-/// Returns true if these arrays contain the same elements.
-func ==<T : Equatable>(lhs: ArraySlice<T>, rhs: ArraySlice<T>) -> Bool
-
-
-/// Returns true if these arrays contain the same elements.
-func ==<T : Equatable>(lhs: ContiguousArray<T>, rhs: ContiguousArray<T>) -> Bool
-
-func ==(lhs: Double, rhs: Double) -> Bool
-
-func ==(lhs: Float, rhs: Float) -> Bool
-
-func ==(lhs: Int, rhs: Int) -> Bool
-
-func ==(lhs: UInt, rhs: UInt) -> Bool
-
-func ==(lhs: UInt8, rhs: UInt8) -> Bool
-
-func ==(lhs: Int64, rhs: Int64) -> Bool
-
-func ==(lhs: UInt64, rhs: UInt64) -> Bool
-
-func ==<T : Hashable>(lhs: SetIndex<T>, rhs: SetIndex<T>) -> Bool
-
-func ==<Key : Hashable, Value>(lhs: DictionaryIndex<Key, Value>, rhs: DictionaryIndex<Key, Value>) -> Bool
+func ==(lhs: String.UnicodeScalarView.Index, rhs: String.UnicodeScalarView.Index) -> Bool
 
 
 /// Return true iff `lhs` and `rhs` wrap equal underlying
@@ -1111,64 +1073,6 @@ func ==<Key : Hashable, Value>(lhs: DictionaryIndex<Key, Value>, rhs: Dictionary
 /// - Requires: The types of indices wrapped by `lhs` and `rhs` are
 ///   identical.
 func ==(lhs: AnyRandomAccessIndex, rhs: AnyRandomAccessIndex) -> Bool
-
-
-/// Two `HalfOpenInterval`s are equal if their `start` and `end` are
-/// equal.
-func ==<T : Comparable>(lhs: HalfOpenInterval<T>, rhs: HalfOpenInterval<T>) -> Bool
-
-
-/// Two `ClosedInterval`s are equal if their `start` and `end` are
-/// equal.
-func ==<T : Comparable>(lhs: ClosedInterval<T>, rhs: ClosedInterval<T>) -> Bool
-
-func ==<Value, Element>(lhs: ManagedBufferPointer<Value, Element>, rhs: ManagedBufferPointer<Value, Element>) -> Bool
-
-func ==<T : Equatable>(lhs: T?, rhs: T?) -> Bool
-
-func ==<T>(lhs: T?, rhs: _OptionalNilComparisonType) -> Bool
-
-func ==<T>(lhs: _OptionalNilComparisonType, rhs: T?) -> Bool
-
-func ==<T>(lhs: Range<T>, rhs: Range<T>) -> Bool
-
-func ==(x: ObjectIdentifier, y: ObjectIdentifier) -> Bool
-
-func ==<I>(lhs: ReverseBidirectionalIndex<I>, rhs: ReverseBidirectionalIndex<I>) -> Bool
-
-func ==<I>(lhs: ReverseRandomAccessIndex<I>, rhs: ReverseRandomAccessIndex<I>) -> Bool
-
-func ==(lhs: Int32, rhs: Int32) -> Bool
-
-func ==(lhs: UInt32, rhs: UInt32) -> Bool
-
-func ==(lhs: Int16, rhs: Int16) -> Bool
-
-func ==<T : _Strideable>(x: T, y: T) -> Bool
-
-func ==(lhs: String, rhs: String) -> Bool
-
-func ==(lhs: Index, rhs: Index) -> Bool
-
-func ==(lhs: UInt16, rhs: UInt16) -> Bool
-
-func ==(lhs: String.UnicodeScalarView.Index, rhs: String.UnicodeScalarView.Index) -> Bool
-
-func ==(lhs: String.UTF16View.Index, rhs: String.UTF16View.Index) -> Bool
-
-func ==<Base : CollectionType>(lhs: FilterCollectionViewIndex<Base>, rhs: FilterCollectionViewIndex<Base>) -> Bool
-
-func ==(lhs: String.UTF8View.Index, rhs: String.UTF8View.Index) -> Bool
-
-func ==(lhs: UnicodeScalar, rhs: UnicodeScalar) -> Bool
-
-func ==<T>(lhs: UnsafeMutablePointer<T>, rhs: UnsafeMutablePointer<T>) -> Bool
-
-func ==<T>(lhs: UnsafePointer<T>, rhs: UnsafePointer<T>) -> Bool
-
-func ==(left: _SwiftNSOperatingSystemVersion, right: _SwiftNSOperatingSystemVersion) -> Bool
-
-func ==(lhs: Bit, rhs: Bit) -> Bool
 
 
 /// Return true iff `lhs` and `rhs` wrap equal underlying
@@ -1186,11 +1090,115 @@ func ==(lhs: AnyForwardIndex, rhs: AnyForwardIndex) -> Bool
 ///   identical.
 func ==(lhs: AnyBidirectionalIndex, rhs: AnyBidirectionalIndex) -> Bool
 
+func ==<T>(lhs: AutoreleasingUnsafeMutablePointer<T>, rhs: AutoreleasingUnsafeMutablePointer<T>) -> Bool
+
+func ==(lhs: Bool, rhs: Bool) -> Bool
+
+
+/// Returns true if these arrays contain the same elements.
+func ==<T : Equatable>(lhs: _UnitTestArray<T>, rhs: _UnitTestArray<T>) -> Bool
+
+func ==<I>(lhs: _ConcatenateBidirectionalIndex<I>, rhs: _ConcatenateBidirectionalIndex<I>) -> Bool
+
+func ==(lhs: Float80, rhs: Float80) -> Bool
+
+func ==<Base : CollectionType>(lhs: FilterCollectionViewIndex<Base>, rhs: FilterCollectionViewIndex<Base>) -> Bool
+
+func ==(lhs: UInt8, rhs: UInt8) -> Bool
+
+func ==(lhs: Int8, rhs: Int8) -> Bool
+
+
+/// Returns true if these arrays contain the same elements.
+func ==<T : Equatable>(lhs: [T], rhs: [T]) -> Bool
+
+func ==(lhs: UInt16, rhs: UInt16) -> Bool
+
+func ==(lhs: Index, rhs: Index) -> Bool
+
+
+/// Returns true if these arrays contain the same elements.
+func ==<T : Equatable>(lhs: ArraySlice<T>, rhs: ArraySlice<T>) -> Bool
+
+func ==(lhs: Int16, rhs: Int16) -> Bool
+
+func ==(lhs: String, rhs: String) -> Bool
+
+func ==<T : _Strideable>(x: T, y: T) -> Bool
+
+func ==<I>(lhs: ReverseRandomAccessIndex<I>, rhs: ReverseRandomAccessIndex<I>) -> Bool
+
+
+/// Returns true if these arrays contain the same elements.
+func ==<T : Equatable>(lhs: ContiguousArray<T>, rhs: ContiguousArray<T>) -> Bool
+
+func ==(lhs: UInt32, rhs: UInt32) -> Bool
+
+func ==(lhs: Int32, rhs: Int32) -> Bool
+
+func ==(lhs: Double, rhs: Double) -> Bool
+
+func ==(lhs: UInt64, rhs: UInt64) -> Bool
+
+func ==(lhs: Int64, rhs: Int64) -> Bool
+
+func ==<T>(lhs: _OptionalNilComparisonType, rhs: T?) -> Bool
+
+func ==<T>(lhs: T?, rhs: _OptionalNilComparisonType) -> Bool
+
+func ==<T : Equatable>(lhs: T?, rhs: T?) -> Bool
+
+func ==(lhs: UnicodeScalar, rhs: UnicodeScalar) -> Bool
+
+func ==(lhs: UInt, rhs: UInt) -> Bool
+
+func ==<T>(lhs: UnsafeMutablePointer<T>, rhs: UnsafeMutablePointer<T>) -> Bool
+
+func ==<T>(lhs: UnsafePointer<T>, rhs: UnsafePointer<T>) -> Bool
+
+func ==(left: _SwiftNSOperatingSystemVersion, right: _SwiftNSOperatingSystemVersion) -> Bool
+
+func ==(lhs: Bit, rhs: Bit) -> Bool
+
+func ==<I>(lhs: ReverseBidirectionalIndex<I>, rhs: ReverseBidirectionalIndex<I>) -> Bool
+
+func ==(x: ObjectIdentifier, y: ObjectIdentifier) -> Bool
+
+
+/// Two `HalfOpenInterval`s are equal if their `start` and `end` are
+/// equal.
+func ==<T : Comparable>(lhs: HalfOpenInterval<T>, rhs: HalfOpenInterval<T>) -> Bool
+
+func ==(lhs: Float, rhs: Float) -> Bool
+
+
+/// Two `ClosedInterval`s are equal if their `start` and `end` are
+/// equal.
+func ==<T : Comparable>(lhs: ClosedInterval<T>, rhs: ClosedInterval<T>) -> Bool
+
+func ==(lhs: Int, rhs: Int) -> Bool
+
+func ==<Value, Element>(lhs: ManagedBufferPointer<Value, Element>, rhs: ManagedBufferPointer<Value, Element>) -> Bool
+
+func ==<T>(lhs: Range<T>, rhs: Range<T>) -> Bool
+
 
 /// Return true iff `lhs` and `rhs` store the same underlying collection.
 func ===<L : AnyCollectionType, R : AnyCollectionType>(lhs: L, rhs: R) -> Bool
 
 func ===(lhs: AnyObject?, rhs: AnyObject?) -> Bool
+
+func >(lhs: UInt32, rhs: UInt32) -> Bool
+
+func ><T : Comparable>(lhs: T, rhs: T) -> Bool
+
+func ><T : Comparable>(lhs: T?, rhs: T?) -> Bool
+
+func >(lhs: Float80, rhs: Float80) -> Bool
+
+func >(lhs: Double, rhs: Double) -> Bool
+
+func >(lhs: Float, rhs: Float) -> Bool
 
 func >(lhs: Int, rhs: Int) -> Bool
 
@@ -1198,21 +1206,9 @@ func >(lhs: UInt, rhs: UInt) -> Bool
 
 func >(lhs: Int64, rhs: Int64) -> Bool
 
-func >(lhs: Float, rhs: Float) -> Bool
-
-func >(lhs: Double, rhs: Double) -> Bool
-
-func >(lhs: Float80, rhs: Float80) -> Bool
-
-func >(lhs: Int32, rhs: Int32) -> Bool
-
 func >(lhs: UInt64, rhs: UInt64) -> Bool
 
 func >(lhs: UInt8, rhs: UInt8) -> Bool
-
-func ><T : Comparable>(lhs: T?, rhs: T?) -> Bool
-
-func ><T : Comparable>(lhs: T, rhs: T) -> Bool
 
 func >(lhs: Int8, rhs: Int8) -> Bool
 
@@ -1220,83 +1216,83 @@ func >(lhs: UInt16, rhs: UInt16) -> Bool
 
 func >(lhs: Int16, rhs: Int16) -> Bool
 
-func >(lhs: UInt32, rhs: UInt32) -> Bool
-
-func >=(lhs: UInt, rhs: UInt) -> Bool
-
-func >=(lhs: UInt8, rhs: UInt8) -> Bool
+func >(lhs: Int32, rhs: Int32) -> Bool
 
 func >=(lhs: Int8, rhs: Int8) -> Bool
 
-func >=(lhs: UInt16, rhs: UInt16) -> Bool
-
-func >=(lhs: Int16, rhs: Int16) -> Bool
-
-func >=(lhs: UInt32, rhs: UInt32) -> Bool
-
-func >=(lhs: Int32, rhs: Int32) -> Bool
-
-func >=(lhs: UInt64, rhs: UInt64) -> Bool
-
-func >=(lhs: Int64, rhs: Int64) -> Bool
-
-func >=(lhs: Int, rhs: Int) -> Bool
+func >=(lhs: Double, rhs: Double) -> Bool
 
 func >=(lhs: Float, rhs: Float) -> Bool
 
-func >=(lhs: Double, rhs: Double) -> Bool
+func >=(lhs: Int, rhs: Int) -> Bool
 
-func >=(lhs: Float80, rhs: Float80) -> Bool
+func >=(lhs: UInt, rhs: UInt) -> Bool
 
-func >=<T : Comparable>(lhs: T?, rhs: T?) -> Bool
+func >=(lhs: Int64, rhs: Int64) -> Bool
 
-func >=<T : Comparable>(lhs: T, rhs: T) -> Bool
+func >=(lhs: UInt64, rhs: UInt64) -> Bool
+
+func >=(lhs: UInt8, rhs: UInt8) -> Bool
+
+func >=(lhs: Int32, rhs: Int32) -> Bool
+
+func >=(lhs: UInt32, rhs: UInt32) -> Bool
 
 func >=(left: _SwiftNSOperatingSystemVersion, right: _SwiftNSOperatingSystemVersion) -> Bool
 
-func >>(lhs: UInt16, rhs: UInt16) -> UInt16
+func >=<T : Comparable>(lhs: T, rhs: T) -> Bool
 
-func >>(lhs: Int, rhs: Int) -> Int
+func >=(lhs: Int16, rhs: Int16) -> Bool
+
+func >=(lhs: UInt16, rhs: UInt16) -> Bool
+
+func >=<T : Comparable>(lhs: T?, rhs: T?) -> Bool
+
+func >=(lhs: Float80, rhs: Float80) -> Bool
 
 func >>(lhs: UInt, rhs: UInt) -> UInt
 
-func >>(lhs: Int64, rhs: Int64) -> Int64
-
-func >>(lhs: UInt64, rhs: UInt64) -> UInt64
-
-func >>(lhs: Int32, rhs: Int32) -> Int32
-
-func >>(lhs: UInt32, rhs: UInt32) -> UInt32
-
-func >>(lhs: Int16, rhs: Int16) -> Int16
+func >>(lhs: Int, rhs: Int) -> Int
 
 func >>(lhs: UInt8, rhs: UInt8) -> UInt8
 
+func >>(lhs: Int16, rhs: Int16) -> Int16
+
 func >>(lhs: Int8, rhs: Int8) -> Int8
 
-func >>=(inout lhs: UInt16, rhs: UInt16)
+func >>(lhs: UInt32, rhs: UInt32) -> UInt32
 
-func >>=(inout lhs: Int16, rhs: Int16)
+func >>(lhs: Int32, rhs: Int32) -> Int32
 
-func >>=(inout lhs: UInt32, rhs: UInt32)
+func >>(lhs: UInt64, rhs: UInt64) -> UInt64
 
-func >>=(inout lhs: Int32, rhs: Int32)
+func >>(lhs: UInt16, rhs: UInt16) -> UInt16
 
-func >>=(inout lhs: UInt64, rhs: UInt64)
-
-func >>=(inout lhs: Int64, rhs: Int64)
-
-func >>=(inout lhs: UInt, rhs: UInt)
-
-func >>=(inout lhs: Int, rhs: Int)
-
-func >>=(inout lhs: Int8, rhs: Int8)
+func >>(lhs: Int64, rhs: Int64) -> Int64
 
 func >>=(inout lhs: UInt8, rhs: UInt8)
 
-func ??<T>(optional: T?, @autoclosure defaultValue: () -> T?) -> T?
+func >>=(inout lhs: Int, rhs: Int)
+
+func >>=(inout lhs: UInt, rhs: UInt)
+
+func >>=(inout lhs: Int64, rhs: Int64)
+
+func >>=(inout lhs: UInt64, rhs: UInt64)
+
+func >>=(inout lhs: Int32, rhs: Int32)
+
+func >>=(inout lhs: UInt32, rhs: UInt32)
+
+func >>=(inout lhs: Int16, rhs: Int16)
+
+func >>=(inout lhs: Int8, rhs: Int8)
+
+func >>=(inout lhs: UInt16, rhs: UInt16)
 
 func ??<T>(optional: T?, @autoclosure defaultValue: () -> T) -> T
+
+func ??<T>(optional: T?, @autoclosure defaultValue: () -> T?) -> T?
 
 
 /// A type that supports an "absolute value" function.
@@ -1895,7 +1891,7 @@ extension Array : _ArrayType, MutableSliceable, RangeReplaceableCollectionType, 
     func join<S : SequenceType where S.Generator.Element == Array<T>>(elements: S) -> [T]
 }
 
-extension Array : Reflectable {
+extension Array : _Reflectable {
 
     /// Returns a mirror that reflects `self`.
     func getMirror() -> MirrorType
@@ -2086,7 +2082,7 @@ extension ArraySlice : _ArrayType, MutableSliceable, RangeReplaceableCollectionT
     func join<S : SequenceType where S.Generator.Element == ArraySlice<T>>(elements: S) -> ArraySlice<T>
 }
 
-extension ArraySlice : Reflectable {
+extension ArraySlice : _Reflectable {
 
     /// Returns a mirror that reflects `self`.
     func getMirror() -> MirrorType
@@ -2256,7 +2252,7 @@ struct BidirectionalReverseView<T : CollectionType where T.Index : Bidirectional
 
 /// A `RandomAccessIndexType` that has two possible values.  Used as
 /// the `Index` type for `CollectionOfOne<T>`.
-enum Bit : Int, Comparable, RandomAccessIndexType, BidirectionalIndexType, ForwardIndexType, _Incrementable, Strideable, _Strideable, Reflectable {
+enum Bit : Int, Comparable, RandomAccessIndexType, BidirectionalIndexType, ForwardIndexType, _Incrementable, Strideable, _Strideable, _Reflectable {
     case Zero
     case One
 
@@ -2401,7 +2397,7 @@ extension Bool : Equatable, Hashable {
     var hashValue: Int { get }
 }
 
-extension Bool : Reflectable {
+extension Bool : _Reflectable {
 
     /// Returns a mirror that reflects `self`.
     func getMirror() -> MirrorType
@@ -2628,7 +2624,7 @@ extension Character : CustomDebugStringConvertible {
     var debugDescription: String { get }
 }
 
-extension Character : Reflectable {
+extension Character : _Reflectable {
 
     /// Returns a mirror that reflects `self`.
     func getMirror() -> MirrorType
@@ -2643,7 +2639,7 @@ extension Character : Streamable {
 
 /// A closed `IntervalType`, which contains both its `start` and its
 /// `end`.  Cannot represent an empty interval.
-struct ClosedInterval<T : Comparable> : IntervalType, Equatable, CustomStringConvertible, CustomDebugStringConvertible, Reflectable {
+struct ClosedInterval<T : Comparable> : IntervalType, Equatable, CustomStringConvertible, CustomDebugStringConvertible, _Reflectable {
 
     /// The type of the `Interval`'s endpoints.
     typealias Bound = T
@@ -2724,7 +2720,7 @@ struct CollectionOfOne<T> : CollectionType, SequenceType, _CollectionDefaultsTyp
     var count: Int { get }
 }
 
-extension CollectionOfOne : Reflectable {
+extension CollectionOfOne : _Reflectable {
 
     /// Returns a mirror that reflects `self`.
     func getMirror() -> MirrorType
@@ -2813,6 +2809,8 @@ extension CollectionType {
     /// all valid subscript arguments for `self`, omitting its `endIndex`.
     var indices: Range<Self.Index> { get }
 }
+
+
 
 extension CollectionType where Index : BidirectionalIndexType {
 
@@ -2967,7 +2965,7 @@ extension ContiguousArray : _ArrayType, MutableSliceable, RangeReplaceableCollec
     func join<S : SequenceType where S.Generator.Element == ContiguousArray<T>>(elements: S) -> ContiguousArray<T>
 }
 
-extension ContiguousArray : Reflectable {
+extension ContiguousArray : _Reflectable {
 
     /// Returns a mirror that reflects `self`.
     func getMirror() -> MirrorType
@@ -3224,7 +3222,7 @@ extension Dictionary : CustomStringConvertible, CustomDebugStringConvertible {
     var debugDescription: String { get }
 }
 
-extension Dictionary : Reflectable {
+extension Dictionary : _Reflectable {
 
     /// Returns a mirror that reflects `self`.
     func getMirror() -> MirrorType
@@ -3476,7 +3474,7 @@ extension Double {
     init?(_ text: String)
 }
 
-extension Double : Reflectable {
+extension Double : _Reflectable {
 
     /// Returns a mirror that reflects `self`.
     func getMirror() -> MirrorType
@@ -3514,7 +3512,7 @@ struct EmptyCollection<T> : CollectionType, SequenceType, _CollectionDefaultsTyp
     var count: Int { get }
 }
 
-extension EmptyCollection : Reflectable {
+extension EmptyCollection : _Reflectable {
 
     /// Returns a mirror that reflects `self`.
     func getMirror() -> MirrorType
@@ -3918,7 +3916,7 @@ extension Float {
     init?(_ text: String)
 }
 
-extension Float : Reflectable {
+extension Float : _Reflectable {
 
     /// Returns a mirror that reflects `self`.
     func getMirror() -> MirrorType
@@ -4159,6 +4157,8 @@ protocol ForwardIndexType : _Incrementable {
 }
 
 
+
+
 /// A generator that produces one or fewer instances of `T`.
 struct GeneratorOfOne<T> : GeneratorType, SequenceType {
 
@@ -4237,7 +4237,7 @@ protocol GeneratorType {
 
 /// A half-open `IntervalType`, which contains its `start` but not its
 /// `end`.  Can represent an empty interval.
-struct HalfOpenInterval<T : Comparable> : IntervalType, Equatable, CustomStringConvertible, CustomDebugStringConvertible, Reflectable {
+struct HalfOpenInterval<T : Comparable> : IntervalType, Equatable, CustomStringConvertible, CustomDebugStringConvertible, _Reflectable {
 
     /// The type of the `Interval`'s endpoints.
     typealias Bound = T
@@ -4307,7 +4307,7 @@ protocol Hashable : Equatable {
 /// The compiler has special knowledge of the existence of
 /// `ImplicitlyUnwrappedOptional<T>`, but always interacts with it using the
 /// library intrinsics below.
-enum ImplicitlyUnwrappedOptional<T> : Reflectable, NilLiteralConvertible {
+enum ImplicitlyUnwrappedOptional<T> : _Reflectable, NilLiteralConvertible {
     case None
     case Some(T)
 
@@ -4556,7 +4556,7 @@ extension Int {
     init?(_ text: String, radix: Int = default)
 }
 
-extension Int : Reflectable {
+extension Int : _Reflectable {
 
     /// Returns a mirror that reflects `self`.
     func getMirror() -> MirrorType
@@ -4774,7 +4774,7 @@ extension Int16 {
     init?(_ text: String, radix: Int = default)
 }
 
-extension Int16 : Reflectable {
+extension Int16 : _Reflectable {
 
     /// Returns a mirror that reflects `self`.
     func getMirror() -> MirrorType
@@ -4977,7 +4977,7 @@ extension Int32 {
     init?(_ text: String, radix: Int = default)
 }
 
-extension Int32 : Reflectable {
+extension Int32 : _Reflectable {
 
     /// Returns a mirror that reflects `self`.
     func getMirror() -> MirrorType
@@ -5156,7 +5156,7 @@ extension Int64 {
     init?(_ text: String, radix: Int = default)
 }
 
-extension Int64 : Reflectable {
+extension Int64 : _Reflectable {
 
     /// Returns a mirror that reflects `self`.
     func getMirror() -> MirrorType
@@ -5367,7 +5367,7 @@ extension Int8 {
     init?(_ text: String, radix: Int = default)
 }
 
-extension Int8 : Reflectable {
+extension Int8 : _Reflectable {
 
     /// Returns a mirror that reflects `self`.
     func getMirror() -> MirrorType
@@ -5900,8 +5900,42 @@ struct Mirror {
     /// `AncestorRepresentation`.  This setting has no effect on mirrors
     /// reflecting value type instances.
     enum AncestorRepresentation {
+
+        /// Generate a default mirror for all ancestor classes.  This is the
+        /// default behavior.
+        ///
+        /// - Note: This option bypasses any implementation of `customMirror`
+        ///   that may be supplied by a `CustomReflectable` ancestor, so this
+        ///   is typically not the right option for a `customMirror`implementation 
+        /// Generate a default mirror for all ancestor classes.
+        ///
+        /// This case is the default.
+        ///
+        /// - Note: This option generates default mirrors even for
+        ///   ancestor classes that may implement `CustomReflectable`'s
+        ///   `customMirror` requirement.  To avoid dropping an ancestor class
+        /// customization, an override of `customMirror()` should pass
+        /// `ancestorRepresentation: .Customized(super.customMirror)` when
+        /// initializing its `Mirror`.
         case Generated
+
+        /// Use the nearest ancestor's implementation of `customMirror()` to
+        /// create a mirror for that ancestor.  Other classes derived from
+        /// such an ancestor are given a default mirror.
+        ///
+        /// The payload for this option should always be
+        /// "`super.customMirror`":
+        ///
+        ///     func customMirror() -> Mirror {
+        ///       return Mirror(
+        ///         self,
+        ///         children: ["someProperty": self.someProperty],
+        ///         ancestorRepresentation: .Customized(super.customMirror)) // <==
+        ///     }
         case Customized(() -> Mirror)
+
+        /// Suppress the representation of all ancestor classes.  The
+        /// resulting `Mirror`'s `superclassMirror()` is `nil`.
         case Suppressed
     }
 
@@ -6102,16 +6136,38 @@ extension Mirror : CustomReflectable {
 
 /// How children of this value should be presented in the IDE.
 enum MirrorDisposition {
+
+    /// As a struct.
     case Struct
+
+    /// As a class.
     case Class
+
+    /// As an enum.
     case Enum
+
+    /// As a tuple.
     case Tuple
+
+    /// As a miscellaneous aggregate with a fixed set of children.
     case Aggregate
+
+    /// As a container that is accessed by index.
     case IndexContainer
+
+    /// As a container that is accessed by key.
     case KeyContainer
+
+    /// As a container that represents membership of its values.
     case MembershipContainer
+
+    /// As a miscellaneous container with a variable number of children.
     case Container
+
+    /// An Optional which can have either zero or one children.
     case Optional
+
+    /// An Objective-C object imported in Swift.
     case ObjCObject
 }
 
@@ -6410,7 +6466,7 @@ extension OptionSetType where RawValue : BitwiseOperationsType {
     mutating func exclusiveOrInPlace(other: Self)
 }
 
-enum Optional<T> : Reflectable, NilLiteralConvertible {
+enum Optional<T> : _Reflectable, NilLiteralConvertible {
     case None
     case Some(T)
 
@@ -6499,23 +6555,71 @@ enum Process {
 
 /// The sum of types that can be used as a quick look representation.
 enum QuickLookObject {
+
+    /// Plain text.
     case Text(String)
+
+    /// An integer numeric value.
     case Int(Int64)
+
+    /// An unsigned integer numeric value.
     case UInt(UInt64)
+
+    /// A single precision floating-point numeric value.
     case Float(Float32)
+
+    /// A double precision floating-point numeric value.
     case Double(Float64)
+
+    /// An image.
     case Image(Any)
+
+    /// A sound.
     case Sound(Any)
+
+    /// A color.
     case Color(Any)
+
+    /// A bezier path.
     case BezierPath(Any)
+
+    /// An attributed string.
     case AttributedString(Any)
+
+    /// A rectangle.
+    ///
+    /// Uses explicit coordinates to avoid coupling a particular Cocoa type.
     case Rectangle(Float64, Float64, Float64, Float64)
+
+    /// A point.
+    ///
+    /// Uses explicit coordinates to avoid coupling a particular Cocoa type.
     case Point(Float64, Float64)
+
+    /// A size.
+    ///
+    /// Uses explicit coordinates to avoid coupling a particular Cocoa type.
     case Size(Float64, Float64)
+
+    /// A logical value.
     case Logical(Bool)
+
+    /// A range.
+    ///
+    /// Uses explicit values to avoid coupling a particular Cocoa type.
     case Range(UInt64, UInt64)
+
+    /// A GUI view.
+    ///
+    /// Uses an Any to avoid coupling a particular Cocoa type.
     case View(Any)
+
+    /// A graphical sprite.
+    ///
+    /// Uses an Any to avoid coupling a particular Cocoa type.
     case Sprite(Any)
+
+    /// A Uniform Resource Locator.
     case URL(String)
 }
 
@@ -6570,6 +6674,8 @@ protocol RandomAccessIndexType : BidirectionalIndexType, Strideable {
     ///     x.distanceTo(x.advancedBy(m)) == m
     func advancedBy(n: Self.Distance) -> Self
 }
+
+
 
 
 /// The lazy `CollectionType` returned by `reverse(c)` where `c` is a
@@ -6679,7 +6785,7 @@ struct Range<T : ForwardIndexType> : Equatable, CollectionType, SequenceType, _C
     var debugDescription: String { get }
 }
 
-extension Range : Reflectable {
+extension Range : _Reflectable {
 
     /// Returns a mirror that reflects `self`.
     func getMirror() -> MirrorType
@@ -6805,11 +6911,6 @@ struct RawByte {
 }
 
 
-/// Protocol for `NS_OPTIONS` imported from Objective-C.
-protocol RawOptionSetType : _RawOptionSetType, BitwiseOperationsType, NilLiteralConvertible {
-}
-
-
 /// A type that can be converted to an associated "raw" type, then
 /// converted back to produce an instance equivalent to the original.
 protocol RawRepresentable {
@@ -6829,15 +6930,6 @@ protocol RawRepresentable {
     ///
     /// `Self(rawValue: self.rawValue)!` is equivalent to `self`.
     var rawValue: Self.RawValue { get }
-}
-
-
-/// Customizes the result of `reflect(x)`, where `x` is a conforming
-/// type.
-protocol Reflectable {
-
-    /// Returns a mirror that reflects `self`.
-    func getMirror() -> MirrorType
 }
 
 
@@ -6957,6 +7049,8 @@ protocol SequenceType {
     func filter(@noescape includeElement: (Self.Generator.Element) -> Bool) -> [Self.Generator.Element]
 }
 
+
+
 extension SequenceType where Self.Generator.Element : Comparable {
 
     /// Return an `Array` containing the sorted elements of `source`.
@@ -6987,6 +7081,8 @@ extension SequenceType {
     func sort(isOrderedBefore: (Self.Generator.Element, Self.Generator.Element) -> Bool) -> [Self.Generator.Element]
 }
 
+
+
 extension SequenceType {
 
     /// Return a value less than or equal to the number of elements in
@@ -7011,6 +7107,8 @@ extension SequenceType {
     /// in order, that satisfy the predicate `includeElement`.
     func filter(@noescape includeElement: (Self.Generator.Element) -> Bool) -> [Self.Generator.Element]
 }
+
+
 
 
 
@@ -7311,7 +7409,7 @@ extension Set : CustomStringConvertible, CustomDebugStringConvertible {
     var debugDescription: String { get }
 }
 
-extension Set : Reflectable {
+extension Set : _Reflectable {
 
     /// Returns a mirror that reflects `self`.
     func getMirror() -> MirrorType
@@ -7352,7 +7450,6 @@ extension Set : Reflectable {
 ///   - `x.isStrictSupersetOf(y)` iff `x.isSupersetOf(y) && x != y`
 ///   - `x.isStrictSubsetOf(y)` iff `x.isSubsetOf(y) && x != y`
 protocol SetAlgebraType : Equatable, ArrayLiteralConvertible {
-    typealias DefaultImplementations = ()
 
     /// A type for which `Self` provides a containment test.
     typealias Element
@@ -7422,7 +7519,7 @@ protocol SetAlgebraType : Equatable, ArrayLiteralConvertible {
     /// Return true iff every element of `other` is contained in `self`.
     func isSupersetOf(other: Self) -> Bool
 
-    /// Returns true iff `self.contains(e)` is `false` for all `e`.
+    /// Return true iff `self.contains(e)` is `false` for all `e`.
     var isEmpty: Bool { get }
 
     /// Creates the set containing all elements of `sequence`.
@@ -7446,7 +7543,7 @@ protocol SetAlgebraType : Equatable, ArrayLiteralConvertible {
     static func element(a: Self.Element, isDisjointWith b: Self.Element) -> Bool
 }
 
-extension SetAlgebraType where DefaultImplementations == () {
+extension SetAlgebraType {
 
     /// Creates the set containing all elements of `sequence`.
     convenience init<S : SequenceType where S.Generator.Element == Element>(_ sequence: S)
@@ -7607,7 +7704,7 @@ protocol Sliceable : _Sliceable {
 ///         case UTF8(start: UnsafePointer<UInt8>, length: Int)
 ///         case Scalar(UnicodeScalar)
 ///      }
-struct StaticString : UnicodeScalarLiteralConvertible, ExtendedGraphemeClusterLiteralConvertible, StringLiteralConvertible, CustomStringConvertible, CustomDebugStringConvertible, Reflectable {
+struct StaticString : UnicodeScalarLiteralConvertible, ExtendedGraphemeClusterLiteralConvertible, StringLiteralConvertible, CustomStringConvertible, CustomDebugStringConvertible, _Reflectable {
 
     /// A pointer to the beginning of UTF-8 code units.
     ///
@@ -7690,7 +7787,7 @@ struct StrideThrough<T : Strideable> : SequenceType {
     func generate() -> StrideThroughGenerator<T>
 }
 
-extension StrideThrough : Reflectable {
+extension StrideThrough : _Reflectable {
 
     /// Returns a mirror that reflects `self`.
     func getMirror() -> MirrorType
@@ -7715,7 +7812,7 @@ struct StrideTo<T : Strideable> : SequenceType {
     func generate() -> StrideToGenerator<T>
 }
 
-extension StrideTo : Reflectable {
+extension StrideTo : _Reflectable {
 
     /// Returns a mirror that reflects `self`.
     func getMirror() -> MirrorType
@@ -7891,7 +7988,7 @@ extension String {
 
     /// A collection of [Unicode scalar values](http://www.unicode.org/glossary/#unicode_scalar_value) that
     /// encode a `String` .
-    struct UnicodeScalarView : Sliceable, _Sliceable, CollectionType, SequenceType, _CollectionDefaultsType, _CollectionGeneratorDefaultsType, Reflectable, CustomStringConvertible, CustomDebugStringConvertible {
+    struct UnicodeScalarView : Sliceable, _Sliceable, CollectionType, SequenceType, _CollectionDefaultsType, _CollectionGeneratorDefaultsType, _Reflectable, CustomStringConvertible, CustomDebugStringConvertible {
 
         /// A position in a `String.UnicodeScalarView`.
         struct Index : ForwardIndexType, _Incrementable, Equatable, BidirectionalIndexType, Comparable {
@@ -7956,7 +8053,7 @@ extension String {
 extension String {
 
     /// A collection of UTF-16 code units that encodes a `String` value.
-    struct UTF16View : Sliceable, _Sliceable, CollectionType, SequenceType, _CollectionDefaultsType, _CollectionGeneratorDefaultsType, Reflectable, CustomStringConvertible, CustomDebugStringConvertible {
+    struct UTF16View : Sliceable, _Sliceable, CollectionType, SequenceType, _CollectionDefaultsType, _CollectionGeneratorDefaultsType, _Reflectable, CustomStringConvertible, CustomDebugStringConvertible {
         struct Index {
         }
 
@@ -7995,7 +8092,7 @@ extension String {
 extension String {
 
     /// A collection of UTF-8 code units that encodes a `String` value.
-    struct UTF8View : CollectionType, SequenceType, _CollectionDefaultsType, _CollectionGeneratorDefaultsType, Reflectable, CustomStringConvertible, CustomDebugStringConvertible {
+    struct UTF8View : CollectionType, SequenceType, _CollectionDefaultsType, _CollectionGeneratorDefaultsType, _Reflectable, CustomStringConvertible, CustomDebugStringConvertible {
 
         /// A position in a `String.UTF8View`.
         struct Index : ForwardIndexType, _Incrementable, Equatable {
@@ -8082,7 +8179,7 @@ extension String {
     func withCString<Result>(@noescape f: UnsafePointer<Int8> -> Result) -> Result
 }
 
-extension String : Reflectable {
+extension String : _Reflectable {
 
     /// Returns a mirror that reflects `self`.
     func getMirror() -> MirrorType
@@ -8320,7 +8417,7 @@ extension String {
     init<T : _SignedIntegerType>(_ v: T)
 
     /// Create an instance representing `v` in base 10.
-    init<T : _UnsignedIntegerType>(_ v: T)
+    init<T : UnsignedIntegerType>(_ v: T)
 
     /// Create an instance representing `v` in the given `radix` (base).
     ///
@@ -8332,7 +8429,7 @@ extension String {
     ///
     /// Numerals greater than 9 are represented as roman letters,
     /// starting with `a` if `uppercase` is `false` or `A` otherwise.
-    init<T : _UnsignedIntegerType>(_ v: T, radix: Int, uppercase: Bool = default)
+    init<T : UnsignedIntegerType>(_ v: T, radix: Int, uppercase: Bool = default)
 }
 
 
@@ -8392,7 +8489,7 @@ extension String {
 extension String.CharacterView : CollectionType, SequenceType, _CollectionDefaultsType, _CollectionGeneratorDefaultsType {
 
     /// A character position.
-    struct Index : ForwardIndexType, _Incrementable, Equatable, BidirectionalIndexType, Comparable, Reflectable {
+    struct Index : ForwardIndexType, _Incrementable, Equatable, BidirectionalIndexType, Comparable, _Reflectable {
 
         /// Returns the next consecutive value after `self`.
         ///
@@ -8671,6 +8768,8 @@ extension String.UTF16View.Index : ForwardIndexType, _Incrementable, Bidirection
 extension String.UTF16View.Index : Equatable, Comparable {
 }
 
+
+
 extension String.UTF16View.Index {
 
     /// Construct the position in `utf16` that corresponds exactly to
@@ -8786,7 +8885,7 @@ typealias StringLiteralType = String
 
 /// A 64-bit unsigned integer value
 /// type.
-struct UInt : UnsignedIntegerType, IntegerType, Equatable, Comparable, _IntegerType, IntegerArithmeticType, _IntegerArithmeticType, IntegerLiteralConvertible, _UnsignedIntegerType {
+struct UInt : UnsignedIntegerType, IntegerType, Equatable, Comparable, _IntegerType, IntegerArithmeticType, _IntegerArithmeticType, IntegerLiteralConvertible, _DisallowMixedSignArithmetic {
     var value: Builtin.Int64
 
     /// A type that can represent the number of steps between pairs of
@@ -8966,7 +9065,7 @@ extension UInt {
     init?(_ text: String, radix: Int = default)
 }
 
-extension UInt : Reflectable {
+extension UInt : _Reflectable {
 
     /// Returns a mirror that reflects `self`.
     func getMirror() -> MirrorType
@@ -8978,7 +9077,7 @@ extension UInt : CVarArgType {
 
 /// A 16-bit unsigned integer value
 /// type.
-struct UInt16 : UnsignedIntegerType, IntegerType, Equatable, Comparable, _IntegerType, IntegerArithmeticType, _IntegerArithmeticType, IntegerLiteralConvertible, _UnsignedIntegerType {
+struct UInt16 : UnsignedIntegerType, IntegerType, Equatable, Comparable, _IntegerType, IntegerArithmeticType, _IntegerArithmeticType, IntegerLiteralConvertible, _DisallowMixedSignArithmetic {
     var value: Builtin.Int16
 
     /// A type that can represent the number of steps between pairs of
@@ -9181,7 +9280,7 @@ extension UInt16 {
     init?(_ text: String, radix: Int = default)
 }
 
-extension UInt16 : Reflectable {
+extension UInt16 : _Reflectable {
 
     /// Returns a mirror that reflects `self`.
     func getMirror() -> MirrorType
@@ -9196,7 +9295,7 @@ extension UInt16 : CVarArgType {
 
 /// A 32-bit unsigned integer value
 /// type.
-struct UInt32 : UnsignedIntegerType, IntegerType, Equatable, Comparable, _IntegerType, IntegerArithmeticType, _IntegerArithmeticType, IntegerLiteralConvertible, _UnsignedIntegerType {
+struct UInt32 : UnsignedIntegerType, IntegerType, Equatable, Comparable, _IntegerType, IntegerArithmeticType, _IntegerArithmeticType, IntegerLiteralConvertible, _DisallowMixedSignArithmetic {
     var value: Builtin.Int32
 
     /// A type that can represent the number of steps between pairs of
@@ -9387,7 +9486,7 @@ extension UInt32 {
     init?(_ text: String, radix: Int = default)
 }
 
-extension UInt32 : Reflectable {
+extension UInt32 : _Reflectable {
 
     /// Returns a mirror that reflects `self`.
     func getMirror() -> MirrorType
@@ -9407,7 +9506,7 @@ extension UInt32 : CVarArgType {
 
 /// A 64-bit unsigned integer value
 /// type.
-struct UInt64 : UnsignedIntegerType, IntegerType, Equatable, Comparable, _IntegerType, IntegerArithmeticType, _IntegerArithmeticType, IntegerLiteralConvertible, _UnsignedIntegerType {
+struct UInt64 : UnsignedIntegerType, IntegerType, Equatable, Comparable, _IntegerType, IntegerArithmeticType, _IntegerArithmeticType, IntegerLiteralConvertible, _DisallowMixedSignArithmetic {
     var value: Builtin.Int64
 
     /// A type that can represent the number of steps between pairs of
@@ -9574,7 +9673,7 @@ extension UInt64 {
     init?(_ text: String, radix: Int = default)
 }
 
-extension UInt64 : Reflectable {
+extension UInt64 : _Reflectable {
 
     /// Returns a mirror that reflects `self`.
     func getMirror() -> MirrorType
@@ -9594,7 +9693,7 @@ extension UInt64 : CVarArgType, _CVarArgAlignedType {
 
 /// A 8-bit unsigned integer value
 /// type.
-struct UInt8 : UnsignedIntegerType, IntegerType, Equatable, Comparable, _IntegerType, IntegerArithmeticType, _IntegerArithmeticType, IntegerLiteralConvertible, _UnsignedIntegerType {
+struct UInt8 : UnsignedIntegerType, IntegerType, Equatable, Comparable, _IntegerType, IntegerArithmeticType, _IntegerArithmeticType, IntegerLiteralConvertible, _DisallowMixedSignArithmetic {
     var value: Builtin.Int8
 
     /// A type that can represent the number of steps between pairs of
@@ -9790,7 +9889,7 @@ extension UInt8 {
     init?(_ text: String, radix: Int = default)
 }
 
-extension UInt8 : Reflectable {
+extension UInt8 : _Reflectable {
 
     /// Returns a mirror that reflects `self`.
     func getMirror() -> MirrorType
@@ -10022,7 +10121,7 @@ struct UnicodeScalar : UnicodeScalarLiteralConvertible {
     func isASCII() -> Bool
 }
 
-extension UnicodeScalar : Reflectable {
+extension UnicodeScalar : _Reflectable {
 
     /// Returns a mirror that reflects `self`.
     func getMirror() -> MirrorType
@@ -10431,7 +10530,7 @@ extension UnsafeMutablePointer : CustomDebugStringConvertible {
     var debugDescription: String { get }
 }
 
-extension UnsafeMutablePointer : Reflectable {
+extension UnsafeMutablePointer : _Reflectable {
 
     /// Returns a mirror that reflects `self`.
     func getMirror() -> MirrorType
@@ -10535,7 +10634,7 @@ extension UnsafePointer : CustomDebugStringConvertible {
     var debugDescription: String { get }
 }
 
-extension UnsafePointer : Reflectable {
+extension UnsafePointer : _Reflectable {
 
     /// Returns a mirror that reflects `self`.
     func getMirror() -> MirrorType
@@ -10546,7 +10645,15 @@ extension UnsafePointer : CVarArgType {
 
 
 /// A set of common requirements for Swift's unsigned integer types.
-protocol UnsignedIntegerType : _UnsignedIntegerType, IntegerType {
+protocol UnsignedIntegerType : _DisallowMixedSignArithmetic, IntegerType {
+
+    /// Represent this number using Swift's widest native unsigned
+    /// integer type.
+    func toUIntMax() -> UIntMax
+
+    /// Convert from Swift's widest unsigned integer type, trapping on
+    /// overflow.
+    init(_: UIntMax)
 }
 
 
@@ -10607,11 +10714,19 @@ struct ZipGenerator2<Generator1 : GeneratorType, Generator2 : GeneratorType> : G
     mutating func next() -> (Generator1.Element, Generator2.Element)?
 }
 
-func ^(lhs: Int32, rhs: Int32) -> Int32
+func ^(lhs: Int64, rhs: Int64) -> Int64
+
+func ^(lhs: UInt8, rhs: UInt8) -> UInt8
+
+func ^(lhs: Int8, rhs: Int8) -> Int8
 
 func ^(lhs: UInt16, rhs: UInt16) -> UInt16
 
-func ^(lhs: Int64, rhs: Int64) -> Int64
+func ^(lhs: Int16, rhs: Int16) -> Int16
+
+func ^(lhs: UInt32, rhs: UInt32) -> UInt32
+
+func ^(lhs: Int32, rhs: Int32) -> Int32
 
 func ^(lhs: UInt64, rhs: UInt64) -> UInt64
 
@@ -10619,27 +10734,15 @@ func ^(lhs: UInt, rhs: UInt) -> UInt
 
 func ^(lhs: Int, rhs: Int) -> Int
 
-func ^<T : _RawOptionSetType>(a: T, b: T) -> T
-
-func ^(lhs: Int16, rhs: Int16) -> Int16
-
-func ^(lhs: Int8, rhs: Int8) -> Int8
-
-func ^(lhs: UInt8, rhs: UInt8) -> UInt8
-
-func ^(lhs: UInt32, rhs: UInt32) -> UInt32
-
-func ^=(inout lhs: Int, rhs: Int)
-
-func ^=(inout lhs: Int32, rhs: Int32)
-
-func ^=<T : BitwiseOperationsType>(inout lhs: T, rhs: T)
-
-func ^=(inout lhs: UInt32, rhs: UInt32)
+func ^=(inout lhs: UInt, rhs: UInt)
 
 func ^=(inout lhs: UInt64, rhs: UInt64)
 
-func ^=(inout lhs: Int16, rhs: Int16)
+func ^=(inout lhs: Int32, rhs: Int32)
+
+func ^=(inout lhs: UInt32, rhs: UInt32)
+
+func ^=(inout lhs: Int64, rhs: Int64)
 
 func ^=(inout lhs: UInt16, rhs: UInt16)
 
@@ -10647,9 +10750,11 @@ func ^=(inout lhs: Int8, rhs: Int8)
 
 func ^=(inout lhs: UInt8, rhs: UInt8)
 
-func ^=(inout lhs: Int64, rhs: Int64)
+func ^=(inout lhs: Int, rhs: Int)
 
-func ^=(inout lhs: UInt, rhs: UInt)
+func ^=<T : BitwiseOperationsType>(inout lhs: T, rhs: T)
+
+func ^=(inout lhs: Int16, rhs: Int16)
 
 
 /// The underlying buffer for an ArrayType conforms to
@@ -10896,6 +11001,12 @@ protocol _DestructorSafeContainer {
 }
 
 
+/// This protocol is an implementation detail of `UnsignedIntegerType`;
+/// do not use it directly.
+protocol _DisallowMixedSignArithmetic : _IntegerType {
+}
+
+
 /// Optionals of conforming types can be initialized with image literals (e.g.
 /// `[#Image(imageLiteral: "hi.png")#]`).
 protocol _ImageLiteralConvertible {
@@ -11064,14 +11175,12 @@ protocol _PointerType {
 }
 
 
-/// This protocol is an implementation detail of `RawOptionSetType`; do
-/// not use it directly.
-///
-/// Its requirements are inherited by `RawOptionSetType` and thus must
-/// be satisfied by types conforming to that protocol.
-protocol _RawOptionSetType : RawRepresentable, Equatable {
-    typealias RawValue : BitwiseOperationsType, Equatable
-    init(rawValue: Self.RawValue)
+/// Customizes the result of `reflect(x)`, where `x` is a conforming
+/// type.
+protocol _Reflectable {
+
+    /// Returns a mirror that reflects `self`.
+    func getMirror() -> MirrorType
 }
 
 @objc protocol _ShadowProtocol {
@@ -11139,26 +11248,11 @@ protocol _Strideable {
 protocol _StringElementType {
 }
 
-
-/// This protocol is an implementation detail of `SignedIntegerType`;
-/// do not use it directly.
-///
-/// Its requirements are inherited by `SignedIntegerType` and thus
-/// must be satisfied by types conforming to that protocol.
-protocol _UnsignedIntegerType : _IntegerType {
-
-    /// Represent this number using Swift's widest native unsigned
-    /// integer type.
-    func toUIntMax() -> UIntMax
-
-    /// Convert from Swift's widest unsigned integer type, trapping on
-    /// overflow.
-    init(_: UIntMax)
-}
-
 protocol __ArrayType : CollectionType {
     var count: Int { get }
 }
+
+
 
 
 /// Return the absolute value of `x`.
@@ -11168,18 +11262,18 @@ protocol __ArrayType : CollectionType {
 func abs<T : SignedNumberType>(x: T) -> T
 
 
-/// Return the result of advancing start by `n` positions, or until it
-/// equals `end`.  If `T` models `RandomAccessIndexType`, executes in
-/// O(1).  Otherwise, executes in O(`abs(n)`).  If `T` does not model
-/// `BidirectionalIndexType`, requires that `n` is non-negative.
-func advance<T : ForwardIndexType>(start: T, _ n: T.Distance, _ end: T) -> T
-
-
 /// Return the result of advancing `start` by `n` positions.  If `T`
 /// models `RandomAccessIndexType`, executes in O(1).  Otherwise,
 /// executes in O(`abs(n)`).  If `T` does not model
 /// `BidirectionalIndexType`, requires that `n` is non-negative.
 func advance<T : ForwardIndexType>(start: T, _ n: T.Distance) -> T
+
+
+/// Return the result of advancing start by `n` positions, or until it
+/// equals `end`.  If `T` models `RandomAccessIndexType`, executes in
+/// O(1).  Otherwise, executes in O(`abs(n)`).  If `T` does not model
+/// `BidirectionalIndexType`, requires that `n` is non-negative.
+func advance<T : ForwardIndexType>(start: T, _ n: T.Distance, _ end: T) -> T
 
 
 /// Returns the minimum memory alignment of `T`.
@@ -11258,26 +11352,6 @@ func assert(@autoclosure condition: () -> Bool, @autoclosure _ message: () -> St
 ///   is a serious programming error.
 func assertionFailure(@autoclosure message: () -> String = default, file: StaticString = default, line: UWord = default)
 
-func debugPrint<T, TargetStream : OutputStreamType>(value: T, inout _ target: TargetStream)
-
-
-/// Writes the textual representation of `value` most suitable for debugging,
-/// and an optional newline, into the stream `target`.
-///
-/// The textual representation is obtained from the `value` using its protocol
-/// conformances, in the following order of preference:
-/// `CustomDebugStringConvertible`, `CustomStringConvertible`, `Streamable`.
-/// If none of these conformances are found, a default text representation is
-/// constructed in an implementation-defined way, based on the type kind and
-/// structure.
-///
-/// Do not overload this function for your type.  Instead, adopt one of the
-/// protocols mentioned above.
-///
-/// - parameter appendNewline: Iff `true` (the default), write a trailing
-///   newline.
-func debugPrint<T, TargetStream : OutputStreamType>(value: T, inout _ target: TargetStream, appendNewline: Bool)
-
 func debugPrint<T>(value: T)
 
 
@@ -11297,6 +11371,26 @@ func debugPrint<T>(value: T)
 /// - parameter appendNewline: Iff `true` (the default), write a trailing
 ///   newline.
 func debugPrint<T>(value: T, appendNewline: Bool)
+
+func debugPrint<T, TargetStream : OutputStreamType>(value: T, inout _ target: TargetStream)
+
+
+/// Writes the textual representation of `value` most suitable for debugging,
+/// and an optional newline, into the stream `target`.
+///
+/// The textual representation is obtained from the `value` using its protocol
+/// conformances, in the following order of preference:
+/// `CustomDebugStringConvertible`, `CustomStringConvertible`, `Streamable`.
+/// If none of these conformances are found, a default text representation is
+/// constructed in an implementation-defined way, based on the type kind and
+/// structure.
+///
+/// Do not overload this function for your type.  Instead, adopt one of the
+/// protocols mentioned above.
+///
+/// - parameter appendNewline: Iff `true` (the default), write a trailing
+///   newline.
+func debugPrint<T, TargetStream : OutputStreamType>(value: T, inout _ target: TargetStream, appendNewline: Bool)
 
 
 /// Measure the distance between `start` and `end`.
@@ -11322,12 +11416,12 @@ func dropFirst<Seq : Sliceable>(s: Seq) -> Seq.SubSlice
 func dropLast<S : Sliceable where S.Index : BidirectionalIndexType>(s: S) -> S.SubSlice
 
 
-/// Dump an object's contents using its mirror to the specified output stream.
-func dump<T, TargetStream : OutputStreamType>(x: T, inout _ targetStream: TargetStream, name: String? = default, indent: Int = default, maxDepth: Int = default, maxItems: Int = default) -> T
-
-
 /// Dump an object's contents using its mirror to standard output.
 func dump<T>(x: T, name: String? = default, indent: Int = default, maxDepth: Int = default, maxItems: Int = default) -> T
+
+
+/// Dump an object's contents using its mirror to the specified output stream.
+func dump<T, TargetStream : OutputStreamType>(x: T, inout _ targetStream: TargetStream, name: String? = default, indent: Int = default, maxDepth: Int = default, maxItems: Int = default) -> T
 
 
 /// Append elements from `newElements` to `x`.
@@ -11406,7 +11500,7 @@ func isUniquelyReferenced<T : NonObjectiveCBase>(inout object: T) -> Bool
 /// This function is safe to use for `mutating` functions in
 /// multithreaded code because a false positive would imply that there
 /// is already a user-level data race on the value being mutated.
-func isUniquelyReferencedNonObjC<T>(inout object: T?) -> Bool
+func isUniquelyReferencedNonObjC<T>(inout object: T) -> Bool
 
 
 /// Returns `true` iff `object` is a non-`@objc` class instance with
@@ -11432,7 +11526,7 @@ func isUniquelyReferencedNonObjC<T>(inout object: T?) -> Bool
 /// This function is safe to use for `mutating` functions in
 /// multithreaded code because a false positive would imply that there
 /// is already a user-level data race on the value being mutated.
-func isUniquelyReferencedNonObjC<T>(inout object: T) -> Bool
+func isUniquelyReferencedNonObjC<T>(inout object: T?) -> Bool
 
 
 /// Creates and returns a collection of type `C` that is the result of
@@ -11462,12 +11556,12 @@ func lazy<S : CollectionType where S.Index : BidirectionalIndexType>(s: S) -> La
 func lazy<S : CollectionType where S.Index : ForwardIndexType>(s: S) -> LazyForwardCollection<S>
 
 
-/// Returns the greatest argument passed.
-func max<T : Comparable>(x: T, _ y: T, _ z: T, _ rest: T...) -> T
-
-
 /// Returns the greater of `x` and `y`.
 func max<T : Comparable>(x: T, _ y: T) -> T
+
+
+/// Returns the greatest argument passed.
+func max<T : Comparable>(x: T, _ y: T, _ z: T, _ rest: T...) -> T
 
 
 /// Returns the least argument passed.
@@ -11476,6 +11570,28 @@ func min<T : Comparable>(x: T, _ y: T, _ z: T, _ rest: T...) -> T
 
 /// Returns the lesser of `x` and `y`.
 func min<T : Comparable>(x: T, _ y: T) -> T
+
+
+/// Convert `x` to type `U`, trapping on overflow in -Onone and -O
+/// builds.
+///
+/// Typically used to do conversion to any contextually-deduced
+/// integer type:
+///
+///     func f(x: UInt32) {}
+///     func g(x: UInt64) { f(numericCast(x)) }
+func numericCast<T : UnsignedIntegerType, U : UnsignedIntegerType>(x: T) -> U
+
+
+/// Convert `x` to type `U`, trapping on overflow in -Onone and -O
+/// builds.
+///
+/// Typically used to do conversion to any contextually-deduced
+/// integer type:
+///
+///     func f(x: UInt32) {}
+///     func g(x: Int64) { f(numericCast(x)) }
+func numericCast<T : _SignedIntegerType, U : UnsignedIntegerType>(x: T) -> U
 
 
 /// Convert `x` to type `U`, trapping on overflow in -Onone and -O
@@ -11495,31 +11611,9 @@ func numericCast<T : _SignedIntegerType, U : _SignedIntegerType>(x: T) -> U
 /// Typically used to do conversion to any contextually-deduced
 /// integer type:
 ///
-///     func f(x: UInt32) {}
-///     func g(x: UInt64) { f(numericCast(x)) }
-func numericCast<T : _UnsignedIntegerType, U : _UnsignedIntegerType>(x: T) -> U
-
-
-/// Convert `x` to type `U`, trapping on overflow in -Onone and -O
-/// builds.
-///
-/// Typically used to do conversion to any contextually-deduced
-/// integer type:
-///
-///     func f(x: UInt32) {}
-///     func g(x: Int64) { f(numericCast(x)) }
-func numericCast<T : _SignedIntegerType, U : _UnsignedIntegerType>(x: T) -> U
-
-
-/// Convert `x` to type `U`, trapping on overflow in -Onone and -O
-/// builds.
-///
-/// Typically used to do conversion to any contextually-deduced
-/// integer type:
-///
 ///     func f(x: Int32) {}
 ///     func g(x: UInt64) { f(numericCast(x)) }
-func numericCast<T : _UnsignedIntegerType, U : _SignedIntegerType>(x: T) -> U
+func numericCast<T : UnsignedIntegerType, U : _SignedIntegerType>(x: T) -> U
 
 
 /// Returns `true` if `lhs` and `rhs` have a non-empty intersection.
@@ -11574,24 +11668,7 @@ func precondition(@autoclosure condition: () -> Bool, @autoclosure _ message: ()
 ///   of slicing `s`.
 func prefix<S : Sliceable>(s: S, _ maxLength: Int) -> S.SubSlice
 
-
-/// Writes the textual representation of `value`, and an optional newline,
-/// into the stream `target`.
-///
-/// The textual representation is obtained from the `value` using its protocol
-/// conformances, in the following order of preference: `Streamable`,
-/// `CustomStringConvertible`, `CustomDebugStringConvertible`.  If none of
-/// these conformances are found, a default text representation is constructed
-/// in an implementation-defined way, based on the type kind and structure.
-///
-/// Do not overload this function for your type.  Instead, adopt one of the
-/// protocols mentioned above.
-///
-/// - parameter appendNewline: Iff `true` (the default), write a trailing
-///   newline.
-func print<T, TargetStream : OutputStreamType>(value: T, inout _ target: TargetStream, appendNewline: Bool)
-
-func print<T, TargetStream : OutputStreamType>(value: T, inout _ target: TargetStream)
+func print<T>(value: T)
 
 
 /// Writes the textual representation of `value`, and an optional newline,
@@ -11610,7 +11687,24 @@ func print<T, TargetStream : OutputStreamType>(value: T, inout _ target: TargetS
 ///   newline.
 func print<T>(value: T, appendNewline: Bool)
 
-func print<T>(value: T)
+func print<T, TargetStream : OutputStreamType>(value: T, inout _ target: TargetStream)
+
+
+/// Writes the textual representation of `value`, and an optional newline,
+/// into the stream `target`.
+///
+/// The textual representation is obtained from the `value` using its protocol
+/// conformances, in the following order of preference: `Streamable`,
+/// `CustomStringConvertible`, `CustomDebugStringConvertible`.  If none of
+/// these conformances are found, a default text representation is constructed
+/// in an implementation-defined way, based on the type kind and structure.
+///
+/// Do not overload this function for your type.  Instead, adopt one of the
+/// protocols mentioned above.
+///
+/// - parameter appendNewline: Iff `true` (the default), write a trailing
+///   newline.
+func print<T, TargetStream : OutputStreamType>(value: T, inout _ target: TargetStream, appendNewline: Bool)
 
 
 /// Returns `Character`s read from standard input through the end of the
@@ -11625,7 +11719,7 @@ func print<T>(value: T)
 func readLine(stripNewline stripNewline: Bool = default) -> String?
 
 
-/// Produce a mirror for any value. If the value's type conforms to Reflectable,
+/// Produce a mirror for any value. If the value's type conforms to _Reflectable,
 /// invoke its getMirror() method; otherwise, fall back to an implementation
 /// in the runtime that structurally reflects values of any type.
 func reflect<T>(x: T) -> MirrorType
@@ -11705,16 +11799,16 @@ func split<S : Sliceable, R : BooleanType>(elements: S, maxSplit: Int = default,
 
 /// Return the sequence of values (`start`, `start + stride`, `start +
 /// stride + stride`, ... *last*) where *last* is the last value in
-/// the progression less than or equal to `end`.
-///
-/// - Note: There is no guarantee that `end` is an element of the sequence.
-func stride<T : Strideable>(from start: T, through end: T, by stride: T.Stride) -> StrideThrough<T>
+/// the progression that is less than `end`.
+func stride<T : Strideable>(from start: T, to end: T, by stride: T.Stride) -> StrideTo<T>
 
 
 /// Return the sequence of values (`start`, `start + stride`, `start +
 /// stride + stride`, ... *last*) where *last* is the last value in
-/// the progression that is less than `end`.
-func stride<T : Strideable>(from start: T, to end: T, by stride: T.Stride) -> StrideTo<T>
+/// the progression less than or equal to `end`.
+///
+/// - Note: There is no guarantee that `end` is an element of the sequence.
+func stride<T : Strideable>(from start: T, through end: T, by stride: T.Stride) -> StrideThrough<T>
 
 
 /// Returns the least possible interval between distinct instances of
@@ -11793,14 +11887,14 @@ func unsafeDowncast<T>(x: AnyObject) -> T
 func unsafeUnwrap<T>(nonEmpty: T?) -> T
 
 
-/// Evaluate `f()` and return its result, ensuring that `x` is not
-/// destroyed before f returns.
-func withExtendedLifetime<T, Result>(x: T, @noescape _ f: () -> Result) -> Result
-
-
 /// Evaluate `f(x)` and return its result, ensuring that `x` is not
 /// destroyed before f returns.
 func withExtendedLifetime<T, Result>(x: T, @noescape _ f: T -> Result) -> Result
+
+
+/// Evaluate `f()` and return its result, ensuring that `x` is not
+/// destroyed before f returns.
+func withExtendedLifetime<T, Result>(x: T, @noescape _ f: () -> Result) -> Result
 
 
 /// Invokes `body` with an `UnsafeMutablePointer` to `arg` and returns the
@@ -11809,13 +11903,13 @@ func withExtendedLifetime<T, Result>(x: T, @noescape _ f: T -> Result) -> Result
 func withUnsafeMutablePointer<T, Result>(inout arg: T, @noescape _ body: UnsafeMutablePointer<T> -> Result) -> Result
 
 
+/// Like `withUnsafeMutablePointer`, but passes pointers to `arg0` and `arg1`.
+func withUnsafeMutablePointers<A0, A1, Result>(inout arg0: A0, inout _ arg1: A1, @noescape _ body: (UnsafeMutablePointer<A0>, UnsafeMutablePointer<A1>) -> Result) -> Result
+
+
 /// Like `withUnsafeMutablePointer`, but passes pointers to `arg0`, `arg1`,
 /// and `arg2`.
 func withUnsafeMutablePointers<A0, A1, A2, Result>(inout arg0: A0, inout _ arg1: A1, inout _ arg2: A2, @noescape _ body: (UnsafeMutablePointer<A0>, UnsafeMutablePointer<A1>, UnsafeMutablePointer<A2>) -> Result) -> Result
-
-
-/// Like `withUnsafeMutablePointer`, but passes pointers to `arg0` and `arg1`.
-func withUnsafeMutablePointers<A0, A1, Result>(inout arg0: A0, inout _ arg1: A1, @noescape _ body: (UnsafeMutablePointer<A0>, UnsafeMutablePointer<A1>) -> Result) -> Result
 
 
 /// Invokes `body` with an `UnsafePointer` to `arg` and returns the
@@ -11824,13 +11918,13 @@ func withUnsafeMutablePointers<A0, A1, Result>(inout arg0: A0, inout _ arg1: A1,
 func withUnsafePointer<T, Result>(inout arg: T, @noescape _ body: UnsafePointer<T> -> Result) -> Result
 
 
-/// Like `withUnsafePointer`, but passes pointers to `arg0` and `arg1`.
-func withUnsafePointers<A0, A1, Result>(inout arg0: A0, inout _ arg1: A1, @noescape _ body: (UnsafePointer<A0>, UnsafePointer<A1>) -> Result) -> Result
-
-
 /// Like `withUnsafePointer`, but passes pointers to `arg0`, `arg1`,
 /// and `arg2`.
 func withUnsafePointers<A0, A1, A2, Result>(inout arg0: A0, inout _ arg1: A1, inout _ arg2: A2, @noescape _ body: (UnsafePointer<A0>, UnsafePointer<A1>, UnsafePointer<A2>) -> Result) -> Result
+
+
+/// Like `withUnsafePointer`, but passes pointers to `arg0` and `arg1`.
+func withUnsafePointers<A0, A1, Result>(inout arg0: A0, inout _ arg1: A1, @noescape _ body: (UnsafePointer<A0>, UnsafePointer<A1>) -> Result) -> Result
 
 
 /// Invoke `f` with a C `va_list` argument derived from `args`.
@@ -11846,47 +11940,45 @@ func withVaList<R>(builder: VaListBuilder, @noescape _ f: CVaListPointer -> R) -
 /// underlying sequence.
 func zip<Sequence1 : SequenceType, Sequence2 : SequenceType>(sequence1: Sequence1, _ sequence2: Sequence2) -> Zip2<Sequence1, Sequence2>
 
+func |(lhs: Int8, rhs: Int8) -> Int8
+
+func |(lhs: UInt16, rhs: UInt16) -> UInt16
+
+func |(lhs: Int16, rhs: Int16) -> Int16
+
+func |(lhs: UInt32, rhs: UInt32) -> UInt32
+
 func |(lhs: Int32, rhs: Int32) -> Int32
 
 func |(lhs: UInt64, rhs: UInt64) -> UInt64
 
-func |(lhs: UInt32, rhs: UInt32) -> UInt32
-
 func |(lhs: Int64, rhs: Int64) -> Int64
 
-func |(lhs: Int16, rhs: Int16) -> Int16
-
-func |(lhs: UInt16, rhs: UInt16) -> UInt16
-
 func |(lhs: UInt, rhs: UInt) -> UInt
-
-func |(lhs: Int8, rhs: Int8) -> Int8
 
 func |(lhs: Int, rhs: Int) -> Int
 
 func |(lhs: UInt8, rhs: UInt8) -> UInt8
 
-func |<T : _RawOptionSetType>(a: T, b: T) -> T
-
-func |=(inout lhs: Int64, rhs: Int64)
-
-func |=(inout lhs: UInt32, rhs: UInt32)
-
-func |=(inout lhs: UInt, rhs: UInt)
-
-func |=(inout lhs: Int16, rhs: Int16)
-
-func |=(inout lhs: UInt16, rhs: UInt16)
-
-func |=(inout lhs: UInt64, rhs: UInt64)
-
-func |=(inout lhs: Int32, rhs: Int32)
-
-func |=(inout lhs: Int, rhs: Int)
-
 func |=(inout lhs: Int8, rhs: Int8)
 
 func |=(inout lhs: UInt8, rhs: UInt8)
+
+func |=(inout lhs: UInt16, rhs: UInt16)
+
+func |=(inout lhs: Int16, rhs: Int16)
+
+func |=(inout lhs: UInt32, rhs: UInt32)
+
+func |=(inout lhs: Int32, rhs: Int32)
+
+func |=(inout lhs: UInt64, rhs: UInt64)
+
+func |=(inout lhs: Int64, rhs: Int64)
+
+func |=(inout lhs: UInt, rhs: UInt)
+
+func |=(inout lhs: Int, rhs: Int)
 
 func |=<T : BitwiseOperationsType>(inout lhs: T, rhs: T)
 
@@ -11897,35 +11989,33 @@ func ||<T : BooleanType, U : BooleanType>(lhs: T, @autoclosure rhs: () -> U) -> 
 
 func ||<T : BooleanType>(lhs: T, @autoclosure rhs: () -> Bool) -> Bool
 
-prefix func ~(rhs: Int64) -> Int64
-
-prefix func ~(rhs: Int32) -> Int32
-
-prefix func ~(rhs: UInt64) -> UInt64
+prefix func ~(rhs: Int) -> Int
 
 prefix func ~(rhs: UInt) -> UInt
 
-prefix func ~<T : _RawOptionSetType>(a: T) -> T
+prefix func ~(rhs: Int64) -> Int64
 
-prefix func ~(rhs: Int8) -> Int8
+prefix func ~(rhs: UInt64) -> UInt64
+
+prefix func ~(rhs: Int32) -> Int32
 
 prefix func ~(rhs: UInt32) -> UInt32
-
-prefix func ~(rhs: Int) -> Int
-
-prefix func ~(rhs: UInt8) -> UInt8
 
 prefix func ~(rhs: Int16) -> Int16
 
 prefix func ~(rhs: UInt16) -> UInt16
 
-func ~=<T>(lhs: _OptionalNilComparisonType, rhs: T?) -> Bool
+prefix func ~(rhs: Int8) -> Int8
 
-func ~=<T : Equatable>(a: T, b: T) -> Bool
+prefix func ~(rhs: UInt8) -> UInt8
 
 
 /// Returns `true` iff `pattern` contains `value`.
 func ~=<I : IntervalType>(pattern: I, value: I.Bound) -> Bool
+
+func ~=<T>(lhs: _OptionalNilComparisonType, rhs: T?) -> Bool
+
+func ~=<T : Equatable>(a: T, b: T) -> Bool
 
 func ~=<I : ForwardIndexType where I : Comparable>(pattern: Range<I>, value: I) -> Bool
 
