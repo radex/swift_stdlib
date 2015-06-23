@@ -1,63 +1,4 @@
-infix operator & {
-    associativity left
-    precedence 150
-}
-
-infix operator >>= {
-    associativity right
-    precedence 90
-    assignment
-}
-
-infix operator !== {
-    associativity none
-    precedence 130
-}
-
-infix operator >= {
-    associativity none
-    precedence 130
-}
-
-infix operator ~= {
-    associativity none
-    precedence 130
-}
-
-infix operator >> {
-    associativity none
-    precedence 160
-}
-
-infix operator < {
-    associativity none
-    precedence 130
-}
-
-infix operator ~> {
-    associativity left
-    precedence 255
-}
-
-infix operator | {
-    associativity left
-    precedence 140
-}
-
-infix operator != {
-    associativity none
-    precedence 130
-}
-
-infix operator > {
-    associativity none
-    precedence 130
-}
-
-infix operator |= {
-    associativity right
-    precedence 90
-    assignment
+extension _SwiftNSOperatingSystemVersion : Comparable, Equatable {
 }
 
 infix operator %= {
@@ -66,54 +7,18 @@ infix operator %= {
     assignment
 }
 
-infix operator << {
-    associativity none
-    precedence 160
-}
-
-infix operator || {
-    associativity left
-    precedence 110
-}
-
-infix operator <<= {
-    associativity right
-    precedence 90
-    assignment
-}
-
-infix operator / {
-    associativity left
-    precedence 150
-}
-
-infix operator - {
-    associativity left
-    precedence 140
-}
-
-infix operator + {
-    associativity left
-    precedence 140
-}
-
-infix operator <= {
+infix operator ~= {
     associativity none
     precedence 130
 }
 
-infix operator * {
-    associativity left
-    precedence 150
-}
-
-infix operator *= {
+infix operator += {
     associativity right
     precedence 90
     assignment
 }
 
-infix operator += {
+infix operator -= {
     associativity right
     precedence 90
     assignment
@@ -124,7 +29,7 @@ infix operator ... {
     precedence 135
 }
 
-infix operator -= {
+infix operator /= {
     associativity right
     precedence 90
     assignment
@@ -133,12 +38,6 @@ infix operator -= {
 infix operator && {
     associativity left
     precedence 120
-}
-
-infix operator /= {
-    associativity right
-    precedence 90
-    assignment
 }
 
 infix operator &* {
@@ -177,19 +76,19 @@ infix operator ^= {
     assignment
 }
 
-infix operator ^ {
-    associativity left
-    precedence 140
-}
-
 infix operator ?? {
     associativity right
     precedence 131
 }
 
-infix operator % {
+infix operator ^ {
     associativity left
-    precedence 150
+    precedence 140
+}
+
+infix operator > {
+    associativity none
+    precedence 130
 }
 
 infix operator &= {
@@ -198,45 +97,174 @@ infix operator &= {
     assignment
 }
 
-prefix operator ! {
+infix operator % {
+    associativity left
+    precedence 150
 }
 
-prefix operator -- {
+infix operator & {
+    associativity left
+    precedence 150
 }
 
-prefix operator ~ {
+infix operator *= {
+    associativity right
+    precedence 90
+    assignment
 }
 
-prefix operator + {
+infix operator * {
+    associativity left
+    precedence 150
 }
 
-prefix operator ++ {
+infix operator != {
+    associativity none
+    precedence 130
+}
+
+infix operator + {
+    associativity left
+    precedence 140
+}
+
+infix operator >> {
+    associativity none
+    precedence 160
+}
+
+infix operator - {
+    associativity left
+    precedence 140
+}
+
+infix operator / {
+    associativity left
+    precedence 150
+}
+
+infix operator <<= {
+    associativity right
+    precedence 90
+    assignment
+}
+
+infix operator | {
+    associativity left
+    precedence 140
+}
+
+infix operator < {
+    associativity none
+    precedence 130
+}
+
+infix operator || {
+    associativity left
+    precedence 110
+}
+
+infix operator << {
+    associativity none
+    precedence 160
+}
+
+infix operator |= {
+    associativity right
+    precedence 90
+    assignment
+}
+
+infix operator >>= {
+    associativity right
+    precedence 90
+    assignment
+}
+
+infix operator <= {
+    associativity none
+    precedence 130
+}
+
+infix operator ~> {
+    associativity left
+    precedence 255
+}
+
+infix operator >= {
+    associativity none
+    precedence 130
+}
+
+infix operator !== {
+    associativity none
+    precedence 130
 }
 
 prefix operator - {
 }
 
-postfix operator ++ {
+prefix operator -- {
+}
+
+prefix operator ++ {
+}
+
+prefix operator + {
+}
+
+prefix operator ! {
+}
+
+prefix operator ~ {
 }
 
 postfix operator -- {
 }
 
+postfix operator ++ {
+}
 
-/// Return the result of inverting `a`\ 's logic value
+
+/// Return the result of inverting `a`'s logic value.
 prefix func !<T : BooleanType>(a: T) -> Bool
 
 prefix func !(a: Bool) -> Bool
+
+
+/// Returns true if the arrays do not contain the same elements.
+func !=<T : Equatable>(lhs: ContiguousArray<T>, rhs: ContiguousArray<T>) -> Bool
+
+
+/// Returns true if the arrays do not contain the same elements.
+func !=<T : Equatable>(lhs: ArraySlice<T>, rhs: ArraySlice<T>) -> Bool
+
+
+/// Returns true if the arrays do not contain the same elements.
+func !=<T : Equatable>(lhs: [T], rhs: [T]) -> Bool
+
+
+/// Returns true if the arrays do not contain the same elements.
+func !=<T : Equatable>(lhs: _UnitTestArray<T>, rhs: _UnitTestArray<T>) -> Bool
+
+
+/// Return `false` iff `t0` is identical to `t1`; i.e. if they are both
+/// `nil` or they both represent the same type.
+func !=(t0: Any.Type?, t1: Any.Type?) -> Bool
+
+
+/// Returns `true` iff `lhs.rawValue != rhs.rawValue`.
+func !=<T : RawRepresentable where T.RawValue : Equatable>(lhs: T, rhs: T) -> Bool
+
+
+/// Returns `true` iff `lhs.rawValue != rhs.rawValue`.
+func !=<T : Equatable where T : RawRepresentable, T.RawValue : Equatable>(lhs: T, rhs: T) -> Bool
 
 func !=(lhs: UInt8, rhs: UInt8) -> Bool
 
 func !=(lhs: Int8, rhs: Int8) -> Bool
 
 func !=(lhs: UInt16, rhs: UInt16) -> Bool
-
-
-/// Returns true if the arrays do not contain the same elements.
-func !=<T : Equatable>(lhs: _UnitTestArray<T>, rhs: _UnitTestArray<T>) -> Bool
 
 func !=(lhs: Int16, rhs: Int16) -> Bool
 
@@ -246,55 +274,51 @@ func !=(lhs: Int32, rhs: Int32) -> Bool
 
 func !=(lhs: UInt64, rhs: UInt64) -> Bool
 
-func !=<T : Equatable>(lhs: T, rhs: T) -> Bool
-
-
-/// Returns true if the arrays do not contain the same elements.
-func !=<T : Equatable>(lhs: ContiguousArray<T>, rhs: ContiguousArray<T>) -> Bool
-
-func !=<T>(lhs: _OptionalNilComparisonType, rhs: T?) -> Bool
-
-func !=<T>(lhs: T?, rhs: _OptionalNilComparisonType) -> Bool
-
-func !=<T : Equatable>(lhs: T?, rhs: T?) -> Bool
-
-
-/// Returns true if the arrays do not contain the same elements.
-func !=<T : Equatable>(lhs: [T], rhs: [T]) -> Bool
-
-func !=<Key : Equatable, Value : Equatable>(lhs: [Key : Value], rhs: [Key : Value]) -> Bool
-
-func !=(lhs: Double, rhs: Double) -> Bool
-
-func !=(lhs: Float, rhs: Float) -> Bool
-
-func !=(lhs: Int, rhs: Int) -> Bool
-
-
-/// Returns true if the arrays do not contain the same elements.
-func !=<T : Equatable>(lhs: ArraySlice<T>, rhs: ArraySlice<T>) -> Bool
+func !=(lhs: Int64, rhs: Int64) -> Bool
 
 func !=(lhs: UInt, rhs: UInt) -> Bool
 
-func !=(lhs: Int64, rhs: Int64) -> Bool
+func !=(lhs: Int, rhs: Int) -> Bool
+
+func !=(lhs: Float, rhs: Float) -> Bool
+
+func !=(lhs: Double, rhs: Double) -> Bool
+
+func !=(lhs: Float80, rhs: Float80) -> Bool
+
+func !=<Key : Equatable, Value : Equatable>(lhs: [Key : Value], rhs: [Key : Value]) -> Bool
+
+func !=<T : Equatable>(lhs: T?, rhs: T?) -> Bool
+
+func !=<T>(lhs: T?, rhs: _OptionalNilComparisonType) -> Bool
+
+func !=<T>(lhs: _OptionalNilComparisonType, rhs: T?) -> Bool
+
+func !=<T : Equatable>(lhs: T, rhs: T) -> Bool
 
 func !==(lhs: AnyObject?, rhs: AnyObject?) -> Bool
 
-func %(lhs: UInt8, rhs: UInt8) -> UInt8
 
-func %(lhs: Int8, rhs: Int8) -> Int8
+/// Returns false iff `lhs` and `rhs` store the same underlying collection.
+func !==<L : AnyCollectionType, R : AnyCollectionType>(lhs: L, rhs: R) -> Bool
 
-func %(lhs: UInt16, rhs: UInt16) -> UInt16
-
-func %(lhs: Int16, rhs: Int16) -> Int16
-
-func %(lhs: UInt32, rhs: UInt32) -> UInt32
-
-func %(lhs: Int32, rhs: Int32) -> Int32
+func %(lhs: UInt, rhs: UInt) -> UInt
 
 func %(lhs: Int64, rhs: Int64) -> Int64
 
-func %(lhs: UInt, rhs: UInt) -> UInt
+func %(lhs: UInt64, rhs: UInt64) -> UInt64
+
+func %(lhs: Int32, rhs: Int32) -> Int32
+
+func %(lhs: UInt32, rhs: UInt32) -> UInt32
+
+func %(lhs: Int16, rhs: Int16) -> Int16
+
+func %(lhs: UInt16, rhs: UInt16) -> UInt16
+
+func %(lhs: Int8, rhs: Int8) -> Int8
+
+func %(lhs: UInt8, rhs: UInt8) -> UInt8
 
 func %(lhs: Int, rhs: Int) -> Int
 
@@ -302,12 +326,14 @@ func %(lhs: Float, rhs: Float) -> Float
 
 func %(lhs: Double, rhs: Double) -> Double
 
+func %(lhs: Float80, rhs: Float80) -> Float80
+
 
 /// Divide `lhs` and `rhs`, returning the remainder and trapping in case of
 /// arithmetic overflow (except in -Ounchecked builds).
 func %<T : _IntegerArithmeticType>(lhs: T, rhs: T) -> T
 
-func %(lhs: UInt64, rhs: UInt64) -> UInt64
+func %=(inout lhs: Double, rhs: Double)
 
 func %=(inout lhs: Float, rhs: Float)
 
@@ -316,36 +342,36 @@ func %=(inout lhs: Float, rhs: Float)
 /// case of arithmetic overflow (except in -Ounchecked builds).
 func %=<T : _IntegerArithmeticType>(inout lhs: T, rhs: T)
 
-func %=(inout lhs: Double, rhs: Double)
-
-func &(lhs: UInt8, rhs: UInt8) -> UInt8
-
-func &(lhs: Int8, rhs: Int8) -> Int8
-
-func &(lhs: UInt16, rhs: UInt16) -> UInt16
-
-func &(lhs: Int16, rhs: Int16) -> Int16
-
-func &(lhs: UInt32, rhs: UInt32) -> UInt32
-
-func &(lhs: Int32, rhs: Int32) -> Int32
-
-func &(lhs: UInt64, rhs: UInt64) -> UInt64
-
-func &(lhs: Int64, rhs: Int64) -> Int64
-
-func &(lhs: UInt, rhs: UInt) -> UInt
+func %=(inout lhs: Float80, rhs: Float80)
 
 func &(lhs: Int, rhs: Int) -> Int
 
+func &(lhs: UInt, rhs: UInt) -> UInt
+
+func &(lhs: Int64, rhs: Int64) -> Int64
+
+func &(lhs: UInt64, rhs: UInt64) -> UInt64
+
+func &(lhs: UInt32, rhs: UInt32) -> UInt32
+
+func &(lhs: Int16, rhs: Int16) -> Int16
+
+func &(lhs: UInt16, rhs: UInt16) -> UInt16
+
+func &(lhs: Int8, rhs: Int8) -> Int8
+
+func &(lhs: UInt8, rhs: UInt8) -> UInt8
+
 func &<T : _RawOptionSetType>(a: T, b: T) -> T
 
-func &&<T : BooleanType>(lhs: T, rhs: @autoclosure () -> Bool) -> Bool
+func &(lhs: Int32, rhs: Int32) -> Int32
+
+func &&<T : BooleanType>(lhs: T, @autoclosure rhs: () -> Bool) -> Bool
 
 
 /// If `lhs` is `false`, return it.  Otherwise, evaluate `rhs` and
 /// return its `boolValue`.
-@inline(__always) func &&<T : BooleanType, U : BooleanType>(lhs: T, rhs: @autoclosure () -> U) -> Bool
+func &&<T : BooleanType, U : BooleanType>(lhs: T, @autoclosure rhs: () -> U) -> Bool
 
 
 /// multiply `lhs` and `rhs`, silently discarding any overflow.
@@ -359,13 +385,11 @@ func &+<T : _IntegerArithmeticType>(lhs: T, rhs: T) -> T
 /// subtract `lhs` and `rhs`, silently discarding any overflow.
 func &-<T : _IntegerArithmeticType>(lhs: T, rhs: T) -> T
 
-func &=(inout lhs: Int16, rhs: Int16)
-
-func &=<T : BitwiseOperationsType>(inout lhs: T, rhs: T)
+func &=(inout lhs: UInt, rhs: UInt)
 
 func &=(inout lhs: Int, rhs: Int)
 
-func &=(inout lhs: UInt, rhs: UInt)
+func &=<T : BitwiseOperationsType>(inout lhs: T, rhs: T)
 
 func &=(inout lhs: Int64, rhs: Int64)
 
@@ -375,26 +399,24 @@ func &=(inout lhs: Int32, rhs: Int32)
 
 func &=(inout lhs: UInt32, rhs: UInt32)
 
+func &=(inout lhs: Int16, rhs: Int16)
+
 func &=(inout lhs: UInt16, rhs: UInt16)
 
 func &=(inout lhs: Int8, rhs: Int8)
 
 func &=(inout lhs: UInt8, rhs: UInt8)
 
-func *(lhs: UInt16, rhs: UInt16) -> UInt16
-
-func *(lhs: UInt8, rhs: UInt8) -> UInt8
-
-func *(lhs: Int8, rhs: Int8) -> Int8
+func *(lhs: UInt32, rhs: UInt32) -> UInt32
 
 
 /// Multiply `lhs` and `rhs`, returning a result and trapping in case of
 /// arithmetic overflow (except in -Ounchecked builds).
 func *<T : _IntegerArithmeticType>(lhs: T, rhs: T) -> T
 
-func *(lhs: Double, rhs: Double) -> Double
+func *(lhs: Float80, rhs: Float80) -> Float80
 
-func *(lhs: Int16, rhs: Int16) -> Int16
+func *(lhs: Double, rhs: Double) -> Double
 
 func *(lhs: Float, rhs: Float) -> Float
 
@@ -404,13 +426,17 @@ func *(lhs: UInt, rhs: UInt) -> UInt
 
 func *(lhs: Int64, rhs: Int64) -> Int64
 
+func *(lhs: UInt8, rhs: UInt8) -> UInt8
+
+func *(lhs: Int8, rhs: Int8) -> Int8
+
+func *(lhs: UInt16, rhs: UInt16) -> UInt16
+
+func *(lhs: Int16, rhs: Int16) -> Int16
+
 func *(lhs: UInt64, rhs: UInt64) -> UInt64
 
 func *(lhs: Int32, rhs: Int32) -> Int32
-
-func *(lhs: UInt32, rhs: UInt32) -> UInt32
-
-func *=(inout lhs: UInt8, rhs: UInt8)
 
 func *=(inout lhs: Int8, rhs: Int8)
 
@@ -434,22 +460,30 @@ func *=(inout lhs: Float, rhs: Float)
 
 func *=(inout lhs: Double, rhs: Double)
 
+func *=(inout lhs: Float80, rhs: Float80)
+
 
 /// multiply `lhs` and `rhs` and store the result in `lhs`, trapping in
 /// case of arithmetic overflow (except in -Ounchecked builds).
 func *=<T : _IntegerArithmeticType>(inout lhs: T, rhs: T)
 
-func +<T : _UnsignedIntegerType>(lhs: T._DisallowMixedSignArithmetic, rhs: T) -> T
+func *=(inout lhs: UInt8, rhs: UInt8)
 
-func +(lhs: String, rhs: String) -> String
+func +<T : Strideable>(lhs: T, rhs: T.Stride) -> T
 
-func +<T>(lhs: UnsafeMutablePointer<T>, rhs: Int) -> UnsafeMutablePointer<T>
+func +<EC1 : ExtensibleCollectionType, EC2 : ExtensibleCollectionType where EC1.Generator.Element == EC2.Generator.Element>(lhs: EC1, rhs: EC2) -> EC1
 
-func +<T>(lhs: Int, rhs: UnsafeMutablePointer<T>) -> UnsafeMutablePointer<T>
+func +<T>(lhs: Int, rhs: UnsafePointer<T>) -> UnsafePointer<T>
 
 func +<T>(lhs: UnsafePointer<T>, rhs: Int) -> UnsafePointer<T>
 
-func +<T>(lhs: Int, rhs: UnsafePointer<T>) -> UnsafePointer<T>
+func +<T>(lhs: Int, rhs: UnsafeMutablePointer<T>) -> UnsafeMutablePointer<T>
+
+func +<T>(lhs: UnsafeMutablePointer<T>, rhs: Int) -> UnsafeMutablePointer<T>
+
+func +(lhs: String, rhs: String) -> String
+
+func +<T : _UnsignedIntegerType>(lhs: T._DisallowMixedSignArithmetic, rhs: T) -> T
 
 func +(lhs: UInt8, rhs: UInt8) -> UInt8
 
@@ -473,52 +507,76 @@ func +(lhs: Int, rhs: Int) -> Int
 
 prefix func +(x: Float) -> Float
 
+func +<T : _UnsignedIntegerType>(lhs: T, rhs: T._DisallowMixedSignArithmetic) -> T
+
 func +(lhs: Float, rhs: Float) -> Float
 
 prefix func +(x: Double) -> Double
 
 func +(lhs: Double, rhs: Double) -> Double
 
+prefix func +(x: Float80) -> Float80
+
+func +(lhs: Float80, rhs: Float80) -> Float80
+
 
 /// Add `lhs` and `rhs`, returning a result and trapping in case of
 /// arithmetic overflow (except in -Ounchecked builds).
 func +<T : _IntegerArithmeticType>(lhs: T, rhs: T) -> T
 
-prefix func +<T : _SignedNumberType>(x: T) -> T
+prefix func +<T : SignedNumberType>(x: T) -> T
 
-func +<C : _ExtensibleCollectionType, S : SequenceType where C.Generator.Element == C.Generator.Element>(lhs: C, rhs: S) -> C
+func +<C : ExtensibleCollectionType, S : SequenceType where S.Generator.Element == C.Generator.Element>(lhs: C, rhs: S) -> C
 
-func +<T : _UnsignedIntegerType>(lhs: T, rhs: T._DisallowMixedSignArithmetic) -> T
+func +<C : ExtensibleCollectionType, S : SequenceType where S.Generator.Element == C.Generator.Element>(lhs: S, rhs: C) -> C
+
+func +<C : ExtensibleCollectionType, S : CollectionType where S.Generator.Element == C.Generator.Element>(lhs: C, rhs: S) -> C
 
 func +<T : Strideable>(lhs: T.Stride, rhs: T) -> T
 
-func +<T : Strideable>(lhs: T, rhs: T.Stride) -> T
+postfix func ++(inout x: Int32) -> Int32
 
-func +<EC1 : _ExtensibleCollectionType, EC2 : _ExtensibleCollectionType where EC1.Generator.Element == EC1.Generator.Element>(lhs: EC1, rhs: EC2) -> EC1
-
-func +<C : _ExtensibleCollectionType, S : CollectionType where C.Generator.Element == C.Generator.Element>(lhs: C, rhs: S) -> C
-
-func +<C : _ExtensibleCollectionType, S : SequenceType where C.Generator.Element == C.Generator.Element>(lhs: S, rhs: C) -> C
-
-prefix func ++(inout x: UInt8) -> UInt8
-
-postfix func ++(inout x: UInt8) -> UInt8
-
-prefix func ++(inout x: Int8) -> Int8
-
-postfix func ++(inout x: Int8) -> Int8
-
-prefix func ++(inout x: UInt16) -> UInt16
-
-postfix func ++(inout x: UInt16) -> UInt16
+prefix func ++(inout x: Int32) -> Int32
 
 prefix func ++(inout x: Int16) -> Int16
 
-postfix func ++(inout x: Int16) -> Int16
+prefix func ++(inout rhs: Double) -> Double
+
+postfix func ++(inout lhs: Double) -> Double
+
+prefix func ++(inout rhs: Float80) -> Float80
+
+postfix func ++(inout lhs: Float80) -> Float80
+
+postfix func ++(inout x: UInt16) -> UInt16
+
+
+/// Replace `i` with its `successor()` and return the updated value of
+/// `i`.
+prefix func ++<T : _Incrementable>(inout i: T) -> T
+
+
+/// Replace `i` with its `successor()` and return the original
+/// value of `i`.
+postfix func ++<T : _Incrementable>(inout i: T) -> T
+
+prefix func ++(inout x: UInt64) -> UInt64
+
+postfix func ++(inout x: UInt64) -> UInt64
+
+prefix func ++(inout x: Int64) -> Int64
+
+postfix func ++(inout x: UInt32) -> UInt32
 
 prefix func ++(inout x: UInt32) -> UInt32
 
-postfix func ++(inout x: UInt32) -> UInt32
+postfix func ++(inout x: Int16) -> Int16
+
+postfix func ++(inout x: Int64) -> Int64
+
+prefix func ++(inout x: UInt) -> UInt
+
+postfix func ++(inout x: UInt) -> UInt
 
 prefix func ++(inout x: Int) -> Int
 
@@ -528,95 +586,65 @@ prefix func ++(inout rhs: Float) -> Float
 
 postfix func ++(inout lhs: Float) -> Float
 
-prefix func ++(inout rhs: Double) -> Double
+prefix func ++(inout x: UInt8) -> UInt8
 
-postfix func ++(inout lhs: Double) -> Double
+postfix func ++(inout x: UInt8) -> UInt8
 
-prefix func ++<T : _Incrementable>(inout x: T) -> T
+prefix func ++(inout x: Int8) -> Int8
 
-postfix func ++<T : _Incrementable>(inout x: T) -> T
+prefix func ++(inout x: UInt16) -> UInt16
 
-prefix func ++(inout x: Int32) -> Int32
+postfix func ++(inout x: Int8) -> Int8
 
-postfix func ++(inout x: Int32) -> Int32
-
-prefix func ++(inout x: UInt64) -> UInt64
-
-postfix func ++(inout x: UInt64) -> UInt64
-
-prefix func ++(inout x: Int64) -> Int64
-
-postfix func ++(inout x: Int64) -> Int64
-
-prefix func ++(inout x: UInt) -> UInt
-
-postfix func ++(inout x: UInt) -> UInt
-
-
-/// Append the elements of rhs to lhs
-func +=<T, C : CollectionType where T == T>(inout lhs: _ContiguousArrayBuffer<T>, rhs: C)
-
-
-/// Extend `lhs` with the elements of `rhs`
-func +=<T, S : SequenceType where T == T>(inout lhs: ContiguousArray<T>, rhs: S)
-
-
-/// Extend `lhs` with the elements of `rhs`
-func +=<T, C : CollectionType where T == T>(inout lhs: ContiguousArray<T>, rhs: C)
-
-
-/// Extend `lhs` with the elements of `rhs`
-func +=<T, S : SequenceType where T == T>(inout lhs: ArraySlice<T>, rhs: S)
-
-
-/// Extend `lhs` with the elements of `rhs`
-func +=<T, C : CollectionType where T == T>(inout lhs: ArraySlice<T>, rhs: C)
-
-
-/// Extend `lhs` with the elements of `rhs`
-func +=<T, S : SequenceType where T == T>(inout lhs: [T], rhs: S)
-
-
-/// Extend `lhs` with the elements of `rhs`
-func +=<T, C : CollectionType where T == T>(inout lhs: [T], rhs: C)
-
-
-/// Extend `lhs` with the elements of `rhs`
-func +=<T, S : SequenceType where T == T>(inout lhs: _UnitTestArray<T>, rhs: S)
-
-
-/// Extend `lhs` with the elements of `rhs`
-func +=<T, C : CollectionType where T == T>(inout lhs: _UnitTestArray<T>, rhs: C)
-
-func +=(inout lhs: UInt8, rhs: UInt8)
+func +=(inout lhs: UInt16, rhs: UInt16)
 
 func +=(inout lhs: Int8, rhs: Int8)
 
-func +=(inout lhs: UInt16, rhs: UInt16)
+func +=(inout lhs: UInt8, rhs: UInt8)
+
+
+/// Append the elements of `rhs` to `lhs`.
+func +=<T, C : CollectionType where C.Generator.Element == T>(inout lhs: _ContiguousArrayBuffer<T>, rhs: C)
+
+
+/// Extend `lhs` with the elements of `rhs`.
+func +=<T, C : CollectionType where C.Generator.Element == T>(inout lhs: _UnitTestArray<T>, rhs: C)
+
+
+/// Extend `lhs` with the elements of `rhs`.
+func +=<T, S : SequenceType where S.Generator.Element == T>(inout lhs: _UnitTestArray<T>, rhs: S)
+
+
+/// Extend `lhs` with the elements of `rhs`.
+func +=<T, C : CollectionType where C.Generator.Element == T>(inout lhs: [T], rhs: C)
+
+
+/// Extend `lhs` with the elements of `rhs`.
+func +=<T, S : SequenceType where S.Generator.Element == T>(inout lhs: [T], rhs: S)
+
+
+/// Extend `lhs` with the elements of `rhs`.
+func +=<T, C : CollectionType where C.Generator.Element == T>(inout lhs: ArraySlice<T>, rhs: C)
 
 func +=(inout lhs: Int16, rhs: Int16)
 
 func +=(inout lhs: UInt32, rhs: UInt32)
 
-func +=<T>(inout lhs: UnsafePointer<T>, rhs: Int)
-
-func +=<T>(inout lhs: UnsafeMutablePointer<T>, rhs: Int)
-
-
-/// Append rhs to lhs
-func +=<T>(inout lhs: _UnitTestArrayBuffer<T>, rhs: T)
-
-
-/// Append the elements of rhs to lhs
-func +=<T, C : CollectionType where T == T>(inout lhs: _UnitTestArrayBuffer<T>, rhs: C)
-
-func +=(inout lhs: String, rhs: String)
-
-func +=<T : _UnsignedIntegerType>(inout lhs: T, rhs: T._DisallowMixedSignArithmetic)
-
 func +=(inout lhs: Int32, rhs: Int32)
 
 func +=(inout lhs: UInt64, rhs: UInt64)
+
+
+/// Extend `lhs` with the elements of `rhs`.
+func +=<T, S : SequenceType where S.Generator.Element == T>(inout lhs: ArraySlice<T>, rhs: S)
+
+
+/// Extend `lhs` with the elements of `rhs`.
+func +=<T, C : CollectionType where C.Generator.Element == T>(inout lhs: ContiguousArray<T>, rhs: C)
+
+
+/// Extend `lhs` with the elements of `rhs`.
+func +=<T, S : SequenceType where S.Generator.Element == T>(inout lhs: ContiguousArray<T>, rhs: S)
 
 func +=(inout lhs: Int64, rhs: Int64)
 
@@ -628,6 +656,8 @@ func +=(inout lhs: Float, rhs: Float)
 
 func +=(inout lhs: Double, rhs: Double)
 
+func +=(inout lhs: Float80, rhs: Float80)
+
 
 /// add `lhs` and `rhs` and store the result in `lhs`, trapping in
 /// case of arithmetic overflow (except in -Ounchecked builds).
@@ -635,17 +665,28 @@ func +=<T : _IntegerArithmeticType>(inout lhs: T, rhs: T)
 
 func +=<T : Strideable>(inout lhs: T, rhs: T.Stride)
 
-func -<T : _UnsignedIntegerType>(lhs: T, rhs: T._DisallowMixedSignArithmetic) -> T
+func +=<T>(inout lhs: UnsafePointer<T>, rhs: Int)
 
-func -<T : _UnsignedIntegerType>(lhs: T, rhs: T) -> T._DisallowMixedSignArithmetic
+func +=(inout lhs: String, rhs: String)
 
-func -<T>(lhs: UnsafeMutablePointer<T>, rhs: Int) -> UnsafeMutablePointer<T>
 
-func -<T>(lhs: UnsafeMutablePointer<T>, rhs: UnsafeMutablePointer<T>) -> Int
+/// Append the elements of `rhs` to `lhs`.
+func +=<T, C : CollectionType where C.Generator.Element == T>(inout lhs: _UnitTestArrayBuffer<T>, rhs: C)
 
-func -<T>(lhs: UnsafePointer<T>, rhs: Int) -> UnsafePointer<T>
 
-func -<T>(lhs: UnsafePointer<T>, rhs: UnsafePointer<T>) -> Int
+/// Append `rhs` to `lhs`.
+func +=<T>(inout lhs: _UnitTestArrayBuffer<T>, rhs: T)
+
+func +=<T>(inout lhs: UnsafeMutablePointer<T>, rhs: Int)
+
+func +=<T : _UnsignedIntegerType>(inout lhs: T, rhs: T._DisallowMixedSignArithmetic)
+
+
+/// Subtract `lhs` and `rhs`, returning a result and trapping in case of
+/// arithmetic overflow (except in -Ounchecked builds).
+func -<T : _IntegerArithmeticType>(lhs: T, rhs: T) -> T
+
+prefix func -<T : SignedNumberType>(x: T) -> T
 
 func -(lhs: UInt8, rhs: UInt8) -> UInt8
 
@@ -669,28 +710,77 @@ func -(lhs: Int, rhs: Int) -> Int
 
 prefix func -(x: Float) -> Float
 
-func -<T : Strideable>(lhs: T, rhs: T) -> T.Stride
-
-func -<T : Strideable>(lhs: T, rhs: T.Stride) -> T
-
-prefix func -<T : _SignedNumberType>(x: T) -> T
-
-
-/// Subtract `lhs` and `rhs`, returning a result and trapping in case of
-/// arithmetic overflow (except in -Ounchecked builds).
-func -<T : _IntegerArithmeticType>(lhs: T, rhs: T) -> T
-
-func -(lhs: Double, rhs: Double) -> Double
+func -(lhs: Float, rhs: Float) -> Float
 
 prefix func -(x: Double) -> Double
 
-func -(lhs: Float, rhs: Float) -> Float
+func -(lhs: Double, rhs: Double) -> Double
 
-prefix func --(inout x: Int32) -> Int32
+prefix func -(x: Float80) -> Float80
+
+func -(lhs: Float80, rhs: Float80) -> Float80
+
+func -<T : Strideable>(lhs: T, rhs: T.Stride) -> T
+
+func -<T>(lhs: UnsafePointer<T>, rhs: UnsafePointer<T>) -> Int
+
+func -<T>(lhs: UnsafePointer<T>, rhs: Int) -> UnsafePointer<T>
+
+func -<T>(lhs: UnsafeMutablePointer<T>, rhs: UnsafeMutablePointer<T>) -> Int
+
+func -<T>(lhs: UnsafeMutablePointer<T>, rhs: Int) -> UnsafeMutablePointer<T>
+
+func -<T : _UnsignedIntegerType>(lhs: T, rhs: T) -> T._DisallowMixedSignArithmetic
+
+func -<T : _UnsignedIntegerType>(lhs: T, rhs: T._DisallowMixedSignArithmetic) -> T
+
+func -<T : Strideable>(lhs: T, rhs: T) -> T.Stride
+
+prefix func --(inout x: Int) -> Int
+
+prefix func --(inout rhs: Double) -> Double
+
+postfix func --(inout lhs: Float) -> Float
+
+postfix func --(inout x: Int) -> Int
+
+prefix func --(inout rhs: Float) -> Float
+
+prefix func --(inout x: UInt32) -> UInt32
 
 postfix func --(inout x: UInt32) -> UInt32
 
-prefix func --(inout x: UInt32) -> UInt32
+prefix func --(inout x: Int32) -> Int32
+
+postfix func --(inout x: Int32) -> Int32
+
+prefix func --(inout x: UInt64) -> UInt64
+
+postfix func --(inout x: UInt64) -> UInt64
+
+prefix func --(inout x: Int64) -> Int64
+
+postfix func --(inout x: Int64) -> Int64
+
+prefix func --(inout x: UInt) -> UInt
+
+
+/// Replace `i` with its `predecessor()` and return the original
+/// value of `i`.
+postfix func --<T : BidirectionalIndexType>(inout i: T) -> T
+
+
+/// Replace `i` with its `predecessor()` and return the updated value
+/// of `i`.
+prefix func --<T : BidirectionalIndexType>(inout i: T) -> T
+
+postfix func --(inout lhs: Float80) -> Float80
+
+prefix func --(inout rhs: Float80) -> Float80
+
+postfix func --(inout lhs: Double) -> Double
+
+postfix func --(inout x: UInt) -> UInt
 
 postfix func --(inout x: Int16) -> Int16
 
@@ -708,37 +798,13 @@ postfix func --(inout x: UInt8) -> UInt8
 
 prefix func --(inout x: UInt8) -> UInt8
 
-postfix func --(inout x: Int32) -> Int32
-
-prefix func --(inout x: UInt64) -> UInt64
-
-postfix func --(inout x: UInt64) -> UInt64
-
-prefix func --(inout x: Int64) -> Int64
-
-postfix func --(inout x: Int64) -> Int64
-
-prefix func --(inout x: UInt) -> UInt
-
-postfix func --(inout x: UInt) -> UInt
-
-prefix func --(inout x: Int) -> Int
-
-postfix func --(inout x: Int) -> Int
-
-prefix func --(inout rhs: Float) -> Float
-
-postfix func --(inout lhs: Float) -> Float
-
-prefix func --(inout rhs: Double) -> Double
-
-postfix func --(inout lhs: Double) -> Double
-
-prefix func --<T : _BidirectionalIndexType>(inout x: T) -> T
-
-postfix func --<T : _BidirectionalIndexType>(inout x: T) -> T
+func -=(inout lhs: UInt8, rhs: UInt8)
 
 func -=<T : _UnsignedIntegerType>(inout lhs: T, rhs: T._DisallowMixedSignArithmetic)
+
+func -=<T>(inout lhs: UnsafePointer<T>, rhs: Int)
+
+func -=<T>(inout lhs: UnsafeMutablePointer<T>, rhs: Int)
 
 func -=<T : Strideable>(inout lhs: T, rhs: T.Stride)
 
@@ -746,6 +812,8 @@ func -=<T : Strideable>(inout lhs: T, rhs: T.Stride)
 /// subtract `lhs` and `rhs` and store the result in `lhs`, trapping in
 /// case of arithmetic overflow (except in -Ounchecked builds).
 func -=<T : _IntegerArithmeticType>(inout lhs: T, rhs: T)
+
+func -=(inout lhs: Float80, rhs: Float80)
 
 func -=(inout lhs: Double, rhs: Double)
 
@@ -765,18 +833,12 @@ func -=(inout lhs: UInt32, rhs: UInt32)
 
 func -=(inout lhs: Int16, rhs: Int16)
 
-func -=(inout lhs: UInt16, rhs: UInt16)
-
 func -=(inout lhs: Int8, rhs: Int8)
 
-func -=(inout lhs: UInt8, rhs: UInt8)
-
-func -=<T>(inout lhs: UnsafeMutablePointer<T>, rhs: Int)
-
-func -=<T>(inout lhs: UnsafePointer<T>, rhs: Int)
+func -=(inout lhs: UInt16, rhs: UInt16)
 
 
-/// Returns a closed interval from `start` through `end`
+/// Returns a closed interval from `start` through `end`.
 func ...<T : Comparable>(start: T, end: T) -> ClosedInterval<T>
 
 
@@ -785,11 +847,11 @@ func ...<Pos : ForwardIndexType>(minimum: Pos, maximum: Pos) -> Range<Pos>
 
 
 /// Forms a closed range that contains both `start` and `end`.
-/// Requres: `start <= end`
+/// - Requires: `start <= end`.
 func ...<Pos : ForwardIndexType where Pos : Comparable>(start: Pos, end: Pos) -> Range<Pos>
 
 
-/// Returns a half-open interval from `start` to `end`
+/// Returns a half-open interval from `start` to `end`.
 func ..<<T : Comparable>(start: T, end: T) -> HalfOpenInterval<T>
 
 
@@ -798,34 +860,37 @@ func ..<<T : Comparable>(start: T, end: T) -> HalfOpenInterval<T>
 func ..<<Pos : ForwardIndexType>(minimum: Pos, maximum: Pos) -> Range<Pos>
 
 
-/// Forms a half-open range that contains `start`, but not
-/// `end`.  Requires: `start <= end`
+/// Forms a half-open range that contains `start`, but not `end`.
+///
+/// - Requires: `start <= end`.
 func ..<<Pos : ForwardIndexType where Pos : Comparable>(start: Pos, end: Pos) -> Range<Pos>
-
-func /(lhs: UInt16, rhs: UInt16) -> UInt16
-
-func /(lhs: Int16, rhs: Int16) -> Int16
-
-func /(lhs: UInt32, rhs: UInt32) -> UInt32
-
-func /(lhs: Int32, rhs: Int32) -> Int32
-
-func /(lhs: UInt64, rhs: UInt64) -> UInt64
-
-func /(lhs: Int64, rhs: Int64) -> Int64
-
-func /(lhs: UInt, rhs: UInt) -> UInt
-
-func /(lhs: Int, rhs: Int) -> Int
-
-func /(lhs: Float, rhs: Float) -> Float
-
-func /(lhs: Double, rhs: Double) -> Double
 
 
 /// Divide `lhs` and `rhs`, returning a result and trapping in case of
 /// arithmetic overflow (except in -Ounchecked builds).
 func /<T : _IntegerArithmeticType>(lhs: T, rhs: T) -> T
+
+func /(lhs: Float80, rhs: Float80) -> Float80
+
+func /(lhs: Double, rhs: Double) -> Double
+
+func /(lhs: Float, rhs: Float) -> Float
+
+func /(lhs: Int, rhs: Int) -> Int
+
+func /(lhs: UInt, rhs: UInt) -> UInt
+
+func /(lhs: Int64, rhs: Int64) -> Int64
+
+func /(lhs: UInt64, rhs: UInt64) -> UInt64
+
+func /(lhs: Int32, rhs: Int32) -> Int32
+
+func /(lhs: UInt32, rhs: UInt32) -> UInt32
+
+func /(lhs: Int16, rhs: Int16) -> Int16
+
+func /(lhs: UInt16, rhs: UInt16) -> UInt16
 
 func /(lhs: Int8, rhs: Int8) -> Int8
 
@@ -835,94 +900,106 @@ func /=(inout lhs: Float, rhs: Float)
 
 func /=(inout lhs: Double, rhs: Double)
 
+func /=(inout lhs: Float80, rhs: Float80)
+
 
 /// divide `lhs` and `rhs` and store the result in `lhs`, trapping in
 /// case of arithmetic overflow (except in -Ounchecked builds).
 func /=<T : _IntegerArithmeticType>(inout lhs: T, rhs: T)
 
-func <(lhs: ObjectIdentifier, rhs: ObjectIdentifier) -> Bool
+func <(lhs: UInt32, rhs: UInt32) -> Bool
 
-func <<T : _Comparable>(lhs: T?, rhs: T?) -> Bool
-
-func <(lhs: Double, rhs: Double) -> Bool
+func <(lhs: Float, rhs: Float) -> Bool
 
 func <(lhs: Bit, rhs: Bit) -> Bool
+
+
+/// Lexicographic comparison of version components.
+func <(left: _SwiftNSOperatingSystemVersion, right: _SwiftNSOperatingSystemVersion) -> Bool
 
 func <<T>(lhs: UnsafePointer<T>, rhs: UnsafePointer<T>) -> Bool
 
 func <<T>(lhs: UnsafeMutablePointer<T>, rhs: UnsafeMutablePointer<T>) -> Bool
 
-func <(lhs: String, rhs: String) -> Bool
-
-func <(lhs: String.Index, rhs: String.Index) -> Bool
-
-func <<Key : Hashable, Value>(lhs: DictionaryIndex<Key, Value>, rhs: DictionaryIndex<Key, Value>) -> Bool
-
-func <<T : Hashable>(lhs: SetIndex<T>, rhs: SetIndex<T>) -> Bool
-
-
-/// Compare two Strideables
-func <<T : _Strideable>(x: T, y: T) -> Bool
-
-func <(lhs: Float, rhs: Float) -> Bool
-
-func <(lhs: Int, rhs: Int) -> Bool
-
-func <(lhs: UInt, rhs: UInt) -> Bool
-
-func <(lhs: Int64, rhs: Int64) -> Bool
-
-func <(lhs: UInt64, rhs: UInt64) -> Bool
-
-func <(lhs: Int32, rhs: Int32) -> Bool
-
-func <(lhs: UInt32, rhs: UInt32) -> Bool
-
-func <(lhs: Int16, rhs: Int16) -> Bool
-
-func <(lhs: UInt16, rhs: UInt16) -> Bool
-
-func <(lhs: Int8, rhs: Int8) -> Bool
-
-func <(lhs: UInt8, rhs: UInt8) -> Bool
-
-func <(lhs: Character, rhs: Character) -> Bool
+func <(lhs: UnicodeScalar, rhs: UnicodeScalar) -> Bool
 
 func <(lhs: String.UTF16View.Index, rhs: String.UTF16View.Index) -> Bool
 
 func <(lhs: String.UnicodeScalarView.Index, rhs: String.UnicodeScalarView.Index) -> Bool
 
-func <(lhs: UnicodeScalar, rhs: UnicodeScalar) -> Bool
+func <(lhs: UInt64, rhs: UInt64) -> Bool
+
+func <(lhs: Index, rhs: Index) -> Bool
+
+func <(lhs: String, rhs: String) -> Bool
+
+
+/// Compare two `Strideable`s.
+func <<T : _Strideable>(x: T, y: T) -> Bool
+
+func <(lhs: ObjectIdentifier, rhs: ObjectIdentifier) -> Bool
+
+func <<T : Comparable>(lhs: T?, rhs: T?) -> Bool
+
+func <<Key : Hashable, Value>(lhs: DictionaryIndex<Key, Value>, rhs: DictionaryIndex<Key, Value>) -> Bool
+
+func <<T : Hashable>(lhs: SetIndex<T>, rhs: SetIndex<T>) -> Bool
+
+func <(lhs: Float80, rhs: Float80) -> Bool
+
+func <(lhs: Double, rhs: Double) -> Bool
+
+func <(lhs: Int16, rhs: Int16) -> Bool
+
+func <(lhs: Int, rhs: Int) -> Bool
+
+func <(lhs: UInt, rhs: UInt) -> Bool
+
+func <(lhs: UInt16, rhs: UInt16) -> Bool
+
+func <(lhs: Int8, rhs: Int8) -> Bool
+
+func <(lhs: Character, rhs: Character) -> Bool
+
+func <(lhs: UInt8, rhs: UInt8) -> Bool
+
+func <(lhs: Int32, rhs: Int32) -> Bool
+
+func <(lhs: Int64, rhs: Int64) -> Bool
 
 func <<(lhs: Int16, rhs: Int16) -> Int16
 
-func <<(lhs: UInt8, rhs: UInt8) -> UInt8
+func <<(lhs: UInt16, rhs: UInt16) -> UInt16
 
 func <<(lhs: Int8, rhs: Int8) -> Int8
 
-func <<(lhs: Int, rhs: Int) -> Int
-
-func <<(lhs: UInt, rhs: UInt) -> UInt
-
-func <<(lhs: Int64, rhs: Int64) -> Int64
-
-func <<(lhs: UInt64, rhs: UInt64) -> UInt64
-
-func <<(lhs: Int32, rhs: Int32) -> Int32
-
-func <<(lhs: UInt16, rhs: UInt16) -> UInt16
+func <<(lhs: UInt8, rhs: UInt8) -> UInt8
 
 func <<(lhs: UInt32, rhs: UInt32) -> UInt32
 
-func <<=(inout lhs: Int16, rhs: Int16)
+func <<(lhs: Int32, rhs: Int32) -> Int32
 
-func <<=(inout lhs: UInt, rhs: UInt)
+func <<(lhs: UInt64, rhs: UInt64) -> UInt64
 
-func <<=(inout lhs: UInt8, rhs: UInt8)
+func <<(lhs: UInt, rhs: UInt) -> UInt
+
+func <<(lhs: Int, rhs: Int) -> Int
+
+func <<(lhs: Int64, rhs: Int64) -> Int64
 
 func <<=(inout lhs: Int8, rhs: Int8)
 
+func <<=(inout lhs: UInt, rhs: UInt)
+
+func <<=(inout lhs: Int, rhs: Int)
+
+func <<=(inout lhs: UInt8, rhs: UInt8)
+
 func <<=(inout lhs: UInt16, rhs: UInt16)
+
+func <<=(inout lhs: Int64, rhs: Int64)
+
+func <<=(inout lhs: Int16, rhs: Int16)
 
 func <<=(inout lhs: UInt32, rhs: UInt32)
 
@@ -930,116 +1007,66 @@ func <<=(inout lhs: Int32, rhs: Int32)
 
 func <<=(inout lhs: UInt64, rhs: UInt64)
 
-func <<=(inout lhs: Int64, rhs: Int64)
-
-func <<=(inout lhs: Int, rhs: Int)
-
-func <=<T : _Comparable>(lhs: T, rhs: T) -> Bool
-
-func <=<T : _Comparable>(lhs: T?, rhs: T?) -> Bool
-
-func <=(lhs: UInt8, rhs: UInt8) -> Bool
-
-func <=(lhs: Int8, rhs: Int8) -> Bool
-
-func <=(lhs: UInt16, rhs: UInt16) -> Bool
-
-func <=(lhs: Int16, rhs: Int16) -> Bool
-
-func <=(lhs: Double, rhs: Double) -> Bool
-
 func <=(lhs: Float, rhs: Float) -> Bool
 
 func <=(lhs: UInt32, rhs: UInt32) -> Bool
 
-func <=(lhs: Int32, rhs: Int32) -> Bool
+func <=<T : Comparable>(lhs: T, rhs: T) -> Bool
 
-func <=(lhs: UInt64, rhs: UInt64) -> Bool
-
-func <=(lhs: Int64, rhs: Int64) -> Bool
-
-func <=(lhs: UInt, rhs: UInt) -> Bool
+func <=<T : Comparable>(lhs: T?, rhs: T?) -> Bool
 
 func <=(lhs: Int, rhs: Int) -> Bool
 
-func ==(lhs: UInt16, rhs: UInt16) -> Bool
+func <=(lhs: UInt, rhs: UInt) -> Bool
+
+func <=(lhs: Int64, rhs: Int64) -> Bool
+
+func <=(lhs: UInt64, rhs: UInt64) -> Bool
+
+func <=(lhs: Int32, rhs: Int32) -> Bool
+
+func <=(lhs: Int16, rhs: Int16) -> Bool
+
+func <=(lhs: UInt16, rhs: UInt16) -> Bool
+
+func <=(lhs: Int8, rhs: Int8) -> Bool
+
+func <=(lhs: UInt8, rhs: UInt8) -> Bool
+
+func <=(lhs: Double, rhs: Double) -> Bool
+
+func <=(lhs: Float80, rhs: Float80) -> Bool
 
 func ==(lhs: Int8, rhs: Int8) -> Bool
-
-func ==(lhs: UInt8, rhs: UInt8) -> Bool
-
-func ==<Base : CollectionType>(lhs: FilterCollectionViewIndex<Base>, rhs: FilterCollectionViewIndex<Base>) -> Bool
-
-func ==<I>(lhs: _ConcatenateBidirectionalIndex<I>, rhs: _ConcatenateBidirectionalIndex<I>) -> Bool
 
 func ==<I>(lhs: _ConcatenateForwardIndex<I>, rhs: _ConcatenateForwardIndex<I>) -> Bool
 
 func ==<T : _RawOptionSetType>(a: T, b: T) -> Bool
 
+func ==(lhs: FloatingPointClassification, rhs: FloatingPointClassification) -> Bool
+
+func ==<I>(lhs: _ConcatenateBidirectionalIndex<I>, rhs: _ConcatenateBidirectionalIndex<I>) -> Bool
+
+
+/// Returns `true` iff `lhs.rawValue == rhs.rawValue`.
+func ==<T : RawRepresentable where T.RawValue : Equatable>(lhs: T, rhs: T) -> Bool
+
 func ==(lhs: Character, rhs: Character) -> Bool
 
-func ==<T>(lhs: CFunctionPointer<T>, rhs: CFunctionPointer<T>) -> Bool
-
 func ==(lhs: COpaquePointer, rhs: COpaquePointer) -> Bool
-
-func ==<I>(lhs: ReverseRandomAccessIndex<I>, rhs: ReverseRandomAccessIndex<I>) -> Bool
-
-func ==<T : _Strideable>(x: T, y: T) -> Bool
-
-func ==(lhs: String, rhs: String) -> Bool
-
-func ==(lhs: String.Index, rhs: String.Index) -> Bool
-
-func ==(lhs: String.UTF16View.Index, rhs: String.UTF16View.Index) -> Bool
-
-func ==(lhs: String.UTF8View.Index, rhs: String.UTF8View.Index) -> Bool
-
-func ==(lhs: String.UnicodeScalarView.Index, rhs: String.UnicodeScalarView.Index) -> Bool
-
-func ==(lhs: UnicodeScalar, rhs: UnicodeScalar) -> Bool
-
-func ==<I>(lhs: ReverseBidirectionalIndex<I>, rhs: ReverseBidirectionalIndex<I>) -> Bool
-
-func ==<T>(lhs: UnsafeMutablePointer<T>, rhs: UnsafeMutablePointer<T>) -> Bool
-
-func ==<T>(lhs: UnsafePointer<T>, rhs: UnsafePointer<T>) -> Bool
-
-func ==(lhs: Bit, rhs: Bit) -> Bool
-
-
-/// Two `HalfOpenInterval`\ s are equal if their `start` and `end` are
-/// equal
-func ==<T : Comparable>(lhs: HalfOpenInterval<T>, rhs: HalfOpenInterval<T>) -> Bool
-
-func ==(x: ObjectIdentifier, y: ObjectIdentifier) -> Bool
-
-func ==<T>(lhs: Range<T>, rhs: Range<T>) -> Bool
-
-func ==<T>(lhs: _OptionalNilComparisonType, rhs: T?) -> Bool
-
-func ==<T>(lhs: T?, rhs: _OptionalNilComparisonType) -> Bool
-
-func ==(lhs: Int, rhs: Int) -> Bool
-
-func ==(lhs: Float, rhs: Float) -> Bool
-
-func ==(lhs: Double, rhs: Double) -> Bool
-
-func ==(lhs: UInt, rhs: UInt) -> Bool
-
-func ==<T : Equatable>(lhs: T?, rhs: T?) -> Bool
-
-func ==<T>(lhs: AutoreleasingUnsafeMutablePointer<T>, rhs: AutoreleasingUnsafeMutablePointer<T>) -> Bool
-
-func ==(lhs: Int64, rhs: Int64) -> Bool
-
-func ==(lhs: FloatingPointClassification, rhs: FloatingPointClassification) -> Bool
 
 func ==<T : Hashable>(lhs: Set<T>, rhs: Set<T>) -> Bool
 
 func ==<Key : Equatable, Value : Equatable>(lhs: [Key : Value], rhs: [Key : Value]) -> Bool
 
-func ==<T : Hashable>(lhs: SetIndex<T>, rhs: SetIndex<T>) -> Bool
+
+/// Return `true` iff `t0` is identical to `t1`; i.e. if they are both
+/// `nil` or they both represent the same type.
+func ==(t0: Any.Type?, t1: Any.Type?) -> Bool
+
+func ==<T>(lhs: AutoreleasingUnsafeMutablePointer<T>, rhs: AutoreleasingUnsafeMutablePointer<T>) -> Bool
+
+func ==(lhs: Float80, rhs: Float80) -> Bool
 
 func ==(lhs: Bool, rhs: Bool) -> Bool
 
@@ -1055,38 +1082,139 @@ func ==<T : Equatable>(lhs: [T], rhs: [T]) -> Bool
 /// Returns true if these arrays contain the same elements.
 func ==<T : Equatable>(lhs: ArraySlice<T>, rhs: ArraySlice<T>) -> Bool
 
-func ==(lhs: Int16, rhs: Int16) -> Bool
-
-func ==<Value, Element>(lhs: ManagedBufferPointer<Value, Element>, rhs: ManagedBufferPointer<Value, Element>) -> Bool
-
-func ==(lhs: UInt32, rhs: UInt32) -> Bool
-
-func ==(lhs: Int32, rhs: Int32) -> Bool
-
 
 /// Returns true if these arrays contain the same elements.
 func ==<T : Equatable>(lhs: ContiguousArray<T>, rhs: ContiguousArray<T>) -> Bool
 
-func ==<Key : Hashable, Value>(lhs: DictionaryIndex<Key, Value>, rhs: DictionaryIndex<Key, Value>) -> Bool
+func ==(lhs: Double, rhs: Double) -> Bool
+
+func ==(lhs: Float, rhs: Float) -> Bool
+
+func ==(lhs: Int, rhs: Int) -> Bool
+
+func ==(lhs: UInt, rhs: UInt) -> Bool
+
+func ==(lhs: UInt8, rhs: UInt8) -> Bool
+
+func ==(lhs: Int64, rhs: Int64) -> Bool
 
 func ==(lhs: UInt64, rhs: UInt64) -> Bool
 
+func ==<T : Hashable>(lhs: SetIndex<T>, rhs: SetIndex<T>) -> Bool
 
-/// Two `ClosedInterval`\ s are equal if their `start` and `end` are
-/// equal
+func ==<Key : Hashable, Value>(lhs: DictionaryIndex<Key, Value>, rhs: DictionaryIndex<Key, Value>) -> Bool
+
+
+/// Return true iff `lhs` and `rhs` wrap equal underlying
+/// `AnyRandomAccessIndex`s.
+///
+/// - Requires: The types of indices wrapped by `lhs` and `rhs` are
+///   identical.
+func ==(lhs: AnyRandomAccessIndex, rhs: AnyRandomAccessIndex) -> Bool
+
+
+/// Two `HalfOpenInterval`s are equal if their `start` and `end` are
+/// equal.
+func ==<T : Comparable>(lhs: HalfOpenInterval<T>, rhs: HalfOpenInterval<T>) -> Bool
+
+
+/// Two `ClosedInterval`s are equal if their `start` and `end` are
+/// equal.
 func ==<T : Comparable>(lhs: ClosedInterval<T>, rhs: ClosedInterval<T>) -> Bool
+
+func ==<Value, Element>(lhs: ManagedBufferPointer<Value, Element>, rhs: ManagedBufferPointer<Value, Element>) -> Bool
+
+func ==<T : Equatable>(lhs: T?, rhs: T?) -> Bool
+
+func ==<T>(lhs: T?, rhs: _OptionalNilComparisonType) -> Bool
+
+func ==<T>(lhs: _OptionalNilComparisonType, rhs: T?) -> Bool
+
+func ==<T>(lhs: Range<T>, rhs: Range<T>) -> Bool
+
+func ==(x: ObjectIdentifier, y: ObjectIdentifier) -> Bool
+
+func ==<I>(lhs: ReverseBidirectionalIndex<I>, rhs: ReverseBidirectionalIndex<I>) -> Bool
+
+func ==<I>(lhs: ReverseRandomAccessIndex<I>, rhs: ReverseRandomAccessIndex<I>) -> Bool
+
+func ==(lhs: Int32, rhs: Int32) -> Bool
+
+func ==(lhs: UInt32, rhs: UInt32) -> Bool
+
+func ==(lhs: Int16, rhs: Int16) -> Bool
+
+func ==<T : _Strideable>(x: T, y: T) -> Bool
+
+func ==(lhs: String, rhs: String) -> Bool
+
+func ==(lhs: Index, rhs: Index) -> Bool
+
+func ==(lhs: UInt16, rhs: UInt16) -> Bool
+
+func ==(lhs: String.UnicodeScalarView.Index, rhs: String.UnicodeScalarView.Index) -> Bool
+
+func ==(lhs: String.UTF16View.Index, rhs: String.UTF16View.Index) -> Bool
+
+func ==<Base : CollectionType>(lhs: FilterCollectionViewIndex<Base>, rhs: FilterCollectionViewIndex<Base>) -> Bool
+
+func ==(lhs: String.UTF8View.Index, rhs: String.UTF8View.Index) -> Bool
+
+func ==(lhs: UnicodeScalar, rhs: UnicodeScalar) -> Bool
+
+func ==<T>(lhs: UnsafeMutablePointer<T>, rhs: UnsafeMutablePointer<T>) -> Bool
+
+func ==<T>(lhs: UnsafePointer<T>, rhs: UnsafePointer<T>) -> Bool
+
+func ==(left: _SwiftNSOperatingSystemVersion, right: _SwiftNSOperatingSystemVersion) -> Bool
+
+func ==(lhs: Bit, rhs: Bit) -> Bool
+
+
+/// Return true iff `lhs` and `rhs` wrap equal underlying
+/// `AnyForwardIndex`s.
+///
+/// - Requires: The types of indices wrapped by `lhs` and `rhs` are
+///   identical.
+func ==(lhs: AnyForwardIndex, rhs: AnyForwardIndex) -> Bool
+
+
+/// Return true iff `lhs` and `rhs` wrap equal underlying
+/// `AnyBidirectionalIndex`s.
+///
+/// - Requires: The types of indices wrapped by `lhs` and `rhs` are
+///   identical.
+func ==(lhs: AnyBidirectionalIndex, rhs: AnyBidirectionalIndex) -> Bool
+
+
+/// Return true iff `lhs` and `rhs` store the same underlying collection.
+func ===<L : AnyCollectionType, R : AnyCollectionType>(lhs: L, rhs: R) -> Bool
 
 func ===(lhs: AnyObject?, rhs: AnyObject?) -> Bool
 
-func ><T : _Comparable>(lhs: T?, rhs: T?) -> Bool
+func >(lhs: Int, rhs: Int) -> Bool
+
+func >(lhs: UInt, rhs: UInt) -> Bool
+
+func >(lhs: Int64, rhs: Int64) -> Bool
+
+func >(lhs: Float, rhs: Float) -> Bool
+
+func >(lhs: Double, rhs: Double) -> Bool
+
+func >(lhs: Float80, rhs: Float80) -> Bool
 
 func >(lhs: Int32, rhs: Int32) -> Bool
 
+func >(lhs: UInt64, rhs: UInt64) -> Bool
+
 func >(lhs: UInt8, rhs: UInt8) -> Bool
 
-func >(lhs: Int8, rhs: Int8) -> Bool
+func ><T : Comparable>(lhs: T?, rhs: T?) -> Bool
 
-func ><T : _Comparable>(lhs: T, rhs: T) -> Bool
+func ><T : Comparable>(lhs: T, rhs: T) -> Bool
+
+func >(lhs: Int8, rhs: Int8) -> Bool
 
 func >(lhs: UInt16, rhs: UInt16) -> Bool
 
@@ -1094,45 +1222,39 @@ func >(lhs: Int16, rhs: Int16) -> Bool
 
 func >(lhs: UInt32, rhs: UInt32) -> Bool
 
-func >(lhs: Double, rhs: Double) -> Bool
+func >=(lhs: UInt, rhs: UInt) -> Bool
 
-func >(lhs: UInt64, rhs: UInt64) -> Bool
+func >=(lhs: UInt8, rhs: UInt8) -> Bool
 
-func >(lhs: Int64, rhs: Int64) -> Bool
+func >=(lhs: Int8, rhs: Int8) -> Bool
 
-func >(lhs: UInt, rhs: UInt) -> Bool
-
-func >(lhs: Int, rhs: Int) -> Bool
-
-func >(lhs: Float, rhs: Float) -> Bool
-
-func >=<T : _Comparable>(lhs: T?, rhs: T?) -> Bool
-
-func >=(lhs: Double, rhs: Double) -> Bool
-
-func >=(lhs: Float, rhs: Float) -> Bool
-
-func >=(lhs: Int, rhs: Int) -> Bool
-
-func >=<T : _Comparable>(lhs: T, rhs: T) -> Bool
-
-func >=(lhs: Int64, rhs: Int64) -> Bool
+func >=(lhs: UInt16, rhs: UInt16) -> Bool
 
 func >=(lhs: Int16, rhs: Int16) -> Bool
-
-func >=(lhs: UInt, rhs: UInt) -> Bool
 
 func >=(lhs: UInt32, rhs: UInt32) -> Bool
 
 func >=(lhs: Int32, rhs: Int32) -> Bool
 
-func >=(lhs: UInt16, rhs: UInt16) -> Bool
-
-func >=(lhs: Int8, rhs: Int8) -> Bool
-
-func >=(lhs: UInt8, rhs: UInt8) -> Bool
-
 func >=(lhs: UInt64, rhs: UInt64) -> Bool
+
+func >=(lhs: Int64, rhs: Int64) -> Bool
+
+func >=(lhs: Int, rhs: Int) -> Bool
+
+func >=(lhs: Float, rhs: Float) -> Bool
+
+func >=(lhs: Double, rhs: Double) -> Bool
+
+func >=(lhs: Float80, rhs: Float80) -> Bool
+
+func >=<T : Comparable>(lhs: T?, rhs: T?) -> Bool
+
+func >=<T : Comparable>(lhs: T, rhs: T) -> Bool
+
+func >=(left: _SwiftNSOperatingSystemVersion, right: _SwiftNSOperatingSystemVersion) -> Bool
+
+func >>(lhs: UInt16, rhs: UInt16) -> UInt16
 
 func >>(lhs: Int, rhs: Int) -> Int
 
@@ -1148,25 +1270,23 @@ func >>(lhs: UInt32, rhs: UInt32) -> UInt32
 
 func >>(lhs: Int16, rhs: Int16) -> Int16
 
-func >>(lhs: UInt16, rhs: UInt16) -> UInt16
+func >>(lhs: UInt8, rhs: UInt8) -> UInt8
 
 func >>(lhs: Int8, rhs: Int8) -> Int8
 
-func >>(lhs: UInt8, rhs: UInt8) -> UInt8
-
-func >>=(inout lhs: UInt, rhs: UInt)
-
-func >>=(inout lhs: Int64, rhs: Int64)
-
-func >>=(inout lhs: UInt64, rhs: UInt64)
-
-func >>=(inout lhs: Int32, rhs: Int32)
-
-func >>=(inout lhs: UInt32, rhs: UInt32)
+func >>=(inout lhs: UInt16, rhs: UInt16)
 
 func >>=(inout lhs: Int16, rhs: Int16)
 
-func >>=(inout lhs: UInt16, rhs: UInt16)
+func >>=(inout lhs: UInt32, rhs: UInt32)
+
+func >>=(inout lhs: Int32, rhs: Int32)
+
+func >>=(inout lhs: UInt64, rhs: UInt64)
+
+func >>=(inout lhs: Int64, rhs: Int64)
+
+func >>=(inout lhs: UInt, rhs: UInt)
 
 func >>=(inout lhs: Int, rhs: Int)
 
@@ -1174,21 +1294,120 @@ func >>=(inout lhs: Int8, rhs: Int8)
 
 func >>=(inout lhs: UInt8, rhs: UInt8)
 
-func ??<T>(optional: T?, defaultValue: @autoclosure () -> T?) -> T?
+func ??<T>(optional: T?, @autoclosure defaultValue: () -> T?) -> T?
 
-func ??<T>(optional: T?, defaultValue: @autoclosure () -> T) -> T
+func ??<T>(optional: T?, @autoclosure defaultValue: () -> T) -> T
 
 
 /// A type that supports an "absolute value" function.
 protocol AbsoluteValuable : SignedNumberType {
 
-    /// Returns the absolute value of `x`
+    /// Returns the absolute value of `x`.
     static func abs(x: Self) -> Self
 }
 
 
-/// The protocol to which all types implicitly conform
+/// The protocol to which all types implicitly conform.
 typealias Any = protocol<>
+
+
+/// A type-erased wrapper over any collection with indices that
+/// support bidirectional traversal.
+///
+/// Forwards operations to an arbitrary underlying collection having the
+/// same `Element` type, hiding the specifics of the underlying
+/// `CollectionType`.
+///
+/// - SeeAlso: `AnyRandomAccessType`, `AnyForwardType`
+struct AnyBidirectionalCollection<Element> : AnyCollectionType, CollectionType, SequenceType, _CollectionDefaultsType, _CollectionGeneratorDefaultsType {
+
+    /// Create an `AnyBidirectionalCollection` that stores `base` as its
+    /// underlying collection.
+    ///
+    /// - Complexity: O(1).
+    init<C : CollectionType where C.Index : BidirectionalIndexType, C.Generator.Element == Element>(_ base: C)
+
+    /// Create an `AnyBidirectionalCollection` having the same underlying
+    /// collection as `other`.
+    ///
+    /// - Postcondition: The result is `===` to `other`.
+    ///
+    /// - Complexity: O(1).
+    init(_ other: AnyBidirectionalCollection<Element>)
+
+    /// Create an `AnyBidirectionalCollection` that stores `base` as its
+    /// underlying collection.
+    ///
+    /// - Complexity: O(1).
+    init<C : CollectionType where C.Index : RandomAccessIndexType, C.Generator.Element == Element>(_ base: C)
+
+    /// Create an `AnyBidirectionalCollection` having the same underlying
+    /// collection as `other`.
+    ///
+    /// - Postcondition: The result is `===` to `other`.
+    ///
+    /// - Complexity: O(1).
+    init(_ other: AnyRandomAccessCollection<Element>)
+
+    /// If the indices of the underlying collection stored by `other`
+    /// satisfy `BidirectionalIndexType`, create an
+    /// `AnyBidirectionalCollection` having the same underlying
+    /// collection as `other`.  Otherwise, the result is `nil`.
+    ///
+    /// - Complexity: O(1).
+    init?(_ other: AnyForwardCollection<Element>)
+
+    /// Returns a *generator* over the elements of this *collection*.
+    ///
+    /// - Complexity: O(1).
+    func generate() -> AnyGenerator<Element>
+
+    /// The position of the first element in a non-empty collection.
+    ///
+    /// In an empty collection, `startIndex == endIndex`.
+    var startIndex: AnyBidirectionalIndex { get }
+
+    /// The collection's "past the end" position.
+    ///
+    /// `endIndex` is not a valid argument to `subscript`, and is always
+    /// reachable from `startIndex` by zero or more applications of
+    /// `successor()`.
+    var endIndex: AnyBidirectionalIndex { get }
+    subscript (position: AnyBidirectionalIndex) -> Element { get }
+
+    /// Return the number of elements.
+    ///
+    /// - Complexity: O(N).
+    var count: IntMax { get }
+}
+
+extension AnyBidirectionalCollection {
+    func underestimateCount() -> Int
+}
+
+
+/// A wrapper over an underlying `BidirectionalIndexType` that hides
+/// the specific underlying type.
+///
+/// - SeeAlso: `AnyBidirectionalCollection`
+struct AnyBidirectionalIndex : ForwardIndexType, _Incrementable, Equatable, BidirectionalIndexType {
+    typealias Distance = IntMax
+
+    /// Wrap and forward operations to `base`.
+    init<BaseIndex : BidirectionalIndexType>(_ base: BaseIndex)
+
+    /// Return the next consecutive value in a discrete sequence of
+    /// `AnyBidirectionalIndex` values.
+    ///
+    /// - Requires: `self` has a well-defined successor.
+    func successor() -> AnyBidirectionalIndex
+
+    /// Return the previous consecutive value in a discrete sequence of
+    /// `AnyBidirectionalIndex` values.
+    ///
+    /// - Requires: `self` has a well-defined predecessor.
+    func predecessor() -> AnyBidirectionalIndex
+}
 
 
 /// The protocol to which all class types implicitly conform.
@@ -1198,60 +1417,299 @@ typealias Any = protocol<>
 /// and properties respectively, on each instance of `AnyClass`. For
 /// example:
 ///
-/// .. parsed-literal:
+///     class C {
+///       @objc class var cValue: Int { return 42 }
+///     }
 ///
-///   class C {
-///     @objc class var cValue: Int { return 42 }
-///   }
+///     // If x has an @objc cValue: Int, return its value.
+///     // Otherwise, return nil.
+///     func getCValue(x: AnyClass) -> Int? {
+///       return x.cValue // <===
+///     }
 ///
-///   // If x has an @objc cValue: Int, return its value.  
-///   // Otherwise, return nil.
-///   func getCValue(x: AnyClass) -> Int? {
-///     return **x.cValue**
-///   }
-///
-/// See also: `AnyObject`
+/// - SeeAlso: `AnyObject`
 typealias AnyClass = AnyObject.Type
 
 
-/// The protocol to which all classes implicitly conform.
+/// A protocol for `AnyForwardCollection<T>`,
+/// `AnyBidirectionalCollection<T>`, and
+/// `AnyRandomAccessCollection<T>`.
 ///
-/// When used as a concrete type, all known `@objc` methods and
-/// properties are available, as implicitly-unwrapped-optional methods
-/// and properties respectively, on each instance of `AnyObject`.  For
-/// example:
+/// This protocol can be considered an implementation detail of the
+/// `===` and `!==` implementations for these types.
+protocol AnyCollectionType : CollectionType {
+}
+
+
+/// A type-erased wrapper over any collection with indices that
+/// support forward traversal.
 ///
-/// .. parsed-literal:
+/// Forwards operations to an arbitrary underlying collection having the
+/// same `Element` type, hiding the specifics of the underlying
+/// `CollectionType`.
 ///
-///   class C {
-///     @objc func getCValue() -> Int { return 42 }
-///   }
+/// - SeeAlso: `AnyBidirectionalType`, `AnyRandomAccessType`
+struct AnyForwardCollection<Element> : AnyCollectionType, CollectionType, SequenceType, _CollectionDefaultsType, _CollectionGeneratorDefaultsType {
+
+    /// Create an `AnyForwardCollection` that stores `base` as its
+    /// underlying collection.
+    ///
+    /// - Complexity: O(1).
+    init<C : CollectionType where C.Index : ForwardIndexType, C.Generator.Element == Element>(_ base: C)
+
+    /// Create an `AnyForwardCollection` having the same underlying
+    /// collection as `other`.
+    ///
+    /// - Postcondition: The result is `===` to `other`.
+    ///
+    /// - Complexity: O(1).
+    init(_ other: AnyForwardCollection<Element>)
+
+    /// Create an `AnyForwardCollection` that stores `base` as its
+    /// underlying collection.
+    ///
+    /// - Complexity: O(1).
+    init<C : CollectionType where C.Index : BidirectionalIndexType, C.Generator.Element == Element>(_ base: C)
+
+    /// Create an `AnyForwardCollection` having the same underlying
+    /// collection as `other`.
+    ///
+    /// - Postcondition: The result is `===` to `other`.
+    ///
+    /// - Complexity: O(1).
+    init(_ other: AnyBidirectionalCollection<Element>)
+
+    /// Create an `AnyForwardCollection` that stores `base` as its
+    /// underlying collection.
+    ///
+    /// - Complexity: O(1).
+    init<C : CollectionType where C.Index : RandomAccessIndexType, C.Generator.Element == Element>(_ base: C)
+
+    /// Create an `AnyForwardCollection` having the same underlying
+    /// collection as `other`.
+    ///
+    /// - Postcondition: The result is `===` to `other`.
+    ///
+    /// - Complexity: O(1).
+    init(_ other: AnyRandomAccessCollection<Element>)
+
+    /// Returns a *generator* over the elements of this *collection*.
+    ///
+    /// - Complexity: O(1).
+    func generate() -> AnyGenerator<Element>
+
+    /// The position of the first element in a non-empty collection.
+    ///
+    /// In an empty collection, `startIndex == endIndex`.
+    var startIndex: AnyForwardIndex { get }
+
+    /// The collection's "past the end" position.
+    ///
+    /// `endIndex` is not a valid argument to `subscript`, and is always
+    /// reachable from `startIndex` by zero or more applications of
+    /// `successor()`.
+    var endIndex: AnyForwardIndex { get }
+    subscript (position: AnyForwardIndex) -> Element { get }
+
+    /// Return the number of elements.
+    ///
+    /// - Complexity: O(N).
+    var count: IntMax { get }
+}
+
+extension AnyForwardCollection {
+    func underestimateCount() -> Int
+}
+
+
+/// A wrapper over an underlying `ForwardIndexType` that hides
+/// the specific underlying type.
 ///
-///   // If x has a method @objc getValue()->Int, call it and
-///   // return the result.  Otherwise, return nil.
-///   func getCValue1(x: AnyObject) -> Int? {
-///     if let f: ()->Int = **x.getCValue** {
-///       return f()
-///     }
-///     return nil
-///   }
+/// - SeeAlso: `AnyForwardCollection`
+struct AnyForwardIndex : ForwardIndexType, _Incrementable, Equatable {
+    typealias Distance = IntMax
+
+    /// Wrap and forward operations to `base`.
+    init<BaseIndex : ForwardIndexType>(_ base: BaseIndex)
+
+    /// Return the next consecutive value in a discrete sequence of
+    /// `AnyForwardIndex` values.
+    ///
+    /// - Requires: `self` has a well-defined successor.
+    func successor() -> AnyForwardIndex
+}
+
+
+/// An abstract `GeneratorType` base class over `T` elements.
 ///
-///   // A more idiomatic implementation using "optional chaining"
-///   func getCValue2(x: AnyObject) -> Int? {
-///     return **x.getCValue?()**
-///   }
+/// Use this as a `Sequence`'s associated `Generator` type when you
+/// don't want to expose details of the concrete generator, a subclass.
 ///
-///   // An implementation that assumes the required method is present
-///   func getCValue3(x: AnyObject) -> **Int** {
-///     return **x.getCValue()** // x.getCValue is implicitly unwrapped.
-///   }
+/// It is an error to create instances of `AnyGenerator` that are not
+/// also instances of an `AnyGenerator` subclass.
 ///
-/// See also: `AnyClass`
+/// - seealso:
+///   - `struct AnySequence<S : SequenceType>`
+///   - `func anyGenerator<G : GeneratorType>(base: G) -> AnyGenerator<G.Element>`
+///   - `func anyGenerator<T>(body: ()->T?) -> AnyGenerator<T>`
+class AnyGenerator<T> : GeneratorType {
+
+    /// Initialize the instance.  May only be called from a subclass
+    /// initializer.
+    init()
+
+    /// Advance to the next element and return it, or `nil` if no next
+    /// element exists.
+    ///
+    /// - Note: Subclasses must override this method.
+    func next() -> T?
+}
+
+extension AnyGenerator : SequenceType {
+
+    /// Returns `self`.
+    func generate() -> AnyGenerator<T>
+}
+
 @objc protocol AnyObject {
 }
 
 
-/// Conceptually_, `Array` is an efficient, tail-growable random-access
+/// A type-erased wrapper over any collection with indices that
+/// support random access traversal.
+///
+/// Forwards operations to an arbitrary underlying collection having the
+/// same `Element` type, hiding the specifics of the underlying
+/// `CollectionType`.
+///
+/// - SeeAlso: `AnyForwardType`, `AnyBidirectionalType`
+struct AnyRandomAccessCollection<Element> : AnyCollectionType, CollectionType, SequenceType, _CollectionDefaultsType, _CollectionGeneratorDefaultsType {
+
+    /// Create an `AnyRandomAccessCollection` that stores `base` as its
+    /// underlying collection.
+    ///
+    /// - Complexity: O(1).
+    init<C : CollectionType where C.Index : RandomAccessIndexType, C.Generator.Element == Element>(_ base: C)
+
+    /// Create an `AnyRandomAccessCollection` having the same underlying
+    /// collection as `other`.
+    ///
+    /// - Postcondition: The result is `===` to `other`.
+    ///
+    /// - Complexity: O(1).
+    init(_ other: AnyRandomAccessCollection<Element>)
+
+    /// If the indices of the underlying collection stored by `other`
+    /// satisfy `RandomAccessIndexType`, create an
+    /// `AnyRandomAccessCollection` having the same underlying
+    /// collection as `other`.  Otherwise, the result is `nil`.
+    ///
+    /// - Complexity: O(1).
+    init?(_ other: AnyForwardCollection<Element>)
+
+    /// If the indices of the underlying collection stored by `other`
+    /// satisfy `RandomAccessIndexType`, create an
+    /// `AnyRandomAccessCollection` having the same underlying
+    /// collection as `other`.  Otherwise, the result is `nil`.
+    ///
+    /// - Complexity: O(1).
+    init?(_ other: AnyBidirectionalCollection<Element>)
+
+    /// Returns a *generator* over the elements of this *collection*.
+    ///
+    /// - Complexity: O(1).
+    func generate() -> AnyGenerator<Element>
+
+    /// The position of the first element in a non-empty collection.
+    ///
+    /// In an empty collection, `startIndex == endIndex`.
+    var startIndex: AnyRandomAccessIndex { get }
+
+    /// The collection's "past the end" position.
+    ///
+    /// `endIndex` is not a valid argument to `subscript`, and is always
+    /// reachable from `startIndex` by zero or more applications of
+    /// `successor()`.
+    var endIndex: AnyRandomAccessIndex { get }
+    subscript (position: AnyRandomAccessIndex) -> Element { get }
+
+    /// Return the number of elements.
+    ///
+    /// - Complexity: O(1).
+    var count: IntMax { get }
+}
+
+extension AnyRandomAccessCollection {
+    func underestimateCount() -> Int
+}
+
+
+/// A wrapper over an underlying `RandomAccessIndexType` that hides
+/// the specific underlying type.
+///
+/// - SeeAlso: `AnyRandomAccessCollection`
+struct AnyRandomAccessIndex : ForwardIndexType, _Incrementable, Equatable, RandomAccessIndexType, BidirectionalIndexType, Strideable, Comparable, _Strideable {
+    typealias Distance = IntMax
+
+    /// Wrap and forward operations to `base`.
+    init<BaseIndex : RandomAccessIndexType>(_ base: BaseIndex)
+
+    /// Return the next consecutive value in a discrete sequence of
+    /// `AnyRandomAccessIndex` values.
+    ///
+    /// - Requires: `self` has a well-defined successor.
+    func successor() -> AnyRandomAccessIndex
+
+    /// Return the previous consecutive value in a discrete sequence of
+    /// `AnyRandomAccessIndex` values.
+    ///
+    /// - Requires: `self` has a well-defined predecessor.
+    func predecessor() -> AnyRandomAccessIndex
+
+    /// Return the minimum number of applications of `successor` or
+    /// `predecessor` required to reach `other` from `self`.
+    ///
+    /// - Requires: `self` and `other` wrap instances of the same type.
+    func distanceTo(other: AnyRandomAccessIndex) -> Distance
+
+    /// Return `self` offset by `n` steps.
+    ///
+    /// - Returns: If `n > 0`, the result of applying `successor` to
+    ///   `self` `n` times.  If `n < 0`, the result of applying
+    ///   `predecessor` to `self` `n` times. Otherwise, `self`.
+    func advancedBy(amount: Distance) -> AnyRandomAccessIndex
+}
+
+
+/// A type-erased sequence.
+///
+/// Forwards operations to an arbitrary underlying sequence having the
+/// same `Element` type, hiding the specifics of the underlying
+/// `SequenceType`.
+///
+/// - SeeAlso: `AnyGenerator<T>`.
+struct AnySequence<T> : SequenceType {
+    typealias Element = T
+
+    /// Wrap and forward operations to to `base`.
+    init<S : SequenceType where S.Generator.Element == T>(_ base: S)
+
+    /// Create a sequence whose `generate()` method forwards to
+    /// `makeUnderlyingGenerator`.
+    init<G : GeneratorType where G.Element == T>(_ makeUnderlyingGenerator: () -> G)
+
+    /// Return a *generator* over the elements of this *sequence*.
+    ///
+    /// - Complexity: O(1).
+    func generate() -> AnyGenerator<T>
+}
+
+extension AnySequence {
+    func underestimateCount() -> Int
+}
+
+
+/// `Array` is an efficient, tail-growable random-access
 /// collection of arbitrary elements.
 ///
 /// Common Properties of Array Types
@@ -1268,15 +1726,15 @@ typealias AnyClass = AnyObject.Type
 /// Each array variable, `let` binding, or stored property has an
 /// independent value that includes the values of all of its elements.
 /// Therefore, mutations to the array are not observable through its
-/// copies::
+/// copies:
 ///
-///   var a = [1, 2, 3]
-///   var b = a
-///   b[0] = 4
-///   println("a=\(a), b=\(b)")     // a=[1, 2, 3], b=[4, 2, 3]
+///     var a = [1, 2, 3]
+///     var b = a
+///     b[0] = 4
+///     print("a=\(a), b=\(b)")     // a=[1, 2, 3], b=[4, 2, 3]
 ///
 /// (Of course, if the array stores `class` references, the objects
-/// are shared; only the values of the references are independent)
+/// are shared; only the values of the references are independent.)
 ///
 /// Arrays use Copy-on-Write so that their storage and elements are
 /// only copied lazily, upon mutation, when more than one array
@@ -1297,8 +1755,6 @@ typealias AnyClass = AnyObject.Type
 /// know how many elements you'll store, you can call
 /// `reserveCapacity` to pre-emptively reallocate and prevent
 /// intermediate reallocations.
-///
-/// .. _Conceptually:
 ///
 /// Objective-C Bridge
 /// ==================
@@ -1325,7 +1781,7 @@ typealias AnyClass = AnyObject.Type
 ///
 /// Any bridged `Array` can be implicitly converted to an `NSArray`.
 /// When `T` is a `class` or `@objc` protocol, bridging takes O(1)
-/// time and O(1) space.  Other `Array`\ s must be bridged
+/// time and O(1) space.  Other `Array`s must be bridged
 /// element-by-element, allocating a new object for each element, at a
 /// cost of at least O(`count`) time and space.
 ///
@@ -1335,12 +1791,12 @@ typealias AnyClass = AnyObject.Type
 /// An `NSArray` can be implicitly or explicitly converted to any
 /// bridged `Array<T>`.  This conversion calls `copyWithZone` on the
 /// `NSArray`, to ensure it won't be modified, and stores the result
-/// in the `Array`.  Type-checking, to ensure the `NSArray`\ 's
+/// in the `Array`.  Type-checking, to ensure the `NSArray`'s
 /// elements match or can be bridged to `T`, is deferred until the
 /// first element access.
-struct Array<T> : MutableCollectionType, Sliceable, _DestructorSafeContainer {
+struct Array<T> : CollectionType, SequenceType, _CollectionDefaultsType, _CollectionGeneratorDefaultsType, MutableCollectionType, Sliceable, _Sliceable, _DestructorSafeContainer {
 
-    /// The type of element stored by this `Array`
+    /// The type of element stored by this `Array`.
     typealias Element = T
 
     /// Always zero, which is the index of the first element when non-empty.
@@ -1353,16 +1809,12 @@ struct Array<T> : MutableCollectionType, Sliceable, _DestructorSafeContainer {
 
     /// Return a *generator* over the elements.
     ///
-    /// Complexity: O(1)
+    /// - Complexity: O(1).
     func generate() -> IndexingGenerator<[T]>
 
-    /// A type that can represent a sub-range of an `Array` 
+    /// A type that can represent a sub-range of an `Array`.
     typealias SubSlice = ArraySlice<T>
     subscript (subRange: Range<Int>) -> ArraySlice<T>
-
-    /// Initialization from an existing buffer does not have "array.init"
-    /// semantics because the caller may retain an alias to buffer.
-    init(_ buffer: _ArrayBuffer<T>)
 }
 
 extension Array : __ArrayType {
@@ -1374,117 +1826,73 @@ extension Array : ArrayLiteralConvertible {
     init(arrayLiteral elements: T...)
 }
 
-extension Array : _ArrayType {
+extension Array : _ArrayType, MutableSliceable, RangeReplaceableCollectionType, ExtensibleCollectionType {
 
-    /// Construct an empty Array
+    /// Construct an empty Array.
     init()
 
-    /// Construct from an arbitrary sequence with elements of type `T`
-    init<S : SequenceType where T == T>(_ s: S)
+    /// Construct from an arbitrary sequence with elements of type `T`.
+    init<S : SequenceType where S.Generator.Element == _Buffer.Element>(_ s: S)
 
     /// Construct a Array of `count` elements, each initialized to
     /// `repeatedValue`.
     init(count: Int, repeatedValue: T)
 
-    /// How many elements the Array stores
+    /// The number of elements the Array stores.
     var count: Int { get }
 
-    /// How many elements the `Array` can store without reallocation
+    /// The number of elements the `Array` can store without reallocation.
     var capacity: Int { get }
 
-    /// `true` if and only if the `Array` is empty
-    var isEmpty: Bool { get }
-
-    /// The first element, or `nil` if the array is empty
-    var first: T? { get }
-
-    /// The last element, or `nil` if the array is empty
-    var last: T? { get }
-
-    /// Reserve enough space to store minimumCapacity elements.
+    /// Reserve enough space to store `minimumCapacity` elements.
     ///
-    /// PostCondition: `capacity >= minimumCapacity` and the array has
-    /// mutable contiguous storage.
+    /// - Postcondition: `capacity >= minimumCapacity` and the array has
+    ///   mutable contiguous storage.
     ///
-    /// Complexity: O(`count`)
+    /// - Complexity: O(`count`).
     mutating func reserveCapacity(minimumCapacity: Int)
 
-    /// Append newElement to the Array
+    /// Append `newElement` to the Array.
     ///
-    /// Complexity: amortized O(1) unless `self`'s storage is shared with another live array; O(`count`) if `self` does not wrap a bridged `NSArray`; otherwise the efficiency is unspecified.
+    /// - Complexity: Amortized O(1) unless `self`'s storage is shared with another live array; O(`count`) if `self` does not wrap a bridged `NSArray`; otherwise the efficiency is unspecified..
     mutating func append(newElement: T)
 
     /// Append the elements of `newElements` to `self`.
     ///
-    /// Complexity: O(*length of result*) 
-    /// 
-    mutating func extend<S : SequenceType where T == T>(newElements: S)
+    /// - Complexity: O(*length of result*).
+    mutating func extend<S : SequenceType where S.Generator.Element == T>(newElements: S)
 
     /// Remove an element from the end of the Array in O(1).
-    /// Requires: count > 0
+    ///
+    /// - Requires: `count > 0`.
     mutating func removeLast() -> T
 
     /// Insert `newElement` at index `i`.
     ///
-    /// Requires: `i <= count`
+    /// - Requires: `i <= count`.
     ///
-    /// Complexity: O(\ `count`\ ).
+    /// - Complexity: O(`count`).
     mutating func insert(newElement: T, atIndex i: Int)
 
-    /// Remove and return the element at index `i`
+    /// Remove and return the element at index `i`.
     ///
     /// Invalidates all indices with respect to `self`.
     ///
-    /// Complexity: O(\ `count`\ ).
+    /// - Complexity: O(`count`).
     mutating func removeAtIndex(index: Int) -> T
 
     /// Remove all elements.
     ///
-    /// Postcondition: `capacity == 0` iff `keepCapacity` is `false`.
+    /// - Postcondition: `capacity == 0` iff `keepCapacity` is `false`.
     ///
-    /// Complexity: O(\ `count(self)`\ ).
-    mutating func removeAll(keepCapacity: Bool = default)
+    /// - Complexity: O(`self.count`).
+    mutating func removeAll(keepCapacity keepCapacity: Bool = default)
 
     /// Interpose `self` between each consecutive pair of `elements`,
     /// and concatenate the elements of the resulting sequence.  For
     /// example, `[-1, -2].join([[1, 2, 3], [4, 5, 6], [7, 8, 9]])`
-    /// yields `[1, 2, 3, -1, -2, 4, 5, 6, -1, -2, 7, 8, 9]`
-    func join<S : SequenceType where [T] == [T]>(elements: S) -> [T]
-
-    /// Return the result of repeatedly calling `combine` with an
-    /// accumulated value initialized to `initial` and each element of
-    /// `self`, in turn, i.e. return
-    /// `combine(combine(...combine(combine(initial, self[0]),
-    /// self[1]),...self[count-2]), self[count-1])`.
-    func reduce<U>(initial: U, combine: @noescape (U, T) -> U) -> U
-
-    /// Sort `self` in-place according to `isOrderedBefore`.  Requires:
-    /// `isOrderedBefore` induces a `strict weak ordering
-    /// <http://en.wikipedia.org/wiki/Strict_weak_order#Strict_weak_orderings>`__
-    /// over the elements.
-    mutating func sort(isOrderedBefore: (T, T) -> Bool)
-
-    /// Return a copy of `self` that has been sorted according to
-    /// `isOrderedBefore`.  Requires: `isOrderedBefore` induces a
-    /// `strict weak ordering
-    /// <http://en.wikipedia.org/wiki/Strict_weak_order#Strict_weak_orderings>`__
-    /// over the elements.
-    func sorted(isOrderedBefore: (T, T) -> Bool) -> [T]
-
-    /// Return an `Array` containing the results of calling
-    /// `transform(x)` on each element `x` of `self`
-    func map<U>(transform: (T) -> U) -> [U]
-
-    /// Return an `Array` containing the results of calling
-    /// `transform(x)` on each element `x` of `self` and flattening the result.
-    func flatMap<U>(transform: @noescape (T) -> [U]) -> [U]
-
-    /// A Array containing the elements of `self` in reverse order
-    func reverse() -> [T]
-
-    /// Return an `Array` containing the elements `x` of `self` for which
-    /// `includeElement(x)` is `true`
-    func filter(includeElement: (T) -> Bool) -> [T]
+    /// yields `[1, 2, 3, -1, -2, 4, 5, 6, -1, -2, 7, 8, 9]`.
+    func join<S : SequenceType where S.Generator.Element == Array<T>>(elements: S) -> [T]
 }
 
 extension Array : Reflectable {
@@ -1493,7 +1901,7 @@ extension Array : Reflectable {
     func getMirror() -> MirrorType
 }
 
-extension Array : Printable, DebugPrintable {
+extension Array : CustomStringConvertible, CustomDebugStringConvertible {
 
     /// A textual representation of `self`.
     var description: String { get }
@@ -1506,63 +1914,60 @@ extension Array : Printable, DebugPrintable {
 
 extension Array {
 
-    /// Call `body(p)`, where `p` is a pointer to the `Array`\ 's
+    /// Call `body(p)`, where `p` is a pointer to the `Array`'s
     /// contiguous storage. If no such storage exists, it is first created.
     ///
     /// Often, the optimizer can eliminate bounds checks within an
     /// array algorithm, but when that fails, invoking the
-    /// same algorithm on `body`\ 's argument lets you trade safety for
+    /// same algorithm on `body`'s argument lets you trade safety for
     /// speed.
-    func withUnsafeBufferPointer<R>(body: @noescape (UnsafeBufferPointer<T>) -> R) -> R
+    func withUnsafeBufferPointer<R>(@noescape body: (UnsafeBufferPointer<T>) -> R) -> R
 
-    /// Call `body(p)`, where `p` is a pointer to the `Array`\ 's
+    /// Call `body(p)`, where `p` is a pointer to the `Array`'s
     /// mutable contiguous storage. If no such storage exists, it is first created.
     ///
     /// Often, the optimizer can eliminate bounds- and uniqueness-checks
     /// within an array algorithm, but when that fails, invoking the
-    /// same algorithm on `body`\ 's argument lets you trade safety for
+    /// same algorithm on `body`'s argument lets you trade safety for
     /// speed.
-    mutating func withUnsafeMutableBufferPointer<R>(body: @noescape (inout UnsafeMutableBufferPointer<T>) -> R) -> R
+    ///
+    /// - Warning: Do not rely on anything about `self` (the `Array`
+    ///   that is the target of this method) during the execution of
+    ///   `body`: it may not appear to have its correct value.  Instead,
+    ///   use only the `UnsafeMutableBufferPointer` argument to `body`.
+    mutating func withUnsafeMutableBufferPointer<R>(@noescape body: (inout UnsafeMutableBufferPointer<T>) -> R) -> R
 }
 
 extension Array {
 
     /// Replace the given `subRange` of elements with `newElements`.
     ///
-    /// Complexity: O(\ `count(subRange)`\ ) if `subRange.endIndex
-    /// == self.endIndex` and `isEmpty(newElements)`\ , O(N) otherwise.
-    mutating func replaceRange<C : CollectionType where T == T>(subRange: Range<Int>, with newElements: C)
+    /// - Complexity: O(`subRange.count`) if `subRange.endIndex
+    ///   == self.endIndex` and `isEmpty(newElements)`, O(N) otherwise.
+    mutating func replaceRange<C : CollectionType where C.Generator.Element == _Buffer.Element>(subRange: Range<Int>, with newElements: C)
 
-    /// Insert `newElements` at index `i`
+    /// Insert `newElements` at index `i`.
     ///
     /// Invalidates all indices with respect to `self`.
     ///
-    /// Complexity: O(\ `count + count(newElements)`\ ).
-    mutating func splice<S : CollectionType where T == T>(newElements: S, atIndex i: Int)
+    /// - Complexity: O(`count + newElements.count`).
+    mutating func splice<S : CollectionType where S.Generator.Element == T>(newElements: S, atIndex i: Int)
 
-    /// Remove the indicated `subRange` of elements
+    /// Remove the indicated `subRange` of elements.
     ///
-    /// Complexity: O(\ `count`\ ).
+    /// - Complexity: O(`count`).
     mutating func removeRange(subRange: Range<Int>)
 }
 
-extension Array {
-
-    /// Construct from the given `_NSArrayCoreType`.
-    ///
-    /// If `noCopy` is `true`, either `source` must be known to be immutable,
-    /// or the resulting `Array` must not survive across code that could mutate
-    /// `source`.
-    init(_fromCocoaArray source: _NSArrayCoreType, noCopy: Bool = default)
-}
 
 
-/// Conforming types can be initialized with array literals
+
+/// Conforming types can be initialized with array literals.
 protocol ArrayLiteralConvertible {
     typealias Element
 
     /// Create an instance initialized with `elements`.
-    init(arrayLiteral elements: Element...)
+    init(arrayLiteral elements: Self.Element...)
 }
 
 
@@ -1572,17 +1977,17 @@ protocol ArrayLiteralConvertible {
 /// `ArraySlice` always uses contiguous storage and does not bridge to
 /// Objective-C.
 ///
-/// .. Warning:: Long-term storage of `ArraySlice` instances is discouraged
+/// - Warning: Long-term storage of `ArraySlice` instances is discouraged.
 ///
-///    Because a `ArraySlice` presents a *view* onto the storage of some
-///    larger array even after the original array's lifetime ends,
-///    storing the slice may prolong the lifetime of elements that are
-///    no longer accessible, which can manifest as apparent memory and
-///    object leakage.  To prevent this effect, use `ArraySlice` only for
-///    transient computation.
-struct ArraySlice<T> : MutableCollectionType, Sliceable, _DestructorSafeContainer {
+/// Because a `ArraySlice` presents a *view* onto the storage of some
+/// larger array even after the original array's lifetime ends,
+/// storing the slice may prolong the lifetime of elements that are
+/// no longer accessible, which can manifest as apparent memory and
+/// object leakage.  To prevent this effect, use `ArraySlice` only for
+/// transient computation.
+struct ArraySlice<T> : _CollectionDefaultsType, SequenceType, _CollectionGeneratorDefaultsType, CollectionType, MutableCollectionType, Sliceable, _Sliceable, _DestructorSafeContainer {
 
-    /// The type of element stored by this `ArraySlice`
+    /// The type of element stored by this `ArraySlice`.
     typealias Element = T
 
     /// Always zero, which is the index of the first element when non-empty.
@@ -1595,16 +2000,12 @@ struct ArraySlice<T> : MutableCollectionType, Sliceable, _DestructorSafeContaine
 
     /// Return a *generator* over the elements.
     ///
-    /// Complexity: O(1)
+    /// - Complexity: O(1).
     func generate() -> IndexingGenerator<ArraySlice<T>>
 
-    /// A type that can represent a sub-range of an `ArraySlice` 
+    /// A type that can represent a sub-range of an `ArraySlice`.
     typealias SubSlice = ArraySlice<T>
     subscript (subRange: Range<Int>) -> ArraySlice<T>
-
-    /// Initialization from an existing buffer does not have "array.init"
-    /// semantics because the caller may retain an alias to buffer.
-    init(_ buffer: _SliceBuffer<T>)
 }
 
 extension ArraySlice : __ArrayType {
@@ -1616,117 +2017,73 @@ extension ArraySlice : ArrayLiteralConvertible {
     init(arrayLiteral elements: T...)
 }
 
-extension ArraySlice : _ArrayType {
+extension ArraySlice : _ArrayType, MutableSliceable, RangeReplaceableCollectionType, ExtensibleCollectionType {
 
-    /// Construct an empty ArraySlice
+    /// Construct an empty ArraySlice.
     init()
 
-    /// Construct from an arbitrary sequence with elements of type `T`
-    init<S : SequenceType where T == T>(_ s: S)
+    /// Construct from an arbitrary sequence with elements of type `T`.
+    init<S : SequenceType where S.Generator.Element == _Buffer.Element>(_ s: S)
 
     /// Construct a ArraySlice of `count` elements, each initialized to
     /// `repeatedValue`.
     init(count: Int, repeatedValue: T)
 
-    /// How many elements the ArraySlice stores
+    /// The number of elements the ArraySlice stores.
     var count: Int { get }
 
-    /// How many elements the `ArraySlice` can store without reallocation
+    /// The number of elements the `ArraySlice` can store without reallocation.
     var capacity: Int { get }
 
-    /// `true` if and only if the `ArraySlice` is empty
-    var isEmpty: Bool { get }
-
-    /// The first element, or `nil` if the array is empty
-    var first: T? { get }
-
-    /// The last element, or `nil` if the array is empty
-    var last: T? { get }
-
-    /// Reserve enough space to store minimumCapacity elements.
+    /// Reserve enough space to store `minimumCapacity` elements.
     ///
-    /// PostCondition: `capacity >= minimumCapacity` and the array has
-    /// mutable contiguous storage.
+    /// - Postcondition: `capacity >= minimumCapacity` and the array has
+    ///   mutable contiguous storage.
     ///
-    /// Complexity: O(`count`)
+    /// - Complexity: O(`count`).
     mutating func reserveCapacity(minimumCapacity: Int)
 
-    /// Append newElement to the ArraySlice
+    /// Append `newElement` to the ArraySlice.
     ///
-    /// Complexity: amortized O(1) unless `self`'s storage is shared with another live array; O(`count`) otherwise.
+    /// - Complexity: Amortized O(1) unless `self`'s storage is shared with another live array; O(`count`) otherwise..
     mutating func append(newElement: T)
 
     /// Append the elements of `newElements` to `self`.
     ///
-    /// Complexity: O(*length of result*) 
-    /// 
-    mutating func extend<S : SequenceType where T == T>(newElements: S)
+    /// - Complexity: O(*length of result*).
+    mutating func extend<S : SequenceType where S.Generator.Element == T>(newElements: S)
 
     /// Remove an element from the end of the ArraySlice in O(1).
-    /// Requires: count > 0
+    ///
+    /// - Requires: `count > 0`.
     mutating func removeLast() -> T
 
     /// Insert `newElement` at index `i`.
     ///
-    /// Requires: `i <= count`
+    /// - Requires: `i <= count`.
     ///
-    /// Complexity: O(\ `count`\ ).
+    /// - Complexity: O(`count`).
     mutating func insert(newElement: T, atIndex i: Int)
 
-    /// Remove and return the element at index `i`
+    /// Remove and return the element at index `i`.
     ///
     /// Invalidates all indices with respect to `self`.
     ///
-    /// Complexity: O(\ `count`\ ).
+    /// - Complexity: O(`count`).
     mutating func removeAtIndex(index: Int) -> T
 
     /// Remove all elements.
     ///
-    /// Postcondition: `capacity == 0` iff `keepCapacity` is `false`.
+    /// - Postcondition: `capacity == 0` iff `keepCapacity` is `false`.
     ///
-    /// Complexity: O(\ `count(self)`\ ).
-    mutating func removeAll(keepCapacity: Bool = default)
+    /// - Complexity: O(`self.count`).
+    mutating func removeAll(keepCapacity keepCapacity: Bool = default)
 
     /// Interpose `self` between each consecutive pair of `elements`,
     /// and concatenate the elements of the resulting sequence.  For
     /// example, `[-1, -2].join([[1, 2, 3], [4, 5, 6], [7, 8, 9]])`
-    /// yields `[1, 2, 3, -1, -2, 4, 5, 6, -1, -2, 7, 8, 9]`
-    func join<S : SequenceType where ArraySlice<T> == ArraySlice<T>>(elements: S) -> ArraySlice<T>
-
-    /// Return the result of repeatedly calling `combine` with an
-    /// accumulated value initialized to `initial` and each element of
-    /// `self`, in turn, i.e. return
-    /// `combine(combine(...combine(combine(initial, self[0]),
-    /// self[1]),...self[count-2]), self[count-1])`.
-    func reduce<U>(initial: U, combine: @noescape (U, T) -> U) -> U
-
-    /// Sort `self` in-place according to `isOrderedBefore`.  Requires:
-    /// `isOrderedBefore` induces a `strict weak ordering
-    /// <http://en.wikipedia.org/wiki/Strict_weak_order#Strict_weak_orderings>`__
-    /// over the elements.
-    mutating func sort(isOrderedBefore: (T, T) -> Bool)
-
-    /// Return a copy of `self` that has been sorted according to
-    /// `isOrderedBefore`.  Requires: `isOrderedBefore` induces a
-    /// `strict weak ordering
-    /// <http://en.wikipedia.org/wiki/Strict_weak_order#Strict_weak_orderings>`__
-    /// over the elements.
-    func sorted(isOrderedBefore: (T, T) -> Bool) -> ArraySlice<T>
-
-    /// Return an `ArraySlice` containing the results of calling
-    /// `transform(x)` on each element `x` of `self`
-    func map<U>(transform: (T) -> U) -> ArraySlice<U>
-
-    /// Return an `ArraySlice` containing the results of calling
-    /// `transform(x)` on each element `x` of `self` and flattening the result.
-    func flatMap<U>(transform: @noescape (T) -> ArraySlice<U>) -> ArraySlice<U>
-
-    /// A ArraySlice containing the elements of `self` in reverse order
-    func reverse() -> ArraySlice<T>
-
-    /// Return an `ArraySlice` containing the elements `x` of `self` for which
-    /// `includeElement(x)` is `true`
-    func filter(includeElement: (T) -> Bool) -> ArraySlice<T>
+    /// yields `[1, 2, 3, -1, -2, 4, 5, 6, -1, -2, 7, 8, 9]`.
+    func join<S : SequenceType where S.Generator.Element == ArraySlice<T>>(elements: S) -> ArraySlice<T>
 }
 
 extension ArraySlice : Reflectable {
@@ -1735,7 +2092,7 @@ extension ArraySlice : Reflectable {
     func getMirror() -> MirrorType
 }
 
-extension ArraySlice : Printable, DebugPrintable {
+extension ArraySlice : CustomStringConvertible, CustomDebugStringConvertible {
 
     /// A textual representation of `self`.
     var description: String { get }
@@ -1748,43 +2105,48 @@ extension ArraySlice : Printable, DebugPrintable {
 
 extension ArraySlice {
 
-    /// Call `body(p)`, where `p` is a pointer to the `ArraySlice`\ 's
+    /// Call `body(p)`, where `p` is a pointer to the `ArraySlice`'s
     /// contiguous storage.
     ///
     /// Often, the optimizer can eliminate bounds checks within an
     /// array algorithm, but when that fails, invoking the
-    /// same algorithm on `body`\ 's argument lets you trade safety for
+    /// same algorithm on `body`'s argument lets you trade safety for
     /// speed.
-    func withUnsafeBufferPointer<R>(body: @noescape (UnsafeBufferPointer<T>) -> R) -> R
+    func withUnsafeBufferPointer<R>(@noescape body: (UnsafeBufferPointer<T>) -> R) -> R
 
-    /// Call `body(p)`, where `p` is a pointer to the `ArraySlice`\ 's
+    /// Call `body(p)`, where `p` is a pointer to the `ArraySlice`'s
     /// mutable contiguous storage.
     ///
     /// Often, the optimizer can eliminate bounds- and uniqueness-checks
     /// within an array algorithm, but when that fails, invoking the
-    /// same algorithm on `body`\ 's argument lets you trade safety for
+    /// same algorithm on `body`'s argument lets you trade safety for
     /// speed.
-    mutating func withUnsafeMutableBufferPointer<R>(body: @noescape (inout UnsafeMutableBufferPointer<T>) -> R) -> R
+    ///
+    /// - Warning: Do not rely on anything about `self` (the `ArraySlice`
+    ///   that is the target of this method) during the execution of
+    ///   `body`: it may not appear to have its correct value.  Instead,
+    ///   use only the `UnsafeMutableBufferPointer` argument to `body`.
+    mutating func withUnsafeMutableBufferPointer<R>(@noescape body: (inout UnsafeMutableBufferPointer<T>) -> R) -> R
 }
 
 extension ArraySlice {
 
     /// Replace the given `subRange` of elements with `newElements`.
     ///
-    /// Complexity: O(\ `count(subRange)`\ ) if `subRange.endIndex
-    /// == self.endIndex` and `isEmpty(newElements)`\ , O(N) otherwise.
-    mutating func replaceRange<C : CollectionType where T == T>(subRange: Range<Int>, with newElements: C)
+    /// - Complexity: O(`subRange.count`) if `subRange.endIndex
+    ///   == self.endIndex` and `isEmpty(newElements)`, O(N) otherwise.
+    mutating func replaceRange<C : CollectionType where C.Generator.Element == _Buffer.Element>(subRange: Range<Int>, with newElements: C)
 
-    /// Insert `newElements` at index `i`
+    /// Insert `newElements` at index `i`.
     ///
     /// Invalidates all indices with respect to `self`.
     ///
-    /// Complexity: O(\ `count + count(newElements)`\ ).
-    mutating func splice<S : CollectionType where T == T>(newElements: S, atIndex i: Int)
+    /// - Complexity: O(`count + newElements.count`).
+    mutating func splice<S : CollectionType where S.Generator.Element == T>(newElements: S, atIndex i: Int)
 
-    /// Remove the indicated `subRange` of elements
+    /// Remove the indicated `subRange` of elements.
     ///
-    /// Complexity: O(\ `count`\ ).
+    /// - Complexity: O(`count`).
     mutating func removeRange(subRange: Range<Int>)
 }
 
@@ -1794,13 +2156,13 @@ extension ArraySlice {
 /// This type has implicit conversions to allow passing any of the following
 /// to a C or ObjC API:
 ///
-/// - 'nil', which gets passed as a null pointer,
+/// - `nil`, which gets passed as a null pointer,
 /// - an inout argument of the referenced type, which gets passed as a pointer
 ///   to a writeback temporary with autoreleasing ownership semantics,
-/// - an UnsafeMutablePointer<T>, which is passed as-is.
+/// - an `UnsafeMutablePointer<T>`, which is passed as-is.
 ///
 /// Passing pointers to mutable arrays of ObjC class pointers is not
-/// directly supported. Unlike UnsafeMutablePointer<T>,
+/// directly supported. Unlike `UnsafeMutablePointer<T>`,
 /// AutoreleasingUnsafeMutablePointer must reference storage that does
 /// not own a reference count to the referenced
 /// value. UnsafeMutablePointer's operations, by contrast, assume that
@@ -1830,32 +2192,40 @@ struct AutoreleasingUnsafeMutablePointer<T> : Equatable, NilLiteralConvertible, 
     init<U>(_ ptr: UnsafeMutablePointer<U>)
 }
 
-extension AutoreleasingUnsafeMutablePointer : DebugPrintable {
+extension AutoreleasingUnsafeMutablePointer : CustomDebugStringConvertible {
 
     /// A textual representation of `self`, suitable for debugging.
     var debugDescription: String { get }
 }
 
 extension AutoreleasingUnsafeMutablePointer : CVarArgType {
-
-    /// Transform `self` into a series of machine words that can be
-    /// appropriately interpreted by C varargs
-    func encode() -> [Word]
 }
 
 
 /// An *index* that can step backwards via application of its
 /// `predecessor()` method.
-protocol BidirectionalIndexType : ForwardIndexType, _BidirectionalIndexType {
+protocol BidirectionalIndexType : ForwardIndexType {
+
+    /// Return the previous consecutive value in a discrete sequence.
+    ///
+    /// If `self` has a well-defined successor,
+    /// `self.successor().predecessor() == self`.  If `self` has a
+    /// well-defined predecessor, `self.predecessor().successor() ==
+    /// self`.
+    ///
+    /// - Requires: `self` has a well-defined predecessor.
+    func predecessor() -> Self
 }
 
 
+
+
 /// The lazy `CollectionType` returned by `reverse(c)` where `c` is a
-/// `CollectionType` with an `Index` conforming to `BidirectionalIndexType`
-struct BidirectionalReverseView<T : CollectionType where T.Index : BidirectionalIndexType> : CollectionType {
+/// `CollectionType` with an `Index` conforming to `BidirectionalIndexType`.
+struct BidirectionalReverseView<T : CollectionType where T.Index : BidirectionalIndexType> : CollectionType, SequenceType, _CollectionDefaultsType, _CollectionGeneratorDefaultsType {
 
     /// A type that represents a valid position in the collection.
-    /// 
+    ///
     /// Valid indices consist of the position of every element and a
     /// "past the end" position that's not valid for use as a subscript.
     typealias Index = ReverseBidirectionalIndex<T.Index>
@@ -1866,60 +2236,60 @@ struct BidirectionalReverseView<T : CollectionType where T.Index : Bidirectional
 
     /// Return a *generator* over the elements of this *sequence*.
     ///
-    /// Complexity: O(1)
+    /// - Complexity: O(1).
     func generate() -> IndexingGenerator<BidirectionalReverseView<T>>
 
     /// The position of the first element in a non-empty collection.
     ///
-    /// Identical to `endIndex` in an empty collection.
-    var startIndex: Index { get }
+    /// In an empty collection, `startIndex == endIndex`.
+    var startIndex: ReverseBidirectionalIndex<T.Index> { get }
 
     /// The collection's "past the end" position.
     ///
     /// `endIndex` is not a valid argument to `subscript`, and is always
     /// reachable from `startIndex` by zero or more applications of
     /// `successor()`.
-    var endIndex: Index { get }
-    subscript (position: Index) -> T.Generator.Element { get }
+    var endIndex: ReverseBidirectionalIndex<T.Index> { get }
+    subscript (position: ReverseBidirectionalIndex<T.Index>) -> T.Generator.Element { get }
 }
 
 
 /// A `RandomAccessIndexType` that has two possible values.  Used as
-/// the `Index` type for `SequenceOfOne<T>`.
-enum Bit : Int, RandomAccessIndexType, Reflectable {
+/// the `Index` type for `CollectionOfOne<T>`.
+enum Bit : Int, Comparable, RandomAccessIndexType, BidirectionalIndexType, ForwardIndexType, _Incrementable, Strideable, _Strideable, Reflectable {
     case Zero
     case One
 
     /// Returns the next consecutive value after `self`.
     ///
-    /// Requires: `self == .Zero`.
+    /// - Requires: `self == .Zero`.
     func successor() -> Bit
 
     /// Returns the previous consecutive value before `self`.
     ///
-    /// Requires: `self != .Zero`.
+    /// - Requires: `self != .Zero`.
     func predecessor() -> Bit
 
     /// Return the minimum number of applications of `successor` or
     /// `predecessor` required to reach `other` from `self`.
     ///
-    /// Complexity: O(1).
+    /// - Complexity: O(1).
     func distanceTo(other: Bit) -> Int
 
     /// Return `self` offset by `n` steps.
     ///
-    /// :returns: If `n > 0`, the result of applying `successor` to
-    /// `self` `n` times.  If `n < 0`, the result of applying
-    /// `predecessor` to `self` `-n` times. Otherwise, `self`.
+    /// - Returns: If `n > 0`, the result of applying `successor` to
+    ///   `self` `n` times.  If `n < 0`, the result of applying
+    ///   `predecessor` to `self` `-n` times. Otherwise, `self`.
     ///
-    /// Complexity: O(1)
+    /// - Complexity: O(1).
     func advancedBy(distance: Int) -> Bit
 
     /// Returns a mirror that reflects `self`.
     func getMirror() -> MirrorType
 }
 
-extension Bit : IntegerArithmeticType {
+extension Bit : IntegerArithmeticType, _IntegerArithmeticType {
 
     /// Add `lhs` and `rhs`, returning a result and a `Bool` that is
     /// true iff the operation caused an arithmetic overflow.
@@ -1949,43 +2319,41 @@ extension Bit : IntegerArithmeticType {
 
 /// A set type with O(1) standard bitwise operators.
 ///
-/// Each instance is a subset of `~Self.allZeros`
+/// Each instance is a subset of `~Self.allZeros`.
 ///
-/// Axioms, where `x` is an instance of `Self`::
+/// **Axioms**, where `x` is an instance of `Self`:
 ///
-///   x | Self.allZeros == x
-///   x ^ Self.allZeros == x
-///   x & Self.allZeros == .allZeros
-///   x & ~Self.allZeros == x
-///   ~x == x ^ ~Self.allZeros
+/// -  `x | Self.allZeros == x`
+/// -  `x ^ Self.allZeros == x`
+/// -  `x & Self.allZeros == .allZeros`
+/// -  `x & ~Self.allZeros == x`
+/// -  `~x == x ^ ~Self.allZeros`
 protocol BitwiseOperationsType {
 
     /// Returns the intersection of bits set in `lhs` and `rhs`.
     ///
-    /// Complexity: O(1)
+    /// - Complexity: O(1).
     func &(lhs: Self, rhs: Self) -> Self
 
-    /// Returns the union of bits set in `lhs` and `rhs`
+    /// Returns the union of bits set in `lhs` and `rhs`.
     ///
-    /// Complexity: O(1)
+    /// - Complexity: O(1).
     func |(lhs: Self, rhs: Self) -> Self
 
-    /// Returns the bits that are set in exactly one of `lhs` and `rhs`
+    /// Returns the bits that are set in exactly one of `lhs` and `rhs`.
     ///
-    /// Complexity: O(1)
+    /// - Complexity: O(1).
     func ^(lhs: Self, rhs: Self) -> Self
 
-    /// Returns `x ^ ~Self.allZeros`
+    /// Returns `x ^ ~Self.allZeros`.
     ///
-    /// Complexity: O(1)
+    /// - Complexity: O(1).
     prefix func ~(x: Self) -> Self
 
     /// The empty bitset.
     ///
-    /// Also the `identity element
-    /// <http://en.wikipedia.org/wiki/Identity_element>`_ for `|` and
-    /// `^`, and the `fixed point
-    /// <http://en.wikipedia.org/wiki/Fixed_point_(mathematics)>`_ for
+    /// Also the [identity element](http://en.wikipedia.org/wiki/Identity_element) for `|` and
+    /// `^`, and the [fixed point](http://en.wikipedia.org/wiki/Fixed_point_(mathematics)) for
     /// `&`.
     static var allZeros: Self { get }
 }
@@ -2011,11 +2379,11 @@ extension Bool : BooleanType {
     var boolValue: Bool { get }
 
     /// Construct an instance representing the same logical value as
-    /// `value`
+    /// `value`.
     init<T : BooleanType>(_ value: T)
 }
 
-extension Bool : Printable {
+extension Bool : CustomStringConvertible {
 
     /// A textual representation of `self`.
     var description: String { get }
@@ -2025,11 +2393,11 @@ extension Bool : Equatable, Hashable {
 
     /// The hash value.
     ///
-    /// **Axiom:** `x == y` implies `x.hashValue == y.hashValue`
+    /// **Axiom:** `x == y` implies `x.hashValue == y.hashValue`.
     ///
-    /// **Note:** the hash value is not guaranteed to be stable across
-    /// different invocations of the same program.  Do not persist the
-    /// hash value across program runs.
+    /// - Note: the hash value is not guaranteed to be stable across
+    ///   different invocations of the same program.  Do not persist the
+    ///   hash value across program runs.
     var hashValue: Int { get }
 }
 
@@ -2040,21 +2408,21 @@ extension Bool : Reflectable {
 }
 
 
-/// Conforming types can be initialized with the boolean literals
+/// Conforming types can be initialized with the Boolean literals
 /// `true` and `false`.
 protocol BooleanLiteralConvertible {
     typealias BooleanLiteralType
 
     /// Create an instance initialized to `value`.
-    init(booleanLiteral value: BooleanLiteralType)
+    init(booleanLiteral value: Self.BooleanLiteralType)
 }
 
 
-/// The default type for an otherwise-unconstrained boolean literal
+/// The default type for an otherwise-unconstrained Boolean literal.
 typealias BooleanLiteralType = Bool
 
 
-/// A type that represents a boolean value.
+/// A type that represents a Boolean value.
 ///
 /// Types that conform to the `BooleanType` protocol can be used as
 /// the condition in control statements (`if`, `while`, C-style `for`)
@@ -2097,52 +2465,6 @@ typealias CDouble = Double
 typealias CFloat = Float
 
 
-/// The family of C function pointer types.
-///
-/// In imported APIs, `T` is a Swift function type such as
-/// `(Int)->String`.
-/// 
-/// Though not directly useful in Swift, `CFunctionPointer<T>` can be
-/// used to safely pass a C function pointer, received from one C or
-/// Objective-C API, to another C or Objective-C API.
-struct CFunctionPointer<T> : Equatable, Hashable, NilLiteralConvertible {
-
-    /// Create a `nil` instance.
-    init()
-
-    /// Reinterpret the bits of `value` as `CFunctionPointer<T>`.
-    ///
-    /// .. Warning:: This is a fundamentally unsafe operation, equivalent to
-    ///      `unsafeBitCast(value, CFunctionPointer<T>.self)`
-    init(_ value: COpaquePointer)
-
-    /// The hash value.
-    ///
-    /// **Axiom:** `x == y` implies `x.hashValue == y.hashValue`
-    ///
-    /// **Note:** the hash value is not guaranteed to be stable across
-    /// different invocations of the same program.  Do not persist the
-    /// hash value across program runs.
-    var hashValue: Int { get }
-
-    /// Create an instance initialized with `nil`.
-    init(nilLiteral: ())
-}
-
-extension CFunctionPointer : DebugPrintable {
-
-    /// A textual representation of `self`, suitable for debugging.
-    var debugDescription: String { get }
-}
-
-extension CFunctionPointer : CVarArgType {
-
-    /// Transform `self` into a series of machine words that can be
-    /// appropriately interpreted by C varargs
-    func encode() -> [Word]
-}
-
-
 /// The C 'int' type.
 typealias CInt = Int32
 
@@ -2182,37 +2504,24 @@ struct COpaquePointer : Equatable, Hashable, NilLiteralConvertible {
 
     /// The hash value.
     ///
-    /// **Axiom:** `x == y` implies `x.hashValue == y.hashValue`
+    /// **Axiom:** `x == y` implies `x.hashValue == y.hashValue`.
     ///
-    /// **Note:** the hash value is not guaranteed to be stable across
-    /// different invocations of the same program.  Do not persist the
-    /// hash value across program runs.
+    /// - Note: The hash value is not guaranteed to be stable across
+    ///   different invocations of the same program.  Do not persist the
+    ///   hash value across program runs.
     var hashValue: Int { get }
 
     /// Create an instance initialized with `nil`.
     init(nilLiteral: ())
 }
 
-extension COpaquePointer : DebugPrintable {
+extension COpaquePointer : CustomDebugStringConvertible {
 
     /// A textual representation of `self`, suitable for debugging.
     var debugDescription: String { get }
 }
 
-extension COpaquePointer {
-
-    /// Reinterpret the bits of `value` as `COpaquePointer`.
-    ///
-    /// .. Warning:: This is a fundamentally unsafe operation, equivalent to
-    ///      `unsafeBitCast(value, COpaquePointer.self)`
-    init<T>(_ value: CFunctionPointer<T>)
-}
-
 extension COpaquePointer : CVarArgType {
-
-    /// Transform `self` into a series of machine words that can be
-    /// appropriately interpreted by C varargs
-    func encode() -> [Word]
 }
 
 
@@ -2249,7 +2558,7 @@ struct CVaListPointer {
     init(_fromUnsafeMutablePointer from: UnsafeMutablePointer<Void>)
 }
 
-extension CVaListPointer : DebugPrintable {
+extension CVaListPointer : CustomDebugStringConvertible {
 
     /// A textual representation of `self`, suitable for debugging.
     var debugDescription: String { get }
@@ -2261,24 +2570,20 @@ extension CVaListPointer : DebugPrintable {
 ///
 /// This protocol is useful in presenting C "varargs" APIs natively in
 /// Swift.  It only works for APIs that have a `va_list` variant, so
-/// for example, it isn't much use if all you have is::
+/// for example, it isn't much use if all you have is:
 ///
-///   int f(int n, ...)
+///     int f(int n, ...)
 ///
-/// Given a version like this, though, ::
+/// Given a version like this, though,
 ///
-///   int f(int, va_list arguments)
+///     int f(int, va_list arguments)
 ///
-/// you can write::
+/// you can write:
 ///
-///   func swiftF(x: Int, arguments: CVarArgType...) -> Int {
-///     return withVaList(arguments) { f(x, $0) }
-///   }
+///     func swiftF(x: Int, arguments: CVarArgType...) -> Int {
+///       return withVaList(arguments) { f(x, $0) }
+///     }
 protocol CVarArgType {
-
-    /// Transform `self` into a series of machine words that can be
-    /// appropriately interpreted by C varargs
-    func encode() -> [Word]
 }
 
 
@@ -2289,7 +2594,7 @@ typealias CWideChar = UnicodeScalar
 /// `Character` represents some Unicode grapheme cluster as
 /// defined by a canonical, localized, or otherwise tailored
 /// segmentation algorithm.
-struct Character : ExtendedGraphemeClusterLiteralConvertible, Equatable, Hashable, Comparable {
+struct Character : ExtendedGraphemeClusterLiteralConvertible, UnicodeScalarLiteralConvertible, Equatable, Hashable, Comparable {
 
     /// Construct a `Character` containing just the given `scalar`.
     init(_ scalar: UnicodeScalar)
@@ -2304,20 +2609,20 @@ struct Character : ExtendedGraphemeClusterLiteralConvertible, Equatable, Hashabl
 
     /// Create an instance from a single-character `String`.
     ///
-    /// Requires: `s` contains exactly one extended grapheme cluster.
+    /// - Requires: `s` contains exactly one extended grapheme cluster.
     init(_ s: String)
 
     /// The hash value.
     ///
-    /// **Axiom:** `x == y` implies `x.hashValue == y.hashValue`
+    /// **Axiom:** `x == y` implies `x.hashValue == y.hashValue`.
     ///
-    /// **Note:** the hash value is not guaranteed to be stable across
-    /// different invocations of the same program.  Do not persist the
-    /// hash value across program runs.
+    /// - Note: The hash value is not guaranteed to be stable across
+    ///   different invocations of the same program.  Do not persist the
+    ///   hash value across program runs.
     var hashValue: Int { get }
 }
 
-extension Character : DebugPrintable {
+extension Character : CustomDebugStringConvertible {
 
     /// A textual representation of `self`, suitable for debugging.
     var debugDescription: String { get }
@@ -2331,29 +2636,34 @@ extension Character : Reflectable {
 
 extension Character : Streamable {
 
-    /// Write a textual representation of `self` into `target`
+    /// Write a textual representation of `self` into `target`.
     func writeTo<Target : OutputStreamType>(inout target: Target)
 }
 
 
 /// A closed `IntervalType`, which contains both its `start` and its
 /// `end`.  Cannot represent an empty interval.
-struct ClosedInterval<T : Comparable> : IntervalType, Equatable, Printable, DebugPrintable, Reflectable {
+struct ClosedInterval<T : Comparable> : IntervalType, Equatable, CustomStringConvertible, CustomDebugStringConvertible, Reflectable {
 
-    /// The type of the `Interval`\ 's endpoints
+    /// The type of the `Interval`'s endpoints.
     typealias Bound = T
 
-    /// Construct a copy of `x`
+    /// Construct a copy of `x`.
     init(_ x: ClosedInterval<T>)
 
-    /// Construct an interval with the given bounds.  Requires: `start`
-    /// <= `end`.
+    /// Construct an interval with the given bounds.
+    ///
+    /// - Requires: `start <= end`.
     init(_ start: T, _ end: T)
 
-    /// The `Interval`\ 's lower bound. Invariant: `start` <= `end`
+    /// The `Interval`'s lower bound.
+    ///
+    /// Invariant: `start` <= `end`.
     var start: T { get }
 
-    /// The `Interval`\ 's upper bound. Invariant: `start` <= `end`
+    /// The `Interval`'s upper bound.
+    ///
+    /// Invariant: `start` <= `end`.
     var end: T { get }
 
     /// A textual representation of `self`.
@@ -2362,12 +2672,13 @@ struct ClosedInterval<T : Comparable> : IntervalType, Equatable, Printable, Debu
     /// A textual representation of `self`, suitable for debugging.
     var debugDescription: String { get }
 
-    /// Returns `true` iff the `Interval` contains `x`
+    /// Returns `true` iff the `Interval` contains `x`.
     func contains(x: T) -> Bool
 
-    /// Return `intervalToClamp` clamped to `self`.  The bounds of the
-    /// result, even if it is empty, are always limited to the bounds of
-    /// `self`
+    /// Returns `intervalToClamp` clamped to `self`.
+    ///
+    /// The bounds of the result, even if it is empty, are always limited to the bounds of
+    /// `self`.
     func clamp(intervalToClamp: ClosedInterval<T>) -> ClosedInterval<T>
 
     /// Returns a mirror that reflects `self`.
@@ -2377,16 +2688,16 @@ struct ClosedInterval<T : Comparable> : IntervalType, Equatable, Printable, Debu
 extension ClosedInterval {
 
     /// `true` iff the `Interval` is empty.  In the case of
-    /// `ClosedInterval`, always returns `false`
+    /// `ClosedInterval`, always returns `false`.
     var isEmpty: Bool { get }
 }
 
 
 /// A collection containing a single element of type `T`.
-struct CollectionOfOne<T> : CollectionType {
+struct CollectionOfOne<T> : CollectionType, SequenceType, _CollectionDefaultsType, _CollectionGeneratorDefaultsType {
 
     /// A type that represents a valid position in the collection.
-    /// 
+    ///
     /// Valid indices consist of the position of every element and a
     /// "past the end" position that's not valid for use as a subscript.
     typealias Index = Bit
@@ -2400,14 +2711,17 @@ struct CollectionOfOne<T> : CollectionType {
     /// The "past the end" position; always identical to
     /// `startIndex.successor()`.
     ///
-    /// Note: `endIndex` is not a valid argument to `subscript`.
+    /// - Note: `endIndex` is not a valid argument to `subscript`.
     var endIndex: Index { get }
 
     /// Return a *generator* over the elements of this *sequence*.
     ///
-    /// Complexity: O(1)
+    /// - Complexity: O(1).
     func generate() -> GeneratorOfOne<T>
     subscript (position: Index) -> T { get }
+
+    /// Return the number of elements (always one).
+    var count: Int { get }
 }
 
 extension CollectionOfOne : Reflectable {
@@ -2426,27 +2740,105 @@ extension CollectionOfOne : Reflectable {
 ///
 /// The sequence view of the elements is identical to the collection
 /// view.  In other words, the following code binds the same series of
-/// values to `x` as does `for x in self {}`::
+/// values to `x` as does `for x in self {}`:
 ///
-///   for i in startIndex..<endIndex {
-///     let x = self[i]
-///   }
-protocol CollectionType : _CollectionType, SequenceType {
+///     for i in startIndex..<endIndex {
+///       let x = self[i]
+///     }
+protocol CollectionType : SequenceType, _CollectionDefaultsType, _CollectionGeneratorDefaultsType {
     subscript (position: Self.Index) -> Self.Generator.Element { get }
+
+    /// Returns `true` iff `self` is empty.
+    var isEmpty: Bool { get }
+
+    /// Returns the number of elements.
+    ///
+    /// - Complexity: O(1) if `Index` conforms to `RandomAccessIndexType`;
+    ///   O(N) otherwise.
+    var count: Self.Index.Distance { get }
+}
+
+extension CollectionType {
+
+    /// Return an `Array` containing the results of mapping `transform`
+    /// over `self`.
+    ///
+    /// - Complexity: O(N).
+    func map<T>(@noescape transform: (Self.Generator.Element) -> T) -> [T]
+}
+
+extension CollectionType {
+
+    /// Returns an `Array` containing the elements of `self`,
+    /// in order, that satisfy the predicate `includeElement`.
+    func filter(@noescape includeElement: (Self.Generator.Element) -> Bool) -> [Self.Generator.Element]
+}
+
+extension CollectionType {
+
+    /// Returns the first element of `self`, or `nil` if `self` is empty.
+    var first: Self.Generator.Element? { get }
+}
+
+
+
+extension CollectionType where Index : BidirectionalIndexType {
+    var last: Self.Generator.Element? { get }
+}
+
+extension CollectionType where Generator.Element : Equatable {
+
+    /// Returns the first index where `value` appears in `self` or `nil` if
+    /// `value` is not found.
+    ///
+    /// - Complexity: O(`self.count`).
+    func indexOf(element: Self.Generator.Element) -> Self.Index?
+}
+
+extension CollectionType {
+
+    /// Returns the first index where `predicate` returns `true` for the
+    /// corresponding value, or `nil` if such value is not found.
+    ///
+    /// - Complexity: O(`self.count`).
+    func indexOf(@noescape predicate: (Self.Generator.Element) -> Bool) -> Self.Index?
+}
+
+extension CollectionType {
+
+    /// Return the range of valid index values.
+    ///
+    /// The result's `endIndex` is the same as that of `self`.  Because
+    /// `Range` is half-open, iterating the values of the result produces
+    /// all valid subscript arguments for `self`, omitting its `endIndex`.
+    var indices: Range<Self.Index> { get }
+}
+
+extension CollectionType where Index : BidirectionalIndexType {
+
+    /// Return a lazy `CollectionType` containing the elements of `self`
+    /// in reverse order.
+    func reverse() -> BidirectionalReverseView<Self>
+}
+
+extension CollectionType where Index : RandomAccessIndexType {
+
+    /// Return a lazy `CollectionType` containing the elements of `self`
+    /// in reverse order.
+    func reverse() -> RandomAccessReverseView<Self>
 }
 
 
 /// Instances of conforming types can be compared using relational
-/// operators, which define a `strict total order
-/// <http://en.wikipedia.org/wiki/Total_order#Strict_total_order>`_.
+/// operators, which define a [strict total order](http://en.wikipedia.org/wiki/Total_order#Strict_total_order).
 ///
 /// A type conforming to `Comparable` need only supply the `<` and
 /// `==` operators; default implementations of `<=`, `>`, `>=`, and
-/// `!=` are supplied by the standard library::
+/// `!=` are supplied by the standard library:
 ///
-///   struct Singular : Comparable {}
-///   func ==(x: Singular, y: Singular) -> Bool { return true }
-///   func <(x: Singular, y: Singular) -> Bool { return false }
+///     struct Singular : Comparable {}
+///     func ==(x: Singular, y: Singular) -> Bool { return true }
+///     func <(x: Singular, y: Singular) -> Bool { return false }
 ///
 /// **Axioms**, in addition to those of `Equatable`:
 ///
@@ -2455,7 +2847,11 @@ protocol CollectionType : _CollectionType, SequenceType {
 /// - `x > y` implies `x >= y` and `y < x`
 /// - `x <= y` implies `y >= x`
 /// - `x >= y` implies `y <= x`
-protocol Comparable : _Comparable, Equatable {
+protocol Comparable : Equatable {
+
+    /// A [strict total order](http://en.wikipedia.org/wiki/Total_order#Strict_total_order)
+    /// over instances of `Self`.
+    func <(lhs: Self, rhs: Self) -> Bool
     func <=(lhs: Self, rhs: Self) -> Bool
     func >=(lhs: Self, rhs: Self) -> Bool
     func >(lhs: Self, rhs: Self) -> Bool
@@ -2470,9 +2866,9 @@ protocol Comparable : _Comparable, Equatable {
 /// `ContiguousArray` does not bridge to Objective-C.  See `Array`,
 /// with which `ContiguousArray` shares most properties, for more
 /// detail.
-struct ContiguousArray<T> : MutableCollectionType, Sliceable, _DestructorSafeContainer {
+struct ContiguousArray<T> : CollectionType, SequenceType, _CollectionDefaultsType, _CollectionGeneratorDefaultsType, MutableCollectionType, Sliceable, _Sliceable, _DestructorSafeContainer {
 
-    /// The type of element stored by this `ContiguousArray`
+    /// The type of element stored by this `ContiguousArray`.
     typealias Element = T
 
     /// Always zero, which is the index of the first element when non-empty.
@@ -2485,16 +2881,12 @@ struct ContiguousArray<T> : MutableCollectionType, Sliceable, _DestructorSafeCon
 
     /// Return a *generator* over the elements.
     ///
-    /// Complexity: O(1)
+    /// - Complexity: O(1).
     func generate() -> IndexingGenerator<ContiguousArray<T>>
 
-    /// A type that can represent a sub-range of a ContiguousArray 
+    /// A type that can represent a sub-range of a ContiguousArray.
     typealias SubSlice = ArraySlice<T>
     subscript (subRange: Range<Int>) -> ArraySlice<T>
-
-    /// Initialization from an existing buffer does not have "array.init"
-    /// semantics because the caller may retain an alias to buffer.
-    init(_ buffer: _ContiguousArrayBuffer<T>)
 }
 
 extension ContiguousArray : __ArrayType {
@@ -2506,117 +2898,73 @@ extension ContiguousArray : ArrayLiteralConvertible {
     init(arrayLiteral elements: T...)
 }
 
-extension ContiguousArray : _ArrayType {
+extension ContiguousArray : _ArrayType, MutableSliceable, RangeReplaceableCollectionType, ExtensibleCollectionType {
 
-    /// Construct an empty ContiguousArray
+    /// Construct an empty ContiguousArray.
     init()
 
-    /// Construct from an arbitrary sequence with elements of type `T`
-    init<S : SequenceType where T == T>(_ s: S)
+    /// Construct from an arbitrary sequence with elements of type `T`.
+    init<S : SequenceType where S.Generator.Element == _Buffer.Element>(_ s: S)
 
     /// Construct a ContiguousArray of `count` elements, each initialized to
     /// `repeatedValue`.
     init(count: Int, repeatedValue: T)
 
-    /// How many elements the ContiguousArray stores
+    /// The number of elements the ContiguousArray stores.
     var count: Int { get }
 
-    /// How many elements the `ContiguousArray` can store without reallocation
+    /// The number of elements the `ContiguousArray` can store without reallocation.
     var capacity: Int { get }
 
-    /// `true` if and only if the `ContiguousArray` is empty
-    var isEmpty: Bool { get }
-
-    /// The first element, or `nil` if the array is empty
-    var first: T? { get }
-
-    /// The last element, or `nil` if the array is empty
-    var last: T? { get }
-
-    /// Reserve enough space to store minimumCapacity elements.
+    /// Reserve enough space to store `minimumCapacity` elements.
     ///
-    /// PostCondition: `capacity >= minimumCapacity` and the array has
-    /// mutable contiguous storage.
+    /// - Postcondition: `capacity >= minimumCapacity` and the array has
+    ///   mutable contiguous storage.
     ///
-    /// Complexity: O(`count`)
+    /// - Complexity: O(`count`).
     mutating func reserveCapacity(minimumCapacity: Int)
 
-    /// Append newElement to the ContiguousArray
+    /// Append `newElement` to the ContiguousArray.
     ///
-    /// Complexity: amortized O(1) unless `self`'s storage is shared with another live array; O(`count`) otherwise.
+    /// - Complexity: Amortized O(1) unless `self`'s storage is shared with another live array; O(`count`) otherwise..
     mutating func append(newElement: T)
 
     /// Append the elements of `newElements` to `self`.
     ///
-    /// Complexity: O(*length of result*) 
-    /// 
-    mutating func extend<S : SequenceType where T == T>(newElements: S)
+    /// - Complexity: O(*length of result*).
+    mutating func extend<S : SequenceType where S.Generator.Element == T>(newElements: S)
 
     /// Remove an element from the end of the ContiguousArray in O(1).
-    /// Requires: count > 0
+    ///
+    /// - Requires: `count > 0`.
     mutating func removeLast() -> T
 
     /// Insert `newElement` at index `i`.
     ///
-    /// Requires: `i <= count`
+    /// - Requires: `i <= count`.
     ///
-    /// Complexity: O(\ `count`\ ).
+    /// - Complexity: O(`count`).
     mutating func insert(newElement: T, atIndex i: Int)
 
-    /// Remove and return the element at index `i`
+    /// Remove and return the element at index `i`.
     ///
     /// Invalidates all indices with respect to `self`.
     ///
-    /// Complexity: O(\ `count`\ ).
+    /// - Complexity: O(`count`).
     mutating func removeAtIndex(index: Int) -> T
 
     /// Remove all elements.
     ///
-    /// Postcondition: `capacity == 0` iff `keepCapacity` is `false`.
+    /// - Postcondition: `capacity == 0` iff `keepCapacity` is `false`.
     ///
-    /// Complexity: O(\ `count(self)`\ ).
-    mutating func removeAll(keepCapacity: Bool = default)
+    /// - Complexity: O(`self.count`).
+    mutating func removeAll(keepCapacity keepCapacity: Bool = default)
 
     /// Interpose `self` between each consecutive pair of `elements`,
     /// and concatenate the elements of the resulting sequence.  For
     /// example, `[-1, -2].join([[1, 2, 3], [4, 5, 6], [7, 8, 9]])`
-    /// yields `[1, 2, 3, -1, -2, 4, 5, 6, -1, -2, 7, 8, 9]`
-    func join<S : SequenceType where ContiguousArray<T> == ContiguousArray<T>>(elements: S) -> ContiguousArray<T>
-
-    /// Return the result of repeatedly calling `combine` with an
-    /// accumulated value initialized to `initial` and each element of
-    /// `self`, in turn, i.e. return
-    /// `combine(combine(...combine(combine(initial, self[0]),
-    /// self[1]),...self[count-2]), self[count-1])`.
-    func reduce<U>(initial: U, combine: @noescape (U, T) -> U) -> U
-
-    /// Sort `self` in-place according to `isOrderedBefore`.  Requires:
-    /// `isOrderedBefore` induces a `strict weak ordering
-    /// <http://en.wikipedia.org/wiki/Strict_weak_order#Strict_weak_orderings>`__
-    /// over the elements.
-    mutating func sort(isOrderedBefore: (T, T) -> Bool)
-
-    /// Return a copy of `self` that has been sorted according to
-    /// `isOrderedBefore`.  Requires: `isOrderedBefore` induces a
-    /// `strict weak ordering
-    /// <http://en.wikipedia.org/wiki/Strict_weak_order#Strict_weak_orderings>`__
-    /// over the elements.
-    func sorted(isOrderedBefore: (T, T) -> Bool) -> ContiguousArray<T>
-
-    /// Return a ContiguousArray containing the results of calling
-    /// `transform(x)` on each element `x` of `self`
-    func map<U>(transform: (T) -> U) -> ContiguousArray<U>
-
-    /// Return a ContiguousArray containing the results of calling
-    /// `transform(x)` on each element `x` of `self` and flattening the result.
-    func flatMap<U>(transform: @noescape (T) -> ContiguousArray<U>) -> ContiguousArray<U>
-
-    /// A ContiguousArray containing the elements of `self` in reverse order
-    func reverse() -> ContiguousArray<T>
-
-    /// Return a ContiguousArray containing the elements `x` of `self` for which
-    /// `includeElement(x)` is `true`
-    func filter(includeElement: (T) -> Bool) -> ContiguousArray<T>
+    /// yields `[1, 2, 3, -1, -2, 4, 5, 6, -1, -2, 7, 8, 9]`.
+    func join<S : SequenceType where S.Generator.Element == ContiguousArray<T>>(elements: S) -> ContiguousArray<T>
 }
 
 extension ContiguousArray : Reflectable {
@@ -2625,7 +2973,7 @@ extension ContiguousArray : Reflectable {
     func getMirror() -> MirrorType
 }
 
-extension ContiguousArray : Printable, DebugPrintable {
+extension ContiguousArray : CustomStringConvertible, CustomDebugStringConvertible {
 
     /// A textual representation of `self`.
     var description: String { get }
@@ -2638,68 +2986,137 @@ extension ContiguousArray : Printable, DebugPrintable {
 
 extension ContiguousArray {
 
-    /// Call `body(p)`, where `p` is a pointer to the `ContiguousArray`\ 's
+    /// Call `body(p)`, where `p` is a pointer to the `ContiguousArray`'s
     /// contiguous storage.
     ///
     /// Often, the optimizer can eliminate bounds checks within an
     /// array algorithm, but when that fails, invoking the
-    /// same algorithm on `body`\ 's argument lets you trade safety for
+    /// same algorithm on `body`'s argument lets you trade safety for
     /// speed.
-    func withUnsafeBufferPointer<R>(body: @noescape (UnsafeBufferPointer<T>) -> R) -> R
+    func withUnsafeBufferPointer<R>(@noescape body: (UnsafeBufferPointer<T>) -> R) -> R
 
-    /// Call `body(p)`, where `p` is a pointer to the `ContiguousArray`\ 's
+    /// Call `body(p)`, where `p` is a pointer to the `ContiguousArray`'s
     /// mutable contiguous storage.
     ///
     /// Often, the optimizer can eliminate bounds- and uniqueness-checks
     /// within an array algorithm, but when that fails, invoking the
-    /// same algorithm on `body`\ 's argument lets you trade safety for
+    /// same algorithm on `body`'s argument lets you trade safety for
     /// speed.
-    mutating func withUnsafeMutableBufferPointer<R>(body: @noescape (inout UnsafeMutableBufferPointer<T>) -> R) -> R
+    ///
+    /// - Warning: Do not rely on anything about `self` (the `ContiguousArray`
+    ///   that is the target of this method) during the execution of
+    ///   `body`: it may not appear to have its correct value.  Instead,
+    ///   use only the `UnsafeMutableBufferPointer` argument to `body`.
+    mutating func withUnsafeMutableBufferPointer<R>(@noescape body: (inout UnsafeMutableBufferPointer<T>) -> R) -> R
 }
 
 extension ContiguousArray {
 
     /// Replace the given `subRange` of elements with `newElements`.
     ///
-    /// Complexity: O(\ `count(subRange)`\ ) if `subRange.endIndex
-    /// == self.endIndex` and `isEmpty(newElements)`\ , O(N) otherwise.
-    mutating func replaceRange<C : CollectionType where T == T>(subRange: Range<Int>, with newElements: C)
+    /// - Complexity: O(`subRange.count`) if `subRange.endIndex
+    ///   == self.endIndex` and `isEmpty(newElements)`, O(N) otherwise.
+    mutating func replaceRange<C : CollectionType where C.Generator.Element == _Buffer.Element>(subRange: Range<Int>, with newElements: C)
 
-    /// Insert `newElements` at index `i`
+    /// Insert `newElements` at index `i`.
     ///
     /// Invalidates all indices with respect to `self`.
     ///
-    /// Complexity: O(\ `count + count(newElements)`\ ).
-    mutating func splice<S : CollectionType where T == T>(newElements: S, atIndex i: Int)
+    /// - Complexity: O(`count + newElements.count`).
+    mutating func splice<S : CollectionType where S.Generator.Element == T>(newElements: S, atIndex i: Int)
 
-    /// Remove the indicated `subRange` of elements
+    /// Remove the indicated `subRange` of elements.
     ///
-    /// Complexity: O(\ `count`\ ).
+    /// - Complexity: O(`count`).
     mutating func removeRange(subRange: Range<Int>)
 }
 
 
-/// A type with a customized textual representation for debugging
-/// purposes.
+/// A type with a customized textual representation suitable for
+/// debugging purposes.
 ///
 /// This textual representation is used when values are written to an
 /// *output stream* by `debugPrint` and `debugPrintln`, and is
-/// typically more verbose than the text provided by a `Printable`\ 's
-/// `description` property.
+/// typically more verbose than the text provided by a
+/// `CustomStringConvertible`'s `description` property.
 ///
-/// In order to generate a textual representation for an instance of any
-/// type (which might or might not conform to `DebugPrintable`), use
-/// `toDebugString`.
-protocol DebugPrintable {
+/// - Note: `String(reflecting: instance)` will work for an `instance`
+///   of *any* type, returning its `debugDescription` if the `instance`
+///   happens to be `CustomDebugStringConvertible`.  Using
+/// `CustomDebugStringConvertible` as a generic constraint, or
+/// accessing a conforming type's `debugDescription` directly, is
+/// therefore discouraged.
+///
+/// - SeeAlso: `String.init<T>(reflecting: T)`,
+///   `CustomStringConvertible`
+protocol CustomDebugStringConvertible {
 
     /// A textual representation of `self`, suitable for debugging.
     var debugDescription: String { get }
 }
 
 
+/// A type that explicitly supplies its own Mirror but whose
+/// descendant classes are not represented in the Mirror unless they
+/// also override `customMirror()`.
+protocol CustomLeafReflectable : CustomReflectable {
+}
+
+
+/// A type that explicitly supplies its own PlaygroundQuickLook.
+///
+/// Instances of any type can be `reflect`'ed upon, but if you are
+/// not satisfied with the `Mirror` supplied for your type by default,
+/// you can make it conform to `CustomReflectable` and return a custom
+/// `Mirror`.
+protocol CustomPlaygroundQuickLookable {
+
+    /// Return the `Mirror` for `self`.
+    ///
+    /// - Note: If `Self` has value semantics, the `Mirror` should be
+    ///   unaffected by subsequent mutations of `self`.
+    func customPlaygroundQuickLook() -> PlaygroundQuickLook
+}
+
+
+/// A type that explicitly supplies its own Mirror.
+///
+/// Instances of any type can be `reflect`'ed upon, but if you are
+/// not satisfied with the `Mirror` supplied for your type by default,
+/// you can make it conform to `CustomReflectable` and return a custom
+/// `Mirror`.
+protocol CustomReflectable {
+
+    /// Return the `Mirror` for `self`.
+    ///
+    /// - Note: If `Self` has value semantics, the `Mirror` should be
+    ///   unaffected by subsequent mutations of `self`.
+    func customMirror() -> Mirror
+}
+
+
+/// A type with a customized textual representation.
+///
+/// This textual representation is used when values are written to an
+/// *output stream*, for example, by `print`.
+///
+/// - Note: `String(instance)` will work for an `instance` of *any*
+///   type, returning its `description` if the `instance` happens to be
+///   `CustomStringConvertible`.  Using `CustomStringConvertible` as a
+/// generic constraint, or accessing a conforming type's `description`
+/// directly, is therefore discouraged.
+///
+/// - SeeAlso: `String.init<T>(T)`, `CustomDebugStringConvertible`
+protocol CustomStringConvertible {
+
+    /// A textual representation of `self`.
+    var description: String { get }
+}
+
+
 /// A hash-based mapping from `Key` to `Value` instances.  Also a
 /// collection of key-value pairs with no defined ordering.
-struct Dictionary<Key : Hashable, Value> : CollectionType, DictionaryLiteralConvertible {
+struct Dictionary<Key : Hashable, Value> : CollectionType, SequenceType, _CollectionDefaultsType, _CollectionGeneratorDefaultsType, DictionaryLiteralConvertible {
     typealias Element = (Key, Value)
     typealias Index = DictionaryIndex<Key, Value>
 
@@ -2713,10 +3130,10 @@ struct Dictionary<Key : Hashable, Value> : CollectionType, DictionaryLiteralConv
 
     /// The position of the first element in a non-empty dictionary.
     ///
-    /// Identical to `endIndex` in an empty dictionary
+    /// Identical to `endIndex` in an empty dictionary.
     ///
-    /// Complexity: amortized O(1) if `self` does not wrap a bridged
-    /// `NSDictionary`, O(N) otherwise.
+    /// - Complexity: Amortized O(1) if `self` does not wrap a bridged
+    ///   `NSDictionary`, O(N) otherwise.
     var startIndex: DictionaryIndex<Key, Value> { get }
 
     /// The collection's "past the end" position.
@@ -2725,8 +3142,8 @@ struct Dictionary<Key : Hashable, Value> : CollectionType, DictionaryLiteralConv
     /// reachable from `startIndex` by zero or more applications of
     /// `successor()`.
     ///
-    /// Complexity: amortized O(1) if `self` does not wrap a bridged
-    /// `NSDictionary`, O(N) otherwise.
+    /// - Complexity: Amortized O(1) if `self` does not wrap a bridged
+    ///   `NSDictionary`, O(N) otherwise.
     var endIndex: DictionaryIndex<Key, Value> { get }
 
     /// Returns the `Index` for the given key, or `nil` if the key is not
@@ -2742,11 +3159,11 @@ struct Dictionary<Key : Hashable, Value> : CollectionType, DictionaryLiteralConv
     /// was added.
     mutating func updateValue(value: Value, forKey key: Key) -> Value?
 
-    /// Remove the key-value pair at index `i`
+    /// Remove the key-value pair at `index`.
     ///
     /// Invalidates all indices with respect to `self`.
     ///
-    /// Complexity: O(\ `count`\ ).
+    /// - Complexity: O(`count`).
     mutating func removeAtIndex(index: DictionaryIndex<Key, Value>)
 
     /// Remove a given key and the associated value from the dictionary.
@@ -2756,49 +3173,49 @@ struct Dictionary<Key : Hashable, Value> : CollectionType, DictionaryLiteralConv
 
     /// Remove all elements.
     ///
-    /// Postcondition: `capacity == 0` if `keepCapacity` is `false`, otherwise
-    /// the capacity will not be decreased.
+    /// - Postcondition: `capacity == 0` if `keepCapacity` is `false`, otherwise
+    ///   the capacity will not be decreased.
     ///
     /// Invalidates all indices with respect to `self`.
     ///
-    /// :param: keepCapacity If `true`, the operation preserves the
-    /// storage capacity that the collection has, otherwise the underlying
-    /// storage is released.  The default is `false`.
+    /// - parameter keepCapacity: If `true`, the operation preserves the
+    ///   storage capacity that the collection has, otherwise the underlying
+    ///   storage is released.  The default is `false`.
     ///
-    /// Complexity: O(\ `count`\ ).
-    mutating func removeAll(keepCapacity: Bool = default)
+    /// Complexity: O(`count`).
+    mutating func removeAll(keepCapacity keepCapacity: Bool = default)
 
     /// The number of entries in the dictionary.
     ///
-    /// Complexity: O(1)
+    /// - Complexity: O(1).
     var count: Int { get }
 
     /// Return a *generator* over the (key, value) pairs.
     ///
-    /// Complexity: O(1)
+    /// - Complexity: O(1).
     func generate() -> DictionaryGenerator<Key, Value>
 
     /// Create an instance initialized with `elements`.
     init(dictionaryLiteral elements: (Key, Value)...)
 
-    /// True iff `count == 0`
-    var isEmpty: Bool { get }
-
-    /// A collection containing just the keys of `self`
+    /// A collection containing just the keys of `self`.
     ///
     /// Keys appear in the same order as they occur as the `.0` member
     /// of key-value pairs in `self`.  Each key in the result has a
     /// unique value.
     var keys: LazyForwardCollection<MapCollectionView<[Key : Value], Key>> { get }
 
-    /// A collection containing just the values of `self`
+    /// A collection containing just the values of `self`.
     ///
     /// Values appear in the same order as they occur as the `.1` member
     /// of key-value pairs in `self`.
     var values: LazyForwardCollection<MapCollectionView<[Key : Value], Value>> { get }
+
+    /// `true` iff `count == 0`.
+    var isEmpty: Bool { get }
 }
 
-extension Dictionary : Printable, DebugPrintable {
+extension Dictionary : CustomStringConvertible, CustomDebugStringConvertible {
 
     /// A textual representation of `self`.
     var description: String { get }
@@ -2816,13 +3233,13 @@ extension Dictionary : Reflectable {
 
 
 
-/// A generator over the members of a `Dictionary<Key, Value>`
+/// A generator over the members of a `Dictionary<Key, Value>`.
 struct DictionaryGenerator<Key : Hashable, Value> : GeneratorType {
 
     /// Advance to the next element and return it, or `nil` if no next
     /// element exists.
     ///
-    /// Requires: no preceding call to `self.next()` has returned `nil`.
+    /// - Requires: No preceding call to `self.next()` has returned `nil`.
     mutating func next() -> (Key, Value)?
 }
 
@@ -2834,27 +3251,80 @@ struct DictionaryGenerator<Key : Hashable, Value> : GeneratorType {
 ///
 /// 1. Subscripting with a key, yielding an optional value:
 ///
-///      v = d[k]!
+///        v = d[k]!
 ///
 /// 2. Subscripting with an index, yielding a key-value pair:
 ///
-///      (k,v) = d[i]
-struct DictionaryIndex<Key : Hashable, Value> : ForwardIndexType, Comparable {
+///        (k,v) = d[i]
+struct DictionaryIndex<Key : Hashable, Value> : ForwardIndexType, _Incrementable, Equatable, Comparable {
 
     /// Returns the next consecutive value after `self`.
     ///
-    /// Requires: the next value is representable.
+    /// - Requires: The next value is representable.
     func successor() -> DictionaryIndex<Key, Value>
 }
 
 
-/// Conforming types can be initialized with dictionary literals
+/// Represent the ability to pass a dictionary literal in function
+/// signatures.
+///
+/// A function with a `DictionaryLiteral` parameter can be passed a
+/// Swift dictionary literal without causing a `Dictionary` to be
+/// created.  This capability can be especially important when the
+/// order of elements in the literal is significant.
+///
+/// For example:
+///
+///     struct IntPairs {
+///       var elements: [(Int, Int)]
+///       init(_ pairs: DictionaryLiteral<Int,Int>) {
+///         elements = Array(pairs)
+///       }
+///     }
+///
+///     let x = IntPairs([1:2, 1:1, 3:4, 2:1])
+///     print(x.elements)  // [(1, 2), (1, 1), (3, 4), (2, 1)]
+struct DictionaryLiteral<Key, Value> : DictionaryLiteralConvertible {
+
+    /// Store `elements`.
+    init(dictionaryLiteral elements: (Key, Value)...)
+}
+
+extension DictionaryLiteral : CollectionType, SequenceType, _CollectionDefaultsType, _CollectionGeneratorDefaultsType {
+
+    /// The position of the first element in a non-empty `DictionaryLiteral`.
+    ///
+    /// Identical to `endIndex` in an empty `DictionaryLiteral`.
+    ///
+    /// - Complexity: O(1).
+    var startIndex: Int { get }
+
+    /// The `DictionaryLiteral`'s "past the end" position.
+    ///
+    /// `endIndex` is not a valid argument to `subscript`, and is always
+    /// reachable from `startIndex` by zero or more applications of
+    /// `successor()`.
+    ///
+    /// - Complexity: O(1).
+    var endIndex: Int { get }
+    subscript (position: Int) -> (Key, Value) { get }
+
+    /// Return a *generator* over the elements of this *sequence*.  The
+    /// *generator*'s next element is the first element of the
+    /// sequence.
+    ///
+    /// - Complexity: O(1).
+    func generate() -> IndexingGenerator<DictionaryLiteral<Key, Value>>
+}
+
+
+/// Conforming types can be initialized with dictionary literals.
 protocol DictionaryLiteralConvertible {
     typealias Key
     typealias Value
 
     /// Create an instance initialized with `elements`.
-    init(dictionaryLiteral elements: (Key, Value)...)
+    init(dictionaryLiteral elements: (Self.Key, Self.Value)...)
 }
 
 struct Double {
@@ -2867,7 +3337,7 @@ struct Double {
     init(_ value: Double)
 }
 
-extension Double : Printable {
+extension Double : CustomStringConvertible {
 
     /// A textual representation of `self`.
     var description: String { get }
@@ -2884,7 +3354,7 @@ extension Double : FloatingPointType {
     /// A quiet NaN.
     static var quietNaN: Double { get }
 
-    /// `true` iff `self` is negative
+    /// `true` iff `self` is negative.
     var isSignMinus: Bool { get }
 
     /// `true` iff `self` is normal (not zero, subnormal, infinity, or
@@ -2925,7 +3395,7 @@ extension Double : IntegerLiteralConvertible {
 }
 
 extension Double {
-    init(_builtinFloatLiteral value: Builtin.FPIEEE64)
+    init(_builtinFloatLiteral value: Builtin.FPIEEE80)
 }
 
 extension Double : FloatLiteralConvertible {
@@ -2934,24 +3404,24 @@ extension Double : FloatLiteralConvertible {
     init(floatLiteral value: Double)
 }
 
-extension Double : Comparable {
+extension Double : Comparable, Equatable {
 }
 
 extension Double : Hashable {
 
     /// The hash value.
     ///
-    /// **Axiom:** `x == y` implies `x.hashValue == y.hashValue`
+    /// **Axiom:** `x == y` implies `x.hashValue == y.hashValue`.
     ///
-    /// **Note:** the hash value is not guaranteed to be stable across
-    /// different invocations of the same program.  Do not persist the
-    /// hash value across program runs.
+    /// - Note: The hash value is not guaranteed to be stable across
+    ///   different invocations of the same program.  Do not persist the
+    ///   hash value across program runs.
     var hashValue: Int { get }
 }
 
-extension Double : AbsoluteValuable {
+extension Double : SignedNumberType, AbsoluteValuable {
 
-    /// Returns the absolute value of `x`
+    /// Returns the absolute value of `x`.
     static func abs(x: Double) -> Double
 }
 
@@ -2972,21 +3442,38 @@ extension Double {
 
     /// Construct an instance that approximates `other`.
     init(_ other: Float)
+
+    /// Construct an instance that approximates `other`.
+    init(_ other: Float80)
 }
 
-extension Double : Strideable {
+extension Double : Strideable, _Strideable {
 
     /// Returns a stride `x` such that `self.advancedBy(x)` approximates
     /// `other`.
     ///
-    /// Complexity: O(1).
+    /// - Complexity: O(1).
     func distanceTo(other: Double) -> Double
 
     /// Returns a `Self` `x` such that `self.distanceTo(x)` approximates
     /// `n`.
     ///
-    /// Complexity: O(1).
+    /// - Complexity: O(1).
     func advancedBy(amount: Double) -> Double
+}
+
+extension Double {
+
+    /// Construct from an ASCII representation.
+    ///
+    /// Returns the result of calling the POSIX function
+    /// `strtod_l` using the "C" locale, unless
+    /// `text` contains non-ASCII text or whitespace, or is not
+    /// completely consumed by the call. Otherwise, returns `nil`.
+    ///
+    /// See the `strtod (3)` man page for details of
+    /// the exact format accepted.
+    init?(_ text: String)
 }
 
 extension Double : Reflectable {
@@ -2995,19 +3482,15 @@ extension Double : Reflectable {
     func getMirror() -> MirrorType
 }
 
-extension Double : _CVarArgPassedAsDouble {
-
-    /// Transform `self` into a series of machine words that can be
-    /// appropriately interpreted by C varargs
-    func encode() -> [Word]
+extension Double : _CVarArgPassedAsDouble, CVarArgType, _CVarArgAlignedType {
 }
 
 
 /// A collection whose element type is `T` but that is always empty.
-struct EmptyCollection<T> : CollectionType {
+struct EmptyCollection<T> : CollectionType, SequenceType, _CollectionDefaultsType, _CollectionGeneratorDefaultsType {
 
     /// A type that represents a valid position in the collection.
-    /// 
+    ///
     /// Valid indices consist of the position of every element and a
     /// "past the end" position that's not valid for use as a subscript.
     typealias Index = Int
@@ -3023,9 +3506,12 @@ struct EmptyCollection<T> : CollectionType {
 
     /// Returns an empty *generator*.
     ///
-    /// Complexity: O(1)
+    /// - Complexity: O(1).
     func generate() -> EmptyGenerator<T>
     subscript (position: Index) -> T { get }
+
+    /// Return the number of elements (always zero).
+    var count: Int { get }
 }
 
 extension EmptyCollection : Reflectable {
@@ -3037,14 +3523,14 @@ extension EmptyCollection : Reflectable {
 
 /// A generator that never produces an element.
 ///
-/// See also: `EmptyCollection<T>`.
+/// - SeeAlso: `EmptyCollection<T>`.
 struct EmptyGenerator<T> : GeneratorType, SequenceType {
 
-    /// Construct an instance
+    /// Construct an instance.
     init()
 
-    /// `EmptyGenerator` is also a `SequenceType`, so it `generate`\ 's
-    /// a copy of itself
+    /// `EmptyGenerator` is also a `SequenceType`, so it `generate`'s
+    /// a copy of itself.
     func generate() -> EmptyGenerator<T>
 
     /// Return `nil`, indicating that there are no more elements.
@@ -3055,57 +3541,57 @@ struct EmptyGenerator<T> : GeneratorType, SequenceType {
 /// The `GeneratorType` for `EnumerateSequence`.  `EnumerateGenerator`
 /// wraps a `Base` `GeneratorType` and yields successive `Int` values,
 /// starting at zero, along with the elements of the underlying
-/// `Base`::
+/// `Base`:
 ///
-///   var g = EnumerateGenerator(["foo", "bar"].generate())
-///   g.next() // (0, "foo")
-///   g.next() // (1, "bar")
-///   g.next() // nil
+///     var g = EnumerateGenerator(["foo", "bar"].generate())
+///     g.next() // (0, "foo")
+///     g.next() // (1, "bar")
+///     g.next() // nil
 ///
-/// Note:: idiomatic usage is to call `enumerate` instead of
-/// constructing an `EnumerateGenerator` directly.
+/// - Note: Idiomatic usage is to call `enumerate` instead of
+///   constructing an `EnumerateGenerator` directly.
 struct EnumerateGenerator<Base : GeneratorType> : GeneratorType, SequenceType {
 
     /// The type of element returned by `next()`.
     typealias Element = (index: Int, element: Base.Element)
 
-    /// Construct from a `Base` generator
+    /// Construct from a `Base` generator.
     init(_ base: Base)
 
     /// Advance to the next element and return it, or `nil` if no next
     /// element exists.
     ///
-    /// Requires: no preceding call to `self.next()` has returned `nil`.
-    mutating func next() -> Element?
+    /// - Requires: No preceding call to `self.next()` has returned `nil`.
+    mutating func next() -> (index: Int, element: Base.Element)?
 
     /// A type whose instances can produce the elements of this
     /// sequence, in order.
     typealias Generator = EnumerateGenerator<Base>
 
     /// `EnumerateGenerator` is also a `SequenceType`, so it
-    /// `generate`\ s a copy of itself
+    /// `generate`s a copy of itself.
     func generate() -> EnumerateGenerator<Base>
 }
 
 
 /// The `SequenceType` returned by `enumerate()`.  `EnumerateSequence`
-/// is a sequence of pairs (*n*, *x*), where *n*\ s are consecutive
-/// `Int`\ s starting at zero, and *x*\ s are the elements of a `Base`
-/// `SequenceType`::
+/// is a sequence of pairs (*n*, *x*), where *n*s are consecutive
+/// `Int`s starting at zero, and *x*s are the elements of a `Base`
+/// `SequenceType`:
 ///
-///   var s = EnumerateSequence(["foo", "bar"])
-///   Array(s) // [(0, "foo"), (1, "bar")]
+///     var s = EnumerateSequence(["foo", "bar"])
+///     Array(s) // [(0, "foo"), (1, "bar")]
 ///
-/// Note:: idiomatic usage is to call `enumerate` instead of
-/// constructing an `EnumerateSequence` directly.
+/// - Note: Idiomatic usage is to call `enumerate` instead of
+///   constructing an `EnumerateSequence` directly.
 struct EnumerateSequence<Base : SequenceType> : SequenceType {
 
-    /// Construct from a `Base` sequence
+    /// Construct from a `Base` sequence.
     init(_ base: Base)
 
-    /// Return a *generator* over the elements of this *sequence*.
+    /// Returns a *generator* over the elements of this *sequence*.
     ///
-    /// Complexity: O(1)
+    /// - Complexity: O(1).
     func generate() -> EnumerateGenerator<Base.Generator>
 }
 
@@ -3128,7 +3614,7 @@ protocol Equatable {
     /// non-value aspects of `Equatable` types is discouraged, and any
     /// that *are* exposed should be explicitly pointed out in
     /// documentation.
-    /// 
+    ///
     /// **Equality is an equivalence relation**
     ///
     /// - `x == x` is `true`
@@ -3136,29 +3622,62 @@ protocol Equatable {
     /// - `x == y` and `y == z` implies `x == z`
     ///
     /// **Inequality is the inverse of equality**, i.e. `!(x == y)` iff
-    /// `x != y`
+    /// `x != y`.
     func ==(lhs: Self, rhs: Self) -> Bool
+}
+
+protocol ErrorType {
 }
 
 
 /// Conforming types can be initialized with string literals
-/// containing a single `Unicode extended grapheme cluster
-/// <http://www.unicode.org/glossary/#extended_grapheme_cluster>`_.
+/// containing a single [Unicode extended grapheme cluster](http://www.unicode.org/glossary/#extended_grapheme_cluster).
 protocol ExtendedGraphemeClusterLiteralConvertible : UnicodeScalarLiteralConvertible {
     typealias ExtendedGraphemeClusterLiteralType
 
     /// Create an instance initialized to `value`.
-    init(extendedGraphemeClusterLiteral value: ExtendedGraphemeClusterLiteralType)
+    init(extendedGraphemeClusterLiteral value: Self.ExtendedGraphemeClusterLiteralType)
 }
 
 
-/// The default type for an otherwise-unconstrained unicode extended
-/// grapheme cluster literal
+/// The default type for an otherwise-unconstrained Unicode extended
+/// grapheme cluster literal.
 typealias ExtendedGraphemeClusterType = String
 
 
 /// A collection type that can be efficiently appended-to.
-protocol ExtensibleCollectionType : _ExtensibleCollectionType {
+protocol ExtensibleCollectionType : CollectionType {
+
+    /// Create an empty instance.
+    init()
+
+    /// A non-binding request to ensure `n` elements of available storage.
+    ///
+    /// This works as an optimization to avoid multiple reallocations of
+    /// linear data structures like `Array`.  Conforming types may
+    /// reserve more than `n`, exactly `n`, less than `n` elements of
+    /// storage, or even ignore the request completely.
+    mutating func reserveCapacity(n: Self.Index.Distance)
+
+    /// Append `x` to `self`.
+    ///
+    /// Applying `successor()` to the index of the new element yields
+    /// `self.endIndex`.
+    ///
+    /// - Complexity: Amortized O(1).
+    mutating func append(x: Self.Generator.Element)
+
+    /// Append the elements of `newElements` to `self`.
+    ///
+    /// - Complexity: O(*length of result*).
+    ///
+    /// A possible implementation:
+    ///
+    ///     reserveCapacity(self.count + newElements.underestimateCount())
+    ///     for x in newElements {
+    ///       self.append(x)
+    ///     }
+    mutating func extend<S : SequenceType where S.Generator.Element == Generator.Element>(newElements: S)
 }
 
 
@@ -3175,10 +3694,10 @@ protocol ExtensibleCollectionType : _ExtensibleCollectionType {
 ///   of the collection before traversing it to read the elements.
 ///   This causes the filter predicate to be called twice for each
 ///   element of the underlying collection, which is surprising.
-struct FilterCollectionView<Base : CollectionType> : CollectionType {
+struct FilterCollectionView<Base : CollectionType> : CollectionType, SequenceType, _CollectionDefaultsType, _CollectionGeneratorDefaultsType {
 
     /// A type that represents a valid position in the collection.
-    /// 
+    ///
     /// Valid indices consist of the position of every element and a
     /// "past the end" position that's not valid for use as a subscript.
     typealias Index = FilterCollectionViewIndex<Base>
@@ -3189,10 +3708,10 @@ struct FilterCollectionView<Base : CollectionType> : CollectionType {
 
     /// The position of the first element in a non-empty collection.
     ///
-    /// Identical to `endIndex` in an empty collection.
+    /// In an empty collection, `startIndex == endIndex`.
     ///
-    /// Complexity: O(N), where N is the ratio between unfiltered and
-    /// filtered collection counts.
+    /// - Complexity: O(N), where N is the ratio between unfiltered and
+    ///   filtered collection counts.
     var startIndex: FilterCollectionViewIndex<Base> { get }
 
     /// The collection's "past the end" position.
@@ -3201,52 +3720,52 @@ struct FilterCollectionView<Base : CollectionType> : CollectionType {
     /// reachable from `startIndex` by zero or more applications of
     /// `successor()`.
     ///
-    /// Complexity: O(1)
+    /// - Complexity: O(1).
     var endIndex: FilterCollectionViewIndex<Base> { get }
     subscript (position: FilterCollectionViewIndex<Base>) -> Base.Generator.Element { get }
 
     /// Return a *generator* over the elements of this *sequence*.
     ///
-    /// Complexity: O(1)
+    /// - Complexity: O(1).
     func generate() -> FilterGenerator<Base.Generator>
 }
 
 
-/// The `Index` used for subscripting a `FilterCollectionView`
-struct FilterCollectionViewIndex<Base : CollectionType> : ForwardIndexType {
+/// The `Index` used for subscripting a `FilterCollectionView`.
+struct FilterCollectionViewIndex<Base : CollectionType> : ForwardIndexType, _Incrementable, Equatable {
 
     /// Returns the next consecutive value after `self`.
     ///
-    /// Requires: the next value is representable.
+    /// - Requires: The next value is representable.
     func successor() -> FilterCollectionViewIndex<Base>
 }
 
 
 /// The `GeneratorType` used by `FilterSequenceView` and
-/// `FilterCollectionView`
+/// `FilterCollectionView`.
 struct FilterGenerator<Base : GeneratorType> : GeneratorType, SequenceType {
 
     /// Advance to the next element and return it, or `nil` if no next
     /// element exists.
     ///
-    /// Requires: `next()` has not been applied to a copy of `self`
-    /// since the copy was made, and no preceding call to `self.next()`
-    /// has returned `nil`.
+    /// - Requires: `next()` has not been applied to a copy of `self`
+    ///   since the copy was made, and no preceding call to `self.next()`
+    ///   has returned `nil`.
     mutating func next() -> Base.Element?
 
-    /// `FilterGenerator` is also a `SequenceType`, so it `generate`\ 's
-    /// a copy of itself
+    /// `FilterGenerator` is also a `SequenceType`, so it `generate`'s
+    /// a copy of itself.
     func generate() -> FilterGenerator<Base>
 }
 
 
 /// The lazy `SequenceType` returned by `filter(c)` where `c` is a
-/// `SequenceType`
+/// `SequenceType`.
 struct FilterSequenceView<Base : SequenceType> : SequenceType {
 
     /// Return a *generator* over the elements of this *sequence*.
     ///
-    /// Complexity: O(1)
+    /// - Complexity: O(1).
     func generate() -> FilterGenerator<Base.Generator>
 }
 
@@ -3260,7 +3779,7 @@ struct Float {
     init(_ value: Float)
 }
 
-extension Float : Printable {
+extension Float : CustomStringConvertible {
 
     /// A textual representation of `self`.
     var description: String { get }
@@ -3277,7 +3796,7 @@ extension Float : FloatingPointType {
     /// A quiet NaN.
     static var quietNaN: Float { get }
 
-    /// `true` iff `self` is negative
+    /// `true` iff `self` is negative.
     var isSignMinus: Bool { get }
 
     /// `true` iff `self` is normal (not zero, subnormal, infinity, or
@@ -3318,7 +3837,7 @@ extension Float : IntegerLiteralConvertible {
 }
 
 extension Float {
-    init(_builtinFloatLiteral value: Builtin.FPIEEE64)
+    init(_builtinFloatLiteral value: Builtin.FPIEEE80)
 }
 
 extension Float : FloatLiteralConvertible {
@@ -3327,24 +3846,24 @@ extension Float : FloatLiteralConvertible {
     init(floatLiteral value: Float)
 }
 
-extension Float : Comparable {
+extension Float : Comparable, Equatable {
 }
 
 extension Float : Hashable {
 
     /// The hash value.
     ///
-    /// **Axiom:** `x == y` implies `x.hashValue == y.hashValue`
+    /// **Axiom:** `x == y` implies `x.hashValue == y.hashValue`.
     ///
-    /// **Note:** the hash value is not guaranteed to be stable across
-    /// different invocations of the same program.  Do not persist the
-    /// hash value across program runs.
+    /// - Note: The hash value is not guaranteed to be stable across
+    ///   different invocations of the same program.  Do not persist the
+    ///   hash value across program runs.
     var hashValue: Int { get }
 }
 
-extension Float : AbsoluteValuable {
+extension Float : SignedNumberType, AbsoluteValuable {
 
-    /// Returns the absolute value of `x`
+    /// Returns the absolute value of `x`.
     static func abs(x: Float) -> Float
 }
 
@@ -3365,21 +3884,38 @@ extension Float {
 
     /// Construct an instance that approximates `other`.
     init(_ other: Double)
+
+    /// Construct an instance that approximates `other`.
+    init(_ other: Float80)
 }
 
-extension Float : Strideable {
+extension Float : Strideable, _Strideable {
 
     /// Returns a stride `x` such that `self.advancedBy(x)` approximates
     /// `other`.
     ///
-    /// Complexity: O(1).
+    /// - Complexity: O(1).
     func distanceTo(other: Float) -> Float
 
     /// Returns a `Self` `x` such that `self.distanceTo(x)` approximates
     /// `n`.
     ///
-    /// Complexity: O(1).
+    /// - Complexity: O(1).
     func advancedBy(amount: Float) -> Float
+}
+
+extension Float {
+
+    /// Construct from an ASCII representation.
+    ///
+    /// Returns the result of calling the POSIX function
+    /// `strtof_l` using the "C" locale, unless
+    /// `text` contains non-ASCII text or whitespace, or is not
+    /// completely consumed by the call. Otherwise, returns `nil`.
+    ///
+    /// See the `strtof (3)` man page for details of
+    /// the exact format accepted.
+    init?(_ text: String)
 }
 
 extension Float : Reflectable {
@@ -3388,32 +3924,133 @@ extension Float : Reflectable {
     func getMirror() -> MirrorType
 }
 
-extension Float : _CVarArgPassedAsDouble {
-
-    /// Transform `self` into a series of machine words that can be
-    /// appropriately interpreted by C varargs
-    func encode() -> [Word]
+extension Float : _CVarArgPassedAsDouble, CVarArgType, _CVarArgAlignedType {
 }
 
 
-/// A 32-bit floating point type
+/// A 32-bit floating point type.
 typealias Float32 = Float
 
 
-/// A 64-bit floating point type
+/// A 64-bit floating point type.
 typealias Float64 = Double
 
+struct Float80 {
 
-/// Conforming types can be initialized with floating point literals
+    /// Create an instance initialized to zero.
+    init()
+    init(_bits v: Builtin.FPIEEE80)
+
+    /// Create an instance initialized to `value`.
+    init(_ value: Float80)
+}
+
+extension Float80 : CustomStringConvertible {
+
+    /// A textual representation of `self`.
+    var description: String { get }
+}
+
+extension Float80 : IntegerLiteralConvertible {
+    init(_builtinIntegerLiteral value: Builtin.Int2048)
+
+    /// Create an instance initialized to `value`.
+    init(integerLiteral value: Int64)
+}
+
+extension Float80 {
+    init(_builtinFloatLiteral value: Builtin.FPIEEE80)
+}
+
+extension Float80 : FloatLiteralConvertible {
+
+    /// Create an instance initialized to `value`.
+    init(floatLiteral value: Float80)
+}
+
+extension Float80 : Comparable, Equatable {
+}
+
+extension Float80 : Hashable {
+
+    /// The hash value.
+    ///
+    /// **Axiom:** `x == y` implies `x.hashValue == y.hashValue`.
+    ///
+    /// - Note: The hash value is not guaranteed to be stable across
+    ///   different invocations of the same program.  Do not persist the
+    ///   hash value across program runs.
+    var hashValue: Int { get }
+}
+
+extension Float80 : AbsoluteValuable, SignedNumberType {
+
+    /// Returns the absolute value of `x`.
+    static func abs(x: Float80) -> Float80
+}
+
+extension Float80 {
+    init(_ v: UInt8)
+    init(_ v: Int8)
+    init(_ v: UInt16)
+    init(_ v: Int16)
+    init(_ v: UInt32)
+    init(_ v: Int32)
+    init(_ v: UInt64)
+    init(_ v: Int64)
+    init(_ v: UInt)
+    init(_ v: Int)
+}
+
+extension Float80 {
+
+    /// Construct an instance that approximates `other`.
+    init(_ other: Float)
+
+    /// Construct an instance that approximates `other`.
+    init(_ other: Double)
+}
+
+extension Float80 : Strideable, _Strideable {
+
+    /// Returns a stride `x` such that `self.advancedBy(x)` approximates
+    /// `other`.
+    ///
+    /// - Complexity: O(1).
+    func distanceTo(other: Float80) -> Float80
+
+    /// Returns a `Self` `x` such that `self.distanceTo(x)` approximates
+    /// `n`.
+    ///
+    /// - Complexity: O(1).
+    func advancedBy(amount: Float80) -> Float80
+}
+
+extension Float80 {
+
+    /// Construct from an ASCII representation.
+    ///
+    /// Returns the result of calling the POSIX function
+    /// `strtold_l` using the "C" locale, unless
+    /// `text` contains non-ASCII text or whitespace, or is not
+    /// completely consumed by the call. Otherwise, returns `nil`.
+    ///
+    /// See the `strtold (3)` man page for details of
+    /// the exact format accepted.
+    init?(_ text: String)
+}
+
+
+/// Conforming types can be initialized with floating point literals.
 protocol FloatLiteralConvertible {
     typealias FloatLiteralType
 
     /// Create an instance initialized to `value`.
-    init(floatLiteral value: FloatLiteralType)
+    init(floatLiteral value: Self.FloatLiteralType)
 }
 
 
-/// The default type for an otherwise-unconstrained floating point literal
+/// The default type for an otherwise-unconstrained floating point literal.
 typealias FloatLiteralType = Double
 
 
@@ -3437,9 +4074,6 @@ extension FloatingPointClassification : Equatable {
 
 /// A set of common requirements for Swift's floating point types.
 protocol FloatingPointType : Strideable {
-    typealias _BitsType
-    static func _fromBitPattern(bits: _BitsType) -> Self
-    func _toBitPattern() -> _BitsType
 
     /// Create an instance initialized to `value`.
     init(_ value: UInt8)
@@ -3480,12 +4114,10 @@ protocol FloatingPointType : Strideable {
     /// A quiet NaN.
     static var quietNaN: Self { get }
 
-    /// @{
-    /// IEEE 754-2008 Non-computational operations.
     /// The IEEE 754 "class" of this type.
     var floatingPointClass: FloatingPointClassification { get }
 
-    /// `true` iff `self` is negative
+    /// `true` iff `self` is negative.
     var isSignMinus: Bool { get }
 
     /// `true` iff `self` is normal (not zero, subnormal, infinity, or
@@ -3516,37 +4148,14 @@ protocol FloatingPointType : Strideable {
 /// Represents a discrete value in a series, where a value's
 /// successor, if any, is reachable by applying the value's
 /// `successor()` method.
-protocol ForwardIndexType : _ForwardIndexType {
-}
+protocol ForwardIndexType : _Incrementable {
 
-
-/// A type-erased generator.
-///
-/// The generator for `SequenceOf<T>`.  Forwards operations to an
-/// arbitrary underlying generator with the same `Element` type,
-/// hiding the specifics of the underlying generator type.
-///
-/// See also: `SequenceOf<T>`.
-struct GeneratorOf<T> : GeneratorType, SequenceType {
-
-    /// Construct an instance whose `next()` method calls `nextElement`.
-    init(_ nextElement: () -> T?)
-
-    /// Construct an instance whose `next()` method pulls its results
-    /// from `base`.
-    init<G : GeneratorType where T == T>(_ base: G)
-
-    /// Advance to the next element and return it, or `nil` if no next
-    /// element exists.
+    /// A type that can represent the number of steps between pairs of
+    /// `Self` values where one value is reachable from the other.
     ///
-    /// Requires: `next()` has not been applied to a copy of `self`
-    /// since the copy was made, and no preceding call to `self.next()`
-    /// has returned `nil`.
-    mutating func next() -> T?
-
-    /// `GeneratorOf<T>` is also a `SequenceType`, so it `generate`\ s
-    /// a copy of itself
-    func generate() -> GeneratorOf<T>
+    /// Reachability is defined by the ability to produce one value from
+    /// the other via zero or more applications of `successor`.
+    typealias Distance : _SignedIntegerType = Int
 }
 
 
@@ -3557,26 +4166,26 @@ struct GeneratorOfOne<T> : GeneratorType, SequenceType {
     /// sequence if `element == nil`.
     init(_ element: T?)
 
-    /// `GeneratorOfOne` is also a `SequenceType`, so it `generate`\ s a
-    /// copy of itself
+    /// `GeneratorOfOne` is also a `SequenceType`, so it `generate`s a
+    /// copy of itself.
     func generate() -> GeneratorOfOne<T>
 
     /// Advance to the next element and return it, or `nil` if no next
     /// element exists.
     ///
-    /// Requires: `next()` has not been applied to a copy of `self`
-    /// since the copy was made, and no preceding call to `self.next()`
-    /// has returned `nil`.
+    /// - Requires: `next()` has not been applied to a copy of `self`
+    ///   since the copy was made, and no preceding call to `self.next()`
+    ///   has returned `nil`.
     mutating func next() -> T?
 }
 
 
 /// A sequence built around a generator of type `G`.
 ///
-/// Useful mostly to recover the ability to use `for`\ ...\ `in`,
-/// given just a generator `g`::
+/// Useful mostly to recover the ability to use `for`...`in`,
+/// given just a generator `g`:
 ///
-///   for x in GeneratorSequence(g) { ... }
+///     for x in GeneratorSequence(g) { ... }
 struct GeneratorSequence<G : GeneratorType> : GeneratorType, SequenceType {
 
     /// Construct an instance whose generator is a copy of `base`.
@@ -3585,14 +4194,14 @@ struct GeneratorSequence<G : GeneratorType> : GeneratorType, SequenceType {
     /// Advance to the next element and return it, or `nil` if no next
     /// element exists.
     ///
-    /// Requires: `next()` has not been applied to a copy of `self`
-    /// since the copy was made, and no preceding call to `self.next()`
-    /// has returned `nil`.
+    /// - Requires: `next()` has not been applied to a copy of `self`
+    ///   since the copy was made, and no preceding call to `self.next()`
+    ///   has returned `nil`.
     mutating func next() -> G.Element?
 
-    /// Return a *generator* over the elements of this *sequence*.
+    /// Returns a *generator* over the elements of this *sequence*.
     ///
-    /// Complexity: O(1)
+    /// - Complexity: O(1).
     func generate() -> GeneratorSequence<G>
 }
 
@@ -3600,10 +4209,10 @@ struct GeneratorSequence<G : GeneratorType> : GeneratorType, SequenceType {
 /// Encapsulates iteration state and interface for iteration over a
 /// *sequence*.
 ///
-/// **Note:** While it is safe to copy a *generator*, advancing one
-/// copy may invalidate the others.
+/// - Note: While it is safe to copy a *generator*, advancing one
+///   copy may invalidate the others.
 ///
-/// Any code that uses multiple generators (or `for`\ ...\ `in` loops)
+/// Any code that uses multiple generators (or `for`...`in` loops)
 /// over a single *sequence* should have static knowledge that the
 /// specific *sequence* is multi-pass, either because its concrete
 /// type is known or because it is constrained to `CollectionType`.
@@ -3617,33 +4226,38 @@ protocol GeneratorType {
     /// Advance to the next element and return it, or `nil` if no next
     /// element exists.
     ///
-    /// Requires: `next()` has not been applied to a copy of `self`
-    /// since the copy was made, and no preceding call to `self.next()`
-    /// has returned `nil`.  Specific implementations of this protocol
-    /// are encouraged to respond to violations of this requirement by
-    /// calling `preconditionFailure("...")`.
-    mutating func next() -> Element?
+    /// - Requires: `next()` has not been applied to a copy of `self`
+    ///   since the copy was made, and no preceding call to `self.next()`
+    ///   has returned `nil`.  Specific implementations of this protocol
+    ///   are encouraged to respond to violations of this requirement by
+    ///   calling `preconditionFailure("...")`.
+    mutating func next() -> Self.Element?
 }
 
 
 /// A half-open `IntervalType`, which contains its `start` but not its
 /// `end`.  Can represent an empty interval.
-struct HalfOpenInterval<T : Comparable> : IntervalType, Equatable, Printable, DebugPrintable, Reflectable {
+struct HalfOpenInterval<T : Comparable> : IntervalType, Equatable, CustomStringConvertible, CustomDebugStringConvertible, Reflectable {
 
-    /// The type of the `Interval`\ 's endpoints
+    /// The type of the `Interval`'s endpoints.
     typealias Bound = T
 
-    /// Construct a copy of `x`
+    /// Construct a copy of `x`.
     init(_ x: HalfOpenInterval<T>)
 
-    /// Construct an interval with the given bounds.  Requires: `start`
-    /// <= `end`.
+    /// Construct an interval with the given bounds.
+    ///
+    /// - Requires: `start <= end`.
     init(_ start: T, _ end: T)
 
-    /// The `Interval`\ 's lower bound. Invariant: `start` <= `end`
+    /// The `Interval`'s lower bound.
+    ///
+    /// Invariant: `start` <= `end`.
     var start: T { get }
 
-    /// The `Interval`\ 's upper bound. Invariant: `start` <= `end`
+    /// The `Interval`'s upper bound.
+    ///
+    /// Invariant: `start` <= `end`.
     var end: T { get }
 
     /// A textual representation of `self`.
@@ -3652,12 +4266,13 @@ struct HalfOpenInterval<T : Comparable> : IntervalType, Equatable, Printable, De
     /// A textual representation of `self`, suitable for debugging.
     var debugDescription: String { get }
 
-    /// Returns `true` iff the `Interval` contains `x`
+    /// Returns `true` iff the `Interval` contains `x`.
     func contains(x: T) -> Bool
 
-    /// Return `intervalToClamp` clamped to `self`.  The bounds of the
-    /// result, even if it is empty, are always limited to the bounds of
-    /// `self`
+    /// Returns `intervalToClamp` clamped to `self`.
+    ///
+    /// The bounds of the result, even if it is empty, are always limited to the bounds of
+    /// `self`.
     func clamp(intervalToClamp: HalfOpenInterval<T>) -> HalfOpenInterval<T>
 
     /// Returns a mirror that reflects `self`.
@@ -3677,11 +4292,11 @@ protocol Hashable : Equatable {
 
     /// The hash value.
     ///
-    /// **Axiom:** `x == y` implies `x.hashValue == y.hashValue`
+    /// **Axiom:** `x == y` implies `x.hashValue == y.hashValue`.
     ///
-    /// **Note:** the hash value is not guaranteed to be stable across
-    /// different invocations of the same program.  Do not persist the
-    /// hash value across program runs.
+    /// - Note: The hash value is not guaranteed to be stable across
+    ///   different invocations of the same program.  Do not persist the
+    ///   hash value across program runs.
     var hashValue: Int { get }
 }
 
@@ -3690,7 +4305,7 @@ protocol Hashable : Equatable {
 /// magic).
 ///
 /// The compiler has special knowledge of the existence of
-/// ImplicitlyUnwrappedOptional<T>, but always interacts with it using the
+/// `ImplicitlyUnwrappedOptional<T>`, but always interacts with it using the
 /// library intrinsics below.
 enum ImplicitlyUnwrappedOptional<T> : Reflectable, NilLiteralConvertible {
     case None
@@ -3699,7 +4314,7 @@ enum ImplicitlyUnwrappedOptional<T> : Reflectable, NilLiteralConvertible {
     /// Construct a `nil` instance.
     init()
 
-    /// Construct a non-\ `nil` instance that stores `some`.
+    /// Construct a non-`nil` instance that stores `some`.
     init(_ some: T)
 
     /// Construct an instance from an explicitly unwrapped optional
@@ -3710,16 +4325,16 @@ enum ImplicitlyUnwrappedOptional<T> : Reflectable, NilLiteralConvertible {
     init(nilLiteral: ())
 
     /// If `self == nil`, returns `nil`.  Otherwise, returns `f(self!)`.
-    func map<U>(f: @noescape (T) -> U) -> U!
+    func map<U>(@noescape f: (T) -> U) -> U!
 
-    /// Returns `f(self)!` iff `self` and `f(self)` are not nil.
-    func flatMap<U>(f: @noescape (T) -> U!) -> U!
+    /// Returns `nil` if `self` is nil, `f(self!)` otherwise.
+    func flatMap<U>(@noescape f: (T) -> U!) -> U!
 
     /// Returns a mirror that reflects `self`.
     func getMirror() -> MirrorType
 }
 
-extension ImplicitlyUnwrappedOptional : Printable {
+extension ImplicitlyUnwrappedOptional : CustomStringConvertible {
 
     /// A textual representation of `self`.
     var description: String { get }
@@ -3731,39 +4346,37 @@ extension ImplicitlyUnwrappedOptional : _ObjectiveCBridgeable {
 
 /// A *generator* for an arbitrary *collection*.  Provided `C`
 /// conforms to the other requirements of *CollectionType*,
-/// `IndexingGenerator<C>` can be used as the result of `C`\ 's
+/// `IndexingGenerator<C>` can be used as the result of `C`'s
 /// `generate()` method.  For example:
 ///
-/// .. parsed-literal::
-///
-///    struct MyCollection : CollectionType {
-///      struct Index : ForwardIndexType { *implementation hidden* }
-///      subscript(i: Index) -> MyElement { *implementation hidden* }
-///      func generate() -> **IndexingGenerator<MyCollection>** {
-///        return IndexingGenerator(self)
+///      struct MyCollection : CollectionType {
+///        struct Index : ForwardIndexType { /* implementation hidden */ }
+///        subscript(i: Index) -> MyElement { /* implementation hidden */ }
+///        func generate() -> IndexingGenerator<MyCollection> { // <===
+///          return IndexingGenerator(self)
+///        }
 ///      }
-///    }
-struct IndexingGenerator<C : _CollectionType> : GeneratorType, SequenceType {
+struct IndexingGenerator<C : _CollectionGeneratorDefaultsType> : GeneratorType, SequenceType {
 
-    /// Create a *generator* over the given collection
+    /// Create a *generator* over the given collection.
     init(_ seq: C)
 
-    /// Return a *generator* over the elements of this *sequence*.
+    /// Returns a *generator* over the elements of this *sequence*.
     ///
-    /// Complexity: O(1)
+    /// - Complexity: O(1).
     func generate() -> IndexingGenerator<C>
 
     /// Advance to the next element and return it, or `nil` if no next
     /// element exists.
     ///
-    /// Requires: no preceding call to `self.next()` has returned `nil`.
+    /// - Requires: No preceding call to `self.next()` has returned `nil`.
     mutating func next() -> C._Element?
 }
 
 
 /// A 64-bit signed integer value
 /// type.
-struct Int : SignedIntegerType {
+struct Int : Equatable, _SignedIntegerType, Comparable, _IntegerType, IntegerArithmeticType, _IntegerArithmeticType, SignedIntegerType, IntegerType {
     var value: Builtin.Int64
 
     /// A type that can represent the number of steps between pairs of
@@ -3807,45 +4420,45 @@ extension Int : Hashable {
 
     /// The hash value.
     ///
-    /// **Axiom:** `x == y` implies `x.hashValue == y.hashValue`
+    /// **Axiom:** `x == y` implies `x.hashValue == y.hashValue`.
     ///
-    /// **Note:** the hash value is not guaranteed to be stable across
-    /// different invocations of the same program.  Do not persist the
-    /// hash value across program runs.
+    /// - Note: The hash value is not guaranteed to be stable across
+    ///   different invocations of the same program.  Do not persist the
+    ///   hash value across program runs.
     var hashValue: Int { get }
 }
 
-extension Int : Printable {
+extension Int : CustomStringConvertible {
 
     /// A textual representation of `self`.
     var description: String { get }
 }
 
-extension Int : RandomAccessIndexType {
+extension Int : ForwardIndexType, _Incrementable, RandomAccessIndexType, BidirectionalIndexType, Strideable, _Strideable {
 
     /// Returns the next consecutive value after `self`.
     ///
-    /// Requires: the next value is representable.
+    /// - Requires: The next value is representable.
     func successor() -> Int
 
     /// Returns the previous consecutive value before `self`.
     ///
-    /// Requires: the previous value is representable.
+    /// - Requires: The previous value is representable.
     func predecessor() -> Int
 
     /// Return the minimum number of applications of `successor` or
     /// `predecessor` required to reach `other` from `self`.
     ///
-    /// Complexity: O(1).
+    /// - Complexity: O(1).
     func distanceTo(other: Int) -> Distance
 
     /// Return `self` offset by `n` steps.
     ///
-    /// :returns: If `n > 0`, the result of applying `successor` to
-    /// `self` `n` times.  If `n < 0`, the result of applying
-    /// `predecessor` to `self` `-n` times. Otherwise, `self`.
+    /// - Returns: If `n > 0`, the result of applying `successor` to
+    ///   `self` `n` times.  If `n < 0`, the result of applying
+    ///   `predecessor` to `self` `-n` times. Otherwise, `self`.
     ///
-    /// Complexity: O(1)
+    /// - Complexity: O(1).
     func advancedBy(amount: Distance) -> Int
 }
 
@@ -3881,7 +4494,7 @@ extension Int {
     func toIntMax() -> IntMax
 }
 
-extension Int : SignedNumberType {
+extension Int : SignedNumberType, IntegerLiteralConvertible {
 }
 
 extension Int {
@@ -3928,6 +4541,19 @@ extension Int {
 
     /// Construct an instance that approximates `other`.
     init(_ other: Double)
+
+    /// Construct an instance that approximates `other`.
+    init(_ other: Float80)
+}
+
+extension Int {
+
+    /// Construct from an ASCII representation in the given `radix`.
+    ///
+    /// If `text` does not match the regular expression
+    /// "[+-][0-9a-zA-Z]+", or the value it denotes in the given `radix`
+    /// is not representable, the result is `nil`.
+    init?(_ text: String, radix: Int = default)
 }
 
 extension Int : Reflectable {
@@ -3936,17 +4562,16 @@ extension Int : Reflectable {
     func getMirror() -> MirrorType
 }
 
-extension Int : CVarArgType {
+extension Int : MirrorPathType {
+}
 
-    /// Transform `self` into a series of machine words that can be
-    /// appropriately interpreted by C varargs
-    func encode() -> [Word]
+extension Int : CVarArgType {
 }
 
 
 /// A 16-bit signed integer value
 /// type.
-struct Int16 : SignedIntegerType {
+struct Int16 : SignedIntegerType, IntegerType, Equatable, Comparable, _IntegerType, IntegerArithmeticType, _IntegerArithmeticType, _SignedIntegerType {
     var value: Builtin.Int16
 
     /// A type that can represent the number of steps between pairs of
@@ -3989,45 +4614,45 @@ extension Int16 : Hashable {
 
     /// The hash value.
     ///
-    /// **Axiom:** `x == y` implies `x.hashValue == y.hashValue`
+    /// **Axiom:** `x == y` implies `x.hashValue == y.hashValue`.
     ///
-    /// **Note:** the hash value is not guaranteed to be stable across
-    /// different invocations of the same program.  Do not persist the
-    /// hash value across program runs.
+    /// - Note: The hash value is not guaranteed to be stable across
+    ///   different invocations of the same program.  Do not persist the
+    ///   hash value across program runs.
     var hashValue: Int { get }
 }
 
-extension Int16 : Printable {
+extension Int16 : CustomStringConvertible {
 
     /// A textual representation of `self`.
     var description: String { get }
 }
 
-extension Int16 : RandomAccessIndexType {
+extension Int16 : RandomAccessIndexType, BidirectionalIndexType, ForwardIndexType, _Incrementable, Strideable, _Strideable {
 
     /// Returns the next consecutive value after `self`.
     ///
-    /// Requires: the next value is representable.
+    /// - Requires: The next value is representable.
     func successor() -> Int16
 
     /// Returns the previous consecutive value before `self`.
     ///
-    /// Requires: the previous value is representable.
+    /// - Requires: The previous value is representable.
     func predecessor() -> Int16
 
     /// Return the minimum number of applications of `successor` or
     /// `predecessor` required to reach `other` from `self`.
     ///
-    /// Complexity: O(1).
+    /// - Complexity: O(1).
     func distanceTo(other: Int16) -> Distance
 
     /// Return `self` offset by `n` steps.
     ///
-    /// :returns: If `n > 0`, the result of applying `successor` to
-    /// `self` `n` times.  If `n < 0`, the result of applying
-    /// `predecessor` to `self` `-n` times. Otherwise, `self`.
+    /// - Returns: If `n > 0`, the result of applying `successor` to
+    ///   `self` `n` times.  If `n < 0`, the result of applying
+    ///   `predecessor` to `self` `-n` times. Otherwise, `self`.
     ///
-    /// Complexity: O(1)
+    /// - Complexity: O(1).
     func advancedBy(amount: Distance) -> Int16
 }
 
@@ -4063,7 +4688,7 @@ extension Int16 {
     func toIntMax() -> IntMax
 }
 
-extension Int16 : SignedNumberType {
+extension Int16 : IntegerLiteralConvertible, SignedNumberType {
 }
 
 extension Int16 {
@@ -4134,6 +4759,19 @@ extension Int16 {
 
     /// Construct an instance that approximates `other`.
     init(_ other: Double)
+
+    /// Construct an instance that approximates `other`.
+    init(_ other: Float80)
+}
+
+extension Int16 {
+
+    /// Construct from an ASCII representation in the given `radix`.
+    ///
+    /// If `text` does not match the regular expression
+    /// "[+-][0-9a-zA-Z]+", or the value it denotes in the given `radix`
+    /// is not representable, the result is `nil`.
+    init?(_ text: String, radix: Int = default)
 }
 
 extension Int16 : Reflectable {
@@ -4143,16 +4781,12 @@ extension Int16 : Reflectable {
 }
 
 extension Int16 : CVarArgType {
-
-    /// Transform `self` into a series of machine words that can be
-    /// appropriately interpreted by C varargs
-    func encode() -> [Word]
 }
 
 
 /// A 32-bit signed integer value
 /// type.
-struct Int32 : SignedIntegerType {
+struct Int32 : SignedIntegerType, IntegerType, Equatable, Comparable, _IntegerType, IntegerArithmeticType, _IntegerArithmeticType, _SignedIntegerType {
     var value: Builtin.Int32
 
     /// A type that can represent the number of steps between pairs of
@@ -4195,45 +4829,45 @@ extension Int32 : Hashable {
 
     /// The hash value.
     ///
-    /// **Axiom:** `x == y` implies `x.hashValue == y.hashValue`
+    /// **Axiom:** `x == y` implies `x.hashValue == y.hashValue`.
     ///
-    /// **Note:** the hash value is not guaranteed to be stable across
-    /// different invocations of the same program.  Do not persist the
-    /// hash value across program runs.
+    /// - Note: The hash value is not guaranteed to be stable across
+    ///   different invocations of the same program.  Do not persist the
+    ///   hash value across program runs.
     var hashValue: Int { get }
 }
 
-extension Int32 : Printable {
+extension Int32 : CustomStringConvertible {
 
     /// A textual representation of `self`.
     var description: String { get }
 }
 
-extension Int32 : RandomAccessIndexType {
+extension Int32 : RandomAccessIndexType, BidirectionalIndexType, ForwardIndexType, _Incrementable, Strideable, _Strideable {
 
     /// Returns the next consecutive value after `self`.
     ///
-    /// Requires: the next value is representable.
+    /// - Requires: The next value is representable.
     func successor() -> Int32
 
     /// Returns the previous consecutive value before `self`.
     ///
-    /// Requires: the previous value is representable.
+    /// - Requires: The previous value is representable.
     func predecessor() -> Int32
 
     /// Return the minimum number of applications of `successor` or
     /// `predecessor` required to reach `other` from `self`.
     ///
-    /// Complexity: O(1).
+    /// - Complexity: O(1).
     func distanceTo(other: Int32) -> Distance
 
     /// Return `self` offset by `n` steps.
     ///
-    /// :returns: If `n > 0`, the result of applying `successor` to
-    /// `self` `n` times.  If `n < 0`, the result of applying
-    /// `predecessor` to `self` `-n` times. Otherwise, `self`.
+    /// - Returns: If `n > 0`, the result of applying `successor` to
+    ///   `self` `n` times.  If `n < 0`, the result of applying
+    ///   `predecessor` to `self` `-n` times. Otherwise, `self`.
     ///
-    /// Complexity: O(1)
+    /// - Complexity: O(1).
     func advancedBy(amount: Distance) -> Int32
 }
 
@@ -4269,7 +4903,7 @@ extension Int32 {
     func toIntMax() -> IntMax
 }
 
-extension Int32 : SignedNumberType {
+extension Int32 : IntegerLiteralConvertible, SignedNumberType {
 }
 
 extension Int32 {
@@ -4328,6 +4962,19 @@ extension Int32 {
 
     /// Construct an instance that approximates `other`.
     init(_ other: Double)
+
+    /// Construct an instance that approximates `other`.
+    init(_ other: Float80)
+}
+
+extension Int32 {
+
+    /// Construct from an ASCII representation in the given `radix`.
+    ///
+    /// If `text` does not match the regular expression
+    /// "[+-][0-9a-zA-Z]+", or the value it denotes in the given `radix`
+    /// is not representable, the result is `nil`.
+    init?(_ text: String, radix: Int = default)
 }
 
 extension Int32 : Reflectable {
@@ -4337,16 +4984,12 @@ extension Int32 : Reflectable {
 }
 
 extension Int32 : CVarArgType {
-
-    /// Transform `self` into a series of machine words that can be
-    /// appropriately interpreted by C varargs
-    func encode() -> [Word]
 }
 
 
 /// A 64-bit signed integer value
 /// type.
-struct Int64 : SignedIntegerType {
+struct Int64 : _SignedIntegerType, Comparable, Equatable, _IntegerType, IntegerArithmeticType, _IntegerArithmeticType, SignedIntegerType, IntegerType {
     var value: Builtin.Int64
 
     /// A type that can represent the number of steps between pairs of
@@ -4389,45 +5032,45 @@ extension Int64 : Hashable {
 
     /// The hash value.
     ///
-    /// **Axiom:** `x == y` implies `x.hashValue == y.hashValue`
+    /// **Axiom:** `x == y` implies `x.hashValue == y.hashValue`.
     ///
-    /// **Note:** the hash value is not guaranteed to be stable across
-    /// different invocations of the same program.  Do not persist the
-    /// hash value across program runs.
+    /// - Note: The hash value is not guaranteed to be stable across
+    ///   different invocations of the same program.  Do not persist the
+    ///   hash value across program runs.
     var hashValue: Int { get }
 }
 
-extension Int64 : Printable {
+extension Int64 : CustomStringConvertible {
 
     /// A textual representation of `self`.
     var description: String { get }
 }
 
-extension Int64 : RandomAccessIndexType {
+extension Int64 : _Incrementable, RandomAccessIndexType, BidirectionalIndexType, ForwardIndexType, Strideable, _Strideable {
 
     /// Returns the next consecutive value after `self`.
     ///
-    /// Requires: the next value is representable.
+    /// - Requires: The next value is representable.
     func successor() -> Int64
 
     /// Returns the previous consecutive value before `self`.
     ///
-    /// Requires: the previous value is representable.
+    /// - Requires: The previous value is representable.
     func predecessor() -> Int64
 
     /// Return the minimum number of applications of `successor` or
     /// `predecessor` required to reach `other` from `self`.
     ///
-    /// Complexity: O(1).
+    /// - Complexity: O(1).
     func distanceTo(other: Int64) -> Distance
 
     /// Return `self` offset by `n` steps.
     ///
-    /// :returns: If `n > 0`, the result of applying `successor` to
-    /// `self` `n` times.  If `n < 0`, the result of applying
-    /// `predecessor` to `self` `-n` times. Otherwise, `self`.
+    /// - Returns: If `n > 0`, the result of applying `successor` to
+    ///   `self` `n` times.  If `n < 0`, the result of applying
+    ///   `predecessor` to `self` `-n` times. Otherwise, `self`.
     ///
-    /// Complexity: O(1)
+    /// - Complexity: O(1).
     func advancedBy(amount: Distance) -> Int64
 }
 
@@ -4463,7 +5106,7 @@ extension Int64 {
     func toIntMax() -> IntMax
 }
 
-extension Int64 : SignedNumberType {
+extension Int64 : SignedNumberType, IntegerLiteralConvertible {
 }
 
 extension Int64 {
@@ -4498,6 +5141,19 @@ extension Int64 {
 
     /// Construct an instance that approximates `other`.
     init(_ other: Double)
+
+    /// Construct an instance that approximates `other`.
+    init(_ other: Float80)
+}
+
+extension Int64 {
+
+    /// Construct from an ASCII representation in the given `radix`.
+    ///
+    /// If `text` does not match the regular expression
+    /// "[+-][0-9a-zA-Z]+", or the value it denotes in the given `radix`
+    /// is not representable, the result is `nil`.
+    init?(_ text: String, radix: Int = default)
 }
 
 extension Int64 : Reflectable {
@@ -4506,17 +5162,16 @@ extension Int64 : Reflectable {
     func getMirror() -> MirrorType
 }
 
-extension Int64 : CVarArgType {
+extension Int64 : MirrorPathType {
+}
 
-    /// Transform `self` into a series of machine words that can be
-    /// appropriately interpreted by C varargs
-    func encode() -> [Word]
+extension Int64 : CVarArgType, _CVarArgAlignedType {
 }
 
 
 /// A 8-bit signed integer value
 /// type.
-struct Int8 : SignedIntegerType {
+struct Int8 : SignedIntegerType, IntegerType, Equatable, Comparable, _IntegerType, IntegerArithmeticType, _IntegerArithmeticType, _SignedIntegerType {
     var value: Builtin.Int8
 
     /// A type that can represent the number of steps between pairs of
@@ -4540,45 +5195,45 @@ extension Int8 : Hashable {
 
     /// The hash value.
     ///
-    /// **Axiom:** `x == y` implies `x.hashValue == y.hashValue`
+    /// **Axiom:** `x == y` implies `x.hashValue == y.hashValue`.
     ///
-    /// **Note:** the hash value is not guaranteed to be stable across
-    /// different invocations of the same program.  Do not persist the
-    /// hash value across program runs.
+    /// - Note: The hash value is not guaranteed to be stable across
+    ///   different invocations of the same program.  Do not persist the
+    ///   hash value across program runs.
     var hashValue: Int { get }
 }
 
-extension Int8 : Printable {
+extension Int8 : CustomStringConvertible {
 
     /// A textual representation of `self`.
     var description: String { get }
 }
 
-extension Int8 : RandomAccessIndexType {
+extension Int8 : RandomAccessIndexType, BidirectionalIndexType, ForwardIndexType, _Incrementable, Strideable, _Strideable {
 
     /// Returns the next consecutive value after `self`.
     ///
-    /// Requires: the next value is representable.
+    /// - Requires: The next value is representable.
     func successor() -> Int8
 
     /// Returns the previous consecutive value before `self`.
     ///
-    /// Requires: the previous value is representable.
+    /// - Requires: The previous value is representable.
     func predecessor() -> Int8
 
     /// Return the minimum number of applications of `successor` or
     /// `predecessor` required to reach `other` from `self`.
     ///
-    /// Complexity: O(1).
+    /// - Complexity: O(1).
     func distanceTo(other: Int8) -> Distance
 
     /// Return `self` offset by `n` steps.
     ///
-    /// :returns: If `n > 0`, the result of applying `successor` to
-    /// `self` `n` times.  If `n < 0`, the result of applying
-    /// `predecessor` to `self` `-n` times. Otherwise, `self`.
+    /// - Returns: If `n > 0`, the result of applying `successor` to
+    ///   `self` `n` times.  If `n < 0`, the result of applying
+    ///   `predecessor` to `self` `-n` times. Otherwise, `self`.
     ///
-    /// Complexity: O(1)
+    /// - Complexity: O(1).
     func advancedBy(amount: Distance) -> Int8
 }
 
@@ -4614,7 +5269,7 @@ extension Int8 {
     func toIntMax() -> IntMax
 }
 
-extension Int8 : SignedNumberType {
+extension Int8 : IntegerLiteralConvertible, SignedNumberType {
 }
 
 extension Int8 {
@@ -4697,6 +5352,19 @@ extension Int8 {
 
     /// Construct an instance that approximates `other`.
     init(_ other: Double)
+
+    /// Construct an instance that approximates `other`.
+    init(_ other: Float80)
+}
+
+extension Int8 {
+
+    /// Construct from an ASCII representation in the given `radix`.
+    ///
+    /// If `text` does not match the regular expression
+    /// "[+-][0-9a-zA-Z]+", or the value it denotes in the given `radix`
+    /// is not representable, the result is `nil`.
+    init?(_ text: String, radix: Int = default)
 }
 
 extension Int8 : Reflectable {
@@ -4706,14 +5374,10 @@ extension Int8 : Reflectable {
 }
 
 extension Int8 : CVarArgType {
-
-    /// Transform `self` into a series of machine words that can be
-    /// appropriately interpreted by C varargs
-    func encode() -> [Word]
 }
 
 
-/// The largest native signed integer type
+/// The largest native signed integer type.
 typealias IntMax = Int64
 
 
@@ -4746,16 +5410,16 @@ protocol IntegerArithmeticType : _IntegerArithmeticType, Comparable {
 }
 
 
-/// Conforming types can be initialized with integer literals
+/// Conforming types can be initialized with integer literals.
 protocol IntegerLiteralConvertible {
     typealias IntegerLiteralType
 
     /// Create an instance initialized to `value`.
-    init(integerLiteral value: IntegerLiteralType)
+    init(integerLiteral value: Self.IntegerLiteralType)
 }
 
 
-/// The default type for an otherwise-unconstrained integer literal
+/// The default type for an otherwise-unconstrained integer literal.
 typealias IntegerLiteralType = Int
 
 
@@ -4767,30 +5431,34 @@ protocol IntegerType : _IntegerType, RandomAccessIndexType {
 /// An interval over a `Comparable` type.
 protocol IntervalType {
 
-    /// The type of the `Interval`\ 's endpoints
+    /// The type of the `Interval`'s endpoints.
     typealias Bound : Comparable
 
-    /// Returns `true` iff the interval contains `value`
-    func contains(value: Bound) -> Bool
+    /// Returns `true` iff the interval contains `value`.
+    func contains(value: Self.Bound) -> Bool
 
     /// Return `rhs` clamped to `self`.  The bounds of the result, even
-    /// if it is empty, are always within the bounds of `self`
+    /// if it is empty, are always within the bounds of `self`.
     func clamp(intervalToClamp: Self) -> Self
 
-    /// True iff `self` is empty
+    /// `true` iff `self` is empty.
     var isEmpty: Bool { get }
 
-    /// The `Interval`\ 's lower bound. Invariant: `start` <= `end`
-    var start: Bound { get }
+    /// The `Interval`'s lower bound.
+    ///
+    /// Invariant: `start` <= `end`.
+    var start: Self.Bound { get }
 
-    /// The `Interval`\ 's upper bound. Invariant: `start` <= `end`
-    var end: Bound { get }
+    /// The `Interval`'s upper bound.
+    ///
+    /// Invariant: `start` <= `end`.
+    var end: Self.Bound { get }
 }
 
 
 /// A collection that forwards its implementation to an underlying
 /// collection instance while exposing lazy computations as methods.
-struct LazyBidirectionalCollection<S : CollectionType where S.Index : BidirectionalIndexType> : CollectionType {
+struct LazyBidirectionalCollection<S : CollectionType where S.Index : BidirectionalIndexType> : CollectionType, SequenceType, _CollectionDefaultsType, _CollectionGeneratorDefaultsType {
 
     /// Construct an instance with `base` as its underlying collection
     /// instance.
@@ -4798,12 +5466,12 @@ struct LazyBidirectionalCollection<S : CollectionType where S.Index : Bidirectio
 
     /// Return a *generator* over the elements of this *sequence*.
     ///
-    /// Complexity: O(1)
+    /// - Complexity: O(1).
     func generate() -> S.Generator
 
     /// The position of the first element in a non-empty collection.
     ///
-    /// Identical to `endIndex` in an empty collection.
+    /// In an empty collection, `startIndex == endIndex`.
     var startIndex: S.Index { get }
 
     /// The collection's "past the end" position.
@@ -4812,26 +5480,18 @@ struct LazyBidirectionalCollection<S : CollectionType where S.Index : Bidirectio
     /// reachable from `startIndex` by zero or more applications of
     /// `successor()`.
     var endIndex: S.Index { get }
-
-    /// True if and only if the collection is empty
-    var isEmpty: Bool { get }
-
-    /// The first element, or `nil` if `self` is empty
-    var first: S.Generator.Element? { get }
-
-    /// The last element, or `nil` if `self` is empty
-    var last: S.Generator.Element? { get }
     subscript (position: S.Index) -> S.Generator.Element { get }
 
     /// an Array, created on-demand, containing the elements of this
     /// lazy CollectionType.
     var array: [S.Generator.Element] { get }
+    func underestimateCount() -> Int
 }
 
 extension LazyBidirectionalCollection {
 
     /// Return a lazy SequenceType containing the elements `x` of `source` for
-    /// which `includeElement(x)` is `true`
+    /// which `includeElement(x)` is `true`.
     func filter(includeElement: (S.Generator.Element) -> Bool) -> LazySequence<FilterSequenceView<S>>
 }
 
@@ -4854,7 +5514,7 @@ extension LazyBidirectionalCollection {
 
 /// A collection that forwards its implementation to an underlying
 /// collection instance while exposing lazy computations as methods.
-struct LazyForwardCollection<S : CollectionType where S.Index : ForwardIndexType> : CollectionType {
+struct LazyForwardCollection<S : CollectionType where S.Index : ForwardIndexType> : CollectionType, SequenceType, _CollectionDefaultsType, _CollectionGeneratorDefaultsType {
 
     /// Construct an instance with `base` as its underlying collection
     /// instance.
@@ -4862,12 +5522,12 @@ struct LazyForwardCollection<S : CollectionType where S.Index : ForwardIndexType
 
     /// Return a *generator* over the elements of this *sequence*.
     ///
-    /// Complexity: O(1)
+    /// - Complexity: O(1).
     func generate() -> S.Generator
 
     /// The position of the first element in a non-empty collection.
     ///
-    /// Identical to `endIndex` in an empty collection.
+    /// In an empty collection, `startIndex == endIndex`.
     var startIndex: S.Index { get }
 
     /// The collection's "past the end" position.
@@ -4876,23 +5536,18 @@ struct LazyForwardCollection<S : CollectionType where S.Index : ForwardIndexType
     /// reachable from `startIndex` by zero or more applications of
     /// `successor()`.
     var endIndex: S.Index { get }
-
-    /// True if and only if the collection is empty
-    var isEmpty: Bool { get }
-
-    /// The first element, or `nil` if `self` is empty
-    var first: S.Generator.Element? { get }
     subscript (position: S.Index) -> S.Generator.Element { get }
 
     /// an Array, created on-demand, containing the elements of this
     /// lazy CollectionType.
     var array: [S.Generator.Element] { get }
+    func underestimateCount() -> Int
 }
 
 extension LazyForwardCollection {
 
     /// Return a lazy SequenceType containing the elements `x` of `source` for
-    /// which `includeElement(x)` is `true`
+    /// which `includeElement(x)` is `true`.
     func filter(includeElement: (S.Generator.Element) -> Bool) -> LazySequence<FilterSequenceView<S>>
 }
 
@@ -4907,7 +5562,7 @@ extension LazyForwardCollection {
 
 /// A collection that forwards its implementation to an underlying
 /// collection instance while exposing lazy computations as methods.
-struct LazyRandomAccessCollection<S : CollectionType where S.Index : RandomAccessIndexType> : CollectionType {
+struct LazyRandomAccessCollection<S : CollectionType where S.Index : RandomAccessIndexType> : CollectionType, SequenceType, _CollectionDefaultsType, _CollectionGeneratorDefaultsType {
 
     /// Construct an instance with `base` as its underlying collection
     /// instance.
@@ -4915,12 +5570,12 @@ struct LazyRandomAccessCollection<S : CollectionType where S.Index : RandomAcces
 
     /// Return a *generator* over the elements of this *sequence*.
     ///
-    /// Complexity: O(1)
+    /// - Complexity: O(1).
     func generate() -> S.Generator
 
     /// The position of the first element in a non-empty collection.
     ///
-    /// Identical to `endIndex` in an empty collection.
+    /// In an empty collection, `startIndex == endIndex`.
     var startIndex: S.Index { get }
 
     /// The collection's "past the end" position.
@@ -4929,26 +5584,18 @@ struct LazyRandomAccessCollection<S : CollectionType where S.Index : RandomAcces
     /// reachable from `startIndex` by zero or more applications of
     /// `successor()`.
     var endIndex: S.Index { get }
-
-    /// True if and only if the collection is empty
-    var isEmpty: Bool { get }
-
-    /// The first element, or `nil` if `self` is empty
-    var first: S.Generator.Element? { get }
-
-    /// The last element, or `nil` if `self` is empty
-    var last: S.Generator.Element? { get }
     subscript (position: S.Index) -> S.Generator.Element { get }
 
     /// an Array, created on-demand, containing the elements of this
     /// lazy CollectionType.
     var array: [S.Generator.Element] { get }
+    func underestimateCount() -> Int
 }
 
 extension LazyRandomAccessCollection {
 
     /// Return a lazy SequenceType containing the elements `x` of `source` for
-    /// which `includeElement(x)` is `true`
+    /// which `includeElement(x)` is `true`.
     func filter(includeElement: (S.Generator.Element) -> Bool) -> LazySequence<FilterSequenceView<S>>
 }
 
@@ -4979,18 +5626,19 @@ struct LazySequence<S : SequenceType> : SequenceType {
 
     /// Return a *generator* over the elements of this *sequence*.
     ///
-    /// Complexity: O(1)
+    /// - Complexity: O(1).
     func generate() -> S.Generator
 
     /// an Array, created on-demand, containing the elements of this
     /// lazy SequenceType.
     var array: [S.Generator.Element] { get }
+    func underestimateCount() -> Int
 }
 
 extension LazySequence {
 
     /// Return a lazy SequenceType containing the elements `x` of `source` for
-    /// which `includeElement(x)` is `true`
+    /// which `includeElement(x)` is `true`.
     func filter(includeElement: (S.Generator.Element) -> Bool) -> LazySequence<FilterSequenceView<S>>
 }
 
@@ -5011,18 +5659,15 @@ extension LazySequence {
 /// You are expected to construct and---if necessary---destroy objects
 /// there yourself, using the APIs on `UnsafeMutablePointer<Element>`.
 /// Typical usage stores a count and capacity in `Value` and destroys
-/// any live elements in the `deinit` of a subclass.  Note: subclasses
-/// must not have any stored properties; any storage needed should be
-/// included in `Value`.
+/// any live elements in the `deinit` of a subclass.
+/// - Note: Subclasses must not have any stored properties; any storage
+///   needed should be included in `Value`.
 class ManagedBuffer<Value, Element> : ManagedProtoBuffer<Value, Element> {
 
     /// Create a new instance of the most-derived class, calling
     /// `initializeValue` on the partially-constructed object to
     /// generate an initial `Value`.
     final class func create(minimumCapacity: Int, initialValue: (ManagedProtoBuffer<Value, Element>) -> Value) -> ManagedBuffer<Value, Element>
-
-    /// Destroy the stored Value
-    deinit 
 
     /// The stored `Value` instance.
     final var value: Value
@@ -5040,56 +5685,54 @@ class ManagedBuffer<Value, Element> : ManagedProtoBuffer<Value, Element> {
 ///
 /// A valid buffer class is non-`@objc`, with no declared stored
 ///   properties.  Its `deinit` must destroy its
-///   stored `Value` and any constructed `Element`\ s.
+///   stored `Value` and any constructed `Element`s.
 ///
 /// Example Buffer Class
 /// --------------------
 ///
-/// ::
+///      class MyBuffer<Element> { // non-@objc
+///        typealias Manager = ManagedBufferPointer<(Int,String), Element>
+///        deinit {
+///          Manager(unsafeBufferObject: self).withUnsafeMutablePointers {
+///            (pointerToValue, pointerToElements)->Void in
+///            pointerToElements.destroy(self.count)
+///            pointerToValue.destroy()
+///          }
+///        }
 ///
-///    class MyBuffer<Element> { // non-@objc
-///      typealias Manager = ManagedBufferPointer<(Int,String), Element>
-///      deinit {
-///        Manager(unsafeBufferObject: self).withUnsafeMutablePointers {
-///          (pointerToValue, pointerToElements)->Void in
-///          pointerToElements.destroy(self.count)
-///          pointerToValue.destroy()
+///        // All properties are *computed* based on members of the Value
+///        var count: Int {
+///          return Manager(unsafeBufferObject: self).value.0
+///        }
+///        var name: String {
+///          return Manager(unsafeBufferObject: self).value.1
 ///        }
 ///      }
-///
-///      // All properties are *computed* based on members of the Value
-///      var count: Int {
-///        return Manager(unsafeBufferObject: self).value.0
-///      }
-///      var name: String {
-///        return Manager(unsafeBufferObject: self).value.1
-///      }
-///    }
 ///
 struct ManagedBufferPointer<Value, Element> : Equatable {
 
     /// Create with new storage containing an initial `Value` and space
-    /// for at least `minimumCapacity` `element`\ s.
+    /// for at least `minimumCapacity` `element`s.
     ///
-    /// :param: `bufferClass` the class of the object used for storage.
-    /// :param: `minimumCapacity` the minimum number of `Element`\ s that
+    /// - parameter bufferClass: The class of the object used for storage.
+    /// - parameter minimumCapacity: The minimum number of `Element`s that
     ///   must be able to be stored in the new buffer.
-    /// :param: `initialValue` a function that produces the initial
+    /// - parameter initialValue: A function that produces the initial
     ///   `Value` instance stored in the buffer, given the `buffer`
     ///   object and a function that can be called on it to get the actual
     ///   number of allocated elements.
     ///
-    /// Requires: minimumCapacity >= 0, and the type indicated by
-    /// `bufferClass` is a non-`@objc` class with no declared stored
-    /// properties.  The `deinit` of `bufferClass` must destroy its
-    /// stored `Value` and any constructed `Element`\ s.
+    /// - Requires: `minimumCapacity >= 0`, and the type indicated by
+    ///   `bufferClass` is a non-`@objc` class with no declared stored
+    ///   properties.  The `deinit` of `bufferClass` must destroy its
+    ///   stored `Value` and any constructed `Element`s.
     init(bufferClass: AnyClass, minimumCapacity: Int, initialValue: (buffer: AnyObject, allocatedCount: (AnyObject) -> Int) -> Value)
 
     /// Manage the given `buffer`.
     ///
-    /// Requires: `buffer` is an instance of a non-`@objc` class whose
-    /// `deinit` destroys its stored `Value` and any constructed
-    /// `Element`\ s.
+    /// - Requires: `buffer` is an instance of a non-`@objc` class whose
+    ///   `deinit` destroys its stored `Value` and any constructed
+    ///   `Element`s.
     init(unsafeBufferObject buffer: AnyObject)
 
     /// The stored `Value` instance.
@@ -5106,18 +5749,24 @@ struct ManagedBufferPointer<Value, Element> : Equatable {
     var allocatedElementCount: Int { get }
 
     /// Call `body` with an `UnsafeMutablePointer` to the stored
-    /// `Value`.  **Note**: this pointer is only valid
-    /// for the duration of the call to `body`
+    /// `Value`.
+    ///
+    /// - Note: This pointer is only valid
+    ///   for the duration of the call to `body`.
     func withUnsafeMutablePointerToValue<R>(body: (UnsafeMutablePointer<Value>) -> R) -> R
 
     /// Call `body` with an `UnsafeMutablePointer` to the `Element`
-    /// storage.  **Note**: this pointer is only valid
-    /// for the duration of the call to `body`.
+    /// storage.
+    ///
+    /// - Note: This pointer is only valid for the duration of the
+    ///   call to `body`.
     func withUnsafeMutablePointerToElements<R>(body: (UnsafeMutablePointer<Element>) -> R) -> R
 
-    /// Call `body` with `UnsafeMutablePointer`\ s to the stored `Value`
-    /// and raw `Element` storage.  **Note**: these pointers are only valid
-    /// for the duration of the call to `body`.
+    /// Call `body` with `UnsafeMutablePointer`s to the stored `Value`
+    /// and raw `Element` storage.
+    ///
+    /// - Note: These pointers are only valid for the duration of the
+    ///   call to `body`.
     func withUnsafeMutablePointers<R>(body: (UnsafeMutablePointer<Value>, UnsafeMutablePointer<Element>) -> R) -> R
 
     /// Returns true iff `self` holds the only strong reference to its buffer.
@@ -5137,7 +5786,7 @@ struct ManagedBufferPointer<Value, Element> : Equatable {
 /// instance creation.
 ///
 /// During instance creation, in particular during
-/// `ManagedBuffer.create`\ 's call to initialize, `ManagedBuffer`\ 's
+/// `ManagedBuffer.create`'s call to initialize, `ManagedBuffer`'s
 /// `value` property is as-yet uninitialized, and therefore
 /// `ManagedProtoBuffer` does not offer access to the as-yet
 /// uninitialized `value` property of `ManagedBuffer`.
@@ -5151,18 +5800,24 @@ class ManagedProtoBuffer<Value, Element> : NonObjectiveCBase {
     final var allocatedElementCount: Int { get }
 
     /// Call `body` with an `UnsafeMutablePointer` to the stored
-    /// `Value`.  **Note**: this pointer is only valid
-    /// for the duration of the call to `body`.
+    /// `Value`.
+    ///
+    /// - Note: This pointer is only valid for the duration of the
+    ///   call to `body`.
     final func withUnsafeMutablePointerToValue<R>(body: (UnsafeMutablePointer<Value>) -> R) -> R
 
     /// Call `body` with an `UnsafeMutablePointer` to the `Element`
-    /// storage.  **Note**: this pointer is only valid
-    /// for the duration of the call to `body`.
+    /// storage.
+    ///
+    /// - Note: This pointer is only valid for the duration of the
+    ///   call to `body`.
     final func withUnsafeMutablePointerToElements<R>(body: (UnsafeMutablePointer<Element>) -> R) -> R
 
-    /// Call `body` with `UnsafeMutablePointer`\ s to the stored `Value`
-    /// and raw `Element` storage.  **Note**: these pointers are only valid
-    /// for the duration of the call to `body`.
+    /// Call `body` with `UnsafeMutablePointer`s to the stored `Value`
+    /// and raw `Element` storage.
+    ///
+    /// - Note: These pointers are only valid for the duration of the
+    ///   call to `body`.
     final func withUnsafeMutablePointers<R>(body: (UnsafeMutablePointer<Value>, UnsafeMutablePointer<Element>) -> R) -> R
 }
 
@@ -5171,11 +5826,11 @@ class ManagedProtoBuffer<Value, Element> : NonObjectiveCBase {
 /// `CollectionType` passed through a transform function returning `T`.
 /// These elements are computed lazily, each time they're read, by
 /// calling the transform function on a base element.
-struct MapCollectionView<Base : CollectionType, T> : CollectionType {
+struct MapCollectionView<Base : CollectionType, T> : CollectionType, SequenceType, _CollectionDefaultsType, _CollectionGeneratorDefaultsType {
 
     /// The position of the first element in a non-empty collection.
     ///
-    /// Identical to `endIndex` in an empty collection.
+    /// In an empty collection, `startIndex == endIndex`.
     var startIndex: Base.Index { get }
 
     /// The collection's "past the end" position.
@@ -5186,28 +5841,29 @@ struct MapCollectionView<Base : CollectionType, T> : CollectionType {
     var endIndex: Base.Index { get }
     subscript (position: Base.Index) -> T { get }
 
-    /// Return a *generator* over the elements of this *sequence*.
+    /// Returns a *generator* over the elements of this *sequence*.
     ///
-    /// Complexity: O(1)
+    /// - Complexity: O(1).
     func generate() -> MapSequenceGenerator<Base.Generator, T>
+    func underestimateCount() -> Int
 }
 
 
 /// The `GeneratorType` used by `MapSequenceView` and `MapCollectionView`.
 /// Produces each element by passing the output of the `Base`
-/// `GeneratorType` through a transform function returning `T`
+/// `GeneratorType` through a transform function returning `T`.
 struct MapSequenceGenerator<Base : GeneratorType, T> : GeneratorType, SequenceType {
 
     /// Advance to the next element and return it, or `nil` if no next
     /// element exists.
     ///
-    /// Requires: `next()` has not been applied to a copy of `self`
-    /// since the copy was made, and no preceding call to `self.next()`
-    /// has returned `nil`.
+    /// - Requires: `next()` has not been applied to a copy of `self`
+    ///   since the copy was made, and no preceding call to `self.next()`
+    ///   has returned `nil`.
     mutating func next() -> T?
 
     /// `MapSequenceGenerator` is also a `SequenceType`, so it
-    /// `generate`\ 's a copy of itself
+    /// `generate`'s a copy of itself.
     func generate() -> MapSequenceGenerator<Base, T>
 }
 
@@ -5220,9 +5876,228 @@ struct MapSequenceView<Base : SequenceType, T> : SequenceType {
 
     /// Return a *generator* over the elements of this *sequence*.
     ///
-    /// Complexity: O(1)
+    /// - Complexity: O(1).
     func generate() -> MapSequenceGenerator<Base.Generator, T>
+    func underestimateCount() -> Int
 }
+
+
+/// Representation of the sub-structure and optional "display style"
+/// of any arbitrary subject instance.
+///
+/// Describes the parts---such as stored properties, collection
+/// elements, tuple elements, or the active enumeration case---that
+/// make up a particular instance.  May also supply a "display style"
+/// property that suggests how this structure might be rendered.
+///
+/// Mirrors are used by playgrounds and the debugger.
+struct Mirror {
+
+    /// Representation of ancestor classes.
+    ///
+    /// A `CustomReflectable` class can control how its mirror will
+    /// represent ancestor classes by initializing the mirror with a
+    /// `AncestorRepresentation`.  This setting has no effect on mirrors
+    /// reflecting value type instances.
+    enum AncestorRepresentation {
+        case Generated
+        case Customized(() -> Mirror)
+        case Suppressed
+    }
+
+    /// Reflect upon the given `subject`.
+    ///
+    /// If the dynamic type of `subject` conforms to `CustomReflectable`,
+    /// the resulting mirror is determined by its `customMirror` method.
+    /// Otherwise, the result is generated by the language.
+    ///
+    /// - Note: If the dynamic type of `subject` has value semantics,
+    ///   subsequent mutations of `subject` will not observable in
+    ///   `Mirror`.  In general, though, the observability of such
+    /// mutations is unspecified.
+    init(reflecting subject: Any)
+
+    /// An element of the reflected instance's structure.  The optional
+    /// `label` may be used when appropriate, e.g. to represent the name
+    /// of a stored property or of an active `enum` case, and will be
+    /// used for lookup when `String`s are passed to the `descendant`
+    /// method.
+    typealias Child = (label: String?, value: Any)
+
+    /// The type used to represent sub-structure.
+    ///
+    /// Depending on your needs, you may find it useful to "upgrade"
+    /// instances of this type to `AnyBidirectionalCollection` or
+    /// `AnyRandomAccessCollection`.  For example, to display the last
+    /// 20 children of a mirror if they can be accessed efficiently, you
+    /// might write:
+    ///
+    ///     if let b = AnyBidirectionalCollection(someMirror.children) {
+    ///       for i in advance(b.endIndex, -20, b.startIndex)..<b.endIndex {
+    ///          print(b[i])
+    ///       }
+    ///     }
+    typealias Children = AnyForwardCollection<Child>
+
+    /// A suggestion of how a `Mirror`'s is to be interpreted.
+    ///
+    /// Playgrounds and the debugger will show a representation similar
+    /// to the one used for instances of the kind indicated by the
+    /// `DisplayStyle` case name when the `Mirror` is used for display.
+    enum DisplayStyle {
+        case Struct
+        case Class
+        case Enum
+        case Tuple
+        case Optional
+        case Collection
+        case Dictionary
+        case Set
+    }
+
+    /// Represent `subject` with structure described by `children`,
+    /// using an optional `displayStyle`.
+    ///
+    /// If `subject` is not a class instance, `ancestorRepresentation`
+    /// is ignored.  Otherwise, `ancestorRepresentation` determines
+    /// whether ancestor classes will be represented and whether their
+    /// `customMirror` implementations will be used.  By default, a
+    /// representation is automatically generated and any `customMirror`
+    /// implementation is bypassed.  To prevent bypassing customized
+    /// ancestors, `customMirror` overrides should initialize the
+    /// `Mirror` with:
+    ///
+    ///     ancestorRepresentation: .Customized(super.customMirror)
+    ///
+    /// - Note: The traversal protocol modeled by `children`'s indices
+    ///   (`ForwardIndexType`, `BidirectionalIndexType`, or
+    ///   `RandomAccessIndexType`) is captured so that the resulting
+    /// `Mirror`'s `children` may be upgraded later.  See the failable
+    /// initializers of `AnyBidirectionalCollection` and
+    /// `AnyRandomAccessCollection` for details.
+    init<T, C : CollectionType where C.Generator.Element == Child>(_ subject: T, children: C, displayStyle: Mirror.DisplayStyle? = default, ancestorRepresentation: Mirror.AncestorRepresentation = default)
+
+    /// Represent `subject` with child values given by
+    /// `unlabeledChildren`, using an optional `displayStyle`.  The
+    /// result's child labels will all be `nil`.
+    ///
+    /// This initializer is especially useful for the mirrors of
+    /// collections, e.g.:
+    ///
+    ///     extension MyArray : CustomReflectable {
+    ///       func customMirror() -> Mirror {
+    ///         return Mirror(self, unlabeledChildren: self, displayStyle: .Collection)
+    ///       }
+    ///     }
+    ///
+    /// If `subject` is not a class instance, `ancestorRepresentation`
+    /// is ignored.  Otherwise, `ancestorRepresentation` determines
+    /// whether ancestor classes will be represented and whether their
+    /// `customMirror` implementations will be used.  By default, a
+    /// representation is automatically generated and any `customMirror`
+    /// implementation is bypassed.  To prevent bypassing customized
+    /// ancestors, `customMirror` overrides should initialize the
+    /// `Mirror` with:
+    ///
+    ///     ancestorRepresentation: .Customized(super.customMirror)
+    ///
+    /// - Note: The traversal protocol modeled by `children`'s indices
+    ///   (`ForwardIndexType`, `BidirectionalIndexType`, or
+    ///   `RandomAccessIndexType`) is captured so that the resulting
+    /// `Mirror`'s `children` may be upgraded later.  See the failable
+    /// initializers of `AnyBidirectionalCollection` and
+    /// `AnyRandomAccessCollection` for details.
+    init<T, C : CollectionType>(_ subject: T, unlabeledChildren: C, displayStyle: Mirror.DisplayStyle? = default, ancestorRepresentation: Mirror.AncestorRepresentation = default)
+
+    /// Represent `subject` with labeled structure described by
+    /// `children`, using an optional `displayStyle`.
+    ///
+    /// Pass a dictionary literal with `String` keys as `children`.  Be
+    /// aware that although an *actual* `Dictionary` is
+    /// arbitrarily-ordered, the ordering of the `Mirror`'s `children`
+    /// will exactly match that of the literal you pass.
+    ///
+    /// If `subject` is not a class instance, `ancestorRepresentation`
+    /// is ignored.  Otherwise, `ancestorRepresentation` determines
+    /// whether ancestor classes will be represented and whether their
+    /// `customMirror` implementations will be used.  By default, a
+    /// representation is automatically generated and any `customMirror`
+    /// implementation is bypassed.  To prevent bypassing customized
+    /// ancestors, `customMirror` overrides should initialize the
+    /// `Mirror` with:
+    ///
+    ///     ancestorRepresentation: .Customized(super.customMirror)
+    ///
+    /// - Note: The resulting `Mirror`'s `children` may be upgraded to
+    ///   `AnyRandomAccessCollection` later.  See the failable
+    ///   initializers of `AnyBidirectionalCollection` and
+    /// `AnyRandomAccessCollection` for details.
+    init<T>(_ subject: T, children: DictionaryLiteral<String, Any>, displayStyle: Mirror.DisplayStyle? = default, ancestorRepresentation: Mirror.AncestorRepresentation = default)
+
+    /// The static type of the subject being reflected.
+    ///
+    /// This type may differ from the subject's dynamic type when `self`
+    /// is the `superclassMirror()` of another mirror.
+    let subjectType: Any.Type
+
+    /// A collection of `Child` elements describing the structure of the
+    /// reflected subject.
+    let children: Children
+
+    /// Suggests a display style for the reflected subject.
+    let displayStyle: Mirror.DisplayStyle?
+    func superclassMirror() -> Mirror?
+}
+
+extension Mirror {
+
+    /// Return a specific descendant of the reflected subject, or `nil`
+    /// if no such descendant exists.
+    ///
+    /// A `String` argument selects the first `Child` with a matching label.
+    /// An integer argument *n* select the *n*th `Child`.  For example:
+    ///
+    ///     var d = Mirror(reflecting: x).descendant(1, "two", 3)
+    ///
+    /// is equivalent to:
+    ///
+    ///     var d = nil
+    ///     let children = Mirror(reflecting: x).children
+    ///     let p0 = advance(children.startIndex, 1, children.endIndex)
+    ///     if p0 != children.endIndex {
+    ///       let grandChildren = reflect(children[p0].value).children
+    ///       SeekTwo: for g in grandChildren {
+    ///         if g.label == "two" {
+    ///           let greatGrandChildren = reflect(g.value).children
+    ///           let p1 = advance(
+    ///             greatGrandChildren.startIndex, 3, 
+    ///             greatGrandChildren.endIndex)
+    ///           if p1 != endIndex { d = greatGrandChildren[p1].value }
+    ///           break SeekTwo
+    ///         }
+    ///       }
+    ///
+    /// As you can see, complexity for each element of the argument list
+    /// depends on the argument type and capabilities of the collection
+    /// used to initialize the corresponding subject's parent's mirror.
+    /// Each `String` argument results in a linear search.  In short,
+    /// this function is suitable for exploring the structure of a
+    /// `Mirror` in a REPL or playground, but don't expect it to be
+    /// efficient.
+    func descendant(first: MirrorPathType, _ rest: MirrorPathType...) -> Any?
+}
+
+
+
+extension Mirror : CustomStringConvertible {
+    var description: String { get }
+}
+
+extension Mirror : CustomReflectable {
+    func customMirror() -> Mirror
+}
+
+
 
 
 /// How children of this value should be presented in the IDE.
@@ -5241,21 +6116,30 @@ enum MirrorDisposition {
 }
 
 
+/// A protocol for legitimate arguments to `Mirror`'s `descendant`
+/// method.
+///
+/// Do not declare new conformances to this protocol; they will not
+/// work as expected.
+protocol MirrorPathType {
+}
+
+
 /// The type returned by `reflect(x)`; supplies an API for runtime
-/// reflection on `x`
+/// reflection on `x`.
 protocol MirrorType {
 
-    /// The instance being reflected
+    /// The instance being reflected.
     var value: Any { get }
 
-    /// Identical to `value.dynamicType`
+    /// Identical to `value.dynamicType`.
     var valueType: Any.Type { get }
 
     /// A unique identifier for `value` if it is a class instance; `nil`
     /// otherwise.
     var objectIdentifier: ObjectIdentifier? { get }
 
-    /// The count of `value`\ 's logical children 
+    /// The count of `value`'s logical children.
     var count: Int { get }
     subscript (i: Int) -> (String, MirrorType) { get }
 
@@ -5270,21 +6154,115 @@ protocol MirrorType {
 }
 
 
+
+
 /// A *collection* that supports subscript assignment.
 ///
 /// For any instance `a` of a type conforming to
-/// `MutableCollectionType`, ::
+/// `MutableCollectionType`, :
 ///
-///   a[i] = x
-///   let y = a[i]
+///     a[i] = x
+///     let y = a[i]
 ///
-/// is equivalent to ::
+/// is equivalent to:
 ///
-///   a[i] = x
-///   let y = x
+///     a[i] = x
+///     let y = x
 ///
 protocol MutableCollectionType : CollectionType {
     subscript (position: Self.Index) -> Self.Generator.Element { get set }
+}
+
+
+
+extension MutableCollectionType where Index : RandomAccessIndexType {
+
+    /// Re-order the given `range` of elements in `self` and return
+    /// a pivot index *p*.
+    ///
+    /// - Postcondition: for all *i* in `range.startIndex..<`\ *p*, and *j*
+    ///   in *p*\ `..<range.endIndex`, `less(self[`\ *i*\ `],
+    ///   self[`\ *j*\ `]) && !less(self[`\ *j*\ `], self[`\ *p*\ `])`.
+    ///   Only returns `range.endIndex` when `self` is empty.
+    ///
+    /// - Requires: `isOrderedBefore` is a
+    ///   [strict weak ordering](http://en.wikipedia.org/wiki/Strict_weak_order#Strict_weak_orderings)
+    ///   over the elements in `self`.
+    mutating func partition(range: Range<Self.Index>, isOrderedBefore: (Self.Generator.Element, Self.Generator.Element) -> Bool) -> Self.Index
+}
+
+extension MutableCollectionType where Index : RandomAccessIndexType, Generator.Element : Comparable {
+
+    /// Re-order the given `range` of elements in `self` and return
+    /// a pivot index *p*.
+    ///
+    /// - Postcondition: for all *i* in `range.startIndex..<`\ *p*, and *j*
+    ///   in *p*\ `..<range.endIndex`, `less(self[`\ *i*\ `],
+    ///   self[`\ *j*\ `]) && !less(self[`\ *j*\ `], self[`\ *p*\ `])`.
+    ///   Only returns `range.endIndex` when `self` is empty.
+    ///
+    /// - Requires: The less-than operator (`func <`) defined in
+    ///   the `Comparable` conformance is a
+    ///   [strict weak ordering](http://en.wikipedia.org/wiki/Strict_weak_order#Strict_weak_orderings)
+    ///   over the elements in `self`.
+    mutating func partition(range: Range<Self.Index>) -> Self.Index
+}
+
+extension MutableCollectionType where Self.Generator.Element : Comparable {
+
+    /// Return an `Array` containing the sorted elements of `source`.
+    ///
+    /// The sorting algorithm is not stable (can change the relative order of
+    /// elements that compare equal).
+    ///
+    /// - Requires: The less-than operator (`func <`) defined in
+    ///   the `Comparable` conformance is a
+    ///   [strict weak ordering](http://en.wikipedia.org/wiki/Strict_weak_order#Strict_weak_orderings)
+    ///   over the elements in `self`.
+    @warn_unused_result(mutable_variant="sortInPlace")
+    func sort() -> [Self.Generator.Element]
+}
+
+extension MutableCollectionType {
+
+    /// Return an `Array` containing the sorted elements of `source`
+    /// according to `isOrderedBefore`.
+    ///
+    /// The sorting algorithm is not stable (can change the relative order of
+    /// elements for which `isOrderedBefore` does not establish an order).
+    ///
+    /// - Requires: `isOrderedBefore` is a
+    ///   [strict weak ordering](http://en.wikipedia.org/wiki/Strict_weak_order#Strict_weak_orderings)
+    ///   over the elements in `self`.
+    @warn_unused_result(mutable_variant="sortInPlace")
+    func sort(isOrderedBefore: (Self.Generator.Element, Self.Generator.Element) -> Bool) -> [Self.Generator.Element]
+}
+
+extension MutableCollectionType where Self.Index : RandomAccessIndexType, Self.Generator.Element : Comparable {
+
+    /// Sort `self` in-place.
+    ///
+    /// The sorting algorithm is not stable (can change the relative order of
+    /// elements that compare equal).
+    ///
+    /// - Requires: The less-than operator (`func <`) defined in
+    ///   the `Comparable` conformance is a
+    ///   [strict weak ordering](http://en.wikipedia.org/wiki/Strict_weak_order#Strict_weak_orderings)
+    ///   over the elements in `self`.
+    mutating func sortInPlace()
+}
+
+extension MutableCollectionType where Self.Index : RandomAccessIndexType {
+
+    /// Sort `self` in-place according to `isOrderedBefore`.
+    ///
+    /// The sorting algorithm is not stable (can change the relative order of
+    /// elements for which `isOrderedBefore` does not establish an order).
+    ///
+    /// - Requires: `isOrderedBefore` is a
+    ///   [strict weak ordering](http://en.wikipedia.org/wiki/Strict_weak_order#Strict_weak_orderings)
+    ///   over the elements in `self`.
+    mutating func sortInPlace(isOrderedBefore: (Self.Generator.Element, Self.Generator.Element) -> Bool)
 }
 
 
@@ -5292,10 +6270,8 @@ protocol MutableCollectionType : CollectionType {
 ///
 /// For example,
 ///
-/// .. parsed-literal:
-///
-///      x[i..<j] = *someExpression*
-///      x[i..<j].\ *mutatingMethod*\ ()
+///      x[i..<j] = someExpression
+///      x[i..<j].mutatingMethod()
 protocol MutableSliceable : Sliceable, MutableCollectionType {
     subscript (_: Range<Self.Index>) -> Self.SubSlice { get set }
 }
@@ -5309,10 +6285,10 @@ protocol NilLiteralConvertible {
 }
 
 
-/// A common base class for classes that need to be non-\ `@objc`, 
+/// A common base class for classes that need to be non-`@objc`,
 /// recognizably in the type system.
 ///
-/// See `isUniquelyReferenced`
+/// - SeeAlso: `isUniquelyReferenced`
 class NonObjectiveCBase {
 }
 
@@ -5322,20 +6298,20 @@ class NonObjectiveCBase {
 ///
 /// In Swift, only class instances and metatypes have unique identities. There
 /// is no notion of identity for structs, enums, functions, or tuples.
-struct ObjectIdentifier : Hashable, Comparable {
+struct ObjectIdentifier : Hashable, Equatable, Comparable {
 
     /// Convert to a `UInt` that captures the full value of `self`.
     ///
-    /// Axiom: `a.uintValue == b.uintValue` iff `a == b`
+    /// Axiom: `a.uintValue == b.uintValue` iff `a == b`.
     var uintValue: UInt { get }
 
     /// The hash value.
     ///
-    /// **Axiom:** `x == y` implies `x.hashValue == y.hashValue`
+    /// **Axiom:** `x == y` implies `x.hashValue == y.hashValue`.
     ///
-    /// **Note:** the hash value is not guaranteed to be stable across
-    /// different invocations of the same program.  Do not persist the
-    /// hash value across program runs.
+    /// - Note: The hash value is not guaranteed to be stable across
+    ///   different invocations of the same program.  Do not persist the
+    ///   hash value across program runs.
     var hashValue: Int { get }
 
     /// Construct an instance that uniquely identifies the class instance `x`.
@@ -5345,6 +6321,95 @@ struct ObjectIdentifier : Hashable, Comparable {
     init(_ x: Any.Type)
 }
 
+
+/// Supplies convenient conformance to `SetAlgebraType` for any type
+/// whose `RawValue` is a `BitwiseOperationsType`.  For example:
+///
+///     struct PackagingOptions : OptionSetType {
+///       let rawValue: Int
+///       init(rawValue: Int) { self.rawValue = rawValue }
+///     
+///       static let Box = PackagingOptions(rawValue: 1)
+///       static let Carton = PackagingOptions(rawValue: 2)
+///       static let Bag = PackagingOptions(rawValue: 4)
+///       static let Satchel = PackagingOptions(rawValue: 8)
+///       static let BoxOrBag: PackagingOptions = [Box, Bag]
+///       static let BoxOrCartonOrBag: PackagingOptions = [Box, Carton, Bag]
+///     }
+///
+/// In the example above, `PackagingOptions.Element` is the same type
+/// as `PackagingOptions`, and instance `a` subsumes instance `b` if
+/// and only if `a.rawValue & b.rawValue == b.rawValue`.
+protocol OptionSetType : SetAlgebraType, RawRepresentable {
+
+    /// An `OptionSet`'s `Element` type is normally `Self`.
+    typealias Element = Self
+
+    /// Convert from a value of `RawValue`, succeeding unconditionally.
+    init(rawValue: Self.RawValue)
+}
+
+extension OptionSetType {
+
+    /// Returns the set of elements contained in `self`, in `other`, or in
+    /// both `self` and `other`.
+    func union(other: Self) -> Self
+
+    /// Returns the set of elements contained in both `self` and `other`.
+    func intersect(other: Self) -> Self
+
+    /// Returns the set of elements contained in `self` or in `other`,
+    /// but not in both `self` and `other`.
+    func exclusiveOr(other: Self) -> Self
+}
+
+extension OptionSetType where Element == Self {
+
+    /// Returns `true` if `self` contains `member`.
+    ///
+    /// - Equivalent to `self.intersect([member]) == [member]`
+    func contains(member: Self) -> Bool
+
+    /// If `member` is not already contained in `self`, insert it.
+    ///
+    /// - Equivalent to `self.unionInPlace([member])`
+    /// - Postcondition: `self.contains(member)`
+    mutating func insert(member: Self)
+
+    /// If `member` is contained in `self`, remove and return it.
+    /// Otherwise, return `nil`.
+    ///
+    /// - Postcondition: `self.intersect([member]).isEmpty`
+    mutating func remove(member: Self) -> Self?
+}
+
+extension OptionSetType where RawValue : BitwiseOperationsType {
+
+    /// Create an empty instance.
+    ///
+    /// - Equivalent to `[] as Self`
+    convenience init()
+
+    /// Insert all elements of `other` into `self`.
+    ///
+    /// - Equivalent to replacing `self` with `self.union(other)`.
+    /// - Postcondition: `self.isSupersetOf(other)`
+    mutating func unionInPlace(other: Self)
+
+    /// Remove all elements of `self` that are not also present in
+    /// `other`.
+    ///
+    /// - Equivalent to replacing `self` with `self.intersect(other)`
+    /// - Postcondition: `self.isSubsetOf(other)`
+    mutating func intersectInPlace(other: Self)
+
+    /// Replace `self` with a set containing all elements contained in
+    /// either `self` or `other`, but not both.
+    ///
+    /// - Equivalent to replacing `self` with `self.exclusiveOr(other)`
+    mutating func exclusiveOrInPlace(other: Self)
+}
+
 enum Optional<T> : Reflectable, NilLiteralConvertible {
     case None
     case Some(T)
@@ -5352,14 +6417,14 @@ enum Optional<T> : Reflectable, NilLiteralConvertible {
     /// Construct a `nil` instance.
     init()
 
-    /// Construct a non-\ `nil` instance that stores `some`.
+    /// Construct a non-`nil` instance that stores `some`.
     init(_ some: T)
 
     /// If `self == nil`, returns `nil`.  Otherwise, returns `f(self!)`.
-    func map<U>(f: @noescape (T) -> U) -> U?
+    func map<U>(@noescape f: (T) -> U) -> U?
 
-    /// Returns `f(self)!` iff `self` and `f(self)` are not nil.
-    func flatMap<U>(f: @noescape (T) -> U?) -> U?
+    /// Returns `nil` if `self` is nil, `f(self!)` otherwise.
+    func flatMap<U>(@noescape f: (T) -> U?) -> U?
 
     /// Returns a mirror that reflects `self`.
     func getMirror() -> MirrorType
@@ -5368,7 +6433,7 @@ enum Optional<T> : Reflectable, NilLiteralConvertible {
     init(nilLiteral: ())
 }
 
-extension Optional : DebugPrintable {
+extension Optional : CustomDebugStringConvertible {
 
     /// A textual representation of `self`, suitable for debugging.
     var debugDescription: String { get }
@@ -5383,10 +6448,12 @@ protocol OutputStreamType {
 }
 
 
+
+
 /// A *generator* that adapts a *collection* `C` and any *sequence* of
 /// its `Index` type to present the collection's elements in a
 /// permuted order.
-struct PermutationGenerator<C : CollectionType, Indices : SequenceType where C.Index == C.Index> : GeneratorType, SequenceType {
+struct PermutationGenerator<C : CollectionType, Indices : SequenceType where C.Index == Indices.Generator.Element> : GeneratorType, SequenceType {
 
     /// The type of element returned by `next()`.
     typealias Element = C.Generator.Element
@@ -5394,8 +6461,8 @@ struct PermutationGenerator<C : CollectionType, Indices : SequenceType where C.I
     /// Advance to the next element and return it, or `nil` if no next
     /// element exists.
     ///
-    /// Requires: no preceding call to `self.next()` has returned `nil`.
-    mutating func next() -> Element?
+    /// - Requires: No preceding call to `self.next()` has returned `nil`.
+    mutating func next() -> C.Generator.Element?
 
     /// A type whose instances can produce the elements of this
     /// sequence, in order.
@@ -5403,29 +6470,17 @@ struct PermutationGenerator<C : CollectionType, Indices : SequenceType where C.I
 
     /// Return a *generator* over the elements of this *sequence*.
     ///
-    /// Complexity: O(1)
+    /// - Complexity: O(1).
     func generate() -> PermutationGenerator<C, Indices>
 
     /// Construct a *generator* over a permutation of `elements` given
     /// by `indices`.
     ///
-    /// Requires: `elements[i]` is valid for every `i` in `indices`.
+    /// - Requires: `elements[i]` is valid for every `i` in `indices`.
     init(elements: C, indices: Indices)
 }
 
-
-/// A type with a customized textual representation.
-///
-/// This textual representation is used when values are written to an
-/// *output stream*, for example, by `print` and `println`.
-///
-/// In order to generate a textual representation for an instance of any
-/// type (which might or might not conform to `Printable`), use `toString`.
-protocol Printable {
-
-    /// A textual representation of `self`.
-    var description: String { get }
-}
+typealias PlaygroundQuickLook = QuickLookObject
 
 enum Process {
 
@@ -5464,19 +6519,65 @@ enum QuickLookObject {
     case URL(String)
 }
 
+extension QuickLookObject {
+
+    /// Initialize for the given `subject`.
+    ///
+    /// If the dynamic type of `subject` conforms to
+    /// `CustomPlaygroundQuickLookable`, returns the result of calling
+    /// its `customPlaygroundQuickLook` method.  Otherwise, returns
+    /// a `PlaygroundQuickLook` synthesized for `subject` by the
+    /// language.  Note that in some cases the result may be
+    /// `.Text(String(reflecting: subject))`.
+    ///
+    /// - Note: If the dynamic type of `subject` has value semantics,
+    ///   subsequent mutations of `subject` will not observable in
+    ///   `Mirror`.  In general, though, the observability of such
+    /// mutations is unspecified.
+    init(reflecting subject: Any)
+}
+
 
 /// An *index* that can be offset by an arbitrary number of positions,
 /// and can measure the distance to any reachable value, in O(1).
-protocol RandomAccessIndexType : BidirectionalIndexType, _RandomAccessIndexType {
+protocol RandomAccessIndexType : BidirectionalIndexType, Strideable {
+
+    /// Return the minimum number of applications of `successor` or
+    /// `predecessor` required to reach `other` from `self`.
+    ///
+    /// - Complexity: O(1).
+    ///
+    /// Axioms:
+    ///
+    ///     x.distanceTo(x.successor())) == 1
+    ///     x.distanceTo(x.predecessor())) == -1
+    ///     x.advancedBy(x.distanceTo(y)) == y
+    func distanceTo(other: Self) -> Self.Distance
+
+    /// Return `self` offset by `n` steps.
+    ///
+    /// - Returns: If `n > 0`, the result of applying `successor` to
+    ///   `self` `n` times.  If `n < 0`, the result of applying
+    ///   `predecessor` to `self` `n` times. Otherwise, `self`.
+    ///
+    /// - Complexity: O(1).
+    ///
+    /// Axioms:
+    ///
+    ///     x.advancedBy(0) == x
+    ///     x.advancedBy(1) == x.successor()
+    ///     x.advancedBy(-1) == x.predecessor()
+    ///     x.distanceTo(x.advancedBy(m)) == m
+    func advancedBy(n: Self.Distance) -> Self
 }
 
 
 /// The lazy `CollectionType` returned by `reverse(c)` where `c` is a
-/// `CollectionType` with an `Index` conforming to `RandomAccessIndexType`
-struct RandomAccessReverseView<T : CollectionType where T.Index : RandomAccessIndexType> : CollectionType {
+/// `CollectionType` with an `Index` conforming to `RandomAccessIndexType`.
+struct RandomAccessReverseView<T : CollectionType where T.Index : RandomAccessIndexType> : CollectionType, SequenceType, _CollectionDefaultsType, _CollectionGeneratorDefaultsType {
 
     /// A type that represents a valid position in the collection.
-    /// 
+    ///
     /// Valid indices consist of the position of every element and a
     /// "past the end" position that's not valid for use as a subscript.
     typealias Index = ReverseRandomAccessIndex<T.Index>
@@ -5487,27 +6588,27 @@ struct RandomAccessReverseView<T : CollectionType where T.Index : RandomAccessIn
 
     /// Return a *generator* over the elements of this *sequence*.
     ///
-    /// Complexity: O(1)
+    /// - Complexity: O(1).
     func generate() -> IndexingGenerator<RandomAccessReverseView<T>>
 
     /// The position of the first element in a non-empty collection.
     ///
-    /// Identical to `endIndex` in an empty collection.
-    var startIndex: Index { get }
+    /// In an empty collection, `startIndex == endIndex`.
+    var startIndex: ReverseRandomAccessIndex<T.Index> { get }
 
     /// The collection's "past the end" position.
     ///
     /// `endIndex` is not a valid argument to `subscript`, and is always
     /// reachable from `startIndex` by zero or more applications of
     /// `successor()`.
-    var endIndex: Index { get }
-    subscript (position: Index) -> T.Generator.Element { get }
+    var endIndex: ReverseRandomAccessIndex<T.Index> { get }
+    subscript (position: ReverseRandomAccessIndex<T.Index>) -> T.Generator.Element { get }
 }
 
 
 /// A collection of consecutive discrete index values.
 ///
-/// :param: `T` is both the element type and the index type of the
+/// - parameter T: Is both the element type and the index type of the
 ///   collection.
 ///
 /// Like other collections, a range containing one element has an
@@ -5522,35 +6623,31 @@ struct RandomAccessReverseView<T : CollectionType where T.Index : RandomAccessIn
 /// It also follows from the axiom above that `(-99..<100)[0] == 0`.
 /// To prevent confusion (because some expect the result to be `-99`),
 /// in a context where `T` is known to be an integer type,
-/// subscripting with `T` is a compile-time error::
+/// subscripting with `T` is a compile-time error:
 ///
-///   // error: could not find an overload for 'subscript'...
-///   println( Range<Int>(start:-99, end:100)[0] )
+///     // error: could not find an overload for 'subscript'...
+///     print(Range<Int>(start: -99, end: 100)[0])
 ///
-/// However, subscripting that range still works in a generic context::
+/// However, subscripting that range still works in a generic context:
 ///
-///   func brackets<T:ForwardIndexType>(x: Range<T>, i: T) -> T {
-///     return x[i] // Just forward to subscript
-///   }
-///   println(brackets(Range<Int>(start:-99, end:100), 0)) // prints 0
-struct Range<T : ForwardIndexType> : Equatable, CollectionType, Printable, DebugPrintable {
+///     func brackets<T : ForwardIndexType>(x: Range<T>, i: T) -> T {
+///       return x[i] // Just forward to subscript
+///     }
+///     print(brackets(Range<Int>(start:-99, end:100), 0)) // prints 0
+struct Range<T : ForwardIndexType> : Equatable, CollectionType, SequenceType, _CollectionDefaultsType, _CollectionGeneratorDefaultsType, CustomStringConvertible, CustomDebugStringConvertible {
 
-    /// Construct a copy of `x`
+    /// Construct a copy of `x`.
     init(_ x: Range<T>)
 
     /// Construct a range with `startIndex == start` and `endIndex ==
     /// end`.
     init(start: T, end: T)
 
-    /// `true` iff the range is empty, i.e. `startIndex == endIndex`
-    var isEmpty: Bool { get }
-
     /// A type that represents a valid position in the collection.
-    /// 
+    ///
     /// Valid indices consist of the position of every element and a
     /// "past the end" position that's not valid for use as a subscript.
     typealias Index = T
-    typealias ArraySlice = Range<T>
     subscript (position: T) -> T { get }
     subscript (_: T._DisabledRangeIndex) -> T { get }
 
@@ -5560,15 +6657,15 @@ struct Range<T : ForwardIndexType> : Equatable, CollectionType, Printable, Debug
 
     /// Return a *generator* over the elements of this *sequence*.
     ///
-    /// Complexity: O(1)
+    /// - Complexity: O(1).
     func generate() -> RangeGenerator<T>
 
-    /// The range's lower bound
+    /// The range's lower bound.
     ///
     /// Identical to `endIndex` in an empty range.
     var startIndex: T
 
-    /// The range's upper bound
+    /// The range's upper bound.
     ///
     /// `endIndex` is not a valid argument to `subscript`, and is always
     /// reachable from `startIndex` by zero or more applications of
@@ -5582,13 +6679,6 @@ struct Range<T : ForwardIndexType> : Equatable, CollectionType, Printable, Debug
     var debugDescription: String { get }
 }
 
-extension Range {
-
-    /// Return an array containing the results of calling
-    /// `transform(x)` on each element `x` of `self`.
-    func map<U>(transform: (T) -> U) -> [U]
-}
-
 extension Range : Reflectable {
 
     /// Returns a mirror that reflects `self`.
@@ -5596,13 +6686,13 @@ extension Range : Reflectable {
 }
 
 
-/// A generator over the elements of `Range<T>`
+/// A generator over the elements of `Range<T>`.
 struct RangeGenerator<T : ForwardIndexType> : GeneratorType, SequenceType {
 
     /// The type of element returned by `next()`.
     typealias Element = T
 
-    /// Construct an instance that traverses the elements of `bounds`
+    /// Construct an instance that traverses the elements of `bounds`.
     init(_ bounds: Range<T>)
 
     /// Advance to the next element and return it, or `nil` if no next
@@ -5614,7 +6704,7 @@ struct RangeGenerator<T : ForwardIndexType> : GeneratorType, SequenceType {
     typealias Generator = RangeGenerator<T>
 
     /// `RangeGenerator` is also a `SequenceType`, so it
-    /// `generate`\ 's a copy of itself
+    /// `generate`'s a copy of itself.
     func generate() -> RangeGenerator<T>
 
     /// The lower bound of the remaining range.
@@ -5630,84 +6720,92 @@ struct RangeGenerator<T : ForwardIndexType> : GeneratorType, SequenceType {
 /// of elements with the elements of another collection.
 protocol RangeReplaceableCollectionType : ExtensibleCollectionType {
 
+    /// Append `x` to `self`.
+    ///
+    /// Applying `successor()` to the index of the new element yields
+    /// `self.endIndex`.
+    ///
+    /// - Complexity: Amortized O(1).
+    mutating func append(x: Self.Generator.Element)
+
     /// Replace the given `subRange` of elements with `newElements`.
     ///
     /// Invalidates all indices with respect to `self`.
     ///
-    /// Complexity: O(\ `count(subRange)`\ ) if
-    /// `subRange.endIndex == self.endIndex` and `isEmpty(newElements)`,
-    /// O(\ `count(self)` + `count(newElements)`\ ) otherwise.
-    mutating func replaceRange<C : CollectionType where Self.Generator.Element == Self.Generator.Element>(subRange: Range<Self.Index>, with newElements: C)
+    /// - Complexity: O(`subRange.count`) if
+    ///   `subRange.endIndex == self.endIndex` and `isEmpty(newElements)`,
+    ///   O(`self.count` + `newElements.count`) otherwise.
+    mutating func replaceRange<C : CollectionType where C.Generator.Element == Generator.Element>(subRange: Range<Self.Index>, with newElements: C)
 
     /// Insert `newElement` at index `i`.
     ///
     /// Invalidates all indices with respect to `self`.
     ///
-    /// Complexity: O(\ `count(self)`\ ).
+    /// - Complexity: O(`self.count`).
     ///
-    /// Can be implemented as::
+    /// Can be implemented as:
     ///
-    ///   Swift.insert(&self, newElement, atIndex: i)
+    ///     Swift.insert(&self, newElement, atIndex: i)
     mutating func insert(newElement: Self.Generator.Element, atIndex i: Self.Index)
 
-    /// Insert `newElements` at index `i`
+    /// Insert `newElements` at index `i`.
     ///
     /// Invalidates all indices with respect to `self`.
     ///
-    /// Complexity: O(\ `count(self) + count(newElements)`\ ).
+    /// - Complexity: O(`self.count + newElements.count`).
     ///
-    /// Can be implemented as::
+    /// Can be implemented as:
     ///
-    ///   Swift.splice(&self, newElements, atIndex: i)
-    mutating func splice<S : CollectionType where Self.Generator.Element == Self.Generator.Element>(newElements: S, atIndex i: Self.Index)
+    ///     Swift.splice(&self, newElements, atIndex: i)
+    mutating func splice<S : CollectionType where S.Generator.Element == Generator.Element>(newElements: S, atIndex i: Self.Index)
 
-    /// Remove the element at index `i`
+    /// Remove the element at index `i`.
     ///
     /// Invalidates all indices with respect to `self`.
     ///
-    /// Complexity: O(\ `count(self)`\ ).
+    /// - Complexity: O(`self.count`).
     ///
-    /// Can be implemented as::
+    /// Can be implemented as:
     ///
-    ///   Swift.removeAtIndex(&self, i)
+    ///     Swift.removeAtIndex(&self, i)
     mutating func removeAtIndex(i: Self.Index) -> Self.Generator.Element
 
-    /// Remove the indicated `subRange` of elements
+    /// Remove the indicated `subRange` of elements.
     ///
     /// Invalidates all indices with respect to `self`.
     ///
-    /// Complexity: O(\ `count(self)`\ ).
+    /// - Complexity: O(`self.count`).
     ///
-    /// Can be implemented as::
+    /// Can be implemented as:
     ///
-    ///   Swift.removeRange(&self, subRange)
+    ///     Swift.removeRange(&self, subRange)
     mutating func removeRange(subRange: Range<Self.Index>)
 
-    /// Remove all elements
+    /// Remove all elements.
     ///
     /// Invalidates all indices with respect to `self`.
     ///
-    /// :param: `keepCapacity`, if `true`, is a non-binding request to
+    /// - parameter keepCapacity: If `true`, is a non-binding request to
     ///    avoid releasing storage, which can be a useful optimization
     ///    when `self` is going to be grown again.
     ///
-    /// Complexity: O(\ `count(self)`\ ).
+    /// - Complexity: O(`self.count`).
     ///
-    /// Can be implemented as::
+    /// Can be implemented as:
     ///
-    ///   Swift.removeAll(&self, keepCapacity: keepCapacity)
-    mutating func removeAll(#keepCapacity: Bool)
+    ///     Swift.removeAll(&self, keepCapacity: keepCapacity)
+    mutating func removeAll(keepCapacity keepCapacity: Bool)
 }
 
 
 /// A byte-sized thing that isn't designed to interoperate with
-/// any other types; it makes a decent parameter to UnsafeMutablePointer when
+/// any other types; it makes a decent parameter to `UnsafeMutablePointer` when
 /// you just want to do bytewise pointer arithmetic.
 struct RawByte {
 }
 
 
-/// Protocol for `NS_OPTIONS` imported from Objective-C
+/// Protocol for `NS_OPTIONS` imported from Objective-C.
 protocol RawOptionSetType : _RawOptionSetType, BitwiseOperationsType, NilLiteralConvertible {
 }
 
@@ -5725,12 +6823,12 @@ protocol RawRepresentable {
 
     /// Convert from a value of `RawValue`, yielding `nil` iff
     /// `rawValue` does not correspond to a value of `Self`.
-    init?(rawValue: RawValue)
+    init?(rawValue: Self.RawValue)
 
     /// The corresponding value of the "raw" type.
     ///
     /// `Self(rawValue: self.rawValue)!` is equivalent to `self`.
-    var rawValue: RawValue { get }
+    var rawValue: Self.RawValue { get }
 }
 
 
@@ -5743,8 +6841,8 @@ protocol Reflectable {
 }
 
 
-/// A collection whose elements are all identical `T`\ s.
-struct Repeat<T> : CollectionType {
+/// A collection whose elements are all identical `T`s.
+struct Repeat<T> : CollectionType, SequenceType, _CollectionDefaultsType, _CollectionGeneratorDefaultsType {
 
     /// A type that represents a valid position in the collection.
     /// 
@@ -5764,9 +6862,9 @@ struct Repeat<T> : CollectionType {
     /// the last element in a non-empty instance.
     var endIndex: Index { get }
 
-    /// Return a *generator* over the elements of this *sequence*.
+    /// Returns a *generator* over the elements of this *sequence*.
     ///
-    /// Complexity: O(1)
+    /// - Complexity: O(1).
     func generate() -> IndexingGenerator<Repeat<T>>
     subscript (position: Int) -> T { get }
 
@@ -5779,97 +6877,307 @@ struct Repeat<T> : CollectionType {
 
 
 /// A wrapper for a `BidirectionalIndexType` that reverses its
-/// direction of traversal
-struct ReverseBidirectionalIndex<I : BidirectionalIndexType> : BidirectionalIndexType {
+/// direction of traversal.
+struct ReverseBidirectionalIndex<I : BidirectionalIndexType> : ForwardIndexType, _Incrementable, Equatable, BidirectionalIndexType {
 
     /// Returns the next consecutive value after `self`.
     ///
-    /// Requires: the next value is representable.
+    /// - Requires: The next value is representable.
     func successor() -> ReverseBidirectionalIndex<I>
 
     /// Returns the previous consecutive value before `self`.
     ///
-    /// Requires: the previous value is representable.
+    /// - Requires: The previous value is representable.
     func predecessor() -> ReverseBidirectionalIndex<I>
 }
 
 
 /// A wrapper for a `RandomAccessIndexType` that reverses its
-/// direction of traversal
-struct ReverseRandomAccessIndex<I : RandomAccessIndexType> : RandomAccessIndexType {
+/// direction of traversal.
+struct ReverseRandomAccessIndex<I : RandomAccessIndexType> : ForwardIndexType, _Incrementable, Equatable, RandomAccessIndexType, BidirectionalIndexType, Strideable, Comparable, _Strideable {
 
     /// Returns the next consecutive value after `self`.
     ///
-    /// Requires: the next value is representable.
+    /// - Requires: The next value is representable.
     func successor() -> ReverseRandomAccessIndex<I>
 
     /// Returns the previous consecutive value before `self`.
     ///
-    /// Requires: the previous value is representable.
+    /// - Requires: The previous value is representable.
     func predecessor() -> ReverseRandomAccessIndex<I>
 
     /// Return the minimum number of applications of `successor` or
     /// `predecessor` required to reach `other` from `self`.
     ///
-    /// Complexity: O(1).
+    /// - Complexity: O(1).
     func distanceTo(other: ReverseRandomAccessIndex<I>) -> I.Distance
 
     /// Return `self` offset by `n` steps.
     ///
-    /// :returns: If `n > 0`, the result of applying `successor` to
-    /// `self` `n` times.  If `n < 0`, the result of applying
-    /// `predecessor` to `self` `-n` times. Otherwise, `self`.
+    /// - Returns: If `n > 0`, the result of applying `successor` to
+    ///   `self` `n` times.  If `n < 0`, the result of applying
+    ///   `predecessor` to `self` `-n` times. Otherwise, `self`.
     ///
-    /// Complexity: O(1)
+    /// - Complexity: O(1).
     func advancedBy(amount: I.Distance) -> ReverseRandomAccessIndex<I>
 }
 
 
-/// A type-erased sequence.
-/// 
-/// Forwards operations to an arbitrary underlying sequence with the
-/// same `Element` type, hiding the specifics of the underlying
-/// sequence type.
-///
-/// See also: `GeneratorOf<T>`.
-struct SequenceOf<T> : SequenceType {
-
-    /// Construct an instance whose `generate()` method forwards to
-    /// `makeUnderlyingGenerator`
-    init<G : GeneratorType where T == T>(_ makeUnderlyingGenerator: () -> G)
-
-    /// Construct an instance whose `generate()` method forwards to
-    /// that of `base`.
-    init<S : SequenceType where T == T>(_ base: S)
-
-    /// Return a *generator* over the elements of this *sequence*.
-    ///
-    /// Complexity: O(1)
-    func generate() -> GeneratorOf<T>
-}
-
-
-/// A type that can be iterated with a `for`\ ...\ `in` loop.
+/// A type that can be iterated with a `for`...`in` loop.
 ///
 /// `SequenceType` makes no requirement on conforming types regarding
 /// whether they will be destructively "consumed" by iteration.  To
 /// ensure non-destructive iteration, constrain your *sequence* to
 /// `CollectionType`.
-protocol SequenceType : _Sequence_Type {
+protocol SequenceType {
 
-    /// A type that provides the *sequence*\ 's iteration interface and
+    /// A type that provides the *sequence*'s iteration interface and
     /// encapsulates its iteration state.
     typealias Generator : GeneratorType
 
     /// Return a *generator* over the elements of this *sequence*.
     ///
-    /// Complexity: O(1)
-    func generate() -> Generator
+    /// - Complexity: O(1).
+    func generate() -> Self.Generator
+
+    /// Return a value less than or equal to the number of elements in
+    /// `self`, **nondestructively**.
+    ///
+    /// - Complexity: O(N).
+    func underestimateCount() -> Int
+
+    /// Return an `Array` containing the results of mapping `transform`
+    /// over `self`.
+    ///
+    /// - Complexity: O(N).
+    func map<T>(@noescape transform: (Self.Generator.Element) -> T) -> [T]
+
+    /// Return an `Array` containing the elements of `self`,
+    /// in order, that satisfy the predicate `includeElement`.
+    func filter(@noescape includeElement: (Self.Generator.Element) -> Bool) -> [Self.Generator.Element]
+}
+
+extension SequenceType where Self.Generator.Element : Comparable {
+
+    /// Return an `Array` containing the sorted elements of `source`.
+    ///
+    /// The sorting algorithm is not stable (can change the relative order of
+    /// elements that compare equal).
+    ///
+    /// - Requires: The less-than operator (`func <`) defined in
+    ///   the `Comparable` conformance is a
+    ///   [strict weak ordering](http://en.wikipedia.org/wiki/Strict_weak_order#Strict_weak_orderings)
+    ///   over the elements in `self`.
+    @warn_unused_result
+    func sort() -> [Self.Generator.Element]
+}
+
+extension SequenceType {
+
+    /// Return an `Array` containing the sorted elements of `source`
+    /// according to `isOrderedBefore`.
+    ///
+    /// The sorting algorithm is not stable (can change the relative order of
+    /// elements for which `isOrderedBefore` does not establish an order).
+    ///
+    /// - Requires: `isOrderedBefore` is a
+    ///   [strict weak ordering](http://en.wikipedia.org/wiki/Strict_weak_order#Strict_weak_orderings)
+    ///   over the elements in `self`.
+    @warn_unused_result
+    func sort(isOrderedBefore: (Self.Generator.Element, Self.Generator.Element) -> Bool) -> [Self.Generator.Element]
+}
+
+extension SequenceType {
+
+    /// Return a value less than or equal to the number of elements in
+    /// `self`, **nondestructively**.
+    ///
+    /// - Complexity: O(N).
+    func underestimateCount() -> Int
+}
+
+extension SequenceType {
+
+    /// Return an `Array` containing the results of mapping `transform`
+    /// over `self`.
+    ///
+    /// - Complexity: O(N).
+    func map<T>(@noescape transform: (Self.Generator.Element) -> T) -> [T]
+}
+
+extension SequenceType {
+
+    /// Return an `Array` containing the elements of `self`,
+    /// in order, that satisfy the predicate `includeElement`.
+    func filter(@noescape includeElement: (Self.Generator.Element) -> Bool) -> [Self.Generator.Element]
+}
+
+
+
+extension SequenceType {
+
+    /// Return a lazy `SequenceType` containing pairs (*n*, *x*), where
+    /// *n*s are consecutive `Int`s starting at zero, and *x*s are
+    /// the elements of `base`:
+    ///
+    ///     > for (n, c) in "Swift".characters.enumerate() {
+    ///         print("\(n): '\(c)'")
+    ///       }
+    ///     0: 'S'
+    ///     1: 'w'
+    ///     2: 'i'
+    ///     3: 'f'
+    ///     4: 't'
+    func enumerate() -> EnumerateSequence<Self>
+}
+
+extension SequenceType {
+
+    /// Returns the minimum element in `self` or `nil` if the sequence is empty.
+    ///
+    /// - Complexity: O(`elements.count`).
+    ///
+    /// 
+    /// - Requires: `isOrderedBefore` is a
+    ///   [strict weak ordering](http://en.wikipedia.org/wiki/Strict_weak_order#Strict_weak_orderings).
+    ///   over `self`.
+    func minElement(@noescape isOrderedBefore: (Self.Generator.Element, Self.Generator.Element) -> Bool) -> Self.Generator.Element?
+
+    /// Returns the maximum element in `self` or `nil` if the sequence is empty.
+    ///
+    /// - Complexity: O(`elements.count`).
+    ///   
+    /// - Requires: `isOrderedBefore` is a
+    ///   [strict weak ordering](http://en.wikipedia.org/wiki/Strict_weak_order#Strict_weak_orderings).
+    ///   over `self`.
+    func maxElement(@noescape isOrderedBefore: (Self.Generator.Element, Self.Generator.Element) -> Bool) -> Self.Generator.Element?
+}
+
+extension SequenceType where Generator.Element : Comparable {
+
+    /// Returns the minimum element in `self` or `nil` if the sequence is empty.
+    ///
+    /// - Complexity: O(`elements.count`).
+    ///
+    /// 
+    func minElement() -> Self.Generator.Element?
+
+    /// Returns the maximum element in `self` or `nil` if the sequence is empty.
+    ///
+    /// - Complexity: O(`elements.count`).
+    ///   
+    func maxElement() -> Self.Generator.Element?
+}
+
+extension SequenceType {
+
+    /// Return true iff `self` begins with elements equivalent to those of
+    /// `other`, using `isEquivalent` as the equivalence test.  Return true if
+    /// `other` is empty.
+    ///
+    /// - Requires: `isEquivalent` is an
+    ///   [equivalence relation](http://en.wikipedia.org/wiki/Equivalence_relation).
+    func startsWith<OtherSequence : SequenceType where OtherSequence.Generator.Element == Generator.Element>(other: OtherSequence, @noescape isEquivalent: (Self.Generator.Element, Self.Generator.Element) -> Bool) -> Bool
+}
+
+extension SequenceType where Generator.Element : Equatable {
+
+    /// Return true iff the the initial elements of `self` are equal to `prefix`.
+    /// Return true if `other` is empty.
+    func startsWith<OtherSequence : SequenceType where OtherSequence.Generator.Element == Generator.Element>(other: OtherSequence) -> Bool
+}
+
+extension SequenceType {
+
+    /// Return true iff `self` and `other` contain equivalent elements, using
+    /// `isEquivalent` as the equivalence test.
+    ///
+    /// - Requires: `isEquivalent` is an
+    ///   [equivalence relation](http://en.wikipedia.org/wiki/Equivalence_relation).
+    func elementsEqual<OtherSequence : SequenceType where OtherSequence.Generator.Element == Generator.Element>(other: OtherSequence, @noescape isEquivalent: (Self.Generator.Element, Self.Generator.Element) -> Bool) -> Bool
+}
+
+extension SequenceType where Generator.Element : Equatable {
+
+    /// Return `true` iff `self` and `other` contain the same elements in the
+    /// same order.
+    func elementsEqual<OtherSequence : SequenceType where OtherSequence.Generator.Element == Generator.Element>(other: OtherSequence) -> Bool
+}
+
+extension SequenceType {
+
+    /// Return true iff `self` precedes `other` in a lexicographical ("dictionary")
+    /// ordering, using `isOrderedBefore` as the comparison between elements.
+    ///
+    /// - Note: This method implements the mathematical notion of lexicographical
+    ///   ordering, which has no connection to Unicode.  If you are sorting strings
+    ///   to present to the end-user, you should use `String` APIs that perform
+    /// localized comparison.
+    ///
+    /// - Requires: `isOrderedBefore` is a
+    ///   [strict weak ordering](http://en.wikipedia.org/wiki/Strict_weak_order#Strict_weak_orderings)
+    ///   over the elements of `self` and `other`.
+    func lexicographicalCompare<OtherSequence : SequenceType where OtherSequence.Generator.Element == Generator.Element>(other: OtherSequence, @noescape isOrderedBefore: (Self.Generator.Element, Self.Generator.Element) -> Bool) -> Bool
+}
+
+extension SequenceType where Generator.Element : Comparable {
+
+    /// Return true iff `self` precedes `other` in a lexicographical ("dictionary")
+    /// ordering, using "<" as the comparison between elements.
+    ///
+    /// - Note: This method implements the mathematical notion of lexicographical
+    ///   ordering, which has no connection to Unicode.  If you are sorting strings
+    ///   to present to the end-user, you should use `String` APIs that perform
+    /// localized comparison.
+    func lexicographicalCompare<OtherSequence : SequenceType where OtherSequence.Generator.Element == Generator.Element>(other: OtherSequence) -> Bool
+}
+
+extension SequenceType where Generator.Element : Equatable {
+
+    /// Return `true` iff `x` is in `self`.
+    func contains(element: Self.Generator.Element) -> Bool
+}
+
+extension SequenceType {
+
+    /// Return `true` iff an element in `self` satisfies `predicate`.
+    func contains(@noescape predicate: (Self.Generator.Element) -> Bool) -> Bool
+}
+
+extension SequenceType {
+
+    /// Return the result of repeatedly calling `combine` with an
+    /// accumulated value initialized to `initial` and each element of
+    /// `self`, in turn, i.e. return
+    /// `combine(combine(...combine(combine(initial, self[0]),
+    /// self[1]),...self[count-2]), self[count-1])`.
+    func reduce<T>(initial: T, @noescape combine: (T, Self.Generator.Element) -> T) -> T
+}
+
+extension SequenceType {
+
+    /// Return an `Array` containing the elements of `self` in reverse
+    /// order.
+    func reverse() -> [Self.Generator.Element]
+}
+
+extension SequenceType {
+
+    /// Return an `Array` containing concatenated results of mapping `transform`
+    /// over `self`.
+    func flatMap<S : SequenceType>(@noescape transform: (Self.Generator.Element) -> S) -> [S.Generator.Element]
+}
+
+extension SequenceType {
+
+    /// Return an `Array` containing the non-nil results of mapping `transform`
+    /// over `self`.
+    func flatMap<T>(@noescape transform: (Self.Generator.Element) -> T?) -> [T]
 }
 
 
 /// A collection of unique `T` instances with no defined ordering.
-struct Set<T : Hashable> : Hashable, CollectionType, ArrayLiteralConvertible {
+struct Set<T : Hashable> : Hashable, Equatable, CollectionType, SequenceType, _CollectionDefaultsType, _CollectionGeneratorDefaultsType, ArrayLiteralConvertible {
     typealias Element = T
     typealias Index = SetIndex<T>
     typealias GeneratorType = SetGenerator<T>
@@ -5883,8 +7191,8 @@ struct Set<T : Hashable> : Hashable, CollectionType, ArrayLiteralConvertible {
     ///
     /// This is identical to `endIndex` in an empty set.
     ///
-    /// Complexity: amortized O(1) if `self` does not wrap a bridged
-    /// `NSSet`, O(N) otherwise.
+    /// - Complexity: Amortized O(1) if `self` does not wrap a bridged
+    ///   `NSSet`, O(N) otherwise.
     var startIndex: SetIndex<T> { get }
 
     /// The collection's "past the end" position.
@@ -5893,8 +7201,8 @@ struct Set<T : Hashable> : Hashable, CollectionType, ArrayLiteralConvertible {
     /// reachable from `startIndex` by zero or more applications of
     /// `successor()`.
     ///
-    /// Complexity: amortized O(1) if `self` does not wrap a bridged
-    /// `NSSet`, O(N) otherwise.
+    /// - Complexity: Amortized O(1) if `self` does not wrap a bridged
+    ///   `NSSet`, O(N) otherwise.
     var endIndex: SetIndex<T> { get }
 
     /// Returns `true` if the set contains a member.
@@ -5915,20 +7223,22 @@ struct Set<T : Hashable> : Hashable, CollectionType, ArrayLiteralConvertible {
 
     /// Erase all the elements.  If `keepCapacity` is `true`, `capacity`
     /// will not decrease.
-    mutating func removeAll(keepCapacity: Bool = default)
+    mutating func removeAll(keepCapacity keepCapacity: Bool = default)
 
-    /// Remove a member from the set and return it. Requires: `count > 0`.
+    /// Remove a member from the set and return it.
+    ///
+    /// - Requires: `count > 0`.
     mutating func removeFirst() -> T
 
     /// The number of members in the set.
     ///
-    /// Complexity: O(1)
+    /// - Complexity: O(1).
     var count: Int { get }
     subscript (position: SetIndex<T>) -> T { get }
 
     /// Return a *generator* over the members.
     ///
-    /// Complexity: O(1)
+    /// - Complexity: O(1).
     func generate() -> SetGenerator<T>
     init(arrayLiteral elements: T...)
 
@@ -5936,63 +7246,63 @@ struct Set<T : Hashable> : Hashable, CollectionType, ArrayLiteralConvertible {
     init()
 
     /// Create a `Set` from a finite sequence of items.
-    init<S : SequenceType where T == T>(_ sequence: S)
-
-    /// The first element obtained when iterating, or `nil` if `self` is
-    /// empty.  Equivalent to `self.generate().next()`
-    var first: T? { get }
+    init<S : SequenceType where S.Generator.Element == T>(_ sequence: S)
 
     /// Returns true if the set is a subset of a finite sequence as a `Set`.
-    func isSubsetOf<S : SequenceType where T == T>(sequence: S) -> Bool
+    func isSubsetOf<S : SequenceType where S.Generator.Element == T>(sequence: S) -> Bool
 
     /// Returns true if the set is a subset of a finite sequence as a `Set`
     /// but not equal.
-    func isStrictSubsetOf<S : SequenceType where T == T>(sequence: S) -> Bool
+    func isStrictSubsetOf<S : SequenceType where S.Generator.Element == T>(sequence: S) -> Bool
 
     /// Returns true if the set is a superset of a finite sequence as a `Set`.
-    func isSupersetOf<S : SequenceType where T == T>(sequence: S) -> Bool
+    func isSupersetOf<S : SequenceType where S.Generator.Element == T>(sequence: S) -> Bool
 
     /// Returns true if the set is a superset of a finite sequence as a `Set`
     /// but not equal.
-    func isStrictSupersetOf<S : SequenceType where T == T>(sequence: S) -> Bool
+    func isStrictSupersetOf<S : SequenceType where S.Generator.Element == T>(sequence: S) -> Bool
 
     /// Returns true if no members in the set are in a finite sequence as a `Set`.
-    func isDisjointWith<S : SequenceType where T == T>(sequence: S) -> Bool
+    func isDisjointWith<S : SequenceType where S.Generator.Element == T>(sequence: S) -> Bool
 
     /// Return a new `Set` with items in both this set and a finite sequence.
-    func union<S : SequenceType where T == T>(sequence: S) -> Set<T>
+    func union<S : SequenceType where S.Generator.Element == T>(sequence: S) -> Set<T>
 
     /// Insert elements of a finite sequence into this `Set`.
-    mutating func unionInPlace<S : SequenceType where T == T>(sequence: S)
+    mutating func unionInPlace<S : SequenceType where S.Generator.Element == T>(sequence: S)
 
     /// Return a new set with elements in this set that do not occur
     /// in a finite sequence.
-    func subtract<S : SequenceType where T == T>(sequence: S) -> Set<T>
+    func subtract<S : SequenceType where S.Generator.Element == T>(sequence: S) -> Set<T>
 
     /// Remove all members in the set that occur in a finite sequence.
-    mutating func subtractInPlace<S : SequenceType where T == T>(sequence: S)
+    mutating func subtractInPlace<S : SequenceType where S.Generator.Element == T>(sequence: S)
 
     /// Return a new set with elements common to this set and a finite sequence.
-    func intersect<S : SequenceType where T == T>(sequence: S) -> Set<T>
+    func intersect<S : SequenceType where S.Generator.Element == T>(sequence: S) -> Set<T>
 
     /// Remove any members of this set that aren't also in a finite sequence.
-    mutating func intersectInPlace<S : SequenceType where T == T>(sequence: S)
+    mutating func intersectInPlace<S : SequenceType where S.Generator.Element == T>(sequence: S)
 
     /// Return a new set with elements that are either in the set or a finite
     /// sequence but do not occur in both.
-    func exclusiveOr<S : SequenceType where T == T>(sequence: S) -> Set<T>
+    func exclusiveOr<S : SequenceType where S.Generator.Element == T>(sequence: S) -> Set<T>
 
     /// For each element of a finite sequence, remove it from the set if it is a
     /// common element, otherwise add it to the set. Repeated elements of the
     /// sequence will be ignored.
-    mutating func exclusiveOrInPlace<S : SequenceType where T == T>(sequence: S)
+    mutating func exclusiveOrInPlace<S : SequenceType where S.Generator.Element == T>(sequence: S)
+    var hashValue: Int { get }
 
     /// `true` if the set is empty.
     var isEmpty: Bool { get }
-    var hashValue: Int { get }
+
+    /// The first element obtained when iterating, or `nil` if `self` is
+    /// empty.  Equivalent to `self.generate().next()`.
+    var first: T? { get }
 }
 
-extension Set : Printable, DebugPrintable {
+extension Set : CustomStringConvertible, CustomDebugStringConvertible {
 
     /// A textual representation of `self`.
     var description: String { get }
@@ -6010,23 +7320,203 @@ extension Set : Reflectable {
 
 
 
-/// A generator over the members of a `Set<T>`
+/// A generalized set whose distinct elements are not necessarily
+/// disjoint.
+///
+/// In a model of `SetAlgebraType`, some elements may subsume other
+/// elements, where
+///
+/// > `a` **subsumes** `b` iff `([a] as Self).isSupersetOf([b])`
+///
+/// In many models of `SetAlgebraType` such as `Set<T>`, `a`
+/// *subsumes* `b` if and only if `a == b`, but that is not always the
+/// case.  For example, option sets typically do not satisfy that
+/// property.
+///
+/// Two elements are **disjoint** when neither one *subsumes* the other.
+///
+/// - SeeAlso: `OptionSetType`.
+///
+/// - Axioms, where `S` conforms to `SetAlgebraType`, `x` and `y` are
+///   of type `S`, and `e` is of type `S.Element`:
+///
+///   - `S() == []`
+///   - `x.intersect(x) == x`
+///   - `x.intersect([]) == []`
+///   - `x.union(x) == x`
+///   - `x.union([]) == x`
+///   - `x.contains(e)` implies `x.union(y).contains(e)`
+///   - `x.union(y).contains(e)` implies `x.contains(e) || y.contains(e)`
+///   - `x.contains(e) && y.contains(e)` iff `x.intersect(y).contains(e)`
+///   - `x.isSubsetOf(y)` iff `y.isSupersetOf(x)`
+///   - `x.isStrictSupersetOf(y)` iff `x.isSupersetOf(y) && x != y`
+///   - `x.isStrictSubsetOf(y)` iff `x.isSubsetOf(y) && x != y`
+protocol SetAlgebraType : Equatable, ArrayLiteralConvertible {
+    typealias DefaultImplementations = ()
+
+    /// A type for which `Self` provides a containment test.
+    typealias Element
+
+    /// Creates an empty set.
+    ///
+    /// - Equivalent to `[] as Self`
+    init()
+
+    /// Returns `true` if `self` contains `member`.
+    ///
+    /// - Equivalent to `self.intersect([member]) == [member]`
+    func contains(member: Self.Element) -> Bool
+
+    /// Returns the set of elements contained in `self`, in `other`, or in
+    /// both `self` and `other`.
+    func union(other: Self) -> Self
+
+    /// Returns the set of elements contained in both `self` and `other`.
+    func intersect(other: Self) -> Self
+
+    /// Returns the set of elements contained in `self` or in `other`,
+    /// but not in both `self` and `other`.
+    func exclusiveOr(other: Self) -> Self
+
+    /// If `member` is not already contained in `self`, inserts it.
+    ///
+    /// - Equivalent to `self.unionInPlace([member])`
+    /// - Postcondition: `self.contains(member)`
+    mutating func insert(member: Self.Element)
+
+    /// If `member` is contained in `self`, removes and returns it.
+    /// Otherwise, removes all elements subsumed by `member` and returns
+    /// `nil`.
+    ///
+    /// - Postcondition: `self.intersect([member]).isEmpty`
+    mutating func remove(member: Self.Element) -> Self.Element?
+
+    /// Insert all elements of `other` into `self`.
+    ///
+    /// - Equivalent to replacing `self` with `self.union(other)`.
+    /// - Postcondition: `self.isSupersetOf(other)`
+    mutating func unionInPlace(other: Self)
+
+    /// Removes all elements of `self` that are not also present in
+    /// `other`.
+    ///
+    /// - Equivalent to replacing `self` with `self.intersect(other)`
+    /// - Postcondition: `self.isSubsetOf(other)`
+    mutating func intersectInPlace(other: Self)
+
+    /// Replaces `self` with a set containing all elements contained in
+    /// either `self` or `other`, but not both.
+    ///
+    /// - Equivalent to replacing `self` with `self.exclusiveOr(other)`
+    mutating func exclusiveOrInPlace(other: Self)
+
+    /// Return true iff `self.intersect(other).isEmpty`.
+    func subtract(other: Self) -> Self
+
+    /// Return true iff every element of `self` is contained in `other`.
+    func isSubsetOf(other: Self) -> Bool
+
+    /// Return true iff `self.intersect(other).isEmpty`.
+    func isDisjointWith(other: Self) -> Bool
+
+    /// Return true iff every element of `other` is contained in `self`.
+    func isSupersetOf(other: Self) -> Bool
+
+    /// Returns true iff `self.contains(e)` is `false` for all `e`.
+    var isEmpty: Bool { get }
+
+    /// Creates the set containing all elements of `sequence`.
+    init<S : SequenceType where S.Generator.Element == Element>(_ sequence: S)
+
+    /// Removes all elements of `other` from `self`.
+    ///
+    /// - Equivalent to replacing `self` with `self.subtract(other)`.
+    mutating func subtractInPlace(other: Self)
+
+    /// Returns `true` iff `a` subsumes `b`.
+    ///
+    /// - Equivalent to `([a] as Self).isSupersetOf([b])`
+    static func element(a: Self.Element, subsumes b: Self.Element) -> Bool
+
+    /// Returns `true` iff `a` is disjoint with `b`.
+    ///
+    /// Two elements are disjoint when neither one subsumes the other.
+    ///
+    /// - SeeAlso: `Self.element(_, subsumes:_)`
+    static func element(a: Self.Element, isDisjointWith b: Self.Element) -> Bool
+}
+
+extension SetAlgebraType where DefaultImplementations == () {
+
+    /// Creates the set containing all elements of `sequence`.
+    convenience init<S : SequenceType where S.Generator.Element == Element>(_ sequence: S)
+
+    /// Creates a set containing all elements of the given `arrayLiteral`.
+    ///
+    /// This initializer allows an array literal containing
+    /// `Self.Element` to represent an instance of the set, wherever it
+    /// is implied by the type context.
+    convenience init(arrayLiteral: Self.Element...)
+
+    /// Removes all elements of `other` from `self`.
+    ///
+    /// - Equivalent to replacing `self` with `self.subtract(other)`.
+    mutating func subtractInPlace(other: Self)
+
+    /// Returns true iff every element of `self` is contained in `other`.
+    func isSubsetOf(other: Self) -> Bool
+
+    /// Returns true iff every element of `other` is contained in `self`.
+    func isSupersetOf(other: Self) -> Bool
+
+    /// Returns true iff `self.intersect(other).isEmpty`.
+    func isDisjointWith(other: Self) -> Bool
+
+    /// Returns true iff `self.intersect(other).isEmpty`.
+    func subtract(other: Self) -> Self
+
+    /// Returns true iff `self.contains(e)` is `false` for all `e`.
+    var isEmpty: Bool { get }
+
+    /// Returns true iff every element of `other` is contained in `self`
+    /// and `self` contains an element that is not contained in `other`.
+    func isStrictSupersetOf(other: Self) -> Bool
+
+    /// Return true iff every element of `self` is contained in `other`
+    /// and `other` contains an element that is not contained in `self`.
+    func isStrictSubsetOf(other: Self) -> Bool
+
+    /// Returns `true` iff `a` subsumes `b`.
+    ///
+    /// - Equivalent to `([a] as Self).isSupersetOf([b])`
+    static func element(a: Self.Element, subsumes b: Self.Element) -> Bool
+
+    /// Returns `true` iff `a` is disjoint with `b`.
+    ///
+    /// Two elements are disjoint when neither one subsumes the other.
+    ///
+    /// - SeeAlso: `Self.element(_, subsumes:_)`
+    static func element(a: Self.Element, isDisjointWith b: Self.Element) -> Bool
+}
+
+
+/// A generator over the members of a `Set<T>`.
 struct SetGenerator<T : Hashable> : GeneratorType {
 
     /// Advance to the next element and return it, or `nil` if no next
     /// element exists.
     ///
-    /// Requires: no preceding call to `self.next()` has returned `nil`.
+    /// - Requires: No preceding call to `self.next()` has returned `nil`.
     mutating func next() -> T?
 }
 
 
 /// Used to access the members in an instance of `Set<T>`.
-struct SetIndex<T : Hashable> : ForwardIndexType, Comparable {
+struct SetIndex<T : Hashable> : ForwardIndexType, _Incrementable, Equatable, Comparable {
 
     /// Returns the next consecutive value after `self`.
     ///
-    /// Requires: the next value is representable.
+    /// - Requires: The next value is representable.
     func successor() -> SetIndex<T>
 }
 
@@ -6044,10 +7534,13 @@ protocol SignedIntegerType : _SignedIntegerType, IntegerType {
 /// - `x - 0 == x`
 /// - `-x == 0 - x`
 /// - `-(-x) == x`
-protocol SignedNumberType : _SignedNumberType {
+protocol SignedNumberType : Comparable, IntegerLiteralConvertible {
 
     /// Return the result of negating `x`.
     prefix func -(x: Self) -> Self
+
+    /// Return the difference between `lhs` and `rhs`.
+    func -(lhs: Self, rhs: Self) -> Self
 }
 
 
@@ -6057,11 +7550,11 @@ protocol SignedNumberType : _SignedNumberType {
 /// `Element` type, hiding the specifics of the underlying sink type.
 struct SinkOf<T> : SinkType {
 
-    /// Construct an instance whose `put(x)` calls `putElement(x)`
+    /// Construct an instance whose `put(x)` calls `putElement(x)`.
     init(_ putElement: (T) -> ())
 
-    /// Construct an instance whose `put(x)` calls `base.put(x)`
-    init<S : SinkType where T == T>(_ base: S)
+    /// Construct an instance whose `put(x)` calls `base.put(x)`.
+    init<S : SinkType where S.Element == T>(_ base: S)
 
     /// Write `x` to this sink.
     func put(x: T)
@@ -6073,20 +7566,20 @@ struct SinkOf<T> : SinkType {
 ///
 /// Useful mainly when the optimizer's ability to specialize generics
 /// outstrips its ability to specialize ordinary closures.  For
-/// example, you may find that instead of::
+/// example, you may find that instead of:
 ///
-///   func f(g: (X)->Void) { ... g(a) ...}
+///     func f(g: (X)->Void) { ... g(a) ...}
 ///
-/// the following generates better code::
+/// the following generates better code:
 ///
-///   func f<T: Sink where T.Element == X>(g: T) { ... g.put(a) ...}
+///     func f<T : SinkType where T.Element == X>(g: T) { ... g.put(a) ...}
 protocol SinkType {
 
     /// The type of element to be written to this sink.
     typealias Element
 
     /// Write `x` to this sink.
-    mutating func put(x: Element)
+    mutating func put(x: Self.Element)
 }
 
 
@@ -6100,31 +7593,31 @@ protocol Sliceable : _Sliceable {
     /// `SubSlice` type in a concrete implementation of `Sliceable`
     /// should also be `Sliceable`.
     typealias SubSlice : _Sliceable
-    subscript (bounds: Range<Self.Index>) -> SubSlice { get }
+    subscript (bounds: Range<Self.Index>) -> Self.SubSlice { get }
 }
 
 
 /// An simple string designed to represent text that is "knowable at
 /// compile-time".
 ///
-/// Logically speaking, each instance looks something like this::
+/// Logically speaking, each instance looks something like this:
 ///
-///    enum StaticString {
-///       case ASCII(start: UnsafePointer<UInt8>, length: Int)
-///       case UTF8(start: UnsafePointer<UInt8>, length: Int)
-///       case Scalar(UnicodeScalar)
-///    }
-struct StaticString : UnicodeScalarLiteralConvertible, ExtendedGraphemeClusterLiteralConvertible, StringLiteralConvertible, Printable, DebugPrintable {
+///      enum StaticString {
+///         case ASCII(start: UnsafePointer<UInt8>, length: Int)
+///         case UTF8(start: UnsafePointer<UInt8>, length: Int)
+///         case Scalar(UnicodeScalar)
+///      }
+struct StaticString : UnicodeScalarLiteralConvertible, ExtendedGraphemeClusterLiteralConvertible, StringLiteralConvertible, CustomStringConvertible, CustomDebugStringConvertible, Reflectable {
 
-    /// A pointer to the beginning of UTF-8 code units
+    /// A pointer to the beginning of UTF-8 code units.
     ///
-    /// Requires: `self` stores a pointer to either ASCII or UTF-8 code
-    /// units.
+    /// - Requires: `self` stores a pointer to either ASCII or UTF-8 code
+    ///   units.
     var utf8Start: UnsafePointer<UInt8> { get }
 
-    /// The stored Unicode scalar value
+    /// The stored Unicode scalar value.
     ///
-    /// Requires: `self` stores a single Unicode scalar value.
+    /// - Requires: `self` stores a single Unicode scalar value.
     var unicodeScalar: UnicodeScalar { get }
 
     /// If `self` stores a pointer to ASCII or UTF-8 code units, the
@@ -6134,7 +7627,7 @@ struct StaticString : UnicodeScalarLiteralConvertible, ExtendedGraphemeClusterLi
     /// `byteSize` is unspecified.
     var byteSize: Word { get }
 
-    /// `true` iff `self` stores a pointer to ASCII or UTF-8 code units
+    /// `true` iff `self` stores a pointer to ASCII or UTF-8 code units.
     var hasPointerRepresentation: Bool { get }
 
     /// `true` if `self` stores a pointer to ASCII code units.
@@ -6147,7 +7640,7 @@ struct StaticString : UnicodeScalarLiteralConvertible, ExtendedGraphemeClusterLi
     /// `self`.
     ///
     /// This method works regardless of what `self` stores.
-    func withUTF8Buffer<R>(body: @noescape (UnsafeBufferPointer<UInt8>) -> R) -> R
+    func withUTF8Buffer<R>(@noescape body: (UnsafeBufferPointer<UInt8>) -> R) -> R
 
     /// Return a `String` representing the same sequence of Unicode
     /// scalar values as `self` does.
@@ -6173,6 +7666,7 @@ struct StaticString : UnicodeScalarLiteralConvertible, ExtendedGraphemeClusterLi
 
     /// A textual representation of `self`, suitable for debugging.
     var debugDescription: String { get }
+    func getMirror() -> MirrorType
 }
 
 
@@ -6182,17 +7676,17 @@ struct StaticString : UnicodeScalarLiteralConvertible, ExtendedGraphemeClusterLi
 /// For example: `String`, `Character`, `UnicodeScalar`.
 protocol Streamable {
 
-    /// Write a textual representation of `self` into `target`
+    /// Write a textual representation of `self` into `target`.
     func writeTo<Target : OutputStreamType>(inout target: Target)
 }
 
 
-/// A `SequenceType` of values formed by striding over a closed interval
+/// A `SequenceType` of values formed by striding over a closed interval.
 struct StrideThrough<T : Strideable> : SequenceType {
 
     /// Return a *generator* over the elements of this *sequence*.
     ///
-    /// Complexity: O(1)
+    /// - Complexity: O(1).
     func generate() -> StrideThroughGenerator<T>
 }
 
@@ -6203,7 +7697,7 @@ extension StrideThrough : Reflectable {
 }
 
 
-/// A GeneratorType for StrideThrough<T>
+/// A GeneratorType for `StrideThrough<T>`.
 struct StrideThroughGenerator<T : Strideable> : GeneratorType {
 
     /// Advance to the next element and return it, or `nil` if no next
@@ -6212,12 +7706,12 @@ struct StrideThroughGenerator<T : Strideable> : GeneratorType {
 }
 
 
-/// A `SequenceType` of values formed by striding over a half-open interval
+/// A `SequenceType` of values formed by striding over a half-open interval.
 struct StrideTo<T : Strideable> : SequenceType {
 
     /// Return a *generator* over the elements of this *sequence*.
     ///
-    /// Complexity: O(1)
+    /// - Complexity: O(1).
     func generate() -> StrideToGenerator<T>
 }
 
@@ -6228,7 +7722,7 @@ extension StrideTo : Reflectable {
 }
 
 
-/// A GeneratorType for StrideTo<T>
+/// A GeneratorType for `StrideTo<T>`.
 struct StrideToGenerator<T : Strideable> : GeneratorType {
 
     /// Advance to the next element and return it, or `nil` if no next
@@ -6240,7 +7734,7 @@ struct StrideToGenerator<T : Strideable> : GeneratorType {
 /// Conforming types are notionally continuous, one-dimensional
 /// values that can be offset and measured.
 ///
-/// See also: `stride(from: to: by:)` and `stride(from: through: by:)`
+/// - SeeAlso: `stride(from: to: by:)` and `stride(from: through: by:)`
 protocol Strideable : Comparable, _Strideable {
 }
 
@@ -6253,16 +7747,11 @@ protocol Strideable : Comparable, _Strideable {
 /// Swift strings are designed to be Unicode-correct.  In particular,
 /// the APIs make it easy to write code that works correctly, and does
 /// not surprise end-users, regardless of where you venture in the
-/// Unicode character space.  For example,
-///
-/// * The `==` operator checks for `Unicode canonical equivalence
-///   <http://www.unicode.org/glossary/#deterministic_comparison>`_,
-///   so two different representations of the same string will always
-///   compare equal.
-///
-/// * String elements are `Characters` (`extended grapheme clusters
-///   <http://www.unicode.org/glossary/#extended_grapheme_cluster>`_),
-///   a unit of text that is meaningful to most humans.
+/// Unicode character space.  For example, the `==` operator checks
+/// for [Unicode canonical
+/// equivalence](http://www.unicode.org/glossary/#deterministic_comparison),
+/// so two different representations of the same string will always
+/// compare equal.
 ///
 /// Locale-Insensitive
 /// ==================
@@ -6271,9 +7760,9 @@ protocol Strideable : Comparable, _Strideable {
 /// locale settings.  That's because, for example, the validity of a
 /// `Dictionary<String, T>` in a running program depends on a given
 /// string comparison having a single, stable result.  Therefore,
-/// Swift always uses the default, un-\ `tailored
-/// <http://www.unicode.org/glossary/#tailorable>`_ Unicode algorithms
-/// for basic string operations.
+/// Swift always uses the default,
+/// un-[tailored](http://www.unicode.org/glossary/#tailorable) Unicode
+/// algorithms for basic string operations.
 ///
 /// Importing `Foundation` endows swift strings with the full power of
 /// the `NSString` API, which allows you to choose more complex
@@ -6284,18 +7773,41 @@ protocol Strideable : Comparable, _Strideable {
 ///
 /// Each string variable, `let` binding, or stored property has an
 /// independent value, so mutations to the string are not observable
-/// through its copies::
+/// through its copies:
 ///
-///   var a = "foo"
-///   var b = a
-///   b[b.endIndex.predecessor()] = "x"
-///   println("a=\(a), b=\(b)")     // a=foo, b=fox
+///     var a = "foo"
+///     var b = a
+///     b.extend("bar")
+///     print("a=\(a), b=\(b)")     // a=foo, b=foobar
 ///
 /// Strings use Copy-on-Write so that their data is only copied
 /// lazily, upon mutation, when more than one string instance is using
 /// the same buffer.  Therefore, the first in any sequence of mutating
 /// operations may cost `O(N)` time and space, where `N` is the length
-/// of the string's (unspecified) underlying representation,.
+/// of the string's (unspecified) underlying representation.
+///
+/// Views
+/// =====
+///
+/// `String` is not itself a collection of anything.  Instead, it has
+/// properties that present the string's contents as meaningful
+/// collections:
+///
+///   - `characters`: a collection of `Character` ([extended grapheme
+///     cluster](http://www.unicode.org/glossary/#extended_grapheme_cluster))
+///     elements, a unit of text that is meaningful to most humans.
+///
+///   - `unicodeScalars`: a collection of `UnicodeScalar` ([Unicode
+///     scalar
+///     values](http://www.unicode.org/glossary/#unicode_scalar_value))
+///     the 21-bit codes that are the basic unit of Unicode.  These
+///     values are equivalent to UTF-32 code units.
+///
+///   - `utf16`: a collection of `UTF16.CodeUnit`, the 16-bit
+///     elements of the string's UTF-16 encoding.
+///
+///   - `utf8`: a collection of `UTF8.CodeUnit`, the 8-bit
+///     elements of the string's UTF-8 encoding.
 ///
 /// Growth and Capacity
 /// ===================
@@ -6320,170 +7832,78 @@ protocol Strideable : Comparable, _Strideable {
 /// more, if the underlying `NSString` is has unusual performance
 /// characteristics).
 struct String {
+
+    /// An empty `String`.
     init()
 }
 
-extension String : CollectionType {
+extension String {
+    typealias Index = String.CharacterView.Index
 
-    /// A character position in a `String`
-    struct Index : BidirectionalIndexType, Comparable, Reflectable {
+    /// The position of the first `Character` in `self.characters` if
+    /// `self` is non-empty; identical to `endIndex` otherwise.
+    var startIndex: Index { get }
 
-        /// Returns the next consecutive value after `self`.
-        ///
-        /// Requires: the next value is representable.
-        func successor() -> String.Index
-
-        /// Returns the previous consecutive value before `self`.
-        ///
-        /// Requires: the previous value is representable.
-        func predecessor() -> String.Index
-
-        /// Returns a mirror that reflects `self`.
-        func getMirror() -> MirrorType
-    }
-
-    /// The position of the first `Character` if the `String` is
-    /// non-empty; identical to `endIndex` otherwise.
-    var startIndex: String.Index { get }
-
-    /// The `String`\ 's "past the end" position.
+    /// The "past the end" position in `self.characters`.
     ///
     /// `endIndex` is not a valid argument to `subscript`, and is always
     /// reachable from `startIndex` by zero or more applications of
     /// `successor()`.
-    var endIndex: String.Index { get }
-    subscript (i: String.Index) -> Character { get }
+    var endIndex: Index { get }
+    subscript (i: Index) -> Character { get }
 
-    /// Return a *generator* over the `Characters` in this `String`.
+    /// Return a *generator* over the `Character`s.
     ///
-    /// Complexity: O(1)
-    func generate() -> IndexingGenerator<String>
+    /// - Complexity: O(1).
+    func generate() -> IndexingGenerator<String.CharacterView>
 }
 
 extension String {
 
-    /// A collection of UTF-16 code units that encodes a `String` value.
-    struct UTF16View : Sliceable, Reflectable, Printable, DebugPrintable {
-        struct Index {
-        }
+    /// A `String`'s collection of `Character`s ([extended grapheme
+    /// clusters](http://www.unicode.org/glossary/#extended_grapheme_cluster))
+    /// elements.
+    struct CharacterView {
 
-        /// The position of the first code unit if the `String` is
-        /// non-empty; identical to `endIndex` otherwise.
-        var startIndex: String.UTF16View.Index { get }
-
-        /// The "past the end" position.
-        ///
-        /// `endIndex` is not a valid argument to `subscript`, and is always
-        /// reachable from `startIndex` by zero or more applications of
-        /// `successor()`.
-        var endIndex: String.UTF16View.Index { get }
-
-        /// A type whose instances can produce the elements of this
-        /// sequence, in order.
-        typealias Generator
-
-        /// Return a *generator* over the code points that comprise this
-        /// *sequence*.
-        ///
-        /// Complexity: O(1)
-        func generate() -> Generator
-        subscript (i: String.UTF16View.Index) -> UInt16 { get }
-        subscript (subRange: Range<String.UTF16View.Index>) -> String.UTF16View { get }
-
-        /// Returns a mirror that reflects `self`.
-        func getMirror() -> MirrorType
-        var description: String { get }
-        var debugDescription: String { get }
+        /// Create a view of the `Character`s in `text`.
+        init(_ text: String)
     }
 
-    /// A UTF-16 encoding of `self`.
-    var utf16: String.UTF16View { get }
+    /// A collection of `Characters` representing the `String`'s
+    /// [extended grapheme
+    /// clusters](http://www.unicode.org/glossary/#extended_grapheme_cluster).
+    var characters: String.CharacterView { get }
 
-    /// Construct the `String` corresponding to the given sequence of
-    /// UTF-16 code units.  If `utf16` contains unpaired surrogates, the
-    /// result is `nil`.
-    init?(_ utf16: String.UTF16View)
-
-    /// The index type for subscripting a `String`\ 's `utf16` view.
-    typealias UTF16Index = String.UTF16View.Index
-}
-
-extension String {
-
-    /// A collection of UTF-8 code units that encodes a `String` value.
-    struct UTF8View : CollectionType, Reflectable, Printable, DebugPrintable {
-
-        /// A position in a `String.UTF8View`
-        struct Index : ForwardIndexType {
-
-            /// Returns the next consecutive value after `self`.
-            ///
-            /// Requires: the next value is representable.
-            func successor() -> String.UTF8View.Index
-        }
-
-        /// The position of the first code unit if the `String` is
-        /// non-empty; identical to `endIndex` otherwise.
-        var startIndex: String.UTF8View.Index { get }
-
-        /// The "past the end" position.
-        ///
-        /// `endIndex` is not a valid argument to `subscript`, and is always
-        /// reachable from `startIndex` by zero or more applications of
-        /// `successor()`.
-        var endIndex: String.UTF8View.Index { get }
-        subscript (position: String.UTF8View.Index) -> CodeUnit { get }
-        subscript (subRange: Range<String.UTF8View.Index>) -> String.UTF8View { get }
-
-        /// Return a *generator* over the code points that comprise this
-        /// *sequence*.
-        ///
-        /// Complexity: O(1)
-        func generate() -> IndexingGenerator<String.UTF8View>
-
-        /// Returns a mirror that reflects `self`.
-        func getMirror() -> MirrorType
-        var description: String { get }
-        var debugDescription: String { get }
-    }
-
-    /// A UTF-8 encoding of `self`.
-    var utf8: String.UTF8View { get }
-
-    /// A contiguously-stored nul-terminated UTF-8 representation of
-    /// `self`.
+    /// Efficiently mutate `self` by applying `body` to its `characters`.
     ///
-    /// To access the underlying memory, invoke
-    /// `withUnsafeBufferPointer` on the `ContiguousArray`.
-    var nulTerminatedUTF8: ContiguousArray<CodeUnit> { get }
+    /// - Warning: Do not rely on anything about `self` (the `String`
+    ///   that is the target of this method) during the execution of
+    ///   `body`: it may not appear to have its correct value.  Instead,
+    ///   use only the `String.CharacterView` argument to `body`.
+    mutating func withMutableCharacters<R>(body: (inout String.CharacterView) -> R) -> R
 
     /// Construct the `String` corresponding to the given sequence of
-    /// UTF-8 code units.  If `utf8` contains unpaired surrogates, the
-    /// result is `nil`.
-    init?(_ utf8: String.UTF8View)
-
-    /// The index type for subscripting a `String`\ 's `.utf8` view.
-    typealias UTF8Index = String.UTF8View.Index
+    /// Unicode scalars.
+    init(_ characters: String.CharacterView)
 }
 
 extension String {
 
-    /// A collection of `Unicode scalar values
-    /// <http://www.unicode.org/glossary/#unicode_scalar_value>`_ that
+    /// A collection of [Unicode scalar values](http://www.unicode.org/glossary/#unicode_scalar_value) that
     /// encode a `String` .
-    struct UnicodeScalarView : Sliceable, SequenceType, Reflectable, Printable, DebugPrintable {
+    struct UnicodeScalarView : Sliceable, _Sliceable, CollectionType, SequenceType, _CollectionDefaultsType, _CollectionGeneratorDefaultsType, Reflectable, CustomStringConvertible, CustomDebugStringConvertible {
 
-        /// A position in a `String.UnicodeScalarView`
-        struct Index : BidirectionalIndexType, Comparable {
+        /// A position in a `String.UnicodeScalarView`.
+        struct Index : ForwardIndexType, _Incrementable, Equatable, BidirectionalIndexType, Comparable {
 
             /// Returns the next consecutive value after `self`.
             ///
-            /// Requires: the next value is representable.
+            /// - Requires: The next value is representable.
             func successor() -> String.UnicodeScalarView.Index
 
             /// Returns the previous consecutive value before `self`.
             ///
-            /// Requires: the previous value is representable.
+            /// - Requires: The previous value is representable.
             func predecessor() -> String.UnicodeScalarView.Index
         }
 
@@ -6507,15 +7927,15 @@ extension String {
             /// Advance to the next element and return it, or `nil` if no next
             /// element exists.
             ///
-            /// Requires: no preceding call to `self.next()` has returned
-            /// `nil`.
+            /// - Requires: No preceding call to `self.next()` has returned
+            ///   `nil`.
             mutating func next() -> UnicodeScalar?
         }
 
-        /// Return a *generator* over the `UnicodeScalar`\ s that comprise
+        /// Return a *generator* over the `UnicodeScalar`s that comprise
         /// this *sequence*.
         ///
-        /// Complexity: O(1)
+        /// - Complexity: O(1).
         func generate() -> String.UnicodeScalarView.Generator
 
         /// Returns a mirror that reflects `self`.
@@ -6528,9 +7948,106 @@ extension String {
     /// Unicode scalars.
     init(_ unicodeScalars: String.UnicodeScalarView)
 
-    /// The index type for subscripting a `String`\ 's `.unicodeScalars`
+    /// The index type for subscripting a `String`'s `.unicodeScalars`
     /// view.
     typealias UnicodeScalarIndex = String.UnicodeScalarView.Index
+}
+
+extension String {
+
+    /// A collection of UTF-16 code units that encodes a `String` value.
+    struct UTF16View : Sliceable, _Sliceable, CollectionType, SequenceType, _CollectionDefaultsType, _CollectionGeneratorDefaultsType, Reflectable, CustomStringConvertible, CustomDebugStringConvertible {
+        struct Index {
+        }
+
+        /// The position of the first code unit if the `String` is
+        /// non-empty; identical to `endIndex` otherwise.
+        var startIndex: String.UTF16View.Index { get }
+
+        /// The "past the end" position.
+        ///
+        /// `endIndex` is not a valid argument to `subscript`, and is always
+        /// reachable from `startIndex` by zero or more applications of
+        /// `successor()`.
+        var endIndex: String.UTF16View.Index { get }
+        func generate() -> IndexingGenerator<String.UTF16View>
+        subscript (i: String.UTF16View.Index) -> CodeUnit { get }
+        subscript (subRange: Range<String.UTF16View.Index>) -> String.UTF16View { get }
+
+        /// Returns a mirror that reflects `self`.
+        func getMirror() -> MirrorType
+        var description: String { get }
+        var debugDescription: String { get }
+    }
+
+    /// A UTF-16 encoding of `self`.
+    var utf16: String.UTF16View { get }
+
+    /// Construct the `String` corresponding to the given sequence of
+    /// UTF-16 code units.  If `utf16` contains unpaired surrogates, the
+    /// result is `nil`.
+    init?(_ utf16: String.UTF16View)
+
+    /// The index type for subscripting a `String`'s `utf16` view.
+    typealias UTF16Index = String.UTF16View.Index
+}
+
+extension String {
+
+    /// A collection of UTF-8 code units that encodes a `String` value.
+    struct UTF8View : CollectionType, SequenceType, _CollectionDefaultsType, _CollectionGeneratorDefaultsType, Reflectable, CustomStringConvertible, CustomDebugStringConvertible {
+
+        /// A position in a `String.UTF8View`.
+        struct Index : ForwardIndexType, _Incrementable, Equatable {
+
+            /// Returns the next consecutive value after `self`.
+            ///
+            /// - Requires: The next value is representable.
+            func successor() -> String.UTF8View.Index
+        }
+
+        /// The position of the first code unit if the `String` is
+        /// non-empty; identical to `endIndex` otherwise.
+        var startIndex: String.UTF8View.Index { get }
+
+        /// The "past the end" position.
+        ///
+        /// `endIndex` is not a valid argument to `subscript`, and is always
+        /// reachable from `startIndex` by zero or more applications of
+        /// `successor()`.
+        var endIndex: String.UTF8View.Index { get }
+        subscript (position: String.UTF8View.Index) -> CodeUnit { get }
+        subscript (subRange: Range<String.UTF8View.Index>) -> String.UTF8View { get }
+
+        /// Returns a *generator* over the code points that comprise this
+        /// *sequence*.
+        ///
+        /// - Complexity: O(1).
+        func generate() -> IndexingGenerator<String.UTF8View>
+
+        /// Returns a mirror that reflects `self`.
+        func getMirror() -> MirrorType
+        var description: String { get }
+        var debugDescription: String { get }
+    }
+
+    /// A UTF-8 encoding of `self`.
+    var utf8: String.UTF8View { get }
+
+    /// A contiguously-stored nul-terminated UTF-8 representation of
+    /// `self`.
+    ///
+    /// To access the underlying memory, invoke
+    /// `withUnsafeBufferPointer` on the `ContiguousArray`.
+    var nulTerminatedUTF8: ContiguousArray<CodeUnit> { get }
+
+    /// Construct the `String` corresponding to the given sequence of
+    /// UTF-8 code units.  If `utf8` contains unpaired surrogates, the
+    /// result is `nil`.
+    init?(_ utf8: String.UTF8View)
+
+    /// The index type for subscripting a `String`'s `.utf8` view.
+    typealias UTF8Index = String.UTF8View.Index
 }
 
 extension String {
@@ -6562,7 +8079,7 @@ extension String {
     /// Invoke `f` on the contents of this string, represented as
     /// a nul-terminated array of char, ensuring that the array's
     /// lifetime extends through the execution of `f`.
-    func withCString<Result>(f: @noescape UnsafePointer<Int8> -> Result) -> Result
+    func withCString<Result>(@noescape f: UnsafePointer<Int8> -> Result) -> Result
 }
 
 extension String : Reflectable {
@@ -6579,7 +8096,7 @@ extension String : OutputStreamType {
 
 extension String : Streamable {
 
-    /// Write a textual representation of `self` into `target`
+    /// Write a textual representation of `self` into `target`.
     func writeTo<Target : OutputStreamType>(inout target: Target)
 }
 
@@ -6619,7 +8136,7 @@ extension String : StringLiteralConvertible {
     init(stringLiteral value: String)
 }
 
-extension String : DebugPrintable {
+extension String : CustomDebugStringConvertible {
 
     /// A textual representation of `self`, suitable for debugging.
     var debugDescription: String { get }
@@ -6642,7 +8159,7 @@ extension String {
 
     /// Append `x` to `self`.
     ///
-    /// Complexity: amortized O(1).
+    /// - Complexity: Amortized O(1).
     mutating func append(x: UnicodeScalar)
 }
 
@@ -6650,103 +8167,92 @@ extension String : Hashable {
 
     /// The hash value.
     ///
-    /// **Axiom:** `x == y` implies `x.hashValue == y.hashValue`
+    /// **Axiom:** `x == y` implies `x.hashValue == y.hashValue`.
     ///
-    /// **Note:** the hash value is not guaranteed to be stable across
-    /// different invocations of the same program.  Do not persist the
-    /// hash value across program runs.
+    /// - Note: The hash value is not guaranteed to be stable across
+    ///   different invocations of the same program.  Do not persist the
+    ///   hash value across program runs.
     var hashValue: Int { get }
 }
 
-extension String : StringInterpolationConvertible {
 
-    /// Create an instance by concatenating the elements of `strings`
-    init(stringInterpolation strings: String...)
 
-    /// Create an instance containing `expr`\ 's `print` representation
-    init<T>(stringInterpolationSegment expr: T)
+extension String {
+    subscript (subRange: Range<Index>) -> String { get }
 }
 
-
-
-extension String : Sliceable {
-    subscript (subRange: Range<String.Index>) -> String { get }
-}
-
-extension String : ExtensibleCollectionType {
-
-    /// Reserve enough space to store `n` ASCII characters.
-    ///
-    /// Complexity: O(`n`)
+extension String {
     mutating func reserveCapacity(n: Int)
-
-    /// Append `c` to `self`.
-    ///
-    /// Complexity: amortized O(1).
     mutating func append(c: Character)
-
-    /// Append the elements of `newElements` to `self`.
-    mutating func extend<S : SequenceType where Character == Character>(newElements: S)
+    mutating func extend<S : SequenceType where S.Generator.Element == Character>(newElements: S)
 
     /// Create an instance containing `characters`.
-    init<S : SequenceType where Character == Character>(_ characters: S)
+    init<S : SequenceType where S.Generator.Element == Character>(_ characters: S)
 }
 
 extension String {
 
     /// Interpose `self` between every pair of consecutive `elements`,
-    /// then concatenate the result.  For example::
+    /// then concatenate the result.  For example:
     ///
-    ///   "-|-".join(["foo", "bar", "baz"]) // "foo-|-bar-|-baz"
-    func join<S : SequenceType where String == String>(elements: S) -> String
+    ///     "-|-".join(["foo", "bar", "baz"]) // "foo-|-bar-|-baz"
+    func join<S : SequenceType where S.Generator.Element == String>(elements: S) -> String
 }
 
-extension String : RangeReplaceableCollectionType {
+extension String {
 
     /// Replace the given `subRange` of elements with `newElements`.
     ///
     /// Invalidates all indices with respect to `self`.
     ///
-    /// Complexity: O(\ `count(subRange)`\ ) if `subRange.endIndex
-    /// == self.endIndex` and `isEmpty(newElements)`\ , O(N) otherwise.
-    mutating func replaceRange<C : CollectionType where Character == Character>(subRange: Range<String.Index>, with newElements: C)
+    /// - Complexity: O(`subRange.count`) if `subRange.endIndex
+    ///   == self.endIndex` and `isEmpty(newElements)`, O(N) otherwise.
+    mutating func replaceRange<C : CollectionType where C.Generator.Element == Character>(subRange: Range<Index>, with newElements: C)
+
+    /// Replace the given `subRange` of elements with `newElements`.
+    ///
+    /// Invalidates all indices with respect to `self`.
+    ///
+    /// - Complexity: O(`subRange.count`) if `subRange.endIndex
+    ///   == self.endIndex` and `isEmpty(newElements)`, O(N) otherwise.
+    mutating func replaceRange(subRange: Range<Index>, with newElements: String)
 
     /// Insert `newElement` at index `i`.
     ///
     /// Invalidates all indices with respect to `self`.
     ///
-    /// Complexity: O(\ `count(self)`\ ).
-    mutating func insert(newElement: Character, atIndex i: String.Index)
+    /// - Complexity: O(`self.count`).
+    mutating func insert(newElement: Character, atIndex i: Index)
 
-    /// Insert `newElements` at index `i`
+    /// Insert `newElements` at index `i`.
     ///
     /// Invalidates all indices with respect to `self`.
     ///
-    /// Complexity: O(\ `count(self) + count(newElements)`\ ).
-    mutating func splice<S : CollectionType where Character == Character>(newElements: S, atIndex i: String.Index)
+    /// - Complexity: O(`self.count + newElements.count`).
+    mutating func splice<S : CollectionType where S.Generator.Element == Character>(newElements: S, atIndex i: Index)
 
-    /// Remove and return the element at index `i`
+    /// Remove and return the element at index `i`.
     ///
     /// Invalidates all indices with respect to `self`.
     ///
-    /// Complexity: O(\ `count(self)`\ ).
-    mutating func removeAtIndex(i: String.Index) -> Character
+    /// - Complexity: O(`self.count`).
+    mutating func removeAtIndex(i: Index) -> Character
 
-    /// Remove the indicated `subRange` of characters
+    /// Remove the indicated `subRange` of characters.
     ///
     /// Invalidates all indices with respect to `self`.
     ///
-    /// Complexity: O(\ `count(self)`\ ).
-    mutating func removeRange(subRange: Range<String.Index>)
+    /// - Complexity: O(`self.count`).
+    mutating func removeRange(subRange: Range<Index>)
 
     /// Remove all characters.
     ///
     /// Invalidates all indices with respect to `self`.
     ///
-    /// :param: `keepCapacity`, if `true`, prevents the release of
+    /// - parameter keepCapacity: If `true`, prevents the release of
     ///   allocated storage, which can be a useful optimization
     ///   when `self` is going to be grown again.
-    mutating func removeAll(keepCapacity: Bool = default)
+    mutating func removeAll(keepCapacity keepCapacity: Bool = default)
 }
 
 extension String {
@@ -6759,6 +8265,12 @@ extension String {
 
 
 extension String : StringInterpolationConvertible {
+
+    /// Create an instance by concatenating the elements of `strings`.
+    init(stringInterpolation strings: String...)
+
+    /// Create an instance containing `expr`'s `print` representation.
+    init<T>(stringInterpolationSegment expr: T)
     init(stringInterpolationSegment expr: String)
     init(stringInterpolationSegment expr: Character)
     init(stringInterpolationSegment expr: UnicodeScalar)
@@ -6780,11 +8292,11 @@ extension String : StringInterpolationConvertible {
 extension String {
 
     /// Construct an instance that is the concatenation of `count` copies
-    /// of `repeatedValue`
+    /// of `repeatedValue`.
     init(count: Int, repeatedValue c: Character)
 
     /// Construct an instance that is the concatenation of `count` copies
-    /// of `Character(repeatedValue)`
+    /// of `Character(repeatedValue)`.
     init(count: Int, repeatedValue c: UnicodeScalar)
 
     /// `true` iff `self` contains no characters.
@@ -6795,10 +8307,10 @@ extension String {
 
 extension String {
 
-    /// Return `true` iff `self` begins with `prefix`
+    /// Returns `true` iff `self` begins with `prefix`.
     func hasPrefix(prefix: String) -> Bool
 
-    /// Return `true` iff `self` ends with `suffix`
+    /// Returns `true` iff `self` ends with `suffix`.
     func hasSuffix(suffix: String) -> Bool
 }
 
@@ -6823,69 +8335,178 @@ extension String {
     init<T : _UnsignedIntegerType>(_ v: T, radix: Int, uppercase: Bool = default)
 }
 
-extension String {
-
-    /// If the string represents an integer that fits into an Int, returns
-    /// the corresponding integer.  This accepts strings that match the regular
-    /// expression "[-+]?[0-9]+" only.
-    func toInt() -> Int?
-}
-
-
-
-
-
 
 
 
 
 extension String {
 
-    /// The value of `self` as a collection of `Unicode scalar values
-    /// <http://www.unicode.org/glossary/#unicode_scalar_value>`_.
+    /// The value of `self` as a collection of [Unicode scalar values](http://www.unicode.org/glossary/#unicode_scalar_value).
     var unicodeScalars: String.UnicodeScalarView
 }
 
-extension String.Index {
 
-    /// Construct the position in `characters` that corresponds exactly to
-    /// `unicodeScalarIndex`. If no such position exists, the result is `nil`.
-    ///
-    /// Requires: `unicodeScalarIndex` is an element of
-    /// `indices(characters.unicodeScalars)`.
-    init?(_ unicodeScalarIndex: UnicodeScalarIndex, within characters: String)
 
-    /// Construct the position in `characters` that corresponds exactly to
-    /// `utf16Index`. If no such position exists, the result is `nil`.
-    ///
-    /// Requires: `utf16Index` is an element of
-    /// `indices(characters.utf16)`.
-    init?(_ utf16Index: UTF16Index, within characters: String)
 
-    /// Construct the position in `characters` that corresponds exactly to
-    /// `utf8Index`. If no such position exists, the result is `nil`.
-    ///
-    /// Requires: `utf8Index` is an element of
-    /// `indices(characters.utf8)`.
-    init?(_ utf8Index: UTF8Index, within characters: String)
 
-    /// Return the position in `utf8` that corresponds exactly
-    /// to `self`.
-    ///
-    /// Requires: `self` is an element of `indices(String(utf8))`.
-    func samePositionIn(utf8: String.UTF8View) -> String.UTF8View.Index
 
-    /// Return the position in `utf16` that corresponds exactly
-    /// to `self`.
-    ///
-    /// Requires: `self` is an element of `indices(String(utf16))`.
-    func samePositionIn(utf16: String.UTF16View) -> String.UTF16View.Index
 
-    /// Return the position in `unicodeScalars` that corresponds exactly
-    /// to `self`.
+extension String : MirrorPathType {
+}
+
+extension String {
+
+    /// Initialize `self` with the textual representation of `instance`.
     ///
-    /// Requires: `self` is an element of `indices(String(unicodeScalars))`.
-    func samePositionIn(unicodeScalars: String.UnicodeScalarView) -> String.UnicodeScalarView.Index
+    /// * If `T` conforms to `Streamable`, the result is obtained by
+    ///   calling `instance.writeTo(s)` on an empty string s.
+    /// * Otherwise, if `T` conforms to `CustomStringConvertible`, the
+    ///   result is `instance`'s `description`
+    /// * Otherwise, if `T` conforms to `CustomDebugStringConvertible`,
+    ///   the result is `instance`'s `debugDescription`
+    /// * Otherwise, an unspecified result is supplied automatically by
+    ///   the Swift standard library.
+    ///
+    /// - SeeAlso: `String.init<T>(reflecting: T)`
+    init<T>(_ instance: T)
+
+    /// Initialize `self` with a detailed textual representation of
+    /// `subject`, suitable for debugging.
+    ///
+    /// * If `T` conforms to `CustomDebugStringConvertible`, the result
+    ///   is `subject`'s `debugDescription`.
+    ///
+    /// * Otherwise, if `T` conforms to `CustomStringConvertible`, the result
+    ///   is `subject`'s `description`.
+    ///
+    /// * Otherwise, if `T` conforms to `Streamable`, the result is
+    ///   obtained by calling `subject.writeTo(s)` on an empty string s.
+    ///
+    /// * Otherwise, an unspecified result is supplied automatically by
+    ///   the Swift standard library.
+    ///
+    /// - SeeAlso: `String.init<T>(T)`
+    init<T>(reflecting subject: T)
+}
+
+extension String.CharacterView : CollectionType, SequenceType, _CollectionDefaultsType, _CollectionGeneratorDefaultsType {
+
+    /// A character position.
+    struct Index : ForwardIndexType, _Incrementable, Equatable, BidirectionalIndexType, Comparable, Reflectable {
+
+        /// Returns the next consecutive value after `self`.
+        ///
+        /// - Requires: The next value is representable.
+        func successor() -> String.CharacterView.Index
+
+        /// Returns the previous consecutive value before `self`.
+        ///
+        /// - Requires: The previous value is representable.
+        func predecessor() -> String.CharacterView.Index
+
+        /// Returns a mirror that reflects `self`.
+        func getMirror() -> MirrorType
+    }
+
+    /// The position of the first `Character` if `self` is
+    /// non-empty; identical to `endIndex` otherwise.
+    var startIndex: String.CharacterView.Index { get }
+
+    /// The "past the end" position.
+    ///
+    /// `endIndex` is not a valid argument to `subscript`, and is always
+    /// reachable from `startIndex` by zero or more applications of
+    /// `successor()`.
+    var endIndex: String.CharacterView.Index { get }
+    subscript (i: String.CharacterView.Index) -> Character { get }
+
+    /// Return a *generator* over the `Character`s.
+    ///
+    /// - Complexity: O(1).
+    func generate() -> IndexingGenerator<String.CharacterView>
+}
+
+extension String.CharacterView : ExtensibleCollectionType {
+
+    /// Create an empty instance.
+    init()
+
+    /// Reserve enough space to store `n` ASCII characters.
+    ///
+    /// - Complexity: O(`n`).
+    mutating func reserveCapacity(n: Int)
+
+    /// Append `c` to `self`.
+    ///
+    /// - Complexity: Amortized O(1).
+    mutating func append(c: Character)
+
+    /// Append the elements of `newElements` to `self`.
+    mutating func extend<S : SequenceType where S.Generator.Element == Character>(newElements: S)
+
+    /// Create an instance containing `characters`.
+    init<S : SequenceType where S.Generator.Element == Character>(_ characters: S)
+}
+
+extension String.CharacterView {
+
+    /// Interpose `self` between every pair of consecutive `elements`,
+    /// then concatenate the result.  For example:
+    ///
+    ///     "-|-".join(["foo", "bar", "baz"]) // "foo-|-bar-|-baz"
+    func join<S : SequenceType where S.Generator.Element == String.CharacterView>(elements: S) -> String.CharacterView
+}
+
+extension String.CharacterView : RangeReplaceableCollectionType {
+
+    /// Replace the given `subRange` of elements with `newElements`.
+    ///
+    /// Invalidates all indices with respect to `self`.
+    ///
+    /// - Complexity: O(`subRange.count`) if `subRange.endIndex
+    ///   == self.endIndex` and `isEmpty(newElements)`, O(N) otherwise.
+    mutating func replaceRange<C : CollectionType where C.Generator.Element == Character>(subRange: Range<String.CharacterView.Index>, with newElements: C)
+
+    /// Insert `newElement` at index `i`.
+    ///
+    /// Invalidates all indices with respect to `self`.
+    ///
+    /// - Complexity: O(`self.count`).
+    mutating func insert(newElement: Character, atIndex i: String.CharacterView.Index)
+
+    /// Insert `newElements` at index `i`.
+    ///
+    /// Invalidates all indices with respect to `self`.
+    ///
+    /// - Complexity: O(`self.count + newElements.count`).
+    mutating func splice<S : CollectionType where S.Generator.Element == Character>(newElements: S, atIndex i: String.CharacterView.Index)
+
+    /// Remove and return the element at index `i`.
+    ///
+    /// Invalidates all indices with respect to `self`.
+    ///
+    /// - Complexity: O(`self.count`).
+    mutating func removeAtIndex(i: String.CharacterView.Index) -> Character
+
+    /// Remove the indicated `subRange` of characters.
+    ///
+    /// Invalidates all indices with respect to `self`.
+    ///
+    /// - Complexity: O(`self.count`).
+    mutating func removeRange(subRange: Range<String.CharacterView.Index>)
+
+    /// Remove all characters.
+    ///
+    /// Invalidates all indices with respect to `self`.
+    ///
+    /// - parameter keepCapacity: If `true`, prevents the release of
+    ///   allocated storage, which can be a useful optimization
+    ///   when `self` is going to be grown again.
+    mutating func removeAll(keepCapacity keepCapacity: Bool = default)
+}
+
+extension String.CharacterView : Sliceable, _Sliceable {
+    subscript (subRange: Range<String.CharacterView.Index>) -> String.CharacterView { get }
 }
 
 extension String.UnicodeScalarView : ExtensibleCollectionType {
@@ -6895,18 +8516,18 @@ extension String.UnicodeScalarView : ExtensibleCollectionType {
 
     /// Reserve enough space to store `n` ASCII characters.
     ///
-    /// Complexity: O(`n`)
+    /// - Complexity: O(`n`).
     mutating func reserveCapacity(n: Int)
 
     /// Append `x` to `self`.
     ///
-    /// Complexity: amortized O(1).
+    /// - Complexity: Amortized O(1).
     mutating func append(x: UnicodeScalar)
 
     /// Append the elements of `newElements` to `self`.
     ///
-    /// Complexity: O(*length of result*) 
-    mutating func extend<S : SequenceType where UnicodeScalar == UnicodeScalar>(newElements: S)
+    /// - Complexity: O(*length of result*).
+    mutating func extend<S : SequenceType where S.Generator.Element == UnicodeScalar>(newElements: S)
 }
 
 extension String.UnicodeScalarView : RangeReplaceableCollectionType {
@@ -6915,142 +8536,88 @@ extension String.UnicodeScalarView : RangeReplaceableCollectionType {
     ///
     /// Invalidates all indices with respect to `self`.
     ///
-    /// Complexity: O(\ `count(subRange)`\ ) if `subRange.endIndex
-    /// == self.endIndex` and `isEmpty(newElements)`\ , O(N) otherwise.
-    mutating func replaceRange<C : CollectionType where UnicodeScalar == UnicodeScalar>(subRange: Range<String.UnicodeScalarView.Index>, with newElements: C)
+    /// - Complexity: O(`subRange.count`) if `subRange.endIndex
+    ///   == self.endIndex` and `isEmpty(newElements)`, O(N) otherwise.
+    mutating func replaceRange<C : CollectionType where C.Generator.Element == UnicodeScalar>(subRange: Range<String.UnicodeScalarView.Index>, with newElements: C)
 
     /// Insert `newElement` at index `i`.
     ///
     /// Invalidates all indices with respect to `self`.
     ///
-    /// Complexity: O(\ `count(self)`\ ).
+    /// - Complexity: O(`self.count`).
     mutating func insert(newElement: UnicodeScalar, atIndex i: String.UnicodeScalarView.Index)
 
-    /// Insert `newElements` at index `i`
+    /// Insert `newElements` at index `i`.
     ///
     /// Invalidates all indices with respect to `self`.
     ///
-    /// Complexity: O(\ `count(self) + count(newElements)`\ ).
-    mutating func splice<S : CollectionType where UnicodeScalar == UnicodeScalar>(newElements: S, atIndex i: String.UnicodeScalarView.Index)
+    /// - Complexity: O(`self.count + newElements.count`).
+    mutating func splice<S : CollectionType where S.Generator.Element == UnicodeScalar>(newElements: S, atIndex i: String.UnicodeScalarView.Index)
 
-    /// Remove the and return element at index `i`
+    /// Remove the and return element at index `i`.
     ///
     /// Invalidates all indices with respect to `self`.
     ///
-    /// Complexity: O(\ `count(self)`\ ).
+    /// - Complexity: O(`self.count`).
     mutating func removeAtIndex(i: String.UnicodeScalarView.Index) -> UnicodeScalar
 
-    /// Remove the indicated `subRange` of elements
+    /// Remove the indicated `subRange` of elements.
     ///
     /// Invalidates all indices with respect to `self`.
     ///
-    /// Complexity: O(\ `count(self)`\ ).
+    /// - Complexity: O(`self.count`).
     mutating func removeRange(subRange: Range<String.UnicodeScalarView.Index>)
 
     /// Remove all elements.
     ///
     /// Invalidates all indices with respect to `self`.
     ///
-    /// :param: `keepCapacity`, if `true`, prevents the release of
+    /// - parameter keepCapacity: If `true`, prevents the release of
     ///   allocated storage, which can be a useful optimization
     ///   when `self` is going to be grown again.
-    mutating func removeAll(keepCapacity: Bool = default)
+    mutating func removeAll(keepCapacity keepCapacity: Bool = default)
 }
 
-extension String.UTF16View.Index : BidirectionalIndexType {
-    typealias Distance = Int
-    func successor() -> String.UTF16View.Index
-    func predecessor() -> String.UTF16View.Index
-}
+extension String.CharacterView.Index {
 
-extension String.UTF16View.Index : Comparable {
-}
-
-extension String.UTF16View.Index {
-
-    /// Construct the position in `utf16` that corresponds exactly to
-    /// `utf8Index`. If no such position exists, the result is `nil`.
+    /// Construct the position in `characters` that corresponds exactly to
+    /// `unicodeScalarIndex`. If no such position exists, the result is `nil`.
     ///
-    /// Requires: `utf8Index` is an element of
-    /// `indices(String(utf16)!.utf8)`.
-    init?(_ utf8Index: UTF8Index, within utf16: String.UTF16View)
+    /// - Requires: `unicodeScalarIndex` is an element of
+    ///   `characters.unicodeScalars.indices`.
+    init?(_ unicodeScalarIndex: UnicodeScalarIndex, within characters: String)
 
-    /// Construct the position in `utf16` that corresponds exactly to
-    /// `unicodeScalarIndex`.
-    ///
-    /// Requires: `unicodeScalarIndex` is an element of
-    /// `indices(String(utf16)!.unicodeScalars)`.
-    init(_ unicodeScalarIndex: UnicodeScalarIndex, within utf16: String.UTF16View)
-
-    /// Construct the position in `utf16` that corresponds exactly to
-    /// `characterIndex`.
-    ///
-    /// Requires: `characterIndex` is an element of
-    /// `indices(String(utf16)!)`.
-    init(_ characterIndex: String.Index, within utf16: String.UTF16View)
-
-    /// Return the position in `utf8` that corresponds exactly
-    /// to `self`, or if no such position exists, `nil`.
-    ///
-    /// Requires: `self` is an element of
-    /// `indices(String(utf8)!.utf16)`.
-    func samePositionIn(utf8: String.UTF8View) -> String.UTF8View.Index?
-
-    /// Return the position in `unicodeScalars` that corresponds exactly
-    /// to `self`, or if no such position exists, `nil`.
-    ///
-    /// Requires: `self` is an element of
-    /// `indices(String(unicodeScalars).utf16)`.
-    func samePositionIn(unicodeScalars: String.UnicodeScalarView) -> UnicodeScalarIndex?
-
-    /// Return the position in `characters` that corresponds exactly
-    /// to `self`, or if no such position exists, `nil`.
-    ///
-    /// Requires: `self` is an element of `indices(characters.utf16)`.
-    func samePositionIn(characters: String) -> String.Index?
-}
-
-extension String.UTF8View.Index {
-
-    /// Construct the position in `utf8` that corresponds exactly to
+    /// Construct the position in `characters` that corresponds exactly to
     /// `utf16Index`. If no such position exists, the result is `nil`.
     ///
-    /// Requires: `utf8Index` is an element of
-    /// `indices(String(utf16)!.utf8)`.
-    init?(_ utf16Index: UTF16Index, within utf8: String.UTF8View)
+    /// - Requires: `utf16Index` is an element of
+    ///   `characters.utf16.indices`.
+    init?(_ utf16Index: UTF16Index, within characters: String)
 
-    /// Construct the position in `utf8` that corresponds exactly to
-    /// `unicodeScalarIndex`.
+    /// Construct the position in `characters` that corresponds exactly to
+    /// `utf8Index`. If no such position exists, the result is `nil`.
     ///
-    /// Requires: `unicodeScalarIndex` is an element of
-    /// `indices(String(utf8)!.unicodeScalars)`.
-    init(_ unicodeScalarIndex: UnicodeScalarIndex, within utf8: String.UTF8View)
+    /// - Requires: `utf8Index` is an element of
+    ///   `characters.utf8.indices`.
+    init?(_ utf8Index: UTF8Index, within characters: String)
 
-    /// Construct the position in `utf8` that corresponds exactly to
-    /// `characterIndex`.
+    /// Return the position in `utf8` that corresponds exactly
+    /// to `self`.
     ///
-    /// Requires: `characterIndex` is an element of
-    /// `indices(String(utf8)!)`.
-    init(_ characterIndex: String.Index, within utf8: String.UTF8View)
+    /// - Requires: `self` is an element of `String(utf8).indices`.
+    func samePositionIn(utf8: String.UTF8View) -> String.UTF8View.Index
 
     /// Return the position in `utf16` that corresponds exactly
-    /// to `self`, or if no such position exists, `nil`.
+    /// to `self`.
     ///
-    /// Requires: `self` is an element of `indices(String(utf16)!.utf8)`.
-    func samePositionIn(utf16: String.UTF16View) -> String.UTF16View.Index?
+    /// - Requires: `self` is an element of `String(utf16).indices`.
+    func samePositionIn(utf16: String.UTF16View) -> String.UTF16View.Index
 
     /// Return the position in `unicodeScalars` that corresponds exactly
-    /// to `self`, or if no such position exists, `nil`.
+    /// to `self`.
     ///
-    /// Requires: `self` is an element of
-    /// `indices(String(unicodeScalars).utf8)`.
-    func samePositionIn(unicodeScalars: String.UnicodeScalarView) -> UnicodeScalarIndex?
-
-    /// Return the position in `characters` that corresponds exactly
-    /// to `self`, or if no such position exists, `nil`.
-    ///
-    /// Requires: `self` is an element of `indices(characters.utf8)`.
-    func samePositionIn(characters: String) -> String.Index?
+    /// - Requires: `self` is an element of `String(unicodeScalars).indices`.
+    func samePositionIn(unicodeScalars: String.UnicodeScalarView) -> String.UnicodeScalarView.Index
 }
 
 extension String.UnicodeScalarView.Index {
@@ -7058,72 +8625,168 @@ extension String.UnicodeScalarView.Index {
     /// Construct the position in `unicodeScalars` that corresponds exactly to
     /// `utf16Index`. If no such position exists, the result is `nil`.
     ///
-    /// Requires: `utf16Index` is an element of
-    /// `indices(String(unicodeScalars).utf16)`.
+    /// - Requires: `utf16Index` is an element of
+    ///   `String(unicodeScalars).utf16.indices`.
     init?(_ utf16Index: UTF16Index, within unicodeScalars: String.UnicodeScalarView)
 
     /// Construct the position in `unicodeScalars` that corresponds exactly to
     /// `utf8Index`. If no such position exists, the result is `nil`.
     ///
-    /// Requires: `utf8Index` is an element of
-    /// `indices(String(unicodeScalars).utf8)`.
+    /// - Requires: `utf8Index` is an element of
+    ///   `String(unicodeScalars).utf8.indices`.
     init?(_ utf8Index: UTF8Index, within unicodeScalars: String.UnicodeScalarView)
 
     /// Construct the position in `unicodeScalars` that corresponds
     /// exactly to `characterIndex`.
     ///
-    /// Requires: `characterIndex` is an element of
-    /// `indices(String(unicodeScalars))`.
-    init(_ characterIndex: String.Index, within unicodeScalars: String.UnicodeScalarView)
+    /// - Requires: `characterIndex` is an element of
+    ///   `String(unicodeScalars).indices`.
+    init(_ characterIndex: Index, within unicodeScalars: String.UnicodeScalarView)
 
     /// Return the position in `utf8` that corresponds exactly
     /// to `self`.
     ///
-    /// Requires: `self` is an element of `indices(String(utf8)!)`.
+    /// - Requires: `self` is an element of `String(utf8)!.indices`.
     func samePositionIn(utf8: String.UTF8View) -> String.UTF8View.Index
 
     /// Return the position in `utf16` that corresponds exactly
     /// to `self`.
     ///
-    /// Requires: `self` is an element of `indices(String(utf16)!)`.
+    /// - Requires: `self` is an element of `String(utf16)!.indices`.
     func samePositionIn(utf16: String.UTF16View) -> String.UTF16View.Index
 
     /// Return the position in `characters` that corresponds exactly
     /// to `self`, or if no such position exists, `nil`.
     ///
-    /// Requires: `self` is an element of `indices(characters.unicodeScalars)`.
-    func samePositionIn(characters: String) -> String.Index?
+    /// - Requires: `self` is an element of `characters.unicodeScalars.indices`.
+    func samePositionIn(characters: String) -> Index?
+}
+
+extension String.UTF16View.Index : ForwardIndexType, _Incrementable, BidirectionalIndexType {
+    typealias Distance = Int
+    func successor() -> String.UTF16View.Index
+    func predecessor() -> String.UTF16View.Index
+}
+
+extension String.UTF16View.Index : Equatable, Comparable {
+}
+
+extension String.UTF16View.Index {
+
+    /// Construct the position in `utf16` that corresponds exactly to
+    /// `utf8Index`. If no such position exists, the result is `nil`.
+    ///
+    /// - Requires: `utf8Index` is an element of
+    ///   `String(utf16)!.utf8.indices`.
+    init?(_ utf8Index: UTF8Index, within utf16: String.UTF16View)
+
+    /// Construct the position in `utf16` that corresponds exactly to
+    /// `unicodeScalarIndex`.
+    ///
+    /// - Requires: `unicodeScalarIndex` is an element of
+    ///   `String(utf16)!.unicodeScalars.indices`.
+    init(_ unicodeScalarIndex: UnicodeScalarIndex, within utf16: String.UTF16View)
+
+    /// Construct the position in `utf16` that corresponds exactly to
+    /// `characterIndex`.
+    ///
+    /// - Requires: `characterIndex` is an element of
+    ///   `String(utf16)!.indices`.
+    init(_ characterIndex: Index, within utf16: String.UTF16View)
+
+    /// Return the position in `utf8` that corresponds exactly
+    /// to `self`, or if no such position exists, `nil`.
+    ///
+    /// - Requires: `self` is an element of
+    ///   `String(utf8)!.utf16.indices`.
+    func samePositionIn(utf8: String.UTF8View) -> String.UTF8View.Index?
+
+    /// Return the position in `unicodeScalars` that corresponds exactly
+    /// to `self`, or if no such position exists, `nil`.
+    ///
+    /// - Requires: `self` is an element of
+    ///   `String(unicodeScalars).utf16.indices`.
+    func samePositionIn(unicodeScalars: String.UnicodeScalarView) -> UnicodeScalarIndex?
+
+    /// Return the position in `characters` that corresponds exactly
+    /// to `self`, or if no such position exists, `nil`.
+    ///
+    /// - Requires: `self` is an element of `characters.utf16.indices`.
+    func samePositionIn(characters: String) -> Index?
+}
+
+extension String.UTF8View.Index {
+
+    /// Construct the position in `utf8` that corresponds exactly to
+    /// `utf16Index`. If no such position exists, the result is `nil`.
+    ///
+    /// - Requires: `utf8Index` is an element of
+    ///   `String(utf16)!.utf8.indices`.
+    init?(_ utf16Index: UTF16Index, within utf8: String.UTF8View)
+
+    /// Construct the position in `utf8` that corresponds exactly to
+    /// `unicodeScalarIndex`.
+    ///
+    /// - Requires: `unicodeScalarIndex` is an element of
+    ///   `String(utf8)!.unicodeScalars.indices`.
+    init(_ unicodeScalarIndex: UnicodeScalarIndex, within utf8: String.UTF8View)
+
+    /// Construct the position in `utf8` that corresponds exactly to
+    /// `characterIndex`.
+    ///
+    /// - Requires: `characterIndex` is an element of
+    ///   `String(utf8)!.indices`.
+    init(_ characterIndex: Index, within utf8: String.UTF8View)
+
+    /// Return the position in `utf16` that corresponds exactly
+    /// to `self`, or if no such position exists, `nil`.
+    ///
+    /// - Requires: `self` is an element of `String(utf16)!.utf8.indices`.
+    func samePositionIn(utf16: String.UTF16View) -> String.UTF16View.Index?
+
+    /// Return the position in `unicodeScalars` that corresponds exactly
+    /// to `self`, or if no such position exists, `nil`.
+    ///
+    /// - Requires: `self` is an element of
+    ///   `String(unicodeScalars).utf8.indices`.
+    func samePositionIn(unicodeScalars: String.UnicodeScalarView) -> UnicodeScalarIndex?
+
+    /// Return the position in `characters` that corresponds exactly
+    /// to `self`, or if no such position exists, `nil`.
+    ///
+    /// - Requires: `self` is an element of `characters.utf8.indices`.
+    func samePositionIn(characters: String) -> Index?
 }
 
 
 /// Conforming types can be initialized with string interpolations
-/// containing `\(`\ ...\ `)` clauses.
+/// containing `\(`...`)` clauses.
 protocol StringInterpolationConvertible {
 
-    /// Create an instance by concatenating the elements of `strings`
+    /// Create an instance by concatenating the elements of `strings`.
     init(stringInterpolation strings: Self...)
 
-    /// Create an instance containing `expr`\ 's `print` representation
+    /// Create an instance containing `expr`'s `print` representation.
     init<T>(stringInterpolationSegment expr: T)
 }
 
 
-/// Conforming types can be initialized with arbitrary string literals
+/// Conforming types can be initialized with arbitrary string literals.
 protocol StringLiteralConvertible : ExtendedGraphemeClusterLiteralConvertible {
     typealias StringLiteralType
 
     /// Create an instance initialized to `value`.
-    init(stringLiteral value: StringLiteralType)
+    init(stringLiteral value: Self.StringLiteralType)
 }
 
 
-/// The default type for an otherwise-unconstrained string literal
+/// The default type for an otherwise-unconstrained string literal.
 typealias StringLiteralType = String
 
 
 /// A 64-bit unsigned integer value
 /// type.
-struct UInt : UnsignedIntegerType {
+struct UInt : UnsignedIntegerType, IntegerType, Equatable, Comparable, _IntegerType, IntegerArithmeticType, _IntegerArithmeticType, IntegerLiteralConvertible, _UnsignedIntegerType {
     var value: Builtin.Int64
 
     /// A type that can represent the number of steps between pairs of
@@ -7167,45 +8830,45 @@ extension UInt : Hashable {
 
     /// The hash value.
     ///
-    /// **Axiom:** `x == y` implies `x.hashValue == y.hashValue`
+    /// **Axiom:** `x == y` implies `x.hashValue == y.hashValue`.
     ///
-    /// **Note:** the hash value is not guaranteed to be stable across
-    /// different invocations of the same program.  Do not persist the
-    /// hash value across program runs.
+    /// - Note: The hash value is not guaranteed to be stable across
+    ///   different invocations of the same program.  Do not persist the
+    ///   hash value across program runs.
     var hashValue: Int { get }
 }
 
-extension UInt : Printable {
+extension UInt : CustomStringConvertible {
 
     /// A textual representation of `self`.
     var description: String { get }
 }
 
-extension UInt : RandomAccessIndexType {
+extension UInt : RandomAccessIndexType, BidirectionalIndexType, ForwardIndexType, _Incrementable, Strideable, _Strideable {
 
     /// Returns the next consecutive value after `self`.
     ///
-    /// Requires: the next value is representable.
+    /// - Requires: The next value is representable.
     func successor() -> UInt
 
     /// Returns the previous consecutive value before `self`.
     ///
-    /// Requires: the previous value is representable.
+    /// - Requires: The previous value is representable.
     func predecessor() -> UInt
 
     /// Return the minimum number of applications of `successor` or
     /// `predecessor` required to reach `other` from `self`.
     ///
-    /// Complexity: O(1).
+    /// - Complexity: O(1).
     func distanceTo(other: UInt) -> Distance
 
     /// Return `self` offset by `n` steps.
     ///
-    /// :returns: If `n > 0`, the result of applying `successor` to
-    /// `self` `n` times.  If `n < 0`, the result of applying
-    /// `predecessor` to `self` `-n` times. Otherwise, `self`.
+    /// - Returns: If `n > 0`, the result of applying `successor` to
+    ///   `self` `n` times.  If `n < 0`, the result of applying
+    ///   `predecessor` to `self` `-n` times. Otherwise, `self`.
     ///
-    /// Complexity: O(1)
+    /// - Complexity: O(1).
     func advancedBy(amount: Distance) -> UInt
 }
 
@@ -7288,6 +8951,19 @@ extension UInt {
 
     /// Construct an instance that approximates `other`.
     init(_ other: Double)
+
+    /// Construct an instance that approximates `other`.
+    init(_ other: Float80)
+}
+
+extension UInt {
+
+    /// Construct from an ASCII representation in the given `radix`.
+    ///
+    /// If `text` does not match the regular expression
+    /// "[+-][0-9a-zA-Z]+", or the value it denotes in the given `radix`
+    /// is not representable, the result is `nil`.
+    init?(_ text: String, radix: Int = default)
 }
 
 extension UInt : Reflectable {
@@ -7297,16 +8973,12 @@ extension UInt : Reflectable {
 }
 
 extension UInt : CVarArgType {
-
-    /// Transform `self` into a series of machine words that can be
-    /// appropriately interpreted by C varargs
-    func encode() -> [Word]
 }
 
 
 /// A 16-bit unsigned integer value
 /// type.
-struct UInt16 : UnsignedIntegerType {
+struct UInt16 : UnsignedIntegerType, IntegerType, Equatable, Comparable, _IntegerType, IntegerArithmeticType, _IntegerArithmeticType, IntegerLiteralConvertible, _UnsignedIntegerType {
     var value: Builtin.Int16
 
     /// A type that can represent the number of steps between pairs of
@@ -7349,45 +9021,45 @@ extension UInt16 : Hashable {
 
     /// The hash value.
     ///
-    /// **Axiom:** `x == y` implies `x.hashValue == y.hashValue`
+    /// **Axiom:** `x == y` implies `x.hashValue == y.hashValue`.
     ///
-    /// **Note:** the hash value is not guaranteed to be stable across
-    /// different invocations of the same program.  Do not persist the
-    /// hash value across program runs.
+    /// - Note: The hash value is not guaranteed to be stable across
+    ///   different invocations of the same program.  Do not persist the
+    ///   hash value across program runs.
     var hashValue: Int { get }
 }
 
-extension UInt16 : Printable {
+extension UInt16 : CustomStringConvertible {
 
     /// A textual representation of `self`.
     var description: String { get }
 }
 
-extension UInt16 : RandomAccessIndexType {
+extension UInt16 : RandomAccessIndexType, BidirectionalIndexType, ForwardIndexType, _Incrementable, Strideable, _Strideable {
 
     /// Returns the next consecutive value after `self`.
     ///
-    /// Requires: the next value is representable.
+    /// - Requires: The next value is representable.
     func successor() -> UInt16
 
     /// Returns the previous consecutive value before `self`.
     ///
-    /// Requires: the previous value is representable.
+    /// - Requires: The previous value is representable.
     func predecessor() -> UInt16
 
     /// Return the minimum number of applications of `successor` or
     /// `predecessor` required to reach `other` from `self`.
     ///
-    /// Complexity: O(1).
+    /// - Complexity: O(1).
     func distanceTo(other: UInt16) -> Distance
 
     /// Return `self` offset by `n` steps.
     ///
-    /// :returns: If `n > 0`, the result of applying `successor` to
-    /// `self` `n` times.  If `n < 0`, the result of applying
-    /// `predecessor` to `self` `-n` times. Otherwise, `self`.
+    /// - Returns: If `n > 0`, the result of applying `successor` to
+    ///   `self` `n` times.  If `n < 0`, the result of applying
+    ///   `predecessor` to `self` `-n` times. Otherwise, `self`.
     ///
-    /// Complexity: O(1)
+    /// - Complexity: O(1).
     func advancedBy(amount: Distance) -> UInt16
 }
 
@@ -7494,6 +9166,19 @@ extension UInt16 {
 
     /// Construct an instance that approximates `other`.
     init(_ other: Double)
+
+    /// Construct an instance that approximates `other`.
+    init(_ other: Float80)
+}
+
+extension UInt16 {
+
+    /// Construct from an ASCII representation in the given `radix`.
+    ///
+    /// If `text` does not match the regular expression
+    /// "[+-][0-9a-zA-Z]+", or the value it denotes in the given `radix`
+    /// is not representable, the result is `nil`.
+    init?(_ text: String, radix: Int = default)
 }
 
 extension UInt16 : Reflectable {
@@ -7506,16 +9191,12 @@ extension UInt16 : _StringElementType {
 }
 
 extension UInt16 : CVarArgType {
-
-    /// Transform `self` into a series of machine words that can be
-    /// appropriately interpreted by C varargs
-    func encode() -> [Word]
 }
 
 
 /// A 32-bit unsigned integer value
 /// type.
-struct UInt32 : UnsignedIntegerType {
+struct UInt32 : UnsignedIntegerType, IntegerType, Equatable, Comparable, _IntegerType, IntegerArithmeticType, _IntegerArithmeticType, IntegerLiteralConvertible, _UnsignedIntegerType {
     var value: Builtin.Int32
 
     /// A type that can represent the number of steps between pairs of
@@ -7558,45 +9239,45 @@ extension UInt32 : Hashable {
 
     /// The hash value.
     ///
-    /// **Axiom:** `x == y` implies `x.hashValue == y.hashValue`
+    /// **Axiom:** `x == y` implies `x.hashValue == y.hashValue`.
     ///
-    /// **Note:** the hash value is not guaranteed to be stable across
-    /// different invocations of the same program.  Do not persist the
-    /// hash value across program runs.
+    /// - Note: The hash value is not guaranteed to be stable across
+    ///   different invocations of the same program.  Do not persist the
+    ///   hash value across program runs.
     var hashValue: Int { get }
 }
 
-extension UInt32 : Printable {
+extension UInt32 : CustomStringConvertible {
 
     /// A textual representation of `self`.
     var description: String { get }
 }
 
-extension UInt32 : RandomAccessIndexType {
+extension UInt32 : RandomAccessIndexType, BidirectionalIndexType, ForwardIndexType, _Incrementable, Strideable, _Strideable {
 
     /// Returns the next consecutive value after `self`.
     ///
-    /// Requires: the next value is representable.
+    /// - Requires: The next value is representable.
     func successor() -> UInt32
 
     /// Returns the previous consecutive value before `self`.
     ///
-    /// Requires: the previous value is representable.
+    /// - Requires: The previous value is representable.
     func predecessor() -> UInt32
 
     /// Return the minimum number of applications of `successor` or
     /// `predecessor` required to reach `other` from `self`.
     ///
-    /// Complexity: O(1).
+    /// - Complexity: O(1).
     func distanceTo(other: UInt32) -> Distance
 
     /// Return `self` offset by `n` steps.
     ///
-    /// :returns: If `n > 0`, the result of applying `successor` to
-    /// `self` `n` times.  If `n < 0`, the result of applying
-    /// `predecessor` to `self` `-n` times. Otherwise, `self`.
+    /// - Returns: If `n > 0`, the result of applying `successor` to
+    ///   `self` `n` times.  If `n < 0`, the result of applying
+    ///   `predecessor` to `self` `-n` times. Otherwise, `self`.
     ///
-    /// Complexity: O(1)
+    /// - Complexity: O(1).
     func advancedBy(amount: Distance) -> UInt32
 }
 
@@ -7691,6 +9372,19 @@ extension UInt32 {
 
     /// Construct an instance that approximates `other`.
     init(_ other: Double)
+
+    /// Construct an instance that approximates `other`.
+    init(_ other: Float80)
+}
+
+extension UInt32 {
+
+    /// Construct from an ASCII representation in the given `radix`.
+    ///
+    /// If `text` does not match the regular expression
+    /// "[+-][0-9a-zA-Z]+", or the value it denotes in the given `radix`
+    /// is not representable, the result is `nil`.
+    init?(_ text: String, radix: Int = default)
 }
 
 extension UInt32 : Reflectable {
@@ -7703,21 +9397,17 @@ extension UInt32 {
 
     /// Construct with value `v.value`.
     ///
-    /// Requires: `v.value` can be represented as UInt32.
+    /// - Requires: `v.value` can be represented as UInt32.
     init(_ v: UnicodeScalar)
 }
 
 extension UInt32 : CVarArgType {
-
-    /// Transform `self` into a series of machine words that can be
-    /// appropriately interpreted by C varargs
-    func encode() -> [Word]
 }
 
 
 /// A 64-bit unsigned integer value
 /// type.
-struct UInt64 : UnsignedIntegerType {
+struct UInt64 : UnsignedIntegerType, IntegerType, Equatable, Comparable, _IntegerType, IntegerArithmeticType, _IntegerArithmeticType, IntegerLiteralConvertible, _UnsignedIntegerType {
     var value: Builtin.Int64
 
     /// A type that can represent the number of steps between pairs of
@@ -7760,45 +9450,45 @@ extension UInt64 : Hashable {
 
     /// The hash value.
     ///
-    /// **Axiom:** `x == y` implies `x.hashValue == y.hashValue`
+    /// **Axiom:** `x == y` implies `x.hashValue == y.hashValue`.
     ///
-    /// **Note:** the hash value is not guaranteed to be stable across
-    /// different invocations of the same program.  Do not persist the
-    /// hash value across program runs.
+    /// - Note: The hash value is not guaranteed to be stable across
+    ///   different invocations of the same program.  Do not persist the
+    ///   hash value across program runs.
     var hashValue: Int { get }
 }
 
-extension UInt64 : Printable {
+extension UInt64 : CustomStringConvertible {
 
     /// A textual representation of `self`.
     var description: String { get }
 }
 
-extension UInt64 : RandomAccessIndexType {
+extension UInt64 : RandomAccessIndexType, BidirectionalIndexType, ForwardIndexType, _Incrementable, Strideable, _Strideable {
 
     /// Returns the next consecutive value after `self`.
     ///
-    /// Requires: the next value is representable.
+    /// - Requires: The next value is representable.
     func successor() -> UInt64
 
     /// Returns the previous consecutive value before `self`.
     ///
-    /// Requires: the previous value is representable.
+    /// - Requires: The previous value is representable.
     func predecessor() -> UInt64
 
     /// Return the minimum number of applications of `successor` or
     /// `predecessor` required to reach `other` from `self`.
     ///
-    /// Complexity: O(1).
+    /// - Complexity: O(1).
     func distanceTo(other: UInt64) -> Distance
 
     /// Return `self` offset by `n` steps.
     ///
-    /// :returns: If `n > 0`, the result of applying `successor` to
-    /// `self` `n` times.  If `n < 0`, the result of applying
-    /// `predecessor` to `self` `-n` times. Otherwise, `self`.
+    /// - Returns: If `n > 0`, the result of applying `successor` to
+    ///   `self` `n` times.  If `n < 0`, the result of applying
+    ///   `predecessor` to `self` `-n` times. Otherwise, `self`.
     ///
-    /// Complexity: O(1)
+    /// - Complexity: O(1).
     func advancedBy(amount: Distance) -> UInt64
 }
 
@@ -7869,6 +9559,19 @@ extension UInt64 {
 
     /// Construct an instance that approximates `other`.
     init(_ other: Double)
+
+    /// Construct an instance that approximates `other`.
+    init(_ other: Float80)
+}
+
+extension UInt64 {
+
+    /// Construct from an ASCII representation in the given `radix`.
+    ///
+    /// If `text` does not match the regular expression
+    /// "[+-][0-9a-zA-Z]+", or the value it denotes in the given `radix`
+    /// is not representable, the result is `nil`.
+    init?(_ text: String, radix: Int = default)
 }
 
 extension UInt64 : Reflectable {
@@ -7881,21 +9584,17 @@ extension UInt64 {
 
     /// Construct with value `v.value`.
     ///
-    /// Requires: `v.value` can be represented as UInt64.
+    /// - Requires: `v.value` can be represented as UInt64.
     init(_ v: UnicodeScalar)
 }
 
-extension UInt64 : CVarArgType {
-
-    /// Transform `self` into a series of machine words that can be
-    /// appropriately interpreted by C varargs
-    func encode() -> [Word]
+extension UInt64 : CVarArgType, _CVarArgAlignedType {
 }
 
 
 /// A 8-bit unsigned integer value
 /// type.
-struct UInt8 : UnsignedIntegerType {
+struct UInt8 : UnsignedIntegerType, IntegerType, Equatable, Comparable, _IntegerType, IntegerArithmeticType, _IntegerArithmeticType, IntegerLiteralConvertible, _UnsignedIntegerType {
     var value: Builtin.Int8
 
     /// A type that can represent the number of steps between pairs of
@@ -7919,45 +9618,45 @@ extension UInt8 : Hashable {
 
     /// The hash value.
     ///
-    /// **Axiom:** `x == y` implies `x.hashValue == y.hashValue`
+    /// **Axiom:** `x == y` implies `x.hashValue == y.hashValue`.
     ///
-    /// **Note:** the hash value is not guaranteed to be stable across
-    /// different invocations of the same program.  Do not persist the
-    /// hash value across program runs.
+    /// - Note: The hash value is not guaranteed to be stable across
+    ///   different invocations of the same program.  Do not persist the
+    ///   hash value across program runs.
     var hashValue: Int { get }
 }
 
-extension UInt8 : Printable {
+extension UInt8 : CustomStringConvertible {
 
     /// A textual representation of `self`.
     var description: String { get }
 }
 
-extension UInt8 : RandomAccessIndexType {
+extension UInt8 : RandomAccessIndexType, BidirectionalIndexType, ForwardIndexType, _Incrementable, Strideable, _Strideable {
 
     /// Returns the next consecutive value after `self`.
     ///
-    /// Requires: the next value is representable.
+    /// - Requires: The next value is representable.
     func successor() -> UInt8
 
     /// Returns the previous consecutive value before `self`.
     ///
-    /// Requires: the previous value is representable.
+    /// - Requires: The previous value is representable.
     func predecessor() -> UInt8
 
     /// Return the minimum number of applications of `successor` or
     /// `predecessor` required to reach `other` from `self`.
     ///
-    /// Complexity: O(1).
+    /// - Complexity: O(1).
     func distanceTo(other: UInt8) -> Distance
 
     /// Return `self` offset by `n` steps.
     ///
-    /// :returns: If `n > 0`, the result of applying `successor` to
-    /// `self` `n` times.  If `n < 0`, the result of applying
-    /// `predecessor` to `self` `-n` times. Otherwise, `self`.
+    /// - Returns: If `n > 0`, the result of applying `successor` to
+    ///   `self` `n` times.  If `n < 0`, the result of applying
+    ///   `predecessor` to `self` `-n` times. Otherwise, `self`.
     ///
-    /// Complexity: O(1)
+    /// - Complexity: O(1).
     func advancedBy(amount: Distance) -> UInt8
 }
 
@@ -8076,6 +9775,19 @@ extension UInt8 {
 
     /// Construct an instance that approximates `other`.
     init(_ other: Double)
+
+    /// Construct an instance that approximates `other`.
+    init(_ other: Float80)
+}
+
+extension UInt8 {
+
+    /// Construct from an ASCII representation in the given `radix`.
+    ///
+    /// If `text` does not match the regular expression
+    /// "[+-][0-9a-zA-Z]+", or the value it denotes in the given `radix`
+    /// is not representable, the result is `nil`.
+    init?(_ text: String, radix: Int = default)
 }
 
 extension UInt8 : Reflectable {
@@ -8091,27 +9803,22 @@ extension UInt8 {
 
     /// Construct with value `v.value`.
     ///
-    /// Requires: `v.value` can be represented as ASCII (0..<128).
+    /// - Requires: `v.value` can be represented as ASCII (0..<128).
     init(ascii v: UnicodeScalar)
 }
 
 extension UInt8 : CVarArgType {
-
-    /// Transform `self` into a series of machine words that can be
-    /// appropriately interpreted by C varargs
-    func encode() -> [Word]
 }
 
 
-/// The largest native unsigned integer type
+/// The largest native unsigned integer type.
 typealias UIntMax = UInt64
 
 
-/// A codec for `UTF-16 <http://www.unicode.org/glossary/#UTF_16>`_.
+/// A codec for [UTF-16](http://www.unicode.org/glossary/#UTF_16).
 struct UTF16 : UnicodeCodecType {
 
-    /// A type that can hold `code unit
-    /// <http://www.unicode.org/glossary/#code_unit>`_ values for this
+    /// A type that can hold [code unit](http://www.unicode.org/glossary/#code_unit) values for this
     /// encoding.
     typealias CodeUnit = UInt16
     init()
@@ -8127,12 +9834,12 @@ struct UTF16 : UnicodeCodecType {
     /// Because of buffering, it is impossible to find the corresponing position
     /// in the generator for a given returned `UnicodeScalar` or an error.
     ///
-    /// :param: `next`: a *generator* of code units to be decoded.
-    mutating func decode<G : GeneratorType where CodeUnit == CodeUnit>(inout input: G) -> UnicodeDecodingResult
+    /// - parameter next: A *generator* of code units to be decoded.
+    mutating func decode<G : GeneratorType where G.Element == CodeUnit>(inout input: G) -> UnicodeDecodingResult
 
-    /// Encode a `UnicodeScalar` as a series of `CodeUnit`\ s by
+    /// Encode a `UnicodeScalar` as a series of `CodeUnit`s by
     /// `put`'ing each `CodeUnit` to `output`.
-    static func encode<S : SinkType where CodeUnit == CodeUnit>(input: UnicodeScalar, inout output: S)
+    static func encode<S : SinkType where S.Element == CodeUnit>(input: UnicodeScalar, inout output: S)
 }
 
 extension UTF16 {
@@ -8140,18 +9847,16 @@ extension UTF16 {
     /// Return the number of code units required to encode `x`.
     static func width(x: UnicodeScalar) -> Int
 
-    /// Return the high surrogate code unit of a `surrogate pair
-    /// <http://www.unicode.org/glossary/#surrogate_pair>`_ representing
+    /// Return the high surrogate code unit of a [surrogate pair](http://www.unicode.org/glossary/#surrogate_pair) representing
     /// `x`.
     ///
-    /// Requires: `width(x) == 2`
+    /// - Requires: `width(x) == 2`.
     static func leadSurrogate(x: UnicodeScalar) -> CodeUnit
 
-    /// Return the low surrogate code unit of a `surrogate pair
-    /// <http://www.unicode.org/glossary/#surrogate_pair>`_ representing
+    /// Return the low surrogate code unit of a [surrogate pair](http://www.unicode.org/glossary/#surrogate_pair) representing
     /// `x`.
     ///
-    /// Requires: `width(x) == 2`
+    /// - Requires: `width(x) == 2`.
     static func trailSurrogate(x: UnicodeScalar) -> CodeUnit
     static func isLeadSurrogate(x: CodeUnit) -> Bool
     static func isTrailSurrogate(x: CodeUnit) -> Bool
@@ -8163,15 +9868,14 @@ extension UTF16 {
     /// If `repairIllFormedSequences` is `true`, the function always succeeds.
     /// If it is `false`, `nil` is returned if an ill-formed code unit sequence is
     /// found in `input`.
-    static func measure<Encoding : UnicodeCodecType, Input : GeneratorType where Encoding.CodeUnit == Encoding.CodeUnit>(_: Encoding.Type, input: Input, repairIllFormedSequences: Bool) -> (Int, Bool)?
+    static func measure<Encoding : UnicodeCodecType, Input : GeneratorType where Encoding.CodeUnit == Input.Element>(_: Encoding.Type, input: Input, repairIllFormedSequences: Bool) -> (Int, Bool)?
 }
 
 
-/// A codec for `UTF-32 <http://www.unicode.org/glossary/#UTF_32>`_.
+/// A codec for [UTF-32](http://www.unicode.org/glossary/#UTF_32).
 struct UTF32 : UnicodeCodecType {
 
-    /// A type that can hold `code unit
-    /// <http://www.unicode.org/glossary/#code_unit>`_ values for this
+    /// A type that can hold [code unit](http://www.unicode.org/glossary/#code_unit) values for this
     /// encoding.
     typealias CodeUnit = UInt32
     init()
@@ -8187,20 +9891,19 @@ struct UTF32 : UnicodeCodecType {
     /// Because of buffering, it is impossible to find the corresponing position
     /// in the generator for a given returned `UnicodeScalar` or an error.
     ///
-    /// :param: `next`: a *generator* of code units to be decoded.
-    mutating func decode<G : GeneratorType where CodeUnit == CodeUnit>(inout input: G) -> UnicodeDecodingResult
+    /// - parameter next: A *generator* of code units to be decoded.
+    mutating func decode<G : GeneratorType where G.Element == CodeUnit>(inout input: G) -> UnicodeDecodingResult
 
-    /// Encode a `UnicodeScalar` as a series of `CodeUnit`\ s by
+    /// Encode a `UnicodeScalar` as a series of `CodeUnit`s by
     /// `put`'ing each `CodeUnit` to `output`.
-    static func encode<S : SinkType where CodeUnit == CodeUnit>(input: UnicodeScalar, inout output: S)
+    static func encode<S : SinkType where S.Element == CodeUnit>(input: UnicodeScalar, inout output: S)
 }
 
 
-/// A codec for `UTF-8 <http://www.unicode.org/glossary/#UTF_8>`_.
+/// A codec for [UTF-8](http://www.unicode.org/glossary/#UTF_8).
 struct UTF8 : UnicodeCodecType {
 
-    /// A type that can hold `code unit
-    /// <http://www.unicode.org/glossary/#code_unit>`_ values for this
+    /// A type that can hold [code unit](http://www.unicode.org/glossary/#code_unit) values for this
     /// encoding.
     typealias CodeUnit = UInt8
     init()
@@ -8216,35 +9919,30 @@ struct UTF8 : UnicodeCodecType {
     /// Because of buffering, it is impossible to find the corresponing position
     /// in the generator for a given returned `UnicodeScalar` or an error.
     ///
-    /// :param: `next`: a *generator* of code units to be decoded.
-    mutating func decode<G : GeneratorType where CodeUnit == CodeUnit>(inout next: G) -> UnicodeDecodingResult
+    /// - parameter next: A *generator* of code units to be decoded.
+    mutating func decode<G : GeneratorType where G.Element == CodeUnit>(inout next: G) -> UnicodeDecodingResult
 
-    /// Encode a `UnicodeScalar` as a series of `CodeUnit`\ s by
+    /// Encode a `UnicodeScalar` as a series of `CodeUnit`s by
     /// `put`'ing each `CodeUnit` to `output`.
-    static func encode<S : SinkType where CodeUnit == CodeUnit>(input: UnicodeScalar, inout output: S)
+    static func encode<S : SinkType where S.Element == CodeUnit>(input: UnicodeScalar, inout output: S)
 
-    /// Return true if `byte` is a continuation byte of the form
-    /// `0b10xxxxxx`
+    /// Return `true` if `byte` is a continuation byte of the form
+    /// `0b10xxxxxx`.
     static func isContinuation(byte: CodeUnit) -> Bool
 }
 
 
-/// An unsigned integer type that occupies one machine word
+/// An unsigned integer type that occupies one machine word.
 typealias UWord = UInt
 
 
-/// A Unicode `encoding scheme
-/// <http://www.unicode.org/glossary/#character_encoding_scheme>`_
+/// A Unicode [encoding scheme](http://www.unicode.org/glossary/#character_encoding_scheme).
 ///
-/// Consists of an underlying `code unit
-/// <http://www.unicode.org/glossary/#code_unit>`_ and functions to
-/// translate between sequences of these code units and `unicode
-/// scalar values
-/// <http://www.unicode.org/glossary/#unicode_scalar_value>`_.
+/// Consists of an underlying [code unit](http://www.unicode.org/glossary/#code_unit) and functions to
+/// translate between sequences of these code units and [unicode scalar values](http://www.unicode.org/glossary/#unicode_scalar_value).
 protocol UnicodeCodecType {
 
-    /// A type that can hold `code unit
-    /// <http://www.unicode.org/glossary/#code_unit>`_ values for this
+    /// A type that can hold [code unit](http://www.unicode.org/glossary/#code_unit) values for this
     /// encoding.
     typealias CodeUnit
     init()
@@ -8260,16 +9958,16 @@ protocol UnicodeCodecType {
     /// Because of buffering, it is impossible to find the corresponing position
     /// in the generator for a given returned `UnicodeScalar` or an error.
     ///
-    /// :param: `next`: a *generator* of code units to be decoded.
-    mutating func decode<G : GeneratorType where Self.CodeUnit == CodeUnit>(inout next: G) -> UnicodeDecodingResult
+    /// - parameter next: A *generator* of code units to be decoded.
+    mutating func decode<G : GeneratorType where G.Element == CodeUnit>(inout next: G) -> UnicodeDecodingResult
 
-    /// Encode a `UnicodeScalar` as a series of `CodeUnit`\ s by
+    /// Encode a `UnicodeScalar` as a series of `CodeUnit`s by
     /// `put`'ing each `CodeUnit` to `output`.
-    static func encode<S : SinkType where Self.CodeUnit == CodeUnit>(input: UnicodeScalar, inout output: S)
+    static func encode<S : SinkType where S.Element == CodeUnit>(input: UnicodeScalar, inout output: S)
 }
 
 
-/// The result of one Unicode decoding step
+/// The result of one Unicode decoding step.
 ///
 /// A unicode scalar value, an indication that no more unicode scalars
 /// are available, or an indication of a decoding error.
@@ -8284,8 +9982,7 @@ enum UnicodeDecodingResult {
 }
 
 
-/// A `Unicode scalar value
-/// <http://www.unicode.org/glossary/#unicode_scalar_value>`_.
+/// A [Unicode scalar value](http://www.unicode.org/glossary/#unicode_scalar_value).
 struct UnicodeScalar : UnicodeScalarLiteralConvertible {
 
     /// A numeric representation of `self`.
@@ -8300,12 +9997,12 @@ struct UnicodeScalar : UnicodeScalarLiteralConvertible {
 
     /// Create an instance with numeric value `v`.
     ///
-    /// Requires: `v` is a valid Unicode scalar value.
+    /// - Requires: `v` is a valid Unicode scalar value.
     init(_ v: UInt32)
 
     /// Create an instance with numeric value `v`.
     ///
-    /// Requires: `v` is a valid Unicode scalar value.
+    /// - Requires: `v` is a valid Unicode scalar value.
     init(_ v: UInt16)
 
     /// Create an instance with numeric value `v`.
@@ -8316,9 +10013,9 @@ struct UnicodeScalar : UnicodeScalarLiteralConvertible {
 
     /// Return a String representation of `self` .
     ///
-    /// :param: `asASCII`, if `true`, forces most values into a numeric
-    /// representation.
-    func escape(#asASCII: Bool) -> String
+    /// - parameter forceASCII: If `true`, forces most values into a numeric
+    ///   representation.
+    func escape(asASCII forceASCII: Bool) -> String
 
     /// Returns true if this is an ASCII character (code point 0 to 127
     /// inclusive).
@@ -8333,11 +10030,11 @@ extension UnicodeScalar : Reflectable {
 
 extension UnicodeScalar : Streamable {
 
-    /// Write a textual representation of `self` into `target`
+    /// Write a textual representation of `self` into `target`.
     func writeTo<Target : OutputStreamType>(inout target: Target)
 }
 
-extension UnicodeScalar : Printable, DebugPrintable {
+extension UnicodeScalar : CustomStringConvertible, CustomDebugStringConvertible {
 
     /// A textual representation of `self`.
     var description: String { get }
@@ -8350,11 +10047,11 @@ extension UnicodeScalar : Hashable {
 
     /// The hash value.
     ///
-    /// **Axiom:** `x == y` implies `x.hashValue == y.hashValue`
+    /// **Axiom:** `x == y` implies `x.hashValue == y.hashValue`.
     ///
-    /// **Note:** the hash value is not guaranteed to be stable across
-    /// different invocations of the same program.  Do not persist the
-    /// hash value across program runs.
+    /// - Note: The hash value is not guaranteed to be stable across
+    ///   different invocations of the same program.  Do not persist the
+    ///   hash value across program runs.
     var hashValue: Int { get }
 }
 
@@ -8362,32 +10059,31 @@ extension UnicodeScalar {
 
     /// Construct with value `v`.
     ///
-    /// Requires: `v` is a valid unicode scalar value.
+    /// - Requires: `v` is a valid unicode scalar value.
     init(_ v: Int)
 }
 
-extension UnicodeScalar : Comparable {
+extension UnicodeScalar : Equatable, Comparable {
 }
 
 extension UnicodeScalar {
 }
 
-extension UnicodeScalar.UTF16View : CollectionType {
+extension UnicodeScalar.UTF16View : CollectionType, SequenceType, _CollectionDefaultsType, _CollectionGeneratorDefaultsType {
 }
 
 
 /// Conforming types can be initialized with string literals
-/// containing a single `Unicode scalar value
-/// <http://www.unicode.org/glossary/#unicode_scalar_value>`_.
+/// containing a single [Unicode scalar value](http://www.unicode.org/glossary/#unicode_scalar_value).
 protocol UnicodeScalarLiteralConvertible {
     typealias UnicodeScalarLiteralType
 
     /// Create an instance initialized to `value`.
-    init(unicodeScalarLiteral value: UnicodeScalarLiteralType)
+    init(unicodeScalarLiteral value: Self.UnicodeScalarLiteralType)
 }
 
 
-/// The default type for an otherwise-unconstrained unicode scalar literal
+/// The default type for an otherwise-unconstrained unicode scalar literal.
 typealias UnicodeScalarType = String
 
 
@@ -8402,9 +10098,7 @@ struct Unmanaged<T> {
     ///
     /// This operation does not change reference counts.
     ///
-    /// ::
-    ///
-    ///   let str: CFString = Unmanaged.fromOpaque(ptr).takeUnretainedValue()
+    ///     let str: CFString = Unmanaged.fromOpaque(ptr).takeUnretainedValue()
     static func fromOpaque(value: COpaquePointer) -> Unmanaged<T>
 
     /// Unsafely turn an unmanaged class reference into an opaque
@@ -8412,9 +10106,7 @@ struct Unmanaged<T> {
     ///
     /// This operation does not change reference counts.
     ///
-    /// ::
-    ///
-    ///   let str: CFString = Unmanaged.fromOpaque(ptr).takeUnretainedValue()
+    ///     let str: CFString = Unmanaged.fromOpaque(ptr).takeUnretainedValue()
     func toOpaque() -> COpaquePointer
 
     /// Create an unmanaged reference with an unbalanced retain.
@@ -8432,10 +10124,8 @@ struct Unmanaged<T> {
     /// does not know the ownership rules for, but you know that the
     /// API expects you to pass the object at +0.
     ///
-    /// ::
-    ///
-    ///   CFArraySetValueAtIndex(.passUnretained(array), i,
-    ///                          .passUnretained(object))
+    ///     CFArraySetValueAtIndex(.passUnretained(array), i,
+    ///                            .passUnretained(object))
     static func passUnretained(value: T) -> Unmanaged<T>
 
     /// Get the value of this unmanaged reference as a managed
@@ -8463,10 +10153,10 @@ struct Unmanaged<T> {
 }
 
 
-/// A non-owning pointer to buffer of  `T`\ s stored
+/// A non-owning pointer to buffer of  `T`s stored
 /// contiguously in memory, presenting a `Collection` interface to the
 /// underlying elements.
-struct UnsafeBufferPointer<T> : CollectionType {
+struct UnsafeBufferPointer<T> : CollectionType, SequenceType, _CollectionDefaultsType, _CollectionGeneratorDefaultsType {
 
     /// Always zero, which is the index of the first element in a
     /// non-empty buffer.
@@ -8486,17 +10176,17 @@ struct UnsafeBufferPointer<T> : CollectionType {
 
     /// Return a *generator* over the elements of this *sequence*.
     ///
-    /// Complexity: O(1)
+    /// - Complexity: O(1).
     func generate() -> UnsafeBufferPointerGenerator<T>
 
-    /// A pointer to the first element of the buffer
+    /// A pointer to the first element of the buffer.
     var baseAddress: UnsafePointer<T> { get }
 
-    /// The number of elements in the buffer
+    /// The number of elements in the buffer.
     var count: Int { get }
 }
 
-extension UnsafeBufferPointer : DebugPrintable {
+extension UnsafeBufferPointer : CustomDebugStringConvertible {
 
     /// A textual representation of `self`, suitable for debugging.
     var debugDescription: String { get }
@@ -8504,7 +10194,7 @@ extension UnsafeBufferPointer : DebugPrintable {
 
 
 /// A generator for the elements in the buffer referenced by
-/// `UnsafeBufferPointer` or `UnsafeMutableBufferPointer`
+/// `UnsafeBufferPointer` or `UnsafeMutableBufferPointer`.
 struct UnsafeBufferPointerGenerator<T> : GeneratorType, SequenceType {
 
     /// Advance to the next element and return it, or `nil` if no next
@@ -8512,15 +10202,15 @@ struct UnsafeBufferPointerGenerator<T> : GeneratorType, SequenceType {
     mutating func next() -> T?
 
     /// `UnsafeBufferPointerGenerator` is also a `SequenceType`, so it
-    /// `generate`\ 's a copy of itself
+    /// `generate`'s a copy of itself.
     func generate() -> UnsafeBufferPointerGenerator<T>
 }
 
 
-/// A non-owning pointer to buffer of mutable `T`\ s stored
+/// A non-owning pointer to buffer of mutable `T`s stored
 /// contiguously in memory, presenting a `Collection` interface to the
 /// underlying elements.
-struct UnsafeMutableBufferPointer<T> : MutableCollectionType {
+struct UnsafeMutableBufferPointer<T> : MutableCollectionType, CollectionType, SequenceType, _CollectionDefaultsType, _CollectionGeneratorDefaultsType {
 
     /// Always zero, which is the index of the first element in a
     /// non-empty buffer.
@@ -8540,17 +10230,17 @@ struct UnsafeMutableBufferPointer<T> : MutableCollectionType {
 
     /// Return a *generator* over the elements of this *sequence*.
     ///
-    /// Complexity: O(1)
+    /// - Complexity: O(1).
     func generate() -> UnsafeBufferPointerGenerator<T>
 
-    /// A pointer to the first element of the buffer
+    /// A pointer to the first element of the buffer.
     var baseAddress: UnsafeMutablePointer<T> { get }
 
-    /// The number of elements in the buffer
+    /// The number of elements in the buffer.
     var count: Int { get }
 }
 
-extension UnsafeMutableBufferPointer : DebugPrintable {
+extension UnsafeMutableBufferPointer : CustomDebugStringConvertible {
 
     /// A textual representation of `self`, suitable for debugging.
     var debugDescription: String { get }
@@ -8564,17 +10254,17 @@ extension UnsafeMutableBufferPointer : DebugPrintable {
 /// The pointer can be in one of the following states:
 ///
 /// - memory is not allocated (for example, pointer is null, or memory has
-/// been deallocated previously);
+///   been deallocated previously);
 ///
 /// - memory is allocated, but value has not been initialized;
 ///
 /// - memory is allocated and value is initialized.
-struct UnsafeMutablePointer<T> : RandomAccessIndexType, Hashable, NilLiteralConvertible, _PointerType {
+struct UnsafeMutablePointer<T> : RandomAccessIndexType, BidirectionalIndexType, ForwardIndexType, _Incrementable, Equatable, Strideable, Comparable, _Strideable, Hashable, NilLiteralConvertible, _PointerType {
 
     /// Construct a null pointer.
     init()
 
-    /// Convert from an opaque C pointer to a typed pointer
+    /// Convert from an opaque C pointer to a typed pointer.
     ///
     /// This is a fundamentally unsafe conversion.
     init(_ other: COpaquePointer)
@@ -8589,12 +10279,12 @@ struct UnsafeMutablePointer<T> : RandomAccessIndexType, Hashable, NilLiteralConv
     /// This is a fundamentally unsafe conversion.
     init(bitPattern: UWord)
 
-    /// Convert from an UnsafeMutablePointer of a different type.
+    /// Convert from an `UnsafeMutablePointer` of a different type.
     ///
     /// This is a fundamentally unsafe conversion.
     init<U>(_ from: UnsafeMutablePointer<U>)
 
-    /// Convert from a UnsafePointer of a different type.
+    /// Convert from a `UnsafePointer` of a different type.
     ///
     /// This is a fundamentally unsafe conversion.
     init<U>(_ from: UnsafePointer<U>)
@@ -8604,31 +10294,30 @@ struct UnsafeMutablePointer<T> : RandomAccessIndexType, Hashable, NilLiteralConv
 
     /// Allocate memory for `num` objects of type `T`.
     ///
-    /// Postcondition: the memory is allocated, but not initialized.
+    /// - Postcondition: The memory is allocated, but not initialized.
     static func alloc(num: Int) -> UnsafeMutablePointer<T>
 
     /// Deallocate `num` objects.
     ///
-    /// :param: num number of objects to deallocate.  Should match exactly
-    /// the value that was passed to `alloc()` (partial deallocations are not
-    /// possible).
+    /// - parameter num: Number of objects to deallocate.  Should match exactly
+    ///   the value that was passed to `alloc()` (partial deallocations are not
+    ///   possible).
     ///
-    /// Precondition: the memory is not initialized.
+    /// - Precondition: The memory is not initialized.
     ///
-    /// Postcondition: the memory has been deallocated.
+    /// - Postcondition: The memory has been deallocated.
     func dealloc(num: Int)
 
-    /// Access the underlying raw memory, getting and
-    /// setting values.
+    /// Access the underlying raw memory, getting and setting values.
     var memory: T { get nonmutating set }
 
     /// Initialize the value the pointer points to, to construct
     /// an object where there was no object previously stored.
     ///
-    /// Precondition: the memory is not initialized.
+    /// - Precondition: The memory is not initialized.
     ///
-    /// Postcondition: the memory is initalized; the value should eventually
-    /// be destroyed or moved from to avoid leaks.
+    /// - Postcondition: The memory is initalized; the value should eventually
+    ///   be destroyed or moved from to avoid leaks.
     func initialize(newvalue: T)
 
     /// Retrieve the value the pointer points to, moving it away
@@ -8637,10 +10326,10 @@ struct UnsafeMutablePointer<T> : RandomAccessIndexType, Hashable, NilLiteralConv
     /// Equivalent to reading `memory` property and calling `destroy()`,
     /// but more efficient.
     ///
-    /// Precondition: the memory is initialized.
+    /// - Precondition: The memory is initialized.
     ///
-    /// Postcondition: the value has been destroyed and the memory must
-    /// be initialized before being used again.
+    /// - Postcondition: The value has been destroyed and the memory must
+    ///   be initialized before being used again.
     func move() -> T
 
     /// Assign from `count` values beginning at source into initialized
@@ -8652,10 +10341,10 @@ struct UnsafeMutablePointer<T> : RandomAccessIndexType, Hashable, NilLiteralConv
     /// Use this for assigning ranges into later memory that may overlap
     /// with the source range.
     ///
-    /// Requires: either `source` precedes `self` or follows `self + count`.
+    /// - Requires: Either `source` precedes `self` or follows `self + count`.
     func assignBackwardFrom(source: UnsafeMutablePointer<T>, count: Int)
 
-    /// Move count values beginning at source into raw memory,
+    /// Move `count` values beginning at source into raw memory,
     /// transforming the source values into raw memory.
     func moveInitializeFrom(source: UnsafeMutablePointer<T>, count: Int)
 
@@ -8664,79 +10353,79 @@ struct UnsafeMutablePointer<T> : RandomAccessIndexType, Hashable, NilLiteralConv
     /// the last value to the first.  Use this for copying ranges into
     /// later memory that may overlap with the source range.
     ///
-    /// Requires: either `source` precedes `self` or follows `self + count`.
+    /// - Requires: Either `source` precedes `self` or follows `self + count`.
     func moveInitializeBackwardFrom(source: UnsafeMutablePointer<T>, count: Int)
 
-    /// Copy count values beginning at source into raw memory.
+    /// Copy `count` values beginning at source into raw memory.
     ///
-    /// Precondition: the memory is not initialized.
+    /// - Precondition: The memory is not initialized.
     ///
-    /// Requires: `self` and `source` may not overlap.
+    /// - Requires: `self` and `source` may not overlap.
     func initializeFrom(source: UnsafeMutablePointer<T>, count: Int)
 
     /// Copy the elements of `C` into raw memory.
     ///
-    /// Precondition: the memory is not initialized.
-    func initializeFrom<C : CollectionType where T == T>(source: C)
+    /// - Precondition: The memory is not initialized.
+    func initializeFrom<C : CollectionType where C.Generator.Element == T>(source: C)
 
     /// Assign from `count` values beginning at `source` into initialized
     /// memory, transforming the source values into raw memory.
     ///
-    /// Requires: the `self` and `source` ranges may not overlap.
+    /// - Requires: The `self` and `source` ranges may not overlap.
     func moveAssignFrom(source: UnsafeMutablePointer<T>, count: Int)
 
     /// Destroy the object the pointer points to.
     ///
-    /// Precondition: the memory is initialized.
+    /// - Precondition: The memory is initialized.
     ///
-    /// Postcondition: the value has been destroyed and the memory must
-    /// be initialized before being used again.
+    /// - Postcondition: The value has been destroyed and the memory must
+    ///   be initialized before being used again.
     func destroy()
 
     /// Destroy the `count` objects the pointer points to.
-    /// Precondition: the memory is initialized.
+    /// - Precondition: The memory is initialized.
     ///
-    /// Postcondition: the value has been destroyed and the memory must
-    /// be initialized before being used again.
+    /// - Postcondition: The value has been destroyed and the memory must
+    ///   be initialized before being used again.
     func destroy(count: Int)
     subscript (i: Int) -> T { get nonmutating set }
 
     /// The hash value.
     ///
-    /// **Axiom:** `x == y` implies `x.hashValue == y.hashValue`
+    /// **Axiom:** `x == y` implies `x.hashValue == y.hashValue`.
     ///
-    /// **Note:** the hash value is not guaranteed to be stable across
-    /// different invocations of the same program.  Do not persist the
-    /// hash value across program runs.
+    /// - Note: The hash value is not guaranteed to be stable across
+    ///   different invocations of the same program.  Do not persist the
+    ///   hash value across program runs.
     var hashValue: Int { get }
 
     /// Returns the next consecutive value after `self`.
     ///
-    /// Requires: the next value is representable.
+    /// - Requires: The next value is representable.
     func successor() -> UnsafeMutablePointer<T>
 
     /// Returns the previous consecutive value before `self`.
     ///
-    /// Requires: the previous value is representable.
+    /// - Requires: The previous value is representable.
     func predecessor() -> UnsafeMutablePointer<T>
 
     /// Return the minimum number of applications of `successor` or
     /// `predecessor` required to reach `other` from `self`.
     ///
-    /// Complexity: O(1).
+    /// - Complexity: O(1).
     func distanceTo(x: UnsafeMutablePointer<T>) -> Int
 
     /// Return `self` offset by `n` steps.
     ///
-    /// :returns: If `n > 0`, the result of applying `successor` to
-    /// `self` `n` times.  If `n < 0`, the result of applying
-    /// `predecessor` to `self` `-n` times. Otherwise, `self`.
+    /// - Returns: If `n > 0`, the result of applying `successor` to
+    ///   `self` `n` times.  If `n < 0`, the result of applying
+    ///   `predecessor` to `self` `-n` times. Otherwise, `self`.
     ///
-    /// Complexity: O(1)
+    /// - Complexity: O(1).
     func advancedBy(n: Int) -> UnsafeMutablePointer<T>
 }
 
-extension UnsafeMutablePointer : DebugPrintable {
+extension UnsafeMutablePointer : CustomDebugStringConvertible {
 
     /// A textual representation of `self`, suitable for debugging.
     var debugDescription: String { get }
@@ -8753,10 +10442,6 @@ extension UnsafeMutablePointer : SinkType {
 }
 
 extension UnsafeMutablePointer : CVarArgType {
-
-    /// Transform `self` into a series of machine words that can be
-    /// appropriately interpreted by C varargs
-    func encode() -> [Word]
 }
 
 
@@ -8767,17 +10452,17 @@ extension UnsafeMutablePointer : CVarArgType {
 /// The pointer can be in one of the following states:
 ///
 /// - memory is not allocated (for example, pointer is null, or memory has
-/// been deallocated previously);
+///   been deallocated previously);
 ///
 /// - memory is allocated, but value has not been initialized;
 ///
 /// - memory is allocated and value is initialized.
-struct UnsafePointer<T> : RandomAccessIndexType, Hashable, NilLiteralConvertible, _PointerType {
+struct UnsafePointer<T> : RandomAccessIndexType, BidirectionalIndexType, ForwardIndexType, _Incrementable, Equatable, Strideable, Comparable, _Strideable, Hashable, NilLiteralConvertible, _PointerType {
 
     /// Construct a null pointer.
     init()
 
-    /// Convert from an opaque C pointer to a typed pointer
+    /// Convert from an opaque C pointer to a typed pointer.
     ///
     /// This is a fundamentally unsafe conversion.
     init(_ other: COpaquePointer)
@@ -8792,12 +10477,12 @@ struct UnsafePointer<T> : RandomAccessIndexType, Hashable, NilLiteralConvertible
     /// This is a fundamentally unsafe conversion.
     init(bitPattern: UWord)
 
-    /// Convert from an UnsafeMutablePointer of a different type.
+    /// Convert from an `UnsafeMutablePointer` of a different type.
     ///
     /// This is a fundamentally unsafe conversion.
     init<U>(_ from: UnsafeMutablePointer<U>)
 
-    /// Convert from a UnsafePointer of a different type.
+    /// Convert from a `UnsafePointer` of a different type.
     ///
     /// This is a fundamentally unsafe conversion.
     init<U>(_ from: UnsafePointer<U>)
@@ -8805,47 +10490,46 @@ struct UnsafePointer<T> : RandomAccessIndexType, Hashable, NilLiteralConvertible
     /// Create an instance initialized with `nil`.
     init(nilLiteral: ())
 
-    /// Access the underlying raw memory, getting and
-    /// setting values.
+    /// Access the underlying raw memory, getting values.
     var memory: T { get }
     subscript (i: Int) -> T { get }
 
     /// The hash value.
     ///
-    /// **Axiom:** `x == y` implies `x.hashValue == y.hashValue`
+    /// **Axiom:** `x == y` implies `x.hashValue == y.hashValue`.
     ///
-    /// **Note:** the hash value is not guaranteed to be stable across
-    /// different invocations of the same program.  Do not persist the
-    /// hash value across program runs.
+    /// - Note: The hash value is not guaranteed to be stable across
+    ///   different invocations of the same program.  Do not persist the
+    ///   hash value across program runs.
     var hashValue: Int { get }
 
     /// Returns the next consecutive value after `self`.
     ///
-    /// Requires: the next value is representable.
+    /// - Requires: The next value is representable.
     func successor() -> UnsafePointer<T>
 
     /// Returns the previous consecutive value before `self`.
     ///
-    /// Requires: the previous value is representable.
+    /// - Requires: The previous value is representable.
     func predecessor() -> UnsafePointer<T>
 
     /// Return the minimum number of applications of `successor` or
     /// `predecessor` required to reach `other` from `self`.
     ///
-    /// Complexity: O(1).
+    /// - Complexity: O(1).
     func distanceTo(x: UnsafePointer<T>) -> Int
 
     /// Return `self` offset by `n` steps.
     ///
-    /// :returns: If `n > 0`, the result of applying `successor` to
-    /// `self` `n` times.  If `n < 0`, the result of applying
-    /// `predecessor` to `self` `-n` times. Otherwise, `self`.
+    /// - Returns: If `n > 0`, the result of applying `successor` to
+    ///   `self` `n` times.  If `n < 0`, the result of applying
+    ///   `predecessor` to `self` `-n` times. Otherwise, `self`.
     ///
-    /// Complexity: O(1)
+    /// - Complexity: O(1).
     func advancedBy(n: Int) -> UnsafePointer<T>
 }
 
-extension UnsafePointer : DebugPrintable {
+extension UnsafePointer : CustomDebugStringConvertible {
 
     /// A textual representation of `self`, suitable for debugging.
     var debugDescription: String { get }
@@ -8858,10 +10542,6 @@ extension UnsafePointer : Reflectable {
 }
 
 extension UnsafePointer : CVarArgType {
-
-    /// Transform `self` into a series of machine words that can be
-    /// appropriately interpreted by C varargs
-    func encode() -> [Word]
 }
 
 
@@ -8871,7 +10551,7 @@ protocol UnsignedIntegerType : _UnsignedIntegerType, IntegerType {
 
 
 /// An object that can manage the lifetime of storage backing a
-/// `CVaListPointer`
+/// `CVaListPointer`.
 final class VaListBuilder {
 }
 
@@ -8883,168 +10563,166 @@ final class VaListBuilder {
 typealias Void = ()
 
 
-/// A signed integer type that occupies one machine word
+/// A signed integer type that occupies one machine word.
 typealias Word = Int
 
 
 /// A sequence of pairs built out of two underlying sequences, where
-/// the elements of the `i`\ th pair are the `i`\ th elements of each
+/// the elements of the `i`th pair are the `i`th elements of each
 /// underlying sequence.
-struct Zip2<S0 : SequenceType, S1 : SequenceType> : SequenceType {
-    typealias Stream1 = S0.Generator
-    typealias Stream2 = S1.Generator
+struct Zip2<Sequence1 : SequenceType, Sequence2 : SequenceType> : SequenceType {
+    typealias Stream1 = Sequence1.Generator
+    typealias Stream2 = Sequence2.Generator
 
     /// A type whose instances can produce the elements of this
     /// sequence, in order.
-    typealias Generator = ZipGenerator2<S0.Generator, S1.Generator>
+    typealias Generator = ZipGenerator2<Sequence1.Generator, Sequence2.Generator>
 
-    /// Construct an instance that makes pairs of elements from `s0` and
-    /// `s1`.
-    init(_ s0: S0, _ s1: S1)
+    /// Construct an instance that makes pairs of elements from `sequence1` and
+    /// `sequence2`.
+    init(_ sequence1: Sequence1, _ sequence2: Sequence2)
 
     /// Return a *generator* over the elements of this *sequence*.
     ///
-    /// Complexity: O(1)
-    func generate() -> Generator
+    /// - Complexity: O(1).
+    func generate() -> ZipGenerator2<Sequence1.Generator, Sequence2.Generator>
 }
 
 
-/// A generator for the `Zip2` sequence
-struct ZipGenerator2<E0 : GeneratorType, E1 : GeneratorType> : GeneratorType {
+/// A generator for the `Zip2` sequence.
+struct ZipGenerator2<Generator1 : GeneratorType, Generator2 : GeneratorType> : GeneratorType {
 
     /// The type of element returned by `next()`.
-    typealias Element = (E0.Element, E1.Element)
+    typealias Element = (Generator1.Element, Generator2.Element)
 
     /// Construct around a pair of underlying generators.
-    init(_ e0: E0, _ e1: E1)
+    init(_ generator1: Generator1, _ generator2: Generator2)
 
     /// Advance to the next element and return it, or `nil` if no next
     /// element exists.
     ///
-    /// Requires: `next()` has not been applied to a copy of `self`
-    /// since the copy was made, and no preceding call to `self.next()`
-    /// has returned `nil`.
-    mutating func next() -> Element?
+    /// - Requires: `next()` has not been applied to a copy of `self`
+    ///   since the copy was made, and no preceding call to `self.next()`
+    ///   has returned `nil`.
+    mutating func next() -> (Generator1.Element, Generator2.Element)?
 }
 
-func ^(lhs: UInt, rhs: UInt) -> UInt
+func ^(lhs: Int32, rhs: Int32) -> Int32
+
+func ^(lhs: UInt16, rhs: UInt16) -> UInt16
 
 func ^(lhs: Int64, rhs: Int64) -> Int64
 
 func ^(lhs: UInt64, rhs: UInt64) -> UInt64
 
+func ^(lhs: UInt, rhs: UInt) -> UInt
+
 func ^(lhs: Int, rhs: Int) -> Int
-
-func ^(lhs: Int32, rhs: Int32) -> Int32
-
-func ^(lhs: Int8, rhs: Int8) -> Int8
-
-func ^(lhs: UInt32, rhs: UInt32) -> UInt32
 
 func ^<T : _RawOptionSetType>(a: T, b: T) -> T
 
-func ^(lhs: UInt8, rhs: UInt8) -> UInt8
-
-func ^(lhs: UInt16, rhs: UInt16) -> UInt16
-
 func ^(lhs: Int16, rhs: Int16) -> Int16
 
-func ^=(inout lhs: UInt64, rhs: UInt64)
+func ^(lhs: Int8, rhs: Int8) -> Int8
 
-func ^=(inout lhs: Int8, rhs: Int8)
+func ^(lhs: UInt8, rhs: UInt8) -> UInt8
 
-func ^=<T : BitwiseOperationsType>(inout lhs: T, rhs: T)
+func ^(lhs: UInt32, rhs: UInt32) -> UInt32
 
 func ^=(inout lhs: Int, rhs: Int)
 
-func ^=(inout lhs: UInt, rhs: UInt)
-
-func ^=(inout lhs: Int64, rhs: Int64)
-
-func ^=(inout lhs: UInt8, rhs: UInt8)
-
 func ^=(inout lhs: Int32, rhs: Int32)
 
+func ^=<T : BitwiseOperationsType>(inout lhs: T, rhs: T)
+
 func ^=(inout lhs: UInt32, rhs: UInt32)
+
+func ^=(inout lhs: UInt64, rhs: UInt64)
 
 func ^=(inout lhs: Int16, rhs: Int16)
 
 func ^=(inout lhs: UInt16, rhs: UInt16)
 
+func ^=(inout lhs: Int8, rhs: Int8)
+
+func ^=(inout lhs: UInt8, rhs: UInt8)
+
+func ^=(inout lhs: Int64, rhs: Int64)
+
+func ^=(inout lhs: UInt, rhs: UInt)
+
 
 /// The underlying buffer for an ArrayType conforms to
-/// _ArrayBufferType.  This buffer does not provide value semantics.
+/// `_ArrayBufferType`.  This buffer does not provide value semantics.
 protocol _ArrayBufferType : MutableCollectionType {
 
-    /// The type of elements stored in the buffer
+    /// The type of elements stored in the buffer.
     typealias Element
 
-    /// create an empty buffer
+    /// Create an empty buffer.
     init()
 
-    /// Adopt the storage of x
-    init(_ buffer: _ContiguousArrayBuffer<Element>)
-
-    /// Copy the given subRange of this buffer into uninitialized memory
-    /// starting at target.  Return a pointer past-the-end of the
-    /// just-initialized memory.
-    func _uninitializedCopy(subRange: Range<Int>, target: UnsafeMutablePointer<Element>) -> UnsafeMutablePointer<Element>
-    subscript (index: Int) -> Element { get nonmutating set }
+    /// Adopt the storage of x.
+    init(_ buffer: _ContiguousArrayBuffer<Self.Element>)
+    subscript (index: Int) -> Self.Element { get nonmutating set }
 
     /// If this buffer is backed by a uniquely-referenced mutable
-    /// _ContiguousArrayBuffer that can be grown in-place to allow the self
-    /// buffer store minimumCapacity elements, returns that buffer.
-    /// Otherwise, returns nil.  Note: the result's baseAddress may
-    /// not match ours, if we are a _SliceBuffer.
+    /// `_ContiguousArrayBuffer` that can be grown in-place to allow the `self`
+    /// buffer store `minimumCapacity` elements, returns that buffer.
+    /// Otherwise, returns nil.
     ///
-    /// Note: this function must remain mutating; otherwise the buffer
-    /// may acquire spurious extra references, which will cause
-    /// unnecessary reallocation.
-    mutating func requestUniqueMutableBackingBuffer(minimumCapacity: Int) -> _ContiguousArrayBuffer<Element>?
+    /// - Note: The result's baseAddress may not match ours, if we are a
+    ///   _SliceBuffer.
+    ///
+    /// - Note: This function must remain mutating; otherwise the buffer
+    ///   may acquire spurious extra references, which will cause
+    ///   unnecessary reallocation.
+    mutating func requestUniqueMutableBackingBuffer(minimumCapacity: Int) -> _ContiguousArrayBuffer<Self.Element>?
 
     /// Returns true iff this buffer is backed by a uniquely-referenced mutable
     /// _ContiguousArrayBuffer.
     ///
-    /// Note: this function must remain mutating; otherwise the buffer
-    /// may acquire spurious extra references, which will cause
-    /// unnecessary reallocation.
+    /// - Note: This function must remain mutating; otherwise the buffer
+    ///   may acquire spurious extra references, which will cause
+    ///   unnecessary reallocation.
     mutating func isMutableAndUniquelyReferenced() -> Bool
 
     /// If this buffer is backed by a `_ContiguousArrayBuffer`
     /// containing the same number of elements as `self`, return it.
     /// Otherwise, return `nil`.
-    func requestNativeBuffer() -> _ContiguousArrayBuffer<Element>?
+    func requestNativeBuffer() -> _ContiguousArrayBuffer<Self.Element>?
 
-    /// Replace the given subRange with the first newCount elements of
+    /// Replace the given `subRange` with the first `newCount` elements of
     /// the given collection.
     ///
-    /// Requires: this buffer is backed by a uniquely-referenced
-    /// _ContiguousArrayBuffer
-    mutating func replace<C : CollectionType where Self.Element == Element>(#subRange: Range<Int>, with newCount: Int, elementsOf newValues: C)
-    subscript (subRange: Range<Int>) -> _SliceBuffer<Element> { get }
+    /// - Requires: This buffer is backed by a uniquely-referenced
+    /// `_ContiguousArrayBuffer`.
+    mutating func replace<C : CollectionType where C.Generator.Element == Element>(subRange subRange: Range<Int>, with newCount: Int, elementsOf newValues: C)
+    subscript (subRange: Range<Int>) -> _SliceBuffer<Self.Element> { get }
 
     /// Call `body(p)`, where `p` is an `UnsafeBufferPointer` over the
     /// underlying contiguous storage.  If no such storage exists, it is
     /// created on-demand.
-    func withUnsafeBufferPointer<R>(body: @noescape (UnsafeBufferPointer<Element>) -> R) -> R
+    func withUnsafeBufferPointer<R>(@noescape body: (UnsafeBufferPointer<Self.Element>) -> R) -> R
 
     /// Call `body(p)`, where `p` is an `UnsafeMutableBufferPointer`
-    /// over the underlying contiguous storage.  Requires: such
-    /// contiguous storage exists or the buffer is empty
-    mutating func withUnsafeMutableBufferPointer<R>(body: @noescape (UnsafeMutableBufferPointer<Element>) -> R) -> R
+    /// over the underlying contiguous storage.
+    ///
+    /// - Requires: Such contiguous storage exists or the buffer is empty.
+    mutating func withUnsafeMutableBufferPointer<R>(@noescape body: (UnsafeMutableBufferPointer<Self.Element>) -> R) -> R
 
-    /// How many elements the buffer stores
+    /// The number of elements the buffer stores.
     var count: Int { get set }
 
-    /// How many elements the buffer can store without reallocation
+    /// The number of elements the buffer can store without reallocation.
     var capacity: Int { get }
 
-    /// An object that keeps the elements stored in this buffer alive
+    /// An object that keeps the elements stored in this buffer alive.
     var owner: AnyObject { get }
 
     /// If the elements are stored contiguously, a pointer to the first
-    /// element. Otherwise, nil.
-    var baseAddress: UnsafeMutablePointer<Element> { get }
+    /// element. Otherwise, `nil`.
+    var baseAddress: UnsafeMutablePointer<Self.Element> { get }
 
     /// A value that identifies the storage used by the buffer.  Two
     /// buffers address the same elements when they have the same
@@ -9054,95 +10732,74 @@ protocol _ArrayBufferType : MutableCollectionType {
 
 protocol _ArrayType : __ArrayType, RangeReplaceableCollectionType, MutableSliceable, ArrayLiteralConvertible {
 
-    /// Construct an empty Array
+    /// Construct an empty Array.
     init()
 
-    /// Construct an array of count elements, each initialized to repeatedValue
+    /// Construct an array of `count` elements, each initialized to `repeatedValue`.
     init(count: Int, repeatedValue: Self.Generator.Element)
 
-    /// How many elements the Array stores
+    /// The number of elements the Array stores.
     var count: Int { get }
 
-    /// How many elements the Array can store without reallocation
+    /// The number of elements the Array can store without reallocation.
     var capacity: Int { get }
 
-    /// true if and only if the Array is empty
+    /// `true` if and only if the Array is empty.
     var isEmpty: Bool { get }
-
-    /// An object that guarantees the lifetime of this array's elements
-    var _owner: AnyObject? { get }
-
-    /// If the elements are stored contiguously, a pointer to the first
-    /// element. Otherwise, nil.
-    var _baseAddressIfContiguous: UnsafeMutablePointer<Self.Element> { get }
     subscript (index: Int) -> Self.Generator.Element { get set }
 
     /// Reserve enough space to store minimumCapacity elements.
     ///
-    /// PostCondition: `capacity >= minimumCapacity` and the array has
-    /// mutable contiguous storage.
+    /// - Postcondition: `capacity >= minimumCapacity` and the array has
+    ///   mutable contiguous storage.
     ///
-    /// Complexity: O(`count`)
+    /// - Complexity: O(`count`).
     mutating func reserveCapacity(minimumCapacity: Int)
 
-    /// Append newElement to the Array in O(1) (amortized)
+    /// Append newElement to the Array in O(1) (amortized).
     mutating func append(newElement: Self.Generator.Element)
 
-    /// Append elements from `sequence` to the Array
-    mutating func extend<S : SequenceType where Self.Generator.Element == Self.Generator.Element>(sequence: S)
+    /// Append elements from `sequence` to the Array.
+    mutating func extend<S : SequenceType where S.Generator.Element == Generator.Element>(sequence: S)
 
-    /// Operator form of extend
-    func +=<S : SequenceType where Self.Generator.Element == Self.Generator.Element>(inout lhs: Self, rhs: S)
+    /// Operator form of `extend`.
+    func +=<S : SequenceType where S.Generator.Element == Generator.Element>(inout lhs: Self, rhs: S)
 
-    /// Remove an element from the end of the Array in O(1).  Returns:
-    /// the removed element. Requires: count > 0
+    /// Remove an element from the end of the Array in O(1).
+    ///
+    /// - returns: The removed element.
+    ///
+    /// - Requires: `count > 0`.
     mutating func removeLast() -> Self.Generator.Element
 
     /// Insert `newElement` at index `i`.
     ///
     /// Invalidates all indices with respect to `self`.
     ///
-    /// Complexity: O(\ `count(self)`\ ).
+    /// - Complexity: O(`self.count`).
     ///
-    /// Requires: `atIndex` <= `count`
+    /// - Requires: `atIndex <= count`.
     mutating func insert(newElement: Self.Generator.Element, atIndex i: Int)
 
-    /// Remove and return the element at the given index.  Returns: the removed
-    /// element.  Worst case complexity: O(N).  Requires: count > index
+    /// Remove and return the element at the given index.
+    ///
+    /// - returns: The removed element.
+    ///
+    /// - Complexity: Worst case O(N).
+    ///
+    /// - Requires: `count > index`.
     mutating func removeAtIndex(index: Int) -> Self.Generator.Element
 
     /// Erase all the elements.  If `keepCapacity` is `true`, `capacity`
-    /// will not change
-    mutating func removeAll(#keepCapacity: Bool)
-    func join<S : SequenceType where Self == Self>(elements: S) -> Self
-    func reduce<U>(initial: U, combine: @noescape (U, Self.Generator.Element) -> U) -> U
-
-    /// Sort `self` in-place according to `isOrderedBefore`.  Requires:
-    /// `isOrderedBefore` induces a `strict weak ordering
-    /// <http://en.wikipedia.org/wiki/Strict_weak_order#Strict_weak_orderings>`_
-    /// over the elements.
-    mutating func sort(isOrderedBefore: (Self.Generator.Element, Self.Generator.Element) -> Bool)
-    typealias _Buffer : _ArrayBufferType
-    init(_ buffer: _Buffer)
+    /// will not change.
+    mutating func removeAll(keepCapacity keepCapacity: Bool)
+    func join<S : SequenceType where S.Generator.Element == Self>(elements: S) -> Self
+    init(_ buffer: Self._Buffer)
 }
 
 
-/// This protocol is an implementation detail of `BidirectionalIndexType`; do
-/// not use it directly.
-///
-/// Its requirements are inherited by `BidirectionalIndexType` and thus must
-/// be satisfied by types conforming to that protocol.
-protocol _BidirectionalIndexType : _ForwardIndexType {
-
-    /// Return the previous consecutive value in a discrete sequence.
-    ///
-    /// If `self` has a well-defined successor,
-    /// `self.successor().predecessor() == self`.  If `self` has a
-    /// well-defined predecessor, `self.predecessor().successor() ==
-    /// self`.
-    ///
-    /// Requires: `self` has a well-defined predecessor.
-    func predecessor() -> Self
+/// Some types require alignment greater than Word on some architectures.
+protocol _CVarArgAlignedType : CVarArgType {
 }
 
 
@@ -9158,13 +10815,7 @@ protocol _CVarArgPassedAsDouble : CVarArgType {
 @objc protocol _CocoaStringType {
 }
 
-
-/// This protocol is an implementation detail of `CollectionType`; do
-/// not use it directly.
-///
-/// Its requirements are inherited by `CollectionType` and thus must
-/// be satisfied by types conforming to that protocol.
-protocol _CollectionType : _SequenceType {
+protocol _CollectionDefaultsType : SequenceType {
 
     /// A type that represents a valid position in the collection.
     ///
@@ -9174,100 +10825,81 @@ protocol _CollectionType : _SequenceType {
 
     /// The position of the first element in a non-empty collection.
     ///
-    /// Identical to `endIndex` in an empty collection.
-    var startIndex: Index { get }
+    /// In an empty collection, `startIndex == endIndex`.
+    var startIndex: Self.Index { get }
 
     /// The collection's "past the end" position.
     ///
     /// `endIndex` is not a valid argument to `subscript`, and is always
     /// reachable from `startIndex` by zero or more applications of
     /// `successor()`.
-    var endIndex: Index { get }
-    typealias _Element
-    subscript (_i: Index) -> _Element { get }
+    var endIndex: Self.Index { get }
+
+    /// Returns the first element of `self`, or `nil` if `self` is empty.
+    var first: Self.Generator.Element? { get }
+}
+
+extension _CollectionDefaultsType {
+
+    /// Returns `true` iff `self` is empty.
+    var isEmpty: Bool { get }
+
+    /// Returns a value less than or equal to the number of elements in
+    /// `self`, *nondestructively*.
+    ///
+    /// - Complexity: O(N).
+    func underestimateCount() -> Int
+
+    /// Returns the number of elements.
+    ///
+    /// - Complexity: O(1) if `Index` conforms to `RandomAccessIndexType`;
+    ///   O(N) otherwise.
+    var count: Self.Index.Distance { get }
 }
 
 
-/// This protocol is an implementation detail of `Comparable`; do
+
+
+/// This protocol is an implementation detail of `CollectionType`; do
 /// not use it directly.
 ///
-/// Its requirements are inherited by `Comparable` and thus must
+/// Its requirements are inherited by `CollectionType` and thus must
 /// be satisfied by types conforming to that protocol.
-protocol _Comparable {
+protocol _CollectionGeneratorDefaultsType {
+    typealias Index : ForwardIndexType
+    subscript (position: Self.Index) -> Self._Element { get }
+    var startIndex: Self.Index { get }
+    var endIndex: Self.Index { get }
+}
 
-    /// A `strict total order
-    /// <http://en.wikipedia.org/wiki/Total_order#Strict_total_order>`_
-    /// over instances of `Self`
-    func <(lhs: Self, rhs: Self) -> Bool
+extension _CollectionGeneratorDefaultsType {
+    func generate() -> IndexingGenerator<Self>
+}
+
+
+/// Conforming types can be initialized with color literals (e.g.
+/// `[#Color(colorLiteralRed: 1, blue: 0, green: 0, alpha: 1)#]`).
+protocol _ColorLiteralConvertible {
+    init(colorLiteralRed: Float, green: Float, blue: Float, alpha: Float)
 }
 
 
 /// A container is destructor safe if whether it may store to memory on
 /// destruction only depends on its type parameters.
-/// For example, whether Array<T> may store to memory on destruction depends
-/// only on T.
-/// If T is an Int we know the Array<Int> does not store to memory during
-/// destruction. If T is an arbitrary class Array<MemoryUnsafeDestructorClass>
+/// For example, whether `Array<T>` may store to memory on destruction depends
+/// only on `T`.
+/// If `T` is an `Int` we know the `Array<Int>` does not store to memory during
+/// destruction. If `T` is an arbitrary class `Array<MemoryUnsafeDestructorClass>`
 /// then the compiler will deduce may store to memory on destruction because
-/// MemoryUnsafeDestructorClass' destructor may store to memory on destruction.
+/// `MemoryUnsafeDestructorClass`'s destructor may store to memory on destruction.
 protocol _DestructorSafeContainer {
 }
 
 
-/// This protocol is an implementation detail of `ExtensibleCollectionType`; do
-/// not use it directly.
-///
-/// Its requirements are inherited by `ExtensibleCollectionType` and thus must
-/// be satisfied by types conforming to that protocol.
-protocol _ExtensibleCollectionType : CollectionType {
-
-    /// Create an empty instance
-    init()
-
-    /// A non-binding request to ensure `n` elements of available storage.
-    ///
-    /// This works as an optimization to avoid multiple reallocations of
-    /// linear data structures like `Array`.  Conforming types may
-    /// reserve more than `n`, exactly `n`, less than `n` elements of
-    /// storage, or even ignore the request completely.
-    mutating func reserveCapacity(n: Self.Index.Distance)
-
-    /// Append `x` to `self`.
-    ///
-    /// Applying `successor()` to the index of the new element yields
-    /// `self.endIndex`.
-    ///
-    /// Complexity: amortized O(1).
-    mutating func append(x: Self.Generator.Element)
-
-    /// Append the elements of `newElements` to `self`.
-    ///
-    /// Complexity: O(*length of result*) 
-    /// 
-    /// A possible implementation::
-    ///
-    ///   reserveCapacity(count(self) + underestimateCount(newElements))
-    ///   for x in newElements {
-    ///     self.append(x)
-    ///   }
-    mutating func extend<S : SequenceType where Self.Generator.Element == Self.Generator.Element>(newElements: S)
-}
-
-
-/// This protocol is an implementation detail of `ForwardIndexType`; do
-/// not use it directly.
-///
-/// Its requirements are inherited by `ForwardIndexType` and thus must
-/// be satisfied by types conforming to that protocol.
-protocol _ForwardIndexType : _Incrementable {
-
-    /// A type that can represent the number of steps between pairs of
-    /// `Self` values where one value is reachable from the other.
-    ///
-    /// Reachability is defined by the ability to produce one value from
-    /// the other via zero or more applications of `successor`.
-    typealias Distance : _SignedIntegerType = Int
-    typealias _DisabledRangeIndex = _DisabledRangeIndex_
+/// Optionals of conforming types can be initialized with image literals (e.g.
+/// `[#Image(imageLiteral: "hi.png")#]`).
+protocol _ImageLiteralConvertible {
+    init?(imageLiteral: String)
 }
 
 
@@ -9279,11 +10911,13 @@ protocol _ForwardIndexType : _Incrementable {
 protocol _Incrementable : Equatable {
 
     /// Return the next consecutive value in a discrete sequence of
-    /// `Self` values
+    /// `Self` values.
     ///
-    /// Requires: `self` has a well-defined successor.
+    /// - Requires: `self` has a well-defined successor.
     func successor() -> Self
 }
+
+
 
 
 /// This protocol is an implementation detail of `IntegerArithmeticType`; do
@@ -9320,7 +10954,7 @@ protocol _IntegerArithmeticType {
 ///
 /// Its requirements are inherited by `IntegerType` and thus must
 /// be satisfied by types conforming to that protocol.
-protocol _IntegerType : IntegerLiteralConvertible, Printable, Hashable, IntegerArithmeticType, BitwiseOperationsType, _Incrementable {
+protocol _IntegerType : IntegerLiteralConvertible, CustomStringConvertible, Hashable, IntegerArithmeticType, BitwiseOperationsType, _Incrementable {
 }
 
 
@@ -9328,7 +10962,7 @@ protocol _IntegerType : IntegerLiteralConvertible, Printable, Hashable, IntegerA
 ///
 /// Covers a set of operations everyone needs to implement in order to
 /// be a useful `NSArray` subclass.
-@unsafe_no_objc_tagged_pointer @objc protocol _NSArrayCoreType : _NSCopyingType, _NSFastEnumerationType {
+@objc protocol _NSArrayCoreType : _NSCopyingType, _NSFastEnumerationType {
     func objectAtIndex(index: Int) -> AnyObject
     func getObjects(_: UnsafeMutablePointer<AnyObject>, range: _SwiftNSRange)
     func countByEnumeratingWithState(state: UnsafeMutablePointer<_SwiftNSFastEnumerationState>, objects: UnsafeMutablePointer<AnyObject>, count: Int) -> Int
@@ -9336,7 +10970,7 @@ protocol _IntegerType : IntegerLiteralConvertible, Printable, Hashable, IntegerA
 }
 
 
-/// A shadow for the `NSCopying` protocol
+/// A shadow for the `NSCopying` protocol.
 @objc protocol _NSCopyingType : _ShadowProtocol {
     func copyWithZone(zone: _SwiftNSZone) -> AnyObject
 }
@@ -9349,35 +10983,35 @@ protocol _IntegerType : IntegerLiteralConvertible, Printable, Hashable, IntegerA
 @objc protocol _NSDictionaryCoreType : _NSCopyingType, _NSFastEnumerationType {
     init(objects: UnsafePointer<AnyObject?>, forKeys: UnsafePointer<Void>, count: Int)
     var count: Int { get }
-    func objectForKey(aKey: AnyObject?) -> AnyObject?
-    func keyEnumerator() -> _NSEnumeratorType?
+    func objectForKey(aKey: AnyObject) -> AnyObject?
+    func keyEnumerator() -> _NSEnumeratorType
     func copyWithZone(zone: _SwiftNSZone) -> AnyObject
     func getObjects(objects: UnsafeMutablePointer<AnyObject>, andKeys keys: UnsafeMutablePointer<AnyObject>)
     func countByEnumeratingWithState(state: UnsafeMutablePointer<_SwiftNSFastEnumerationState>, objects: UnsafeMutablePointer<AnyObject>, count: Int) -> Int
 }
 
 
-/// A shadow for the API of NSDictionary we will use in the core
-/// stdlib
+/// A shadow for the API of `NSDictionary` we will use in the core
+/// stdlib.
 ///
 /// `NSDictionary` operations, in addition to those on
 /// `_NSDictionaryCoreType`, that we need to use from the core stdlib.
 /// Distinct from `_NSDictionaryCoreType` because we don't want to be
 /// forced to implement operations that `NSDictionary` already
 /// supplies.
-@unsafe_no_objc_tagged_pointer @objc protocol _NSDictionaryType : _NSDictionaryCoreType {
+@objc protocol _NSDictionaryType : _NSDictionaryCoreType {
     func getObjects(objects: UnsafeMutablePointer<AnyObject>, andKeys keys: UnsafeMutablePointer<AnyObject>)
 }
 
 
-/// A shadow for the `NSEnumerator` class
+/// A shadow for the `NSEnumerator` class.
 @objc protocol _NSEnumeratorType : _ShadowProtocol {
     init()
     func nextObject() -> AnyObject?
 }
 
 
-/// A shadow for the `NSFastEnumeration` protocol
+/// A shadow for the `NSFastEnumeration` protocol.
 @objc protocol _NSFastEnumerationType : _ShadowProtocol {
     func countByEnumeratingWithState(state: UnsafeMutablePointer<_SwiftNSFastEnumerationState>, objects: UnsafeMutablePointer<AnyObject>, count: Int) -> Int
 }
@@ -9390,22 +11024,22 @@ protocol _IntegerType : IntegerLiteralConvertible, Printable, Hashable, IntegerA
 @objc protocol _NSSetCoreType : _NSCopyingType, _NSFastEnumerationType {
     init(objects: UnsafePointer<AnyObject?>, count: Int)
     var count: Int { get }
-    func member(member: AnyObject?) -> AnyObject?
-    func objectEnumerator() -> _NSEnumeratorType?
+    func member(object: AnyObject) -> AnyObject?
+    func objectEnumerator() -> _NSEnumeratorType
     func copyWithZone(zone: _SwiftNSZone) -> AnyObject
     func countByEnumeratingWithState(state: UnsafeMutablePointer<_SwiftNSFastEnumerationState>, objects: UnsafeMutablePointer<AnyObject>, count: Int) -> Int
 }
 
 
 /// A shadow for the API of NSSet we will use in the core
-/// stdlib
+/// stdlib.
 ///
 /// `NSSet` operations, in addition to those on
 /// `_NSSetCoreType`, that we need to use from the core stdlib.
 /// Distinct from `_NSSetCoreType` because we don't want to be
 /// forced to implement operations that `NSSet` already
 /// supplies.
-@unsafe_no_objc_tagged_pointer @objc protocol _NSSetType : _NSSetCoreType {
+@objc protocol _NSSetType : _NSSetCoreType {
 }
 
 @objc protocol _NSStringCoreType : _NSCopyingType, _NSFastEnumerationType {
@@ -9420,49 +11054,6 @@ protocol _IntegerType : IntegerLiteralConvertible, Printable, Hashable, IntegerA
 /// or NSDictionary will be the result of calling `_bridgeToObjectiveC`
 /// on each elmeent of the source container.
 protocol _ObjectiveCBridgeable {
-    typealias _ObjectiveCType
-
-    /// Return true iff instances of `Self` can be converted to
-    /// Objective-C.  Even if this method returns `true`, A given
-    /// instance of `Self._ObjectiveCType` may, or may not, convert
-    /// successfully to `Self`; for example, an `NSArray` will only
-    /// convert successfully to `[String]` if it contains only
-    /// `NSString`\ s.
-    static func _isBridgedToObjectiveC() -> Bool
-
-    /// Must return `_ObjectiveCType.self`.
-    static func _getObjectiveCType() -> Any.Type
-
-    /// Convert `self` to Objective-C
-    func _bridgeToObjectiveC() -> _ObjectiveCType
-
-    /// Bridge from an Objective-C object of the bridged class type to a
-    /// value of the Self type.
-    ///
-    /// This bridging operation is used for forced downcasting (e.g.,
-    /// via as), and may defer complete checking until later. For
-    /// example, when bridging from NSArray to Array<T>, we can defer
-    /// the checking for the individual elements of the array.
-    ///
-    /// :param: result The location where the result is written. The optional
-    /// will always contain a value.
-    static func _forceBridgeFromObjectiveC(source: _ObjectiveCType, inout result: Self?)
-
-    /// Try to bridge from an Objective-C object of the bridged class
-    /// type to a value of the Self type.
-    ///
-    /// This conditional bridging operation is used for conditional
-    /// downcasting (e.g., via as?) and therefore must perform a
-    /// complete conversion to the value type; it cannot defer checking
-    /// to a later time.
-    ///
-    /// :param: result The location where the result is written.
-    ///
-    /// :returns: true if bridging succeeded, false otherwise. This redundant
-    /// information is provided for the convenience of the runtime's dynamic_cast
-    /// implementation, so that it need not look into the optional representation
-    /// to determine success.
-    static func _conditionallyBridgeFromObjectiveC(source: _ObjectiveCType, inout result: Self?) -> Bool
 }
 
 
@@ -9470,49 +11061,6 @@ protocol _ObjectiveCBridgeable {
 /// UnsafeMutablePointer, UnsafePointer, and
 /// AutoreleasingUnsafeMutablePointer.
 protocol _PointerType {
-
-    /// The underlying raw pointer value.
-    var _rawValue: Builtin.RawPointer { get }
-
-    /// Construct a pointer from a raw value.
-    init(_ _rawValue: Builtin.RawPointer)
-}
-
-
-/// This protocol is an implementation detail of `RandomAccessIndexType`; do
-/// not use it directly.
-///
-/// Its requirements are inherited by `RandomAccessIndexType` and thus must
-/// be satisfied by types conforming to that protocol.
-protocol _RandomAccessIndexType : _BidirectionalIndexType, Strideable {
-
-    /// Return the minimum number of applications of `successor` or
-    /// `predecessor` required to reach `other` from `self`.
-    ///
-    /// Complexity: O(1).
-    ///
-    /// Axioms::
-    /// 
-    ///   x.distanceTo(x.successor())) == 1
-    ///   x.distanceTo(x.predecessor())) == -1
-    ///   x.advancedBy(x.distanceTo(y)) == y
-    func distanceTo(other: Self) -> Self.Distance
-
-    /// Return `self` offset by `n` steps.
-    ///
-    /// :returns: If `n > 0`, the result of applying `successor` to
-    /// `self` `n` times.  If `n < 0`, the result of applying
-    /// `predecessor` to `self` `-n` times. Otherwise, `self`.
-    ///
-    /// Complexity: O(1)
-    ///
-    /// Axioms::
-    ///
-    ///   x.advancedBy(0) == x
-    ///   x.advancedBy(1) == x.successor()
-    ///   x.advancedBy(-1) == x.predecessor()
-    ///   x.distanceTo(x.advancedBy(m)) == m
-    func advancedBy(n: Self.Distance) -> Self
 }
 
 
@@ -9523,36 +11071,7 @@ protocol _RandomAccessIndexType : _BidirectionalIndexType, Strideable {
 /// be satisfied by types conforming to that protocol.
 protocol _RawOptionSetType : RawRepresentable, Equatable {
     typealias RawValue : BitwiseOperationsType, Equatable
-    init(rawValue: RawValue)
-}
-
-
-/// This protocol is an implementation detail of `SequenceType`; do
-/// not use it directly.
-///
-/// Its requirements are inherited by `SequenceType` and thus must
-/// be satisfied by types conforming to that protocol.
-protocol _SequenceType {
-}
-
-
-/// This protocol is an implementation detail of `SequenceType`; do
-/// not use it directly.
-///
-/// Its requirements are inherited by `SequenceType` and thus must
-/// be satisfied by types conforming to that protocol.
-protocol _Sequence_Type : _SequenceType {
-
-    /// A type whose instances can produce the elements of this
-    /// sequence, in order.
-    typealias Generator : GeneratorType
-
-    /// Return a *generator* over the elements of this *sequence*.  The
-    /// *generator*\ 's next element is the first element of the
-    /// sequence.
-    ///
-    /// Complexity: O(1)
-    func generate() -> Generator
+    init(rawValue: Self.RawValue)
 }
 
 @objc protocol _ShadowProtocol {
@@ -9576,18 +11095,6 @@ protocol _SignedIntegerType : _IntegerType, SignedNumberType {
 }
 
 
-/// This protocol is an implementation detail of `SignedNumberType`; do
-/// not use it directly.
-///
-/// Its requirements are inherited by `SignedNumberType` and thus must
-/// be satisfied by types conforming to that protocol.
-protocol _SignedNumberType : Comparable, IntegerLiteralConvertible {
-
-    /// Return the difference between `lhs` and `rhs`.
-    func -(lhs: Self, rhs: Self) -> Self
-}
-
-
 /// This protocol is an implementation detail of `Sliceable`; do
 /// not use it directly.
 ///
@@ -9604,34 +11111,32 @@ protocol _Sliceable : CollectionType {
 /// be satisfied by types conforming to that protocol.
 protocol _Strideable {
 
-    /// A type that can represent the distance between two values of `Self`
+    /// A type that can represent the distance between two values of `Self`.
     typealias Stride : SignedNumberType
 
     /// Returns a stride `x` such that `self.advancedBy(x)` approximates
     /// `other`.
     ///
-    /// Complexity: O(1).
+    /// - Complexity: O(1).
     ///
-    /// See also: `RandomAccessIndexType`\ 's `distanceTo`, which provides a
-    /// stronger semantic guarantee.
-    func distanceTo(other: Self) -> Stride
+    /// - SeeAlso: `RandomAccessIndexType`'s `distanceTo`, which provides a
+    ///   stronger semantic guarantee.
+    func distanceTo(other: Self) -> Self.Stride
 
     /// Returns a `Self` `x` such that `self.distanceTo(x)` approximates
     /// `n`.
     ///
-    /// Complexity: O(1).
+    /// - Complexity: O(1).
     ///
-    /// See also: `RandomAccessIndexType`\ 's `advancedBy`, which
-    /// provides a stronger semantic guarantee.
-    func advancedBy(n: Stride) -> Self
+    /// - SeeAlso: `RandomAccessIndexType`'s `advancedBy`, which
+    ///   provides a stronger semantic guarantee.
+    func advancedBy(n: Self.Stride) -> Self
 }
 
 
 /// Instances of conforming types are used in internal `String`
 /// representation.
 protocol _StringElementType {
-    static func _toUTF16CodeUnit(_: Self) -> CodeUnit
-    static func _fromUTF16CodeUnit(utf16: CodeUnit) -> Self
 }
 
 
@@ -9641,7 +11146,6 @@ protocol _StringElementType {
 /// Its requirements are inherited by `SignedIntegerType` and thus
 /// must be satisfied by types conforming to that protocol.
 protocol _UnsignedIntegerType : _IntegerType {
-    typealias _DisallowMixedSignArithmetic : SignedIntegerType = Int
 
     /// Represent this number using Swift's widest native unsigned
     /// integer type.
@@ -9652,11 +11156,8 @@ protocol _UnsignedIntegerType : _IntegerType {
     init(_: UIntMax)
 }
 
-protocol __ArrayType : _CollectionType {
+protocol __ArrayType : CollectionType {
     var count: Int { get }
-    typealias _Buffer : _ArrayBufferType
-    var _buffer: _Buffer { get }
-    func _doCopyToNativeArrayBuffer() -> _ContiguousArrayBuffer<Self._Element>
 }
 
 
@@ -9671,14 +11172,14 @@ func abs<T : SignedNumberType>(x: T) -> T
 /// equals `end`.  If `T` models `RandomAccessIndexType`, executes in
 /// O(1).  Otherwise, executes in O(`abs(n)`).  If `T` does not model
 /// `BidirectionalIndexType`, requires that `n` is non-negative.
-func advance<T : ForwardIndexType>(start: T, n: T.Distance, end: T) -> T
+func advance<T : ForwardIndexType>(start: T, _ n: T.Distance, _ end: T) -> T
 
 
 /// Return the result of advancing `start` by `n` positions.  If `T`
 /// models `RandomAccessIndexType`, executes in O(1).  Otherwise,
 /// executes in O(`abs(n)`).  If `T` does not model
 /// `BidirectionalIndexType`, requires that `n` is non-negative.
-func advance<T : ForwardIndexType>(start: T, n: T.Distance) -> T
+func advance<T : ForwardIndexType>(start: T, _ n: T.Distance) -> T
 
 
 /// Returns the minimum memory alignment of `T`.
@@ -9687,6 +11188,34 @@ func alignof<T>(_: T.Type) -> Int
 
 /// Returns the minimum memory alignment of `T`.
 func alignofValue<T>(_: T) -> Int
+
+
+/// Return a `GeneratorType` instance that wraps `base` but whose type
+/// depends only on the type of `G.Element`.
+///
+/// Example:
+///
+///     func countStrings() -> AnyGenerator<String> {
+///       let lazyStrings = lazy(0..<10).map { String($0) }
+///
+///       // This is a really complicated type of no interest to our
+///       // clients.
+///       let g: MapSequenceGenerator<RangeGenerator<Int>, String>
+///         = lazyStrings.generate()
+///       return anyGenerator(g)
+///     }
+func anyGenerator<G : GeneratorType>(base: G) -> AnyGenerator<G.Element>
+
+
+/// Return a `GeneratorType` instance whose `next` method invokes
+/// `body` and returns the result.
+///
+/// Example:
+///
+///     var x = 7
+///     let g = anyGenerator { x < 15 ? x++ : nil }
+///     let a = Array(g) // [ 7, 8, 9, 10, 11, 12, 13, 14 ]
+func anyGenerator<T>(body: () -> T?) -> AnyGenerator<T>
 
 
 /// Traditional C-style assert with an optional message.
@@ -9706,7 +11235,7 @@ func alignofValue<T>(_: T) -> Int
 ///   optimizer may assume that it *would* evaluate to `true`. Failure
 ///   to satisfy that assumption in -Ounchecked builds is a serious
 ///   programming error.
-func assert(condition: @autoclosure () -> Bool, _ message: @autoclosure () -> String = default, file: StaticString = default, line: UWord = default)
+func assert(@autoclosure condition: () -> Bool, @autoclosure _ message: () -> String = default, file: StaticString = default, line: UWord = default)
 
 
 /// Indicate that an internal sanity check failed.
@@ -9727,69 +11256,47 @@ func assert(condition: @autoclosure () -> Bool, _ message: @autoclosure () -> St
 /// * In -Ounchecked builds, the optimizer may assume that this
 ///   function will never be called. Failure to satisfy that assumption
 ///   is a serious programming error.
-@inline(__always) func assertionFailure(_ message: @autoclosure () -> String = default, file: StaticString = default, line: UWord = default)
+func assertionFailure(@autoclosure message: () -> String = default, file: StaticString = default, line: UWord = default)
+
+func debugPrint<T, TargetStream : OutputStreamType>(value: T, inout _ target: TargetStream)
 
 
-/// Return `true` iff `x` is in `seq`.
-func contains<S : SequenceType where S.Generator.Element : Equatable>(seq: S, x: S.Generator.Element) -> Bool
-
-
-/// Return `true` iff an element in `seq` satisfies `predicate`.
-func contains<S : SequenceType, L : BooleanType>(seq: S, predicate: @noescape (S.Generator.Element) -> L) -> Bool
-
-
-/// Return the number of elements in x.
+/// Writes the textual representation of `value` most suitable for debugging,
+/// and an optional newline, into the stream `target`.
 ///
-/// O(1) if T.Index is RandomAccessIndexType; O(N) otherwise.
-func count<T : _CollectionType>(x: T) -> T.Index.Distance
+/// The textual representation is obtained from the `value` using its protocol
+/// conformances, in the following order of preference:
+/// `CustomDebugStringConvertible`, `CustomStringConvertible`, `Streamable`.
+/// If none of these conformances are found, a default text representation is
+/// constructed in an implementation-defined way, based on the type kind and
+/// structure.
+///
+/// Do not overload this function for your type.  Instead, adopt one of the
+/// protocols mentioned above.
+///
+/// - parameter appendNewline: Iff `true` (the default), write a trailing
+///   newline.
+func debugPrint<T, TargetStream : OutputStreamType>(value: T, inout _ target: TargetStream, appendNewline: Bool)
+
+func debugPrint<T>(value: T)
 
 
-/// Write to `target` the textual representation of `x` most suitable
-/// for debugging.
+/// Writes the textual representation of `value` most suitable for debugging,
+/// and an optional newline, into the standard output.
 ///
-/// * If `T` conforms to `DebugPrintable`, write `x.debugDescription`
-/// * Otherwise, if `T` conforms to `Printable`, write `x.description`
-/// * Otherwise, if `T` conforms to `Streamable`, write `x`
-/// * Otherwise, fall back to a default textual representation.
+/// The textual representation is obtained from the `value` using its protocol
+/// conformances, in the following order of preference:
+/// `CustomDebugStringConvertible`, `CustomStringConvertible`, `Streamable`.
+/// If none of these conformances are found, a default text representation is
+/// constructed in an implementation-defined way, based on the type kind and
+/// structure.
 ///
-/// See also: `debugPrintln(x, &target)`
-@inline(never) func debugPrint<T, TargetStream : OutputStreamType>(value: T, inout target: TargetStream)
-
-
-/// Write to the console the textual representation of `x` most suitable
-/// for debugging.
+/// Do not overload this function for your type.  Instead, adopt one of the
+/// protocols mentioned above.
 ///
-/// * If `T` conforms to `DebugPrintable`, write `x.debugDescription`
-/// * Otherwise, if `T` conforms to `Printable`, write `x.description`
-/// * Otherwise, if `T` conforms to `Streamable`, write `x`
-/// * Otherwise, fall back to a default textual representation.
-///
-/// See also: `debugPrintln(x)`
-@inline(never) func debugPrint<T>(x: T)
-
-
-/// Write to the console the textual representation of `x` most suitable
-/// for debugging, followed by a newline.
-///
-/// * If `T` conforms to `DebugPrintable`, write `x.debugDescription`
-/// * Otherwise, if `T` conforms to `Printable`, write `x.description`
-/// * Otherwise, if `T` conforms to `Streamable`, write `x`
-/// * Otherwise, fall back to a default textual representation.
-///
-/// See also: `debugPrint(x)`
-@inline(never) func debugPrintln<T>(x: T)
-
-
-/// Write to `target` the textual representation of `x` most suitable
-/// for debugging, followed by a newline.
-///
-/// * If `T` conforms to `DebugPrintable`, write `x.debugDescription`
-/// * Otherwise, if `T` conforms to `Printable`, write `x.description`
-/// * Otherwise, if `T` conforms to `Streamable`, write `x`
-/// * Otherwise, fall back to a default textual representation.
-///
-/// See also: `debugPrint(x, &target)`
-@inline(never) func debugPrintln<T, TargetStream : OutputStreamType>(x: T, inout target: TargetStream)
+/// - parameter appendNewline: Iff `true` (the default), write a trailing
+///   newline.
+func debugPrint<T>(value: T, appendNewline: Bool)
 
 
 /// Measure the distance between `start` and `end`.
@@ -9800,141 +11307,75 @@ func count<T : _CollectionType>(x: T) -> T.Index.Distance
 /// Otherwise, requires that `end` is reachable from `start` by
 /// incrementation, and executes in O(N), where N is the function's
 /// result.
-func distance<T : ForwardIndexType>(start: T, end: T) -> T.Distance
+func distance<T : ForwardIndexType>(start: T, _ end: T) -> T.Distance
 
 
-/// Return a slice containing all but the first element of `s`.
+/// Returns a slice containing all but the first element of `s`.
 ///
-/// Requires: `s` is non-empty.
+/// - Requires: `s` is non-empty.
 func dropFirst<Seq : Sliceable>(s: Seq) -> Seq.SubSlice
 
 
-/// Return a slice containing all but the last element of `s`.
+/// Returns a slice containing all but the last element of `s`.
 ///
-/// Requires: `s` is non-empty.
+/// - Requires: `s` is non-empty.
 func dropLast<S : Sliceable where S.Index : BidirectionalIndexType>(s: S) -> S.SubSlice
+
+
+/// Dump an object's contents using its mirror to the specified output stream.
+func dump<T, TargetStream : OutputStreamType>(x: T, inout _ targetStream: TargetStream, name: String? = default, indent: Int = default, maxDepth: Int = default, maxItems: Int = default) -> T
 
 
 /// Dump an object's contents using its mirror to standard output.
 func dump<T>(x: T, name: String? = default, indent: Int = default, maxDepth: Int = default, maxItems: Int = default) -> T
 
 
-/// Dump an object's contents using its mirror to the specified output stream.
-func dump<T, TargetStream : OutputStreamType>(x: T, inout targetStream: TargetStream, name: String? = default, indent: Int = default, maxDepth: Int = default, maxItems: Int = default) -> T
-
-
-/// Return a lazy `SequenceType` containing pairs (*n*, *x*), where
-/// *n*\ s are consecutive `Int`\ s starting at zero, and *x*\ s are
-/// the elements of `base`::
+/// Append elements from `newElements` to `x`.
 ///
-///   > for (n, c) in enumerate("Swift") { println("\(n): '\(c)'" )}
-///   0: 'S'
-///   1: 'w'
-///   2: 'i'
-///   3: 'f'
-///   4: 't'
-func enumerate<Seq : SequenceType>(base: Seq) -> EnumerateSequence<Seq>
-
-
-/// Return true iff `a1` and `a2` contain equivalent elements, using
-/// `isEquivalent` as the equivalence test.  Requires: `isEquivalent`
-/// is an `equivalence relation
-/// <http://en.wikipedia.org/wiki/Equivalence_relation>`_
-func equal<S1 : SequenceType, S2 : SequenceType where S1.Generator.Element == S1.Generator.Element>(a1: S1, a2: S2, isEquivalent: @noescape (S1.Generator.Element, S1.Generator.Element) -> Bool) -> Bool
-
-
-/// Return `true` iff `a1` and `a2` contain the same elements in the
-/// same order.
-func equal<S1 : SequenceType, S2 : SequenceType where S1.Generator.Element == S1.Generator.Element, S1.Generator.Element : Equatable>(a1: S1, a2: S2) -> Bool
-
-
-/// Append elements from `newElements` to `x`.  Complexity:
-/// O(N)
-func extend<C : RangeReplaceableCollectionType, S : CollectionType where C.Generator.Element == C.Generator.Element>(inout x: C, newElements: S)
+/// - Complexity: O(N).
+func extend<C : RangeReplaceableCollectionType, S : CollectionType where S.Generator.Element == C.Generator.Element>(inout x: C, _ newElements: S)
 
 
 /// Unconditionally print a `message` and stop execution.
-@noreturn func fatalError(_ message: @autoclosure () -> String = default, file: StaticString = default, line: UWord = default)
-
-
-/// Return an `Array` containing the elements of `source`,
-/// in order, that satisfy the predicate `includeElement`.
-func filter<S : SequenceType>(source: S, includeElement: (S.Generator.Element) -> Bool) -> [S.Generator.Element]
-
-
-/// Returns the first index where `value` appears in `domain` or `nil` if
-/// `value` is not found.
-///
-/// Complexity: O(\ `count(domain)`\ )
-func find<C : CollectionType where C.Generator.Element : Equatable>(domain: C, value: C.Generator.Element) -> C.Index?
-
-
-/// Returns the first element of `x`, or `nil` if `x` is empty.
-func first<C : CollectionType>(x: C) -> C.Generator.Element?
-
-
-/// Return an `Array` containing the results of mapping `transform`
-/// over `source` and flattening the result.
-func flatMap<S : SequenceType, T>(source: S, transform: @noescape (S.Generator.Element) -> [T]) -> [T]
-
-
-/// Returns `f(self)!` iff `self` and `f(self)` are not nil.
-func flatMap<T, U>(x: T?, f: @noescape (T) -> U?) -> U?
-
-
-/// Return an `Array` containing the results of mapping `transform`
-/// over `source` and flattening the result.
-func flatMap<C : CollectionType, T>(source: C, transform: (C.Generator.Element) -> [T]) -> [T]
+@noreturn func fatalError(@autoclosure message: () -> String = default, file: StaticString = default, line: UWord = default)
 
 
 /// Returns a `CVaListPointer` built from `args` that's backed by
 /// autoreleased storage.
 ///
-/// .. Warning:: This function is best avoided in favor of
-///    `withVaList`, but occasionally (i.e. in a `class` initializer) you
-///    may find that the language rules don't allow you to use
-///    `withVaList` as intended.
+/// - Warning: This function is best avoided in favor of
+///   `withVaList`, but occasionally (i.e. in a `class` initializer) you
+///   may find that the language rules don't allow you to use
+/// `withVaList` as intended.
 func getVaList(args: [CVarArgType]) -> CVaListPointer
-
-
-/// Return the range of `x` 's valid index values.
-///
-/// The result's `endIndex` is the same as that of `x`.  Because
-/// `Range` is half-open, iterating the values of the result produces
-/// all valid subscript arguments for `x`, omitting its `endIndex`.
-func indices<C : CollectionType>(x: C) -> Range<C.Index>
 
 
 /// Insert `newElement` into `x` at index `i`.
 ///
 /// Invalidates all indices with respect to `x`.
 ///
-/// Complexity: O(\ `count(x)`\ ).
-func insert<C : RangeReplaceableCollectionType>(inout x: C, newElement: C.Generator.Element, atIndex i: C.Index)
+/// - Complexity: O(`x.count`).
+func insert<C : RangeReplaceableCollectionType>(inout x: C, _ newElement: C.Generator.Element, atIndex i: C.Index)
 
 
-/// Returns `true` iff `x` is empty.
-func isEmpty<C : CollectionType>(x: C) -> Bool
-
-
-/// Returns `true` iff `object` is a non-\ `@objc` class instance with a single
+/// Returns `true` iff `object` is a non-`@objc` class instance with a single
 /// strong reference.
 ///
 /// * Does *not* modify `object`; the use of `inout` is an
 ///   implementation artifact.
 /// * Weak references do not affect the result of this function.
-///  
-/// Useful for implementing the copy-on-write optimization for the
-/// deep storage of value types::
 ///
-///   mutating func modifyMe(arg: X) {
-///     if isUniquelyReferenced(&myStorage) {
-///       myStorage.modifyInPlace(arg)
+/// Useful for implementing the copy-on-write optimization for the
+/// deep storage of value types:
+///
+///     mutating func modifyMe(arg: X) {
+///       if isUniquelyReferenced(&myStorage) {
+///         myStorage.modifyInPlace(arg)
+///       }
+///       else {
+///         myStorage = myStorage.createModified(arg)
+///       }
 ///     }
-///     else {
-///       myStorage = myStorage.createModified(arg)
-///     }
-///   }
 ///
 /// This function is safe to use for `mutating` functions in
 /// multithreaded code because a false positive would imply that there
@@ -9942,25 +11383,25 @@ func isEmpty<C : CollectionType>(x: C) -> Bool
 func isUniquelyReferenced<T : NonObjectiveCBase>(inout object: T) -> Bool
 
 
-/// Returns `true` iff `object` is a non-\ `@objc` class instance with
+/// Returns `true` iff `object` is a non-`@objc` class instance with
 /// a single strong reference.
 ///
 /// * Does *not* modify `object`; the use of `inout` is an
 ///   implementation artifact.
 /// * If `object` is an Objective-C class instance, returns `false`.
 /// * Weak references do not affect the result of this function.
-///  
-/// Useful for implementing the copy-on-write optimization for the
-/// deep storage of value types::
 ///
-///   mutating func modifyMe(arg: X) {
-///     if isUniquelyReferencedNonObjC(&myStorage) {
-///       myStorage.modifyInPlace(arg)
+/// Useful for implementing the copy-on-write optimization for the
+/// deep storage of value types:
+///
+///     mutating func modifyMe(arg: X) {
+///       if isUniquelyReferencedNonObjC(&myStorage) {
+///         myStorage.modifyInPlace(arg)
+///       }
+///       else {
+///         myStorage = self.createModified(myStorage, arg)
+///       }
 ///     }
-///     else {
-///       myStorage = self.createModified(myStorage, arg)
-///     }
-///   }
 ///
 /// This function is safe to use for `mutating` functions in
 /// multithreaded code because a false positive would imply that there
@@ -9968,25 +11409,25 @@ func isUniquelyReferenced<T : NonObjectiveCBase>(inout object: T) -> Bool
 func isUniquelyReferencedNonObjC<T>(inout object: T?) -> Bool
 
 
-/// Returns `true` iff `object` is a non-\ `@objc` class instance with
+/// Returns `true` iff `object` is a non-`@objc` class instance with
 /// a single strong reference.
 ///
 /// * Does *not* modify `object`; the use of `inout` is an
 ///   implementation artifact.
 /// * If `object` is an Objective-C class instance, returns `false`.
 /// * Weak references do not affect the result of this function.
-///  
-/// Useful for implementing the copy-on-write optimization for the
-/// deep storage of value types::
 ///
-///   mutating func modifyMe(arg: X) {
-///     if isUniquelyReferencedNonObjC(&myStorage) {
-///       myStorage.modifyInPlace(arg)
+/// Useful for implementing the copy-on-write optimization for the
+/// deep storage of value types:
+///
+///     mutating func modifyMe(arg: X) {
+///       if isUniquelyReferencedNonObjC(&myStorage) {
+///         myStorage.modifyInPlace(arg)
+///       }
+///       else {
+///         myStorage = self.createModified(myStorage, arg)
+///       }
 ///     }
-///     else {
-///       myStorage = self.createModified(myStorage, arg)
-///     }
-///   }
 ///
 /// This function is safe to use for `mutating` functions in
 /// multithreaded code because a false positive would imply that there
@@ -9999,18 +11440,10 @@ func isUniquelyReferencedNonObjC<T>(inout object: T) -> Bool
 /// `elements`.
 ///
 /// For example, this code excerpt writes "``here be dragons``" to the standard
-/// output::
+/// output:
 ///
-///   println(join(" ", [ "here", "be", "dragons" ]))
-func join<C : ExtensibleCollectionType, S : SequenceType where C == C>(separator: C, elements: S) -> C
-
-
-/// Returns the last element of `x`, or `nil` if `x` is empty.
-func last<C : CollectionType where C.Index : BidirectionalIndexType>(x: C) -> C.Generator.Element?
-
-
-/// Augment `s` with lazy methods such as `map`, `filter`, etc.
-func lazy<S : CollectionType where S.Index : BidirectionalIndexType>(s: S) -> LazyBidirectionalCollection<S>
+///     print(join(" ", [ "here", "be", "dragons" ]))
+func join<C : ExtensibleCollectionType, S : SequenceType where S.Generator.Element == C>(separator: C, _ elements: S) -> C
 
 
 /// Augment `s` with lazy methods such as `map`, `filter`, etc.
@@ -10018,97 +11451,52 @@ func lazy<S : SequenceType>(s: S) -> LazySequence<S>
 
 
 /// Augment `s` with lazy methods such as `map`, `filter`, etc.
-func lazy<S : CollectionType where S.Index : ForwardIndexType>(s: S) -> LazyForwardCollection<S>
-
-
-/// Augment `s` with lazy methods such as `map`, `filter`, etc.
 func lazy<S : CollectionType where S.Index : RandomAccessIndexType>(s: S) -> LazyRandomAccessCollection<S>
 
 
-/// Return true iff a1 precedes a2 in a lexicographical ("dictionary")
-/// ordering, using "<" as the comparison between elements.
-func lexicographicalCompare<S1 : SequenceType, S2 : SequenceType where S1.Generator.Element == S1.Generator.Element, S1.Generator.Element : Comparable>(a1: S1, a2: S2) -> Bool
+/// Augment `s` with lazy methods such as `map`, `filter`, etc.
+func lazy<S : CollectionType where S.Index : BidirectionalIndexType>(s: S) -> LazyBidirectionalCollection<S>
 
 
-/// Return true iff `a1` precedes `a2` in a lexicographical ("dictionary")
-/// ordering, using `isOrderedBefore` as the comparison between elements.
-///
-/// Requires: isOrderedBefore` is a `strict weak ordering
-/// <http://en.wikipedia.org/wiki/Strict_weak_order#Strict_weak_orderings>`__
-/// over the elements of `a1` and `a2`.
-func lexicographicalCompare<S1 : SequenceType, S2 : SequenceType where S1.Generator.Element == S1.Generator.Element>(a1: S1, a2: S2, isOrderedBefore less: @noescape (S1.Generator.Element, S1.Generator.Element) -> Bool) -> Bool
+/// Augment `s` with lazy methods such as `map`, `filter`, etc.
+func lazy<S : CollectionType where S.Index : ForwardIndexType>(s: S) -> LazyForwardCollection<S>
 
 
-/// Haskell's fmap for Optionals.
-func map<T, U>(x: T?, f: @noescape (T) -> U) -> U?
+/// Returns the greatest argument passed.
+func max<T : Comparable>(x: T, _ y: T, _ z: T, _ rest: T...) -> T
 
 
-/// Return an `Array` containing the results of mapping `transform`
-/// over `source`.
-func map<C : CollectionType, T>(source: C, transform: (C.Generator.Element) -> T) -> [T]
+/// Returns the greater of `x` and `y`.
+func max<T : Comparable>(x: T, _ y: T) -> T
 
 
-/// Return an `Array` containing the results of mapping `transform`
-/// over `source`.
-func map<S : SequenceType, T>(source: S, transform: (S.Generator.Element) -> T) -> [T]
+/// Returns the least argument passed.
+func min<T : Comparable>(x: T, _ y: T, _ z: T, _ rest: T...) -> T
 
 
-/// Return the greater of `x` and `y`
-func max<T : Comparable>(x: T, y: T) -> T
-
-
-/// Return the greatest argument passed
-func max<T : Comparable>(x: T, y: T, z: T, rest: T...) -> T
-
-
-/// Returns the maximum element in `elements`.  Requires:
-/// `elements` is non-empty. O(count(elements))
-func maxElement<R : SequenceType where R.Generator.Element : Comparable>(elements: R) -> R.Generator.Element
-
-
-/// Return the lesser of `x` and `y`
-func min<T : Comparable>(x: T, y: T) -> T
-
-
-/// Return the least argument passed
-func min<T : Comparable>(x: T, y: T, z: T, rest: T...) -> T
-
-
-/// Returns the minimum element in `elements`.  Requires:
-/// `elements` is non-empty. O(count(elements))
-func minElement<R : SequenceType where R.Generator.Element : Comparable>(elements: R) -> R.Generator.Element
+/// Returns the lesser of `x` and `y`.
+func min<T : Comparable>(x: T, _ y: T) -> T
 
 
 /// Convert `x` to type `U`, trapping on overflow in -Onone and -O
 /// builds.
 ///
 /// Typically used to do conversion to any contextually-deduced
-/// integer type::
+/// integer type:
 ///
-///   func f(x: Int32) {}
-///   func g(x: UInt64) { f(numericCast(x)) }
-func numericCast<T : _UnsignedIntegerType, U : _SignedIntegerType>(x: T) -> U
+///     func f(x: Int32) {}
+///     func g(x: Int64) { f(numericCast(x)) }
+func numericCast<T : _SignedIntegerType, U : _SignedIntegerType>(x: T) -> U
 
 
 /// Convert `x` to type `U`, trapping on overflow in -Onone and -O
 /// builds.
 ///
 /// Typically used to do conversion to any contextually-deduced
-/// integer type::
+/// integer type:
 ///
-///   func f(x: UInt32) {}
-///   func g(x: Int64) { f(numericCast(x)) }
-func numericCast<T : _SignedIntegerType, U : _UnsignedIntegerType>(x: T) -> U
-
-
-/// Convert `x` to type `U`, trapping on overflow in -Onone and -O
-/// builds.
-///
-/// Typically used to do conversion to any contextually-deduced
-/// integer type::
-///
-///   func f(x: UInt32) {}
-///   func g(x: UInt64) { f(numericCast(x)) }
+///     func f(x: UInt32) {}
+///     func g(x: UInt64) { f(numericCast(x)) }
 func numericCast<T : _UnsignedIntegerType, U : _UnsignedIntegerType>(x: T) -> U
 
 
@@ -10116,44 +11504,26 @@ func numericCast<T : _UnsignedIntegerType, U : _UnsignedIntegerType>(x: T) -> U
 /// builds.
 ///
 /// Typically used to do conversion to any contextually-deduced
-/// integer type::
+/// integer type:
 ///
-///   func f(x: Int32) {}
-///   func g(x: Int64) { f(numericCast(x)) }
-func numericCast<T : _SignedIntegerType, U : _SignedIntegerType>(x: T) -> U
+///     func f(x: UInt32) {}
+///     func g(x: Int64) { f(numericCast(x)) }
+func numericCast<T : _SignedIntegerType, U : _UnsignedIntegerType>(x: T) -> U
 
 
-/// Returns `true` if `lhs` and `rhs` have a non-empty intersection
-func overlaps<I0 : IntervalType, I1 : IntervalType where I0.Bound == I0.Bound>(lhs: I0, rhs: I1) -> Bool
-
-
-/// Re-order the given `range` of `elements` and return a pivot index
-/// *p*.  
+/// Convert `x` to type `U`, trapping on overflow in -Onone and -O
+/// builds.
 ///
-/// Postcondition: for all *i* in `range.startIndex..<`\ *p*, and *j*
-/// in *p*\ `..<range.endIndex`, `less(elements[`\ *i*\ `],
-/// elements[`\ *j*\ `]) && !less(elements[`\ *j*\ `], 
-/// elements[`\ *p*\ `])`.  Only returns `range.endIndex` when 
-/// `elements` is empty.
-/// Requires: The less-than operator (`func <`) defined in the `Comparable`
-/// conformance is a `strict weak ordering
-/// <http://en.wikipedia.org/wiki/Strict_weak_order#Strict_weak_orderings>`__
-/// over `elements`.
-func partition<C : MutableCollectionType where C.Index : RandomAccessIndexType, C.Generator.Element : Comparable>(inout elements: C, range: Range<C.Index>) -> C.Index
-
-
-/// Re-order the given `range` of `elements` and return a pivot index
-/// *p*.  
+/// Typically used to do conversion to any contextually-deduced
+/// integer type:
 ///
-/// Postcondition: for all *i* in `range.startIndex..<`\ *p*, and *j*
-/// in *p*\ `..<range.endIndex`, `less(elements[`\ *i*\ `],
-/// elements[`\ *j*\ `]) && !less(elements[`\ *j*\ `], 
-/// elements[`\ *p*\ `])`.  Only returns `range.endIndex` when 
-/// `elements` is empty.
-/// Requires: `isOrderedBefore` is a `strict weak ordering
-/// <http://en.wikipedia.org/wiki/Strict_weak_order#Strict_weak_orderings>`__
-/// over `elements`.
-func partition<C : MutableCollectionType where C.Index : RandomAccessIndexType>(inout elements: C, range: Range<C.Index>, isOrderedBefore: (C.Generator.Element, C.Generator.Element) -> Bool) -> C.Index
+///     func f(x: Int32) {}
+///     func g(x: UInt64) { f(numericCast(x)) }
+func numericCast<T : _UnsignedIntegerType, U : _SignedIntegerType>(x: T) -> U
+
+
+/// Returns `true` if `lhs` and `rhs` have a non-empty intersection.
+func overlaps<I0 : IntervalType, I1 : IntervalType where I0.Bound == I1.Bound>(lhs: I0, _ rhs: I1) -> Bool
 
 
 /// Check a necessary condition for making forward progress.
@@ -10172,7 +11542,7 @@ func partition<C : MutableCollectionType where C.Index : RandomAccessIndexType>(
 ///   optimizer may assume that it *would* evaluate to `true`. Failure
 ///   to satisfy that assumption in -Ounchecked builds is a serious
 ///   programming error.
-func precondition(condition: @autoclosure () -> Bool, _ message: @autoclosure () -> String = default, file: StaticString = default, line: UWord = default)
+func precondition(@autoclosure condition: () -> Bool, @autoclosure _ message: () -> String = default, file: StaticString = default, line: UWord = default)
 
 
 /// Indicate that a precondition was violated.
@@ -10190,75 +11560,69 @@ func precondition(condition: @autoclosure () -> Bool, _ message: @autoclosure ()
 /// * In -Ounchecked builds, the optimizer may assume that this
 ///   function will never be called. Failure to satisfy that assumption
 ///   is a serious programming error.
-@noreturn func preconditionFailure(_ message: @autoclosure () -> String = default, file: StaticString = default, line: UWord = default)
+@noreturn func preconditionFailure(@autoclosure message: () -> String = default, file: StaticString = default, line: UWord = default)
 
 
-/// Return a slice, up to `maxLength` in length, containing the
+/// Returns a slice, up to `maxLength` in length, containing the
 /// initial elements of `s`.
 ///
-/// If `maxLength` exceeds `count(s)`, the result contains all
+/// If `maxLength` exceeds `s.count`, the result contains all
 /// the elements of `s`.
-/// 
-/// Complexity: O(1)+K when `S.Index` conforms to
-/// `RandomAccessIndexType` and O(N)+K otherwise, where K is the cost
-/// of slicing `s`.
-func prefix<S : Sliceable>(s: S, maxLength: Int) -> S.SubSlice
+///
+/// - Complexity: O(1)+K when `S.Index` conforms to
+///   `RandomAccessIndexType` and O(N)+K otherwise, where K is the cost
+///   of slicing `s`.
+func prefix<S : Sliceable>(s: S, _ maxLength: Int) -> S.SubSlice
 
 
-/// Writes the textual representation of `value` into the stream `target`.
+/// Writes the textual representation of `value`, and an optional newline,
+/// into the stream `target`.
 ///
 /// The textual representation is obtained from the `value` using its protocol
 /// conformances, in the following order of preference: `Streamable`,
-/// `Printable`, `DebugPrintable`.
+/// `CustomStringConvertible`, `CustomDebugStringConvertible`.  If none of
+/// these conformances are found, a default text representation is constructed
+/// in an implementation-defined way, based on the type kind and structure.
 ///
 /// Do not overload this function for your type.  Instead, adopt one of the
 /// protocols mentioned above.
-@inline(never) func print<T, TargetStream : OutputStreamType>(value: T, inout target: TargetStream)
+///
+/// - parameter appendNewline: Iff `true` (the default), write a trailing
+///   newline.
+func print<T, TargetStream : OutputStreamType>(value: T, inout _ target: TargetStream, appendNewline: Bool)
+
+func print<T, TargetStream : OutputStreamType>(value: T, inout _ target: TargetStream)
 
 
-/// Writes the textual representation of `value` into the standard output.
+/// Writes the textual representation of `value`, and an optional newline,
+/// into the standard output.
 ///
 /// The textual representation is obtained from the `value` using its protocol
 /// conformances, in the following order of preference: `Streamable`,
-/// `Printable`, `DebugPrintable`.
+/// `CustomStringConvertible`, `CustomDebugStringConvertible`.  If none of
+/// these conformances are found, a default text representation is constructed
+/// in an implementation-defined way, based on the type kind and structure.
 ///
 /// Do not overload this function for your type.  Instead, adopt one of the
 /// protocols mentioned above.
-@inline(never) func print<T>(value: T)
-
-
-/// Writes a single newline character into the standard output.
-@inline(never) func println()
-
-
-/// Writes the textual representation of `value` and a newline character into
-/// the standard output.
 ///
-/// The textual representation is obtained from the `value` using its protocol
-/// conformances, in the following order of preference: `Streamable`,
-/// `Printable`, `DebugPrintable`.
+/// - parameter appendNewline: Iff `true` (the default), write a trailing
+///   newline.
+func print<T>(value: T, appendNewline: Bool)
+
+func print<T>(value: T)
+
+
+/// Returns `Character`s read from standard input through the end of the
+/// current line or until EOF is reached, or `nil` if EOF has already been
+/// reached.
 ///
-/// Do not overload this function for your type.  Instead, adopt one of the
-/// protocols mentioned above.
-@inline(never) func println<T>(value: T)
-
-
-/// Writes the textual representation of `value` and a newline character into
-/// the stream `target`.
+/// If `stripNewline` is `true`, newline characters and character
+/// combinations will be stripped from the result.  This is the default.
 ///
-/// The textual representation is obtained from the `value` using its protocol
-/// conformances, in the following order of preference: `Streamable`,
-/// `Printable`, `DebugPrintable`.
-///
-/// Do not overload this function for your type.  Instead, adopt one of the
-/// protocols mentioned above.
-@inline(never) func println<T, TargetStream : OutputStreamType>(value: T, inout target: TargetStream)
-
-
-/// Return the result of repeatedly calling `combine` with an
-/// accumulated value initialized to `initial` and each element of
-/// `sequence`, in turn.
-func reduce<S : SequenceType, U>(sequence: S, initial: U, combine: @noescape (U, S.Generator.Element) -> U) -> U
+/// Standard input is interpreted as `UTF-8`.  Invalid bytes
+/// will be replaced by Unicode [replacement characters](http://en.wikipedia.org/wiki/Specials_(Unicode_block)#Replacement_character).
+func readLine(stripNewline stripNewline: Bool = default) -> String?
 
 
 /// Produce a mirror for any value. If the value's type conforms to Reflectable,
@@ -10267,42 +11631,38 @@ func reduce<S : SequenceType, U>(sequence: S, initial: U, combine: @noescape (U,
 func reflect<T>(x: T) -> MirrorType
 
 
-/// Remove all elements from `x`
+/// Remove all elements from `x`.
 ///
 /// Invalidates all indices with respect to `x`.
 ///
-/// :param: `keepCapacity`, if `true`, is a non-binding request to
+/// - parameter keepCapacity: If `true`, is a non-binding request to
 ///    avoid releasing storage, which can be a useful optimization
 ///    when `x` is going to be grown again.
 ///
-/// Complexity: O(\ `count(x)`\ ).
+/// - Complexity: O(`x.count`).
 func removeAll<C : RangeReplaceableCollectionType>(inout x: C, keepCapacity: Bool = default)
 
 
-/// Remove from `x` and return the element at index `i` 
+/// Remove from `x` and return the element at index `i`.
 ///
 /// Invalidates all indices with respect to `x`.
 ///
-/// Complexity: O(\ `count(x)`\ ).
-func removeAtIndex<C : RangeReplaceableCollectionType>(inout x: C, index: C.Index) -> C.Generator.Element
+/// - Complexity: O(`x.count`).
+func removeAtIndex<C : RangeReplaceableCollectionType>(inout x: C, _ index: C.Index) -> C.Generator.Element
 
 
 /// Remove an element from the end of `x`  in O(1).
-/// Requires: `x` is nonempty
+///
+/// - Requires: `x` is nonempty.
 func removeLast<C : RangeReplaceableCollectionType where C.Index : BidirectionalIndexType>(inout x: C) -> C.Generator.Element
 
 
-/// Remove from `x` the indicated `subRange` of elements
+/// Remove from `x` the indicated `subRange` of elements.
 ///
 /// Invalidates all indices with respect to `x`.
 ///
-/// Complexity: O(\ `count(x)`\ ).
-func removeRange<C : RangeReplaceableCollectionType>(inout x: C, subRange: Range<C.Index>)
-
-
-/// Return an `Array` containing the elements of `source` in reverse
-/// order.
-func reverse<C : CollectionType where C.Index : BidirectionalIndexType>(source: C) -> [C.Generator.Element]
+/// - Complexity: O(`x.count`).
+func removeRange<C : RangeReplaceableCollectionType>(inout x: C, _ subRange: Range<C.Index>)
 
 
 /// Returns the contiguous memory footprint of `T`.
@@ -10320,106 +11680,41 @@ func sizeof<T>(_: T.Type) -> Int
 /// same regardless of how many stored properties `a` has.
 func sizeofValue<T>(_: T) -> Int
 
-
-/// Sort `collection` in-place according to `isOrderedBefore`.
-///
-/// The sorting algorithm is not stable (can change the relative order of
-/// elements for which `isOrderedBefore` does not establish an order).
-///
-/// Requires: `isOrderedBefore` is a `strict weak ordering
-/// <http://en.wikipedia.org/wiki/Strict_weak_order#Strict_weak_orderings>`__
-/// over `elements`.
-func sort<C : MutableCollectionType where C.Index : RandomAccessIndexType>(inout collection: C, isOrderedBefore: (C.Generator.Element, C.Generator.Element) -> Bool)
-
-func sort<T>(inout array: [T], isOrderedBefore: (T, T) -> Bool)
-
-func sort<T>(inout array: ContiguousArray<T>, isOrderedBefore: (T, T) -> Bool)
-
-
-/// Sort `collection` in-place.
-///
-/// The sorting algorithm is not stable (can change the relative order of
-/// elements that compare equal).
-///
-/// Requires: The less-than operator (`func <`) defined in the `Comparable`
-/// conformance is a `strict weak ordering
-/// <http://en.wikipedia.org/wiki/Strict_weak_order#Strict_weak_orderings>`__
-/// over `elements`.
-func sort<C : MutableCollectionType where C.Index : RandomAccessIndexType, C.Generator.Element : Comparable>(inout collection: C)
-
-func sort<T : Comparable>(inout array: [T])
-
 func sort<T : Comparable>(inout array: ContiguousArray<T>)
 
 
-/// Return an `Array` containing the sorted elements of `source`{according}.
-///
-/// The sorting algorithm is not stable (can change the relative order of
-/// elements for which `isOrderedBefore` does not establish an order).
-///
-/// Requires: `isOrderedBefore` is a `strict weak ordering
-/// <http://en.wikipedia.org/wiki/Strict_weak_order#Strict_weak_orderings>`__
-/// over `elements`.
-func sorted<C : SequenceType>(source: C, isOrderedBefore: (C.Generator.Element, C.Generator.Element) -> Bool) -> [C.Generator.Element]
-
-
-/// Return an `Array` containing the sorted elements of `source`{according}.
-///
-/// The sorting algorithm is not stable (can change the relative order of
-/// elements that compare equal).
-///
-/// Requires: The less-than operator (`func <`) defined in the `Comparable`
-/// conformance is a `strict weak ordering
-/// <http://en.wikipedia.org/wiki/Strict_weak_order#Strict_weak_orderings>`__
-/// over `elements`.
-func sorted<C : SequenceType where C.Generator.Element : Comparable>(source: C) -> [C.Generator.Element]
-
-
-/// Insert `newElements` into `x` at index `i`
+/// Insert `newElements` into `x` at index `i`.
 ///
 /// Invalidates all indices with respect to `x`.
 ///
-/// Complexity: O(\ `count(x) + count(newElements)`\ ).
-func splice<C : RangeReplaceableCollectionType, S : CollectionType where C.Generator.Element == C.Generator.Element>(inout x: C, newElements: S, atIndex i: C.Index)
+/// - Complexity: O(`x.count + newElements.count`).
+func splice<C : RangeReplaceableCollectionType, S : CollectionType where S.Generator.Element == C.Generator.Element>(inout x: C, _ newElements: S, atIndex i: C.Index)
 
 
-/// Return the result of slicing `elements` into sub-sequences that
+/// Returns the result of slicing `elements` into sub-sequences that
 /// don't contain elements satisfying the predicate `isSeparator`.
 ///
-/// :param: maxSplit the maximum number of slices to return, minus 1.
-/// If `maxSplit + 1` slices would otherwise be returned, the
-/// algorithm stops splitting and returns a suffix of `elements`
+/// - parameter maxSplit: The maximum number of slices to return, minus 1.
+///   If `maxSplit + 1` slices would otherwise be returned, the
+///   algorithm stops splitting and returns a suffix of `elements`.
 ///
-/// :param: allowEmptySlices if true, an empty slice is produced in
-/// the result for each pair of consecutive 
-func split<S : Sliceable, R : BooleanType>(elements: S, maxSplit: Int = default, allowEmptySlices: Bool = default, #isSeparator: @noescape (S.Generator.Element) -> R) -> [S.SubSlice]
-
-
-/// Return true iff `s` begins with elements equivalent to those of
-/// `prefix`, using `isEquivalent` as the equivalence test.
-///
-/// Requires: `isEquivalent` is an `equivalence relation
-/// <http://en.wikipedia.org/wiki/Equivalence_relation>`_
-func startsWith<S0 : SequenceType, S1 : SequenceType where S0.Generator.Element == S0.Generator.Element>(s: S0, prefix: S1, isEquivalent: @noescape (S0.Generator.Element, S0.Generator.Element) -> Bool) -> Bool
-
-
-/// Return true iff the the initial elements of `s` are equal to `prefix`.
-func startsWith<S0 : SequenceType, S1 : SequenceType where S0.Generator.Element == S0.Generator.Element, S0.Generator.Element : Equatable>(s: S0, prefix: S1) -> Bool
-
-
-/// Return the sequence of values (`start`, `start + stride`, `start +
-/// stride + stride`, ... *last*) where *last* is the last value in
-/// the progression that is less than `end`.
-func stride<T : Strideable>(from start: T, to end: T, by stride: T.Stride) -> StrideTo<T>
+/// - parameter allowEmptySlices: If `true`, an empty slice is produced in
+///   the result for each pair of consecutive.
+func split<S : Sliceable, R : BooleanType>(elements: S, maxSplit: Int = default, allowEmptySlices: Bool = default, @noescape isSeparator: (S.Generator.Element) -> R) -> [S.SubSlice]
 
 
 /// Return the sequence of values (`start`, `start + stride`, `start +
 /// stride + stride`, ... *last*) where *last* is the last value in
 /// the progression less than or equal to `end`.
 ///
-/// .. Note:: There is no guarantee that `end` is an element of the
-///      sequence.
+/// - Note: There is no guarantee that `end` is an element of the sequence.
 func stride<T : Strideable>(from start: T, through end: T, by stride: T.Stride) -> StrideThrough<T>
+
+
+/// Return the sequence of values (`start`, `start + stride`, `start +
+/// stride + stride`, ... *last*) where *last* is the last value in
+/// the progression that is less than `end`.
+func stride<T : Strideable>(from start: T, to end: T, by stride: T.Stride) -> StrideTo<T>
 
 
 /// Returns the least possible interval between distinct instances of
@@ -10432,66 +11727,52 @@ func strideof<T>(_: T.Type) -> Int
 func strideofValue<T>(_: T) -> Int
 
 
-/// Return a slice, up to `maxLength` in length, containing the
+/// Returns a slice, up to `maxLength` in length, containing the
 /// final elements of `s`.
 ///
-/// If `maxLength` exceeds `count(s)`, the result contains all
+/// If `maxLength` exceeds `s.count`, the result contains all
 /// the elements of `s`.
-/// 
-/// Complexity: O(1)+K when `S.Index` conforms to
-/// `RandomAccessIndexType` and O(N)+K otherwise, where K is the cost
-/// of slicing `s`.
-func suffix<S : Sliceable where S.Index : BidirectionalIndexType>(s: S, maxLength: Int) -> S.SubSlice
+///
+/// - Complexity: O(1)+K when `S.Index` conforms to
+///   `RandomAccessIndexType` and O(N)+K otherwise, where K is the cost
+///   of slicing `s`.
+func suffix<S : Sliceable where S.Index : BidirectionalIndexType>(s: S, _ maxLength: Int) -> S.SubSlice
 
 
-/// Exchange the values of `a` and `b`
-func swap<T>(inout a: T, inout b: T)
-
-
-/// Returns the result of `debugPrint`\ 'ing `x` into a `String`
-func toDebugString<T>(x: T) -> String
-
-
-/// Returns the result of `print`\ 'ing `x` into a `String`
-@inline(never) func toString<T>(x: T) -> String
+/// Exchange the values of `a` and `b`.
+func swap<T>(inout a: T, inout _ b: T)
 
 
 /// Translate `input`, in the given `InputEncoding`, into `output`, in
 /// the given `OutputEncoding`.
 ///
-/// :param: `stopOnError` causes encoding to stop when an encoding
+/// - parameter stopOnError: Causes encoding to stop when an encoding
 ///   error is detected in `input`, if `true`.  Otherwise, U+FFFD
 ///   replacement characters are inserted for each detected error.
-func transcode<Input : GeneratorType, Output : SinkType, InputEncoding : UnicodeCodecType, OutputEncoding : UnicodeCodecType where Input.Element == Input.Element, Output.Element == Output.Element>(inputEncoding: InputEncoding.Type, outputEncoding: OutputEncoding.Type, input: Input, inout output: Output, #stopOnError: Bool) -> Bool
+func transcode<Input : GeneratorType, Output : SinkType, InputEncoding : UnicodeCodecType, OutputEncoding : UnicodeCodecType where InputEncoding.CodeUnit == Input.Element, OutputEncoding.CodeUnit == Output.Element>(inputEncoding: InputEncoding.Type, _ outputEncoding: OutputEncoding.Type, _ input: Input, inout _ output: Output, stopOnError: Bool) -> Bool
 
 
-/// Return an underestimate of the number of elements in the given
-/// sequence, without consuming the sequence.  For Sequences that are
-/// actually Collections, this will return count(x)
-func underestimateCount<T : SequenceType>(x: T) -> Int
-
-
-/// Return an UnsafePointer to the storage used for `object`.  There's
+/// Returns an `UnsafePointer` to the storage used for `object`.  There's
 /// not much you can do with this other than use it to identify the
-/// object
+/// object.
 func unsafeAddressOf(object: AnyObject) -> UnsafePointer<Void>
 
 
 /// Returns the the bits of `x`, interpreted as having type `U`.
 ///
-/// .. Caution:: Breaks the guarantees of Swift's type system; use
-///    with extreme care.  There's almost always a better way to do
-///    anything.
+/// - Warning: Breaks the guarantees of Swift's type system; use
+///   with extreme care.  There's almost always a better way to do
+///   anything.
 ///
 func unsafeBitCast<T, U>(x: T, _: U.Type) -> U
 
 
-/// Returns: `x as T`
+/// - returns: `x as T`.
 ///
-/// Requires: `x is T`.  In particular, in -O builds, no test is
-/// performed to ensure that `x` actually has dynamic type `T`.
+/// - Requires: `x is T`.  In particular, in -O builds, no test is
+///   performed to ensure that `x` actually has dynamic type `T`.
 ///
-/// .. Danger:: trades safety for performance.  Use `unsafeDowncast`
+/// - Warning: Trades safety for performance.  Use `unsafeDowncast`
 ///   only when `x as T` has proven to be a performance problem and you
 ///   are confident that, always, `x is T`.  It is better than an
 ///   `unsafeBitCast` because it's more restrictive, and because
@@ -10499,152 +11780,152 @@ func unsafeBitCast<T, U>(x: T, _: U.Type) -> U
 func unsafeDowncast<T>(x: AnyObject) -> T
 
 
-/// Returns: `nonEmpty!`
+/// - Returns: `nonEmpty!`.
 ///
-/// Requires: `nonEmpty != nil`.  In particular, in -O builds, no test
-/// is performed to ensure that `nonEmpty` actually is non-nil.
+/// - Requires: `nonEmpty != nil`.  In particular, in -O builds, no test
+///   is performed to ensure that `nonEmpty` actually is non-nil.
 ///
-/// .. Danger:: trades safety for performance.  Use `unsafeUnwrap`
+/// - Warning: Trades safety for performance.  Use `unsafeUnwrap`
 ///   only when `nonEmpty!` has proven to be a performance problem and
 ///   you are confident that, always, `nonEmpty != nil`.  It is better
 ///   than an `unsafeBitCast` because it's more restrictive, and
 ///   because checking is still performed in debug builds.
-@inline(__always) func unsafeUnwrap<T>(nonEmpty: T?) -> T
+func unsafeUnwrap<T>(nonEmpty: T?) -> T
 
 
 /// Evaluate `f()` and return its result, ensuring that `x` is not
 /// destroyed before f returns.
-func withExtendedLifetime<T, Result>(x: T, f: @noescape () -> Result) -> Result
+func withExtendedLifetime<T, Result>(x: T, @noescape _ f: () -> Result) -> Result
 
 
 /// Evaluate `f(x)` and return its result, ensuring that `x` is not
 /// destroyed before f returns.
-func withExtendedLifetime<T, Result>(x: T, f: @noescape T -> Result) -> Result
+func withExtendedLifetime<T, Result>(x: T, @noescape _ f: T -> Result) -> Result
 
 
 /// Invokes `body` with an `UnsafeMutablePointer` to `arg` and returns the
 /// result. Useful for calling Objective-C APIs that take "in/out"
-/// parameters (and default-constructible "out" parameters) by pointer
-func withUnsafeMutablePointer<T, Result>(inout arg: T, body: @noescape UnsafeMutablePointer<T> -> Result) -> Result
-
-
-/// Like `withUnsafeMutablePointer`, but passes pointers to `arg0` and `arg1`.
-func withUnsafeMutablePointers<A0, A1, Result>(inout arg0: A0, inout arg1: A1, body: @noescape (UnsafeMutablePointer<A0>, UnsafeMutablePointer<A1>) -> Result) -> Result
+/// parameters (and default-constructible "out" parameters) by pointer.
+func withUnsafeMutablePointer<T, Result>(inout arg: T, @noescape _ body: UnsafeMutablePointer<T> -> Result) -> Result
 
 
 /// Like `withUnsafeMutablePointer`, but passes pointers to `arg0`, `arg1`,
 /// and `arg2`.
-func withUnsafeMutablePointers<A0, A1, A2, Result>(inout arg0: A0, inout arg1: A1, inout arg2: A2, body: @noescape (UnsafeMutablePointer<A0>, UnsafeMutablePointer<A1>, UnsafeMutablePointer<A2>) -> Result) -> Result
+func withUnsafeMutablePointers<A0, A1, A2, Result>(inout arg0: A0, inout _ arg1: A1, inout _ arg2: A2, @noescape _ body: (UnsafeMutablePointer<A0>, UnsafeMutablePointer<A1>, UnsafeMutablePointer<A2>) -> Result) -> Result
+
+
+/// Like `withUnsafeMutablePointer`, but passes pointers to `arg0` and `arg1`.
+func withUnsafeMutablePointers<A0, A1, Result>(inout arg0: A0, inout _ arg1: A1, @noescape _ body: (UnsafeMutablePointer<A0>, UnsafeMutablePointer<A1>) -> Result) -> Result
 
 
 /// Invokes `body` with an `UnsafePointer` to `arg` and returns the
 /// result. Useful for calling Objective-C APIs that take "in/out"
-/// parameters (and default-constructible "out" parameters) by pointer
-func withUnsafePointer<T, Result>(inout arg: T, body: @noescape UnsafePointer<T> -> Result) -> Result
+/// parameters (and default-constructible "out" parameters) by pointer.
+func withUnsafePointer<T, Result>(inout arg: T, @noescape _ body: UnsafePointer<T> -> Result) -> Result
 
 
 /// Like `withUnsafePointer`, but passes pointers to `arg0` and `arg1`.
-func withUnsafePointers<A0, A1, Result>(inout arg0: A0, inout arg1: A1, body: @noescape (UnsafePointer<A0>, UnsafePointer<A1>) -> Result) -> Result
+func withUnsafePointers<A0, A1, Result>(inout arg0: A0, inout _ arg1: A1, @noescape _ body: (UnsafePointer<A0>, UnsafePointer<A1>) -> Result) -> Result
 
 
 /// Like `withUnsafePointer`, but passes pointers to `arg0`, `arg1`,
 /// and `arg2`.
-func withUnsafePointers<A0, A1, A2, Result>(inout arg0: A0, inout arg1: A1, inout arg2: A2, body: @noescape (UnsafePointer<A0>, UnsafePointer<A1>, UnsafePointer<A2>) -> Result) -> Result
+func withUnsafePointers<A0, A1, A2, Result>(inout arg0: A0, inout _ arg1: A1, inout _ arg2: A2, @noescape _ body: (UnsafePointer<A0>, UnsafePointer<A1>, UnsafePointer<A2>) -> Result) -> Result
 
 
 /// Invoke `f` with a C `va_list` argument derived from `args`.
-func withVaList<R>(args: [CVarArgType], f: @noescape CVaListPointer -> R) -> R
+func withVaList<R>(args: [CVarArgType], @noescape _ f: CVaListPointer -> R) -> R
 
 
 /// Invoke `f` with a C `va_list` argument derived from `builder`.
-func withVaList<R>(builder: VaListBuilder, f: @noescape CVaListPointer -> R) -> R
+func withVaList<R>(builder: VaListBuilder, @noescape _ f: CVaListPointer -> R) -> R
 
 
 /// A sequence of pairs built out of two underlying sequences, where
-/// the elements of the `i`\ th pair are the `i`\ th elements of each
+/// the elements of the `i`th pair are the `i`th elements of each
 /// underlying sequence.
-func zip<S0 : SequenceType, S1 : SequenceType>(s0: S0, s1: S1) -> Zip2<S0, S1>
-
-func |(lhs: UInt32, rhs: UInt32) -> UInt32
+func zip<Sequence1 : SequenceType, Sequence2 : SequenceType>(sequence1: Sequence1, _ sequence2: Sequence2) -> Zip2<Sequence1, Sequence2>
 
 func |(lhs: Int32, rhs: Int32) -> Int32
 
 func |(lhs: UInt64, rhs: UInt64) -> UInt64
 
+func |(lhs: UInt32, rhs: UInt32) -> UInt32
+
 func |(lhs: Int64, rhs: Int64) -> Int64
-
-func |(lhs: UInt, rhs: UInt) -> UInt
-
-func |(lhs: Int, rhs: Int) -> Int
-
-func |<T : _RawOptionSetType>(a: T, b: T) -> T
-
-func |(lhs: UInt8, rhs: UInt8) -> UInt8
-
-func |(lhs: Int8, rhs: Int8) -> Int8
 
 func |(lhs: Int16, rhs: Int16) -> Int16
 
 func |(lhs: UInt16, rhs: UInt16) -> UInt16
 
-func |=(inout lhs: Int8, rhs: Int8)
+func |(lhs: UInt, rhs: UInt) -> UInt
 
-func |=(inout lhs: UInt16, rhs: UInt16)
+func |(lhs: Int8, rhs: Int8) -> Int8
 
-func |=(inout lhs: Int16, rhs: Int16)
+func |(lhs: Int, rhs: Int) -> Int
+
+func |(lhs: UInt8, rhs: UInt8) -> UInt8
+
+func |<T : _RawOptionSetType>(a: T, b: T) -> T
+
+func |=(inout lhs: Int64, rhs: Int64)
 
 func |=(inout lhs: UInt32, rhs: UInt32)
 
-func |=(inout lhs: UInt8, rhs: UInt8)
-
-func |=<T : BitwiseOperationsType>(inout lhs: T, rhs: T)
-
-func |=(inout lhs: Int, rhs: Int)
-
 func |=(inout lhs: UInt, rhs: UInt)
 
-func |=(inout lhs: Int64, rhs: Int64)
+func |=(inout lhs: Int16, rhs: Int16)
+
+func |=(inout lhs: UInt16, rhs: UInt16)
 
 func |=(inout lhs: UInt64, rhs: UInt64)
 
 func |=(inout lhs: Int32, rhs: Int32)
 
-func ||<T : BooleanType>(lhs: T, rhs: @autoclosure () -> Bool) -> Bool
+func |=(inout lhs: Int, rhs: Int)
+
+func |=(inout lhs: Int8, rhs: Int8)
+
+func |=(inout lhs: UInt8, rhs: UInt8)
+
+func |=<T : BitwiseOperationsType>(inout lhs: T, rhs: T)
 
 
 /// If `lhs` is `true`, return it.  Otherwise, evaluate `rhs` and
 /// return its `boolValue`.
-@inline(__always) func ||<T : BooleanType, U : BooleanType>(lhs: T, rhs: @autoclosure () -> U) -> Bool
+func ||<T : BooleanType, U : BooleanType>(lhs: T, @autoclosure rhs: () -> U) -> Bool
 
-prefix func ~(rhs: Int) -> Int
-
-prefix func ~(rhs: UInt) -> UInt
+func ||<T : BooleanType>(lhs: T, @autoclosure rhs: () -> Bool) -> Bool
 
 prefix func ~(rhs: Int64) -> Int64
 
-prefix func ~(rhs: UInt64) -> UInt64
-
 prefix func ~(rhs: Int32) -> Int32
 
+prefix func ~(rhs: UInt64) -> UInt64
+
+prefix func ~(rhs: UInt) -> UInt
+
+prefix func ~<T : _RawOptionSetType>(a: T) -> T
+
+prefix func ~(rhs: Int8) -> Int8
+
 prefix func ~(rhs: UInt32) -> UInt32
+
+prefix func ~(rhs: Int) -> Int
+
+prefix func ~(rhs: UInt8) -> UInt8
 
 prefix func ~(rhs: Int16) -> Int16
 
 prefix func ~(rhs: UInt16) -> UInt16
 
-prefix func ~(rhs: Int8) -> Int8
-
-prefix func ~(rhs: UInt8) -> UInt8
-
-prefix func ~<T : _RawOptionSetType>(a: T) -> T
-
-func ~=<I : ForwardIndexType where I : Comparable>(pattern: Range<I>, value: I) -> Bool
+func ~=<T>(lhs: _OptionalNilComparisonType, rhs: T?) -> Bool
 
 func ~=<T : Equatable>(a: T, b: T) -> Bool
 
-func ~=<T>(lhs: _OptionalNilComparisonType, rhs: T?) -> Bool
 
-
-/// Returns `true` iff `pattern` contains `value`
+/// Returns `true` iff `pattern` contains `value`.
 func ~=<I : IntervalType>(pattern: I, value: I.Bound) -> Bool
+
+func ~=<I : ForwardIndexType where I : Comparable>(pattern: Range<I>, value: I) -> Bool
 
